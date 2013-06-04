@@ -1,0 +1,186 @@
+/*
++------------------------------------------------------------------+
+|             ____ _               _        __  __ _  __           |
+|            / ___| |__   ___  ___| | __   |  \/  | |/ /           |
+|           | |   | '_ \ / _ \/ __| |/ /   | |\/| | ' /            |
+|           | |___| | | |  __/ (__|   <    | |  | | . \            |
+|            \____|_| |_|\___|\___|_|\_\___|_|  |_|_|\_\           |
+|                                                                  |
+| Copyright Mathias Kettner 2012             mk@mathias-kettner.de |
++------------------------------------------------------------------+
+
+This file is part of Check_MK.
+The official homepage is at http://mathias-kettner.de/check_mk.
+
+check_mk is free software;  you can redistribute it and/or modify it
+under the  terms of the  GNU General Public License  as published by
+the Free Software Foundation in version 2.  check_mk is  distributed
+in the hope that it will be useful, but WITHOUT ANY WARRANTY;  with-
+out even the implied warranty of  MERCHANTABILITY  or  FITNESS FOR A
+PARTICULAR PURPOSE. See the  GNU General Public License for more de-
+ails.  You should have  received  a copy of the  GNU  General Public
+License along with GNU Make; see the file  COPYING.  If  not,  write
+to the Free Software Foundation, Inc., 51 Franklin St,  Fifth Floor,
+Boston, MA 02110-1301 USA.
+
+*/
+
+/*-------------------------------------------------------------------------.
+|                      _                _                                  |
+|                     | |    ___   __ _(_)_ __                             |
+|                     | |   / _ \ / _` | | '_ \                            |
+|                     | |__| (_) | (_| | | | | |                           |
+|                     |_____\___/ \__, |_|_| |_|                           |
+|                                 |___/                                    |
++--------------------------------------------------------------------------+
+| Styling of the login page (when not HTTP Basic Auth is used)             |
+'-------------------------------------------------------------------------*/
+
+body.main {
+    background-image: url("/images/login_dark_bg.png");
+    background-position: center;
+    text-align: center;
+    vertical-align: middle;
+}
+
+
+div#login {
+    background-image: url("/images/login_spotlight.png");
+    background-repeat: no-repeat;
+    width: 770px;
+    height: 605px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -276px 0px 0px -386px;
+    /* border: 1px solid yellow; */
+}
+
+img#login_window {
+    width: 370px;
+    height: 230px;
+    position: relative;
+    left: 10px;
+    top: 160px;
+    float: none;
+}
+
+label {
+    color: white;
+}
+
+#version {
+    position: absolute;
+    text-align: right;
+    width: 150px;
+    top: 173px;
+    left: 415px;
+    color: white;
+    font-size: 8pt;
+}
+
+#label_user, #label_pass {
+    left: 264px;
+}
+
+#input_user, #input_pass {
+    left: 330px;
+}
+
+#label_user {
+    position: absolute;
+    top: 275px;
+}
+#input_user {
+    position: absolute;
+    top: 270px;
+}
+
+#label_pass {
+    position: absolute;
+    top: 315px;
+}
+#input_pass {
+    position: absolute;
+    top: 310px;
+}
+
+#input_user, #input_pass {
+    width: 150px;
+    height: 17px;
+    border: none;
+    border-radius: 0px;
+    outline: none;
+    padding: 3px 5px 3px 5px;
+    background-image: url("/images/login_input_normal.png");
+    background-repeat: no-repeat;
+    box-shadow: none;
+}
+
+.inputerror #input_user, .inputerror #input_pass {
+    background-image: url("/images/login_input_error.png");
+    background-repeat: no-repeat;
+}
+
+#button_login {
+    position: absolute;
+    top: 345px;
+    left: 505px;
+}
+
+#button_login img {
+    width: 63px;
+    height: 32px;
+}
+
+#button_text {
+    position: absolute;
+    top: 356px;
+    left: 513px;
+    text-align: center;
+    width: 61px;
+    color: white;
+    z-index: 100;
+    font-size: 10px;
+    text-transform: uppercase;
+}
+
+#login_error {
+    position: absolute;
+    top: 347px;
+    left: 320px;
+    width: 180px;
+    height: 30px;
+    z-index: 100;
+    background-image: url("/images/login_error_message.png");
+    background-repeat: no-repeat;
+    border: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+#login_error div.error {
+    border-style: none;
+    background-color: transparent;
+    margin: 0px;
+    padding: 8px 0px 0px 0px;
+    color: black;
+    border-radius: 0;
+    box-shadow: 0 0 0;
+}
+
+#foot {
+    position: absolute;
+    text-align: center;
+    top: 400px;
+    left: 220px;
+    width: 350px;
+    color: white;
+    font-size: 8pt;
+}
+
+
+#foot a, #foot a:hover {
+    color: white;
+}
+

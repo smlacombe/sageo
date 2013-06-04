@@ -1,0 +1,26 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    {% block head %}
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('.static', filename='css/check_mk.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('.static', filename='css/pages.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('.static', filename='css/status.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('.static', filename='images/favicon.ico') }}" type="image/ico">
+    <title>{% block title %}{% endblock %} - Sageo</title>
+    {% endblock %}
+</head>
+<body class="main">
+    <div id="content">{% block content %}{% endblock %}</div>
+    <div id="foot">
+        {% block footer %}
+            <p>{{ _('version') }} {{ version }} - &copy;</p>
+            <a href="http://shinken-monitoring.org">{{ _('shinken') }}</a>
+            <br/>
+            <br/>
+            <p>{{ _('license footer') }}</p>
+            <a href='http://www.gnu.lrg/licenses/gpl-3.0.html'>GNU GPL {{ _('version') }} 3</a>
+        {% endblock %}
+    </div>
+</body>
