@@ -1,5 +1,0 @@
-msgid "version"
-msgstr "version"
-
-msgid "license footer"
-msgstr "Vous pouvez utiliser, modifier and distribuer Sageo sous les termes de"

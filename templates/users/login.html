@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}{{ _(login_page_title) }}{% endblock %}
+{% block title %}{{ _('login') }}{% endblock %}
 {% block head %}
     {{ super() }}
     <link rel="stylesheet" type="text/css" href="{{ url_for('.static', filename='css/login.css') }}">
@@ -11,9 +11,9 @@
   <form id="form_login" name="login" class="login" action="login" method="post" enctype="multipart/form-data" >
     <input type=hidden name="_login" value="1">
     <input type=hidden name="_origtarget" value="/">
-    <label id=label_user class=legend for=_username>{{ _(username_invite) }}</label><br />
+    <label id=label_user class=legend for=_username>{{ _('Username:') }}</label><br />
     <input type=text class=text value="" name="_username" id="input_user">
-    <label id=label_pass class=legend for=_password>{{ _(password_invite) }}</label><br />
+    <label id=label_pass class=legend for=_password>{{ _('Password:') }}</label><br />
     <input type=password class=text value="" name="_password" id="input_pass">
 
     {% if error %}
@@ -23,7 +23,7 @@
     {% endif %}
     <div id=button_text>
       <label for="_login" class="image_button">
-        <input id="_login" class="" type="submit" value="{{ _(login_button) }}" name="_login" onfocus="if (this.blur) this.blur();">
+        <input id="_login" class="" type="submit" value="{{ _('login') }}" name="_login" onfocus="if (this.blur) this.blur();">
       </label>
     </div>
   </form>
