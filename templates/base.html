@@ -1,20 +1,20 @@
-<!--
-#   
-#   Copyright (C) 2013 Savoir-Faire Linux Inc.
-#   
-#   This program is free software: you can redistribute it and/or modify
-#   it under the terms of the GNU General Public License as published by
-#   the Free Software Foundation, either version 3 of the License, or
-#   (at your option) any later version.
-#
-#   This program is distributed in the hope that it will be useful,
-#   but WITHOUT ANY WARRANTY; without even the implied warranty of
-#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#   GNU General Public License for more details.
-#
-#   You should have received a copy of the GNU General Public License
-#   along with this program.  If not, see <http://www.gnu.org/licenses/>.
--->
+{#
+   
+   Copyright (C) 2013 Savoir-Faire Linux Inc.
+   
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#}
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
 <html lang="en">
@@ -22,18 +22,20 @@
 <head>
     {% block head %}
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('.static', filename='css/check_mk.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('.static', filename='css/pages.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('.static', filename='css/status.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('.static', filename='css/bootstrap.min.css') }}">
     <link rel="shortcut icon" href="{{ url_for('.static', filename='images/favicon.ico') }}" type="image/ico">
     <title>{% block title %}{% endblock %} - Sageo</title>
     {% endblock %}
 </head>
 <body class="main">
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="{{ url_for('.static', filename='js/bootstrap.min.js') }}"></script>
     <div id="content">{% block content %}{% endblock %}</div>
     <div id="foot">
         {% block footer %}
-            <p>{{ _('version') }} {{ version }} - &copy;</p>
+            <p>{{ _("sageo") }} {{ _('version') }} {{ version }} - &copy; <a href='http://www.savoirfairelinux.com/en/'> {{ _("Savoir-faire Linux") }}</a></p>
             <a href="http://shinken-monitoring.org">{{ _('shinken') }}</a>
             <br/>
             <br/>

@@ -1,20 +1,20 @@
-<!--
-#   
-#   Copyright (C) 2013 Savoir-Faire Linux Inc.
-#   
-#   This program is free software: you can redistribute it and/or modify
-#   it under the terms of the GNU General Public License as published by
-#   the Free Software Foundation, either version 3 of the License, or
-#   (at your option) any later version.
-#
-#   This program is distributed in the hope that it will be useful,
-#   but WITHOUT ANY WARRANTY; without even the implied warranty of
-#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#   GNU General Public License for more details.
-#
-#   You should have received a copy of the GNU General Public License
-#   along with this program.  If not, see <http://www.gnu.org/licenses/>.
--->
+{#
+
+   Copyright (C) 2013 Savoir-Faire Linux Inc.
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#}
 
 {% extends "base.html" %}
 {% block title %}{{ _('login') }}{% endblock %}
@@ -23,27 +23,27 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('.static', filename='css/login.css') }}">
 {% endblock %}
 {% block content %}
-<div id=login>
-  <img id=login_window src="{{ url_for('.static', filename='images/login_window.png') }}"/>
-
-  <form id="form_login" name="login" class="login" action="login" method="post" enctype="multipart/form-data" >
-    <input type=hidden name="_login" value="1">
-    <input type=hidden name="_origtarget" value="/">
-    <label id=label_user class=legend for=_username>{{ _('Username:') }}</label><br />
-    <input type=text class=text value="" name="_username" id="input_user">
-    <label id=label_pass class=legend for=_password>{{ _('Password:') }}</label><br />
-    <input type=password class=text value="" name="_password" id="input_pass">
-
-    {% if error %}
-      <div id="login_error">
-          <div class="error">{{ error }}</div>
-      </div>
-    {% endif %}
-    <div id=button_text>
-      <label for="_login" class="image_button">
-        <input id="_login" class="" type="submit" value="{{ _('login') }}" name="_login" onfocus="if (this.blur) this.blur();">
-      </label>
-    </div>
-  </form>
+<div class="container">
+    <form class="form-signin form-horizontal" name="login" action="login" method="post" enctype="multipart/form-data">
+        <h2 class="form-signin-heading">{{ _("Sageo") }}</h2>
+        <div class="control-group">        
+            <label class="control_label" for=_username>{{ _('Username:') }}</label>
+            <div class="controls">
+                <input type=text  name="_username" id="_username" placeholder="{{ _('username') }}">
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="_password">{{ _('Password:') }}</label>
+            <div class="controls">
+                <input type="password" name="_password" id="_password" placeholder="{{ _('password') }}">
+            </div>
+        </div>
+        {% if error %}
+           <div> 
+                <span class="label label-warning">{{ error }}</span>
+           </div>
+        {% endif %}
+        <button class="btn btn-large btn-primary" type="submit">{{ _('login') }}
+    </form>
 </div>
 {% endblock %}

@@ -35,7 +35,7 @@ babel = Babel(app)
 
 @babel.localeselector
 def get_locale():
-    return 'en'
+    return 'fr'
 
 
 @app.route('/images/<path:filename>')

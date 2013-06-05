@@ -1,49 +1,59 @@
 /*
-+------------------------------------------------------------------+
-|             ____ _               _        __  __ _  __           |
-|            / ___| |__   ___  ___| | __   |  \/  | |/ /           |
-|           | |   | '_ \ / _ \/ __| |/ /   | |\/| | ' /            |
-|           | |___| | | |  __/ (__|   <    | |  | | . \            |
-|            \____|_| |_|\___|\___|_|\_\___|_|  |_|_|\_\           |
-|                                                                  |
-| Copyright Mathias Kettner 2012             mk@mathias-kettner.de |
-+------------------------------------------------------------------+
+   Copyright (C) 2013 Savoir-Faire Linux Inc.
 
-This file is part of Check_MK.
-The official homepage is at http://mathias-kettner.de/check_mk.
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
 
-check_mk is free software;  you can redistribute it and/or modify it
-under the  terms of the  GNU General Public License  as published by
-the Free Software Foundation in version 2.  check_mk is  distributed
-in the hope that it will be useful, but WITHOUT ANY WARRANTY;  with-
-out even the implied warranty of  MERCHANTABILITY  or  FITNESS FOR A
-PARTICULAR PURPOSE. See the  GNU General Public License for more de-
-ails.  You should have  received  a copy of the  GNU  General Public
-License along with GNU Make; see the file  COPYING.  If  not,  write
-to the Free Software Foundation, Inc., 51 Franklin St,  Fifth Floor,
-Boston, MA 02110-1301 USA.
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 */
 
-/*-------------------------------------------------------------------------.
-|                      _                _                                  |
-|                     | |    ___   __ _(_)_ __                             |
-|                     | |   / _ \ / _` | | '_ \                            |
-|                     | |__| (_) | (_| | | | | |                           |
-|                     |_____\___/ \__, |_|_| |_|                           |
-|                                 |___/                                    |
-+--------------------------------------------------------------------------+
-| Styling of the login page (when not HTTP Basic Auth is used)             |
-'-------------------------------------------------------------------------*/
-
-body.main {
+body {
     background-image: url("/images/login_dark_bg.png");
     background-position: center;
     text-align: center;
     vertical-align: middle;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    color: white;
 }
 
+.form-signin {
+    max-width: 300px;
+    padding: 19px 29px 29px;
+    margin: 0 auto 20px;
+    background-color: #5fa2be;
+    border: 1px solid #e5e5e5;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+        border-radius: 5px;
+    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+    -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+        box-shadow: 0 1px 2px rgba(0,0,0,.05);
+}
 
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+    margin-bottom: 10px;
+}
+
+.form-signin input[type="text"],
+.form-signin input[type="password"] {
+    font-size: 16px;
+    height: auto;
+    margin-bottom: 15px;
+    padding: 7px 9px;
+}
+
+/*
 div#login {
     background-image: url("/images/login_spotlight.png");
     background-repeat: no-repeat;
@@ -53,7 +63,6 @@ div#login {
     top: 50%;
     left: 50%;
     margin: -276px 0px 0px -386px;
-    /* border: 1px solid yellow; */
 }
 
 img#login_window {
@@ -183,4 +192,4 @@ label {
 #foot a, #foot a:hover {
     color: white;
 }
-
+*/
