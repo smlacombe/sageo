@@ -27,7 +27,7 @@
     <form class="form-signin form-horizontal" name="login" action="login" method="post" enctype="multipart/form-data">
         <h2 class="form-signin-heading">{{ _("Sageo") }}</h2>
         <div class="control-group">        
-            <label class="control_label" for=_username>{{ _('Username:') }}</label>
+            <label class="control-label" for=_username>{{ _('Username:') }}</label>
             <div class="controls">
                 <input type=text  name="_username" id="_username" placeholder="{{ _('username') }}">
             </div>
@@ -39,11 +39,17 @@
             </div>
         </div>
         {% if error %}
-           <div> 
-                <span class="label label-warning">{{ error }}</span>
+           <div class="control-group"> 
+                <div class="controls">
+                    <span class="label label-warning">{{ error }}</span>
+                </div>
            </div>
         {% endif %}
-        <button class="btn btn-large btn-primary" type="submit">{{ _('login') }}
+        <div class="control-group">
+            <div class="controls">
+                <button type="submit" class="btn">{{ _('login') }}</button>
+            </div>
+        </div>
     </form>
 </div>
 {% endblock %}

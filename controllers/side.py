@@ -19,10 +19,11 @@ from flask import Flask, request, session, g, redirect, url_for, \
 import lib.auth
 
 
-mod_main = Module(__name__)
+mod_side = Module(__name__)
 sageo = current_app
 
-@mod_main.route('/', methods=['GET'])
+@mod_side.route('/side', methods=['GET'])
 @lib.auth.login_required
-def index():
-    return render_template('main.html', page='dashboard')
+def side():
+    return render_template('side.html', page='dashboard')
+

@@ -20,8 +20,9 @@ import os
 from flask import Flask, request, session, g, redirect, url_for, \
     abort, render_template, flash
 
-from controllers.login import auth
-from controllers.index import main
+from controllers.login import mod_auth
+from controllers.index import mod_main
+from controllers.side import mod_side
 from flaskext.babel import Babel
 
 # Configuration
@@ -44,7 +45,10 @@ def send_image(filename):
 
 # Module
 #import ipdb;ipdb.set_trace()
-app.register_module(auth)
-app.register_module(main)
+app.register_module(mod_auth)
+app.register_module(mod_main)
+app.register_module(mod_side)
+
+
 if __name__ == "__main__":
     app.run(host='0.0.0.0')

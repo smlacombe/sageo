@@ -1,0 +1,31 @@
+@import url('http://twitter.github.com/bootstrap/assets/css/bootstrap.css');
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+.container-fluid {
+    margin: 0 auto;
+    height: 100%;
+    padding: 20px 0;
+ 
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.columns {
+    background-color: #C9E6FF;
+    height: 100%;
+   
+}
+
+.content-area, .article-tree{
+    background: #bada55;
+    overflow:auto;
+    height: 100%;
+}
+.footer {
+  background: red;
+  height: 20px;
+}

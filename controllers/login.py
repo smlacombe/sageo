@@ -19,10 +19,10 @@ from flask import Flask, request, session, g, redirect, url_for, \
 from flaskext.babel import gettext, ngettext
 
 _ = gettext
-auth = Module(__name__)
+mod_auth = Module(__name__)
 sageo = current_app
 
-@auth.route('/login', methods=['GET', 'POST'])
+@mod_auth.route('/login', methods=['GET', 'POST'])
 def login():
     error = None
     if request.method == 'POST':
@@ -41,7 +41,7 @@ def login():
             return redirect('/')
     return render_template('users/login.html', version='0.1',error=error)
 
-@auth.route('/logout')
+@mod_auth.route('/logout')
 def logout():
     session.pop('logged_in', None)
     flash(_(u'You were logged out'))

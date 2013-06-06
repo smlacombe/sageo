@@ -27,17 +27,16 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('.static', filename='css/bootstrap.min.css') }}">
     <link rel="shortcut icon" href="{{ url_for('.static', filename='images/favicon.ico') }}" type="image/ico">
     <title>{% block title %}{% endblock %} - Sageo</title>
-    {% endblock %}
-</head>
-<body class="main">
     <script src="http://code.jquery.com/jquery.js"></script>
     <script src="{{ url_for('.static', filename='js/bootstrap.min.js') }}"></script>
+    {% endblock %}
+</head>
+
+<body class="main">
     <div id="content">{% block content %}{% endblock %}</div>
-    <div id="foot">
+    <div id="footer">
         {% block footer %}
             <p>{{ _("sageo") }} {{ _('version') }} {{ version }} - &copy; <a href='http://www.savoirfairelinux.com/en/'> {{ _("Savoir-faire Linux") }}</a></p>
-            <a href="http://shinken-monitoring.org">{{ _('shinken') }}</a>
-            <br/>
             <br/>
             <p>{{ _('You can use, modify and distribute Sageo under the terms of the') }}</p>
             <a href='http://www.gnu.lrg/licenses/gpl-3.0.html'>GNU GPL {{ _('version') }} 3</a>

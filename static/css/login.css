@@ -19,7 +19,6 @@
 body {
     background-image: url("/images/login_dark_bg.png");
     background-position: center;
-    text-align: center;
     vertical-align: middle;
     padding-top: 40px;
     padding-bottom: 40px;
@@ -27,7 +26,7 @@ body {
 }
 
 .form-signin {
-    max-width: 300px;
+    max-width: 400px;
     padding: 19px 29px 29px;
     margin: 0 auto 20px;
     background-color: #5fa2be;
@@ -51,6 +50,17 @@ body {
     height: auto;
     margin-bottom: 15px;
     padding: 7px 9px;
+}
+
+#footer { 
+    text-align: center;
+    top: 400px;
+    left: 220px;
+    width: 350px;
+    color: white;
+    font-size: 8pt;
+    margin: auto;
+    line-height: 8px;
 }
 
 /*
@@ -176,16 +186,6 @@ label {
     color: black;
     border-radius: 0;
     box-shadow: 0 0 0;
-}
-
-#foot {
-    position: absolute;
-    text-align: center;
-    top: 400px;
-    left: 220px;
-    width: 350px;
-    color: white;
-    font-size: 8pt;
 }
 
 
