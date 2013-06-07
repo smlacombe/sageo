@@ -15,26 +15,6 @@
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #}
-
-{% extends "base.html" %}
-{% block title %}Side bar{% endblock %}
-{% block head %}
-    {{ super() }}
-    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('.static', filename='css/sidebar.css') }}">
-    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
-     <script>
-        $(function() {
-            $( "#sortable" ).sortable({
-                placeholder: "ui-state-highlight"
-            });
-            $( "#sortable" ).disableSelection();
-        });
-    </script>
-{% endblock %}
-
-{% block content %}
-
 <ul id="sortable">
 <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 1</li>
 <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 2</li>
@@ -44,8 +24,3 @@
 <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 6</li>
 <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 7</li>
 </ul>
-
-{% endblock %}
-
-
-{% block footer %}{% endblock %}

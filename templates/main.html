@@ -21,17 +21,43 @@
 {% block head %}
     {{ super() }}
     <link rel="stylesheet" type="text/css" href="{{ url_for('.static', filename='css/main.css') }}">
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('.static', filename='css/sidebar.css') }}">
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+     <script>
+        $(function() {
+            $( "#sortable" ).sortable({
+                placeholder: "ui-state-highlight"
+            });
+            $( "#sortable" ).disableSelection();
+              
+          function updateIFrameHeight()
+          {
+           $('.myModal').css('height', $(window).height()+'px'); 
+          }
+        
+            $(window).resize(function() {
+               updateIFrameHeight(); 
+            });
+             $(window).load(function() {
+               updateIFrameHeight(); 
+            });
+      });
+    </script>
+
 {% endblock %}
 {% block content %}
     <div class="container-fluid">
-        <div class="row-fluid columns content">
-            <div class="span3 article-tree"> 
-                <iframe name="side" src="/side"></iframe>
+        <div class="row-fluid">
+            <div class="span2 article-tree"> 
+                {% include "side.html" %}
+                <a target="myModal" href="/login" role="button" class="btn">Launch demo modal</a>
             </div>
-            <div class="span9 content-area">
-                <iframe name="side" src="/{{ page }}"></iframe>
+            <div class="span10 content-area">
+                 <iframe frameborder="0" class="myModal" src="http://shinkendemo.savoirfairelinux.net/nagvis/index.php?mod=Map&act=view&show=SFL-montreal" name="myModal" style="overflow:auto;width:100%;display:block;"></iframe> 
             </div>
         </div>
     </div>
 {% endblock %}
-{% block footer %}{% endblock %}
+{% block footer %}
+{% endblock %}
