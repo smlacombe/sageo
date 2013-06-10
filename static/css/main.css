@@ -1,8 +1,22 @@
 @import url('http://twitter.github.com/bootstrap/assets/css/bootstrap.css');
 html, body {
     margin: 0;
-    padding: 0;
     height: 100%;
+    padding-top:10px;
+}
+
+
+.sidebar-nav-fixed {
+    left: 20px;
+    padding: 9px 0;
+    position: fixed;
+    top: 60px;
+    width: 280px;
+}
+
+
+.row-fluid > .span-fixed-sidebar {
+    margin-left: 300px;
 }
 
 .container-fluid {
@@ -25,6 +39,12 @@ html, body {
     overflow:auto;
     height: 100%;
 }
+
+.row-fluid .content-area {
+    margin-left:0;
+
+}
+
 .footer {
   background: red;
   height: 20px;

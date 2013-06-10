@@ -33,7 +33,8 @@
               
           function updateIFrameHeight()
           {
-           $('.myModal').css('height', $(window).height()+'px'); 
+            var heightSubstraction = parseInt($('body').css('padding-top').replace(/[^-\d\.]/g, '')) + parseInt($('#top-bar').css('height').replace(/[^-\d\.]/g, ''));  
+            $('.myModal').css('height', $(window).height()-heightSubstraction+'px'); 
           }
         
             $(window).resize(function() {
@@ -47,13 +48,37 @@
 
 {% endblock %}
 {% block content %}
-    <div class="container-fluid">
+<div class="navbar navbar-fixed-top" id="top-bar">
+    <div class="navbar-inner">
+        <div class="container-fluid">
+
+          <a data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a href="#" class="brand">{{ _('Sageo') }}</a>
+          <div class="nav-collapse">
+            <ul class="nav">
+
+              <li class="active"><a href="#">Home</a></li>
+              <li><a href="#about">About</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ul>
+            <p class="navbar-text pull-right">Logged in as <a href="#">username</a></p>
+          </div><!--/.nav-collapse -->
+
+        </div>
+      </div>
+    </div>
+        <div class="container-fluid">
         <div class="row-fluid">
-            <div class="span2 article-tree"> 
-                {% include "side.html" %}
-                <a target="myModal" href="/login" role="button" class="btn">Launch demo modal</a>
+            <div class="span3"> 
+                <div class="well sidebar-nav-fixed"> 
+                    {% include "side.html" %}
+                </div>
             </div>
-            <div class="span10 content-area">
+            <div class="span9 span-fixed-sidebar">
                  <iframe frameborder="0" class="myModal" src="http://shinkendemo.savoirfairelinux.net/nagvis/index.php?mod=Map&act=view&show=SFL-montreal" name="myModal" style="overflow:auto;width:100%;display:block;"></iframe> 
             </div>
         </div>
