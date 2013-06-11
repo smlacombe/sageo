@@ -1,10 +1,12 @@
 @import url('http://twitter.github.com/bootstrap/assets/css/bootstrap.css');
 html, body {
     margin: 0;
-    height: 100%;
-    padding-top:10px;
 }
 
+.main-section {
+    margin-left: 310px;
+    margin-top: 40px;
+}
 
 .sidebar-nav-fixed {
     left: 20px;
@@ -17,12 +19,13 @@ html, body {
 
 .row-fluid > .span-fixed-sidebar {
     margin-left: 300px;
+    margin-top:10px;
+    width: 76.4%;
 }
 
 .container-fluid {
     margin: 0 auto;
     height: 100%;
-    padding: 0px 0;
  
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
@@ -49,3 +52,10 @@ html, body {
   background: red;
   height: 20px;
 }
+ .column { width: 170px; float: left; padding-bottom: 100px; }
+.portlet { margin: 0 1em 1em 0; width:270px; }
+.portlet-header { margin: 0.3em; padding-bottom: 4px; padding-left: 0.2em; }
+.portlet-header .ui-icon { float: right; }
+.portlet-content { padding: 0.4em; }
+.ui-sortable-placeholder { border: 1px dotted black; visibility: visible !important; height: 50px !important; }
+.ui-sortable-placeholder * { visibility: hidden; }
