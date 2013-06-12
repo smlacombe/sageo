@@ -17,7 +17,7 @@
 from flask import Flask, request, session, g, redirect, url_for, \
     abort, render_template, flash, Module, current_app
 import lib.auth
-
+import side
 
 mod_main = Module(__name__)
 sageo = current_app
@@ -25,4 +25,5 @@ sageo = current_app
 @mod_main.route('/', methods=['GET'])
 @lib.auth.login_required
 def index():
-    return render_template('main.html', page='dashboard')
+    snapins_contexts = side.side() 
+    return render_template('main.html', snapins_contexts=snapins_contexts)

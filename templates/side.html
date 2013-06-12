@@ -17,12 +17,13 @@
 
 #}
 <div class="column">
-<div class="portlet">
-<div class="portlet-header">Feeds</div>
-<div class="portlet-content">Lorem ipsum dolor sit amet, consectetuer adipiscing elit</div>
-</div>
-<div class="portlet">
-<div class="portlet-header">News</div>
-<div class="portlet-content">Lorem ipsum dolor sit amet, consectetuer adipiscing elit</div>
-</div>
+    {% for snapin, snapin_context in snapins_contexts.iteritems() %}
+        <div class="portlet">
+            <div class="portlet-header">{{ snapin_context['properties']['title'] }}</div>
+            <div class="portlet-content">
+                {% import 'snapins/snapin_' + snapin + '.html' as snapin_template %} 
+                {{ snapin_template.print_html(snapin_context) }} 
+            </div>
+        </div>
+    {% endfor %}
 </div>

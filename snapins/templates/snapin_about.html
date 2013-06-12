@@ -1,0 +1,11 @@
+{% import 'lib/lib.html' as lib %}
+
+{% macro print_html(snapin_context) -%}
+    <ul>
+        <p>Version: {{ snapin_context['properties']['version'] }}</p> 
+        {{ lib.bulletlink("Homepage", "http://mathias-kettner.de/check_mk.html", 'mainFrame') }}
+        {{ lib.bulletlink("Documentation",   "http://mathias-kettner.de/checkmk.html", 'mainFrame') }}
+        {{ lib.bulletlink("Download",        "http://mathias-kettner.de/check_mk_download.html", 'mainFrame') }}
+        {{ lib.bulletlink("Mathias Kettner", "http://mathias-kettner.de", 'mainFrame') }}
+    </ul>
+{%- endmacro %}
