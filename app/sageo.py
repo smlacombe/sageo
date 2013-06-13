@@ -15,25 +15,14 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-import os
-
-from flask import Flask, request, session, g, redirect, url_for, \
+from flask import request, session, g, redirect, url_for, \
     abort, render_template, flash
-
+from app import app
+from flaskext.babel import Babel
 from controllers.login import mod_auth
 from controllers.index import mod_main
 from controllers.side import mod_side
-from flaskext.babel import Babel
-
-# Configuration
-os.environ['FLASKR_SETTINGS'] = 'sageo.cfg'
-
-app = Flask(__name__, static_folder="static")
-app.config.from_object(__name__)
-app.config.from_envvar('FLASKR_SETTINGS', silent=False)
 babel = Babel(app)
-#import ipdb;ipdb.set_trace()
-
 @babel.localeselector
 def get_locale():
     return 'fr'

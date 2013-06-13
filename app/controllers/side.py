@@ -16,14 +16,19 @@
 
 from flask import Flask, request, session, g, redirect, url_for, \
     abort, render_template, flash, Module, current_app
-import lib.auth
-import side
+import app.snapins as snapins
 
-mod_main = Module(__name__)
+mod_side = Module(__name__)
 sageo = current_app
 
-@mod_main.route('/', methods=['GET'])
-@lib.auth.login_required
-def index():
-    snapins_contexts = side.side() 
-    return render_template('main.html', snapins_contexts=snapins_contexts)
+def side():
+    snapin_context = {}
+    snapins_contexts = {} 
+    for snapin in snapins.__all__: 
+        __import__('app.snapins.' + snapin)
+        snapin_context['properties'] = getattr(getattr(snapins, snapin), 'snapin_properties')
+        snapin_context['context']    = getattr(getattr(snapins, snapin), 'snapin_' + snapin)() 
+        snapins_contexts[snapin] = snapin_context 
+        
+    return snapins_contexts 
+
