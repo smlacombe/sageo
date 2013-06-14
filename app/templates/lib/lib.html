@@ -9,3 +9,16 @@
   <a target="{{ frame }}" href="{{ target }}">{{ text }}</a>
 {%- endmacro %}
 
+{% macro with_errors(field) -%}
+  <div class="control-group{% if field.errors %} error{% endif %}">
+    {{ field.label(class_='control-label') }}
+    <div class=controls>
+      {{ field(**kwargs) }}
+      {% if field.errors %}
+      {% for error in field.errors %}
+      <span class=text-error>{{ error }}</span>
+      {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+{%- endmacro %}

@@ -14,9 +14,49 @@
 #   You should have received a copy of the GNU General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from functools import wraps
-from flask import session, request, redirect, url_for
+from functools import update_wrapper
+from flask import current_app, abort
+from flask.ext.login import current_user, session, request, redirect, url_for
 
+def authorized(checker):
+    """Check if current user is authenticated and authorized.
+
+    Meant to be used inside views and templates to protect part of resources.
+    """
+    return current_user.is_authenticated() and checker()
+
+
+def require(checker):
+    """
+    Ensure that current user is authenticated and authorized to access the
+    decorated view.  For example::
+
+        @app.route('/protected')
+        @require(Any(IsUser('root'), InGroups('admins')))
+        def protected():
+            pass
+
+    """
+    def decorator(fn):
+        def wrapped_function(*args, **kwargs):
+            if not current_user.is_authenticated():
+                return current_app.login_manager.unauthorized()
+            if not checker():
+                abort(403)
+            return fn(*args, **kwargs)
+        return update_wrapper(wrapped_function, fn)
+    return decorator
+
+
+class IsUser(object):
+    """Check if current user has provided username."""
+
+    def __init__(self, username):
+        self.username = username
+
+    def __call__(self):
+        return current_user.username == self.username
+"""
 def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
@@ -25,3 +65,4 @@ def login_required(f):
         
         return f(*args, **kwargs)
     return decorated_function
+"""

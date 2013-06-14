@@ -17,13 +17,62 @@
 from flask import Flask, request, session, g, redirect, url_for, \
     abort, render_template, flash, Module, current_app
 from flaskext.babel import gettext, ngettext
+from flask.ext.login import LoginManager, login_user, logout_user, \
+    current_user, login_required
+
+from app.models import User
+from app.forms import LoginForm
+from app import db
+from app.lib import auth
 
 _ = gettext
 mod_auth = Module(__name__)
-sageo = current_app
+sageo = Flask(__name__)
+#import ipdb;ipdb.set_trace()
+login_manager = LoginManager()
+login_manager.login_view = 'login'
+login_manager.init_app(mod_auth)
+
+@login_manager.user_loader
+def load_user(user_id):
+    import ipdb;ipdb.set_trace()
+    return User.query.get(user_id)
+
+@sageo.teardown_request
+def remove_db_session(exception=None):
+    db.session.remove()
 
 @mod_auth.route('/login', methods=['GET', 'POST'])
 def login():
+    import ipdb;ipdb.set_trace()
+    if current_user.is_authenticated():
+        return redirect('/')
+
+    form = LoginForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(username=form.username.data).first()
+        if user is not None and user.check_password(form.password.data):
+            if login_user(user, remember=form.remember.data):
+                # Enable session expiration only if user hasn't chosen to be
+                # remembered.
+                session.permanent = not form.remember.data
+                flash('Logged in successfully!', 'success')
+                return redirect('/') 
+            else:
+                flash('This username is disabled!', 'error')
+        else:
+            flash('Wrong username or password!', 'error')
+    return render_template('users/login.html', version='0.1', form=form) 
+
+
+@mod_auth.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    flash('You have logged out!')
+    return redirect('/') 
+
+"""
     error = None
     if request.method == 'POST':
   #      import pdb;pdb.set_trace()
@@ -46,3 +95,4 @@ def logout():
     session.pop('logged_in', None)
     flash(_(u'You were logged out'))
     return redirect(url_for('show_entries'))
+"""
