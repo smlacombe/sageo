@@ -33,20 +33,21 @@
         {{ with_errors(form.password, placeholder=_('password')) }}
       <div class=control-group>
         <div class=controls>
-          <label class=checkbox>
+          {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul>
+    {% for message in messages %}
+        <li><span class=text-error>{{ message }}</span></li>
+    {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %} 
+            <label class=checkbox>
             <input type=checkbox name=remember> {{ _('Remember me') }}
           </label>
           <button type=submit class="btn btn-primary">{{ _('login') }}</button>
         </div>
       </div> 
-
-        {% if error %}
-           <div class="control-group"> 
-                <div class="controls">
-                    <span class="label label-warning">{{ error }}</span>
-                </div>
-           </div>
-        {% endif %}
     </form>
 </div>
 {% endblock %}

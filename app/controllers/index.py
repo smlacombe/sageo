@@ -16,7 +16,6 @@
 
 from flask import Flask, request, session, g, redirect, url_for, \
     abort, render_template, flash, Module, current_app
-from app import db
 from app.lib import auth
 import side
 from flask.ext.login import LoginManager, login_user, logout_user, \
@@ -29,6 +28,7 @@ mod_main = Module(__name__)
 sageo = current_app
 
 @mod_main.route('/', methods=['GET'])
+@login_required
 def index():
     snapins_contexts = side.side() 
     return render_template('main.html', snapins_contexts=snapins_contexts)
