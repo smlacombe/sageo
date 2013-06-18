@@ -18,7 +18,6 @@ from flask import Flask, request, session, g, redirect, url_for, \
     abort, render_template, flash, Module, current_app
 import app.snapins as snapins
 
-mod_side = Module(__name__)
 sageo = current_app
 
 def side():

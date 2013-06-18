@@ -15,7 +15,7 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 from flask import Flask, request, session, g, redirect, url_for, \
-    abort, render_template, flash, Module, current_app
+    abort, render_template, flash, Module, current_app, Blueprint
 from app.lib import auth
 import side
 from flask.ext.login import LoginManager, login_user, logout_user, \
@@ -24,11 +24,11 @@ from flask.ext.login import LoginManager, login_user, logout_user, \
 import app.models
 import app.forms
 
-mod_main = Module(__name__)
+index_page = Blueprint('index_page', __name__, static_folder='static', template_folder='templates')
 sageo = current_app
 
-@mod_main.route('/', methods=['GET'])
+@index_page.route('/')
 @login_required
 def index():
     snapins_contexts = side.side() 
-    return render_template('main.html', snapins_contexts=snapins_contexts)
+    return render_template('main.html', snapins_contexts=snapins_contexts, current_user=current_user)

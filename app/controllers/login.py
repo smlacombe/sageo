@@ -25,7 +25,6 @@ from app.forms import LoginForm
 from app.lib import auth
 
 _ = gettext
-mod_auth = Module(__name__)
 login_page = Blueprint('login_page', __name__, static_folder='static', template_folder='templates')
 sageo = Flask(__name__)
 
@@ -42,44 +41,17 @@ def login():
                 # Enable session expiration only if user hasn't chosen to be
                 # remembered.
                 session.permanent = not form.remember.data
-                import ipdb;ipdb.set_trace()
-                flash('Logged in successfully!', 'success')
+                flash(_('Logged in successfully!'), 'success')
                 return redirect('/') 
             else:
-                flash('This username is disabled!', 'error')
+                flash(_('This username is disabled!'), 'error')
         else:
-            flash('Wrong username or password!', 'error')
+            flash(_('Wrong username or password!'), 'error')
     return render_template('users/login.html', version='0.1', form=form) 
 
-import ipdb;ipdb.set_trace()
-@mod_auth.route('/logout')
+@login_page.route('/logout')
 @login_required
 def logout():
     logout_user()
-    flash('You have logged out!')
+    flash(_('You have logged out!'))
     return redirect('/') 
-
-"""
-    error = None
-    if request.method == 'POST':
-  #      import pdb;pdb.set_trace()
-        if request.form['_username'] == '' or request.form['_password'] == '':
-            error = _(u'no credentials entered')
-        elif request.form['_username'] != sageo.config['USERNAME']:
-            error = _(u'invalid username')
-        elif request.form['_password'] != sageo.config['PASSWORD']:
-            error = _(u'invalid password')
-        else:
-#            import ipdb;ipdb.set_trace() 
-            session['username'] = request.form['_username'] 
-            session['logged_in'] = True
-            flash(_(u'You were logged in'))
-            return redirect('/')
-    return render_template('users/login.html', version='0.1',error=error)
-
-@mod_auth.route('/logout')
-def logout():
-    session.pop('logged_in', None)
-    flash(_(u'You were logged out'))
-    return redirect(url_for('show_entries'))
-"""

@@ -39,7 +39,12 @@
         {% include "side.html" %}
     </div>
     <div class="main-section">
-         <iframe frameborder="0" class="myModal" name="mainFrame" style="overflow:auto;display:block;"></iframe> 
+        {% if sub_page %}
+            {% include sub_page + ".html" %}   
+        {% endif %}
+       {#
+         <iframe frameborder="0" class="myModal" name="mainFrame" style="overflow:auto;display:block;"></iframe>
+       #} 
     </div>
 {% endblock %}
 {% block footer %}
