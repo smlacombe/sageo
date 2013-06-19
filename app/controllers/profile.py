@@ -23,7 +23,7 @@ from flask.ext.login import LoginManager, login_user, logout_user, \
 from app.models import User, db_session
 from app.forms import ProfileForm
 import side
-
+from app import app
 
 _ = gettext
 profile_page = Blueprint('profile_page', __name__, static_folder='static', template_folder='templates')
@@ -42,4 +42,5 @@ def profile():
         return redirect('/')
     else:
         form.language.data = current_user.language 
+        
     return render_template('main.html', snapins_contexts=snapins_contexts, sub_page='users/profile', version='0.1', form=form)
