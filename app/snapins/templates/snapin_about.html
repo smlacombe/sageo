@@ -3,9 +3,9 @@
 {% macro print_html(snapin_context) -%}
     <ul>
         <p>Version: {{ snapin_context['properties']['version'] }}</p> 
-        {{ lib.bulletlink("Homepage", "http://mathias-kettner.de/check_mk.html", 'mainFrame') }}
-        {{ lib.bulletlink("Documentation",   "http://mathias-kettner.de/checkmk.html", 'mainFrame') }}
-        {{ lib.bulletlink("Download",        "http://mathias-kettner.de/check_mk_download.html", 'mainFrame') }}
-        {{ lib.bulletlink("Mathias Kettner", "http://mathias-kettner.de", 'mainFrame') }}
+        {{ lib.bulletlink("Homepage", "/framed/http://mathias-kettner.de/check_mk.html") }}
+        {{ lib.bulletlink("Documentation",   "/framed/http://mathias-kettner.de/checkmk.html") }}
+        {{ lib.bulletlink("Download",        "/framed/http://mathias-kettner.de/check_mk_download.html") }}
+        {{ lib.bulletlink("Mathias Kettner", "/framed/http://mathias-kettner.de") }}
     </ul>
 {%- endmacro %}

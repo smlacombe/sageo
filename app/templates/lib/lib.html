@@ -1,12 +1,9 @@
-{%- macro bulletlink(text, target, frame='self') -%}
-  <li> {{ link(text, target, frame) }}</li>
+{%- macro bulletlink(text, target) -%}
+  <li> {{ link(text, target) }}</li>
 {%- endmacro %}
 
-{%- macro link(text, target, frame='self') -%}
-  {% if not ":" in target[:10] and target[0] != '/' %}
-      target = "index/" + target
-  {% endif %}
-  <a target="{{ frame }}" href="{{ target }}">{{ text }}</a>
+{%- macro link(text, target) -%}
+    <a href="{{ target }}">{{ text }}</a>
 {%- endmacro %}
 
 {% macro with_errors(field) -%}

@@ -41,10 +41,9 @@
     <div class="main-section">
         {% if sub_page %}
             {% include sub_page + ".html" %}   
+        {% elif page_url %} 
+            <iframe frameborder="0" class="myModal" name="mainFrame" src="{{ page_url }}" style="width:100%;height:100%;overflow:auto;display:block;"></iframe>
         {% endif %}
-       {#
-         <iframe frameborder="0" class="myModal" name="mainFrame" style="overflow:auto;display:block;"></iframe>
-       #} 
     </div>
 {% endblock %}
 {% block footer %}

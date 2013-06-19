@@ -45,7 +45,7 @@ from models import User, init_engine, clear_db, init_db, db_session
 from controllers.login import login_page
 from controllers.index import index_page
 from controllers.profile import profile_page
-
+from controllers.frame import framed_page
 
 init_engine(app.config['SQLALCHEMY_DATABASE_URI'])
 clear_db()
@@ -57,3 +57,4 @@ init_db()
 app.register_blueprint(login_page)
 app.register_blueprint(index_page)
 app.register_blueprint(profile_page)
+app.register_blueprint(framed_page)
