@@ -30,5 +30,5 @@ sageo = current_app
 @index_page.route('/')
 @login_required
 def index():
-    snapins_contexts = side.side() 
-    return render_template('main.html', snapins_contexts=snapins_contexts, current_user=current_user)
+    snapin_objects = side.side() 
+    return render_template('main.html', snapin_objects=snapin_objects, current_user=current_user)

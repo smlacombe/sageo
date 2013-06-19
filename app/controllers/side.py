@@ -21,13 +21,10 @@ import app.snapins as snapins
 sageo = current_app
 
 def side():
-    snapin_context = {}
-    snapins_contexts = {} 
+    snapin_objects = {}
     for snapin in snapins.__all__: 
         __import__('app.snapins.' + snapin)
-        snapin_context['properties'] = getattr(getattr(snapins, snapin), 'snapin_properties')
-        snapin_context['context']    = getattr(getattr(snapins, snapin), 'snapin_' + snapin)() 
-        snapins_contexts[snapin] = snapin_context 
+        snapin_objects[snapin] = getattr(snapins, snapin)
         
-    return snapins_contexts 
+    return snapin_objects 
 

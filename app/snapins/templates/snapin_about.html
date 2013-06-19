@@ -1,8 +1,8 @@
 {% import 'lib/lib.html' as lib %}
 
-{% macro print_html(snapin_context) -%}
+{% macro print_html(snapin_object) -%}
     <ul>
-        <p>Version: {{ snapin_context['properties']['version'] }}</p> 
+        <p>Version: {{ snapin_object.__version }}</p> 
         {{ lib.bulletlink("Homepage", "/framed/http://mathias-kettner.de/check_mk.html") }}
         {{ lib.bulletlink("Documentation",   "/framed/http://mathias-kettner.de/checkmk.html") }}
         {{ lib.bulletlink("Download",        "/framed/http://mathias-kettner.de/check_mk_download.html") }}
