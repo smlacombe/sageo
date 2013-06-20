@@ -16,7 +16,7 @@
 
 from flask import Flask, request, session, g, redirect, url_for, \
     abort, render_template, flash, Module, current_app, Blueprint
-from flaskext.babel import gettext, ngettext
+from flask.ext.babelex import gettext, ngettext
 from flask.ext.login import LoginManager, login_user, logout_user, \
     current_user, login_required
 

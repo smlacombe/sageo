@@ -1,6 +1,6 @@
 from flask.ext.wtf import Form, TextField, SelectField, PasswordField, BooleanField, \
     Required
-from flaskext.babel import lazy_gettext, gettext, ngettext, Babel
+from flask.ext.babelex import lazy_gettext, gettext, ngettext, Babel
 from app import babel, app
 from flask import Flask
 _ = lazy_gettext 

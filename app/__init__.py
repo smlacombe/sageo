@@ -7,7 +7,7 @@ from flask import request, session, g, redirect, url_for, \
 from flask.ext.login import LoginManager, login_user, logout_user, \
     current_user, login_required
 
-from flaskext.babel import gettext, ngettext, Babel
+from flask.ext.babelex import gettext, ngettext, Babel
 _ = gettext
 
 
