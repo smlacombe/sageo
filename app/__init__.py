@@ -33,8 +33,7 @@ def get_locale():
     if current_user.is_authenticated():
         return current_user.language 
     else:     
-        return 'en'
-
+        return request.accept_languages.best_match([lang_code for lang_code in app.config['LANGUAGES']]) 
 
 @app.route('/images/<path:filename>')
 def send_image(filename):

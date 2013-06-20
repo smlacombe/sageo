@@ -7,7 +7,7 @@ from ..snapin import SnapinBase
 class SnapinAbout(SnapinBase):
     title = ""
     def __init__(self):
-        self.title = "About Check_MK"
+        self.title = "About Sageo"
         self.description = "Version information and Links to Documentation, Homepage and Download of Check_MK"
         self.version = "0.1"
         self.name = "about"

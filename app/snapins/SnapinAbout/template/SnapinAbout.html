@@ -3,9 +3,7 @@
 {% macro print_html(snapin_object) -%}
     <ul>
         <p>Version: {{ snapin_object.version }}</p> 
-        {{ lib.bulletlink("Homepage", "/framed/http://mathias-kettner.de/check_mk.html") }}
-        {{ lib.bulletlink("Documentation",   "/framed/http://mathias-kettner.de/checkmk.html") }}
-        {{ lib.bulletlink("Download",        "/framed/http://mathias-kettner.de/check_mk_download.html") }}
-        {{ lib.bulletlink("Mathias Kettner", "/framed/http://mathias-kettner.de") }}
+        {{ lib.bulletlink("Sageo GitHub Repo", "http://github.com/smlacombe/sageo") }}
+        {{ lib.bulletlink("Savoir-Faire Linux",   "/framed/http://savoirfairelinux.com/") }}
     </ul>
 {%- endmacro %}
