@@ -24,8 +24,9 @@ sageo = current_app
 def side():
     snapin_objects = {}
     for snapin in snapins.__all__: 
-        __import__('app.snapins.' + snapin)
-        snapin_objects[snapin] = getattr(getattr(snapins, snapin), snapin)()
-        
+       #import ipdb;ipdb.set_trace()
+       __import__('app.snapins.' + snapin + '.' + snapin)
+       snapin_objects[snapin] = getattr(getattr(getattr(snapins, snapin), snapin),snapin)() 
+
     return snapin_objects 
 

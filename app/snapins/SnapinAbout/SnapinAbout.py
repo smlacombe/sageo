@@ -2,7 +2,7 @@ from flask import Flask, request, session, g, redirect, url_for, abort, render_t
 from flaskext.babel import gettext, ngettext 
 
 import abc
-from snapin import SnapinBase
+from ..snapin import SnapinBase
 
 class SnapinAbout(SnapinBase):
     title = ""

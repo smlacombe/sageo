@@ -22,8 +22,8 @@ from flask.ext.login import LoginManager, login_user, logout_user, \
 
 from app.models import User, db_session
 from app.forms import ProfileForm
-import side
 from app import app
+from app.lib import snapins
 
 _ = gettext
 profile_page = Blueprint('profile_page', __name__, static_folder='static', template_folder='templates')
@@ -31,7 +31,6 @@ profile_page = Blueprint('profile_page', __name__, static_folder='static', templ
 @profile_page.route('/profile', methods=['GET', 'POST'])
 @login_required
 def profile():
-    snapins_contexts = side.side()
     form = ProfileForm()
     
     if form.validate_on_submit():
@@ -43,4 +42,4 @@ def profile():
     else:
         form.language.data = current_user.language 
         
-    return render_template('main.html', snapins_contexts=snapins_contexts, sub_page='users/profile', version='0.1', form=form)
+    return snapins.render_sidebar_template('main.html', sub_page='users/profile', version='0.1', form=form)
