@@ -17,6 +17,7 @@
 from flask import Flask, request, session, g, redirect, url_for, \
     abort, render_template, flash, Module, current_app
 import app.snapins as snapins
+#from app.snapins.snapin import SnapinBase
 
 sageo = current_app
 
@@ -24,7 +25,7 @@ def side():
     snapin_objects = {}
     for snapin in snapins.__all__: 
         __import__('app.snapins.' + snapin)
-        snapin_objects[snapin] = getattr(snapins, snapin)
+        snapin_objects[snapin] = getattr(getattr(snapins, snapin), snapin)()
         
     return snapin_objects 
 
