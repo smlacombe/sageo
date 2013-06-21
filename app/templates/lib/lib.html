@@ -19,3 +19,26 @@
     </div>
   </div>
 {%- endmacro %}
+
+{%- macro flash_alert(text, category='message') -%}
+    {% if category == 'message' %}
+        <div class="alert alert-info">
+            {{ close_alert_button() }}
+            {{ text }}
+        </div>
+    {% elif category == 'error' %}
+        <div class="alert alert-error">
+            {{ close_alert_button() }}
+            {{ text }}
+        </div>
+    {% elif category == 'success' %}
+        <div class="alert alert-success">
+            {{ close_alert_button() }}
+            {{ text }}
+        </div>
+    {% endif %}
+{%- endmacro %}
+
+{%- macro close_alert_button() -%}
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+{%- endmacro %}
