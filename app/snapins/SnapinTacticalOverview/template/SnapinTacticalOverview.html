@@ -1,0 +1,27 @@
+{% import 'lib/lib.html' as lib %}
+
+{% macro print_html(snapin_object) -%}
+    <table class="table table-condensed table-bordered" cellspacing=2 cellpadding=0 border=0>
+        {% for title, data, view, what in [ ("Hosts",  snapin_object.context()['hstdata'], 'hostproblems', 'host'), ("Services", snapin_object.context()['svcdata'], 'svcproblems',  'service')] %}
+          <tr>
+            <th>{{ title }}</th>
+            <th>Problems</th>
+            <th>Unhandled</th>
+          </tr>
+          <tr>
+          <td>
+            <a href="view?view_name=all{{ what }}">{{ data[0] }}</a>
+          </td>
+          {% set unhandled = False %}
+          {% for value in data[1:] %} 
+            {% set href = "view?view_name=" + view %}
+              {% if unhandled %}
+                  {% set href = href + "&is_%s_acknowledged=0" % what %}
+              {% endif %}
+            <td>{{ lib.link(value, href) }}</td>
+          {% set unhandled = True %}
+          {% endfor %}
+          </tr>
+        {% endfor %}
+        </table>
+{%- endmacro %}

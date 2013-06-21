@@ -10,4 +10,4 @@ msgid "Savoir-Faire Linux"
 msgstr "Savoir-Faire Linux"
 
 msgid "About Sageo"
-msgstr "About Sageorr"
+msgstr "About Sageo"

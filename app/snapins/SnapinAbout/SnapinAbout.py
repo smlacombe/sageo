@@ -4,14 +4,16 @@ from flask.ext.babelex import Domain, gettext, ngettext
 import abc
 from ..snapin import SnapinBase
 from app import babel, app
-import os
+from os import path
 
 class SnapinAbout(SnapinBase):
     def __init__(self):
-        self.mydomain = Domain(os.path.abspath('app/snapins/SnapinAbout/translations'))
+        #import ipdb;ipdb.set_trace()
+        self.translations_path = path.join(path.dirname(__file__), 'translations')        
+        self.mydomain = Domain(self.translations_path)
         _ = self.mydomain.lazy_gettext
         self.title = _(u'About Sageo')
-        self.description = "Version information and Links to Documentation, Homepage and Download of Check_MK"
+        self.description = _(u'Version information and Links to Documentation, Homepage and Download of Check_MK')
         self.version = "0.1"
         self.name = "about"
  

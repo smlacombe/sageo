@@ -22,6 +22,9 @@
             <div class="portlet-header">{{ snapin_object.title }}</div>
             <div class="portlet-content">
                 {% import 'snapins/' + snapin + '/template/' + snapin + '.html' as snapin_template %} 
+                <style>
+                    {% include 'snapins/' + snapin + '/template/styles.css' ignore missing %}
+                </style>
                 {{ snapin_template.print_html(snapin_object) }} 
             </div>
         </div>
