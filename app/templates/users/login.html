@@ -18,7 +18,8 @@
 
 {% extends "base.html" %}
 {% from 'lib/lib.html' import with_errors %}
-{% from 'lib/lib.html' import flash_alert %}
+{% from 'lib/lib.html' import print_flash_messages %}
+
 {% block title %}{{ _('login') }}{% endblock %}
 {% block head %}
     {{ super() }}
@@ -33,13 +34,7 @@
         {{ with_errors(form.password, placeholder=_('password')) }}
       <div class=control-group>
         <div class=controls>
-          {% with messages = get_flashed_messages(with_categories=true) %}
-    {% if messages %}
-    {% for category, message in messages %}
-       {{ flash_alert(message,category) }} 
-    {% endfor %}
-    {% endif %}
-    {% endwith %} 
+           {{ print_flash_messages() }}
             <label class=checkbox>
             <input type=checkbox name=remember> {{ _('Remember me') }}
           </label>

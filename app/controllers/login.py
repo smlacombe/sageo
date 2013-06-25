@@ -23,6 +23,7 @@ from flask.ext.login import LoginManager, login_user, logout_user, \
 from app.models import User, db_session
 from app.forms import LoginForm
 from app.lib import auth
+from app import babel, app
 
 _ = gettext
 login_page = Blueprint('login_page', __name__, static_folder='static', template_folder='templates')
@@ -34,6 +35,7 @@ def login():
         return redirect('/')
 
     form = LoginForm()
+
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
         if user is not None and user.check_password(form.password.data):

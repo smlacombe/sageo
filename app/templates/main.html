@@ -17,6 +17,7 @@
 #}
 
 {% extends "base.html" %}
+{% from 'lib/lib.html' import print_flash_messages %}
 {% block title %}Main page{% endblock %}
 {% block head %}
     {{ super() }}
@@ -39,6 +40,7 @@
         {% include "side.html" %}
     </div>
     <div class="main-section">
+        {{ print_flash_messages() }} 
         {% if sub_page %}
             {% include sub_page + ".html" %}   
         {% elif page_url %} 

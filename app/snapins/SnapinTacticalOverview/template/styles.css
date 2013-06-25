@@ -1,0 +1,14 @@
+td.problem
+{
+background-color: orange;
+}
+
+td.normal
+{
+background-color: white;
+}
+
+table#tactical.td
+{
+text-align:right;
+}

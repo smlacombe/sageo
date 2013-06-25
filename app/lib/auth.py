@@ -56,13 +56,3 @@ class IsUser(object):
 
     def __call__(self):
         return current_user.username == self.username
-"""
-def login_required(f):
-    @wraps(f)
-    def decorated_function(*args, **kwargs):
-        if not 'username' in session:
-            return redirect('login')
-        
-        return f(*args, **kwargs)
-    return decorated_function
-"""
