@@ -21,25 +21,19 @@ from flask.ext.login import LoginManager, login_user, logout_user, \
     current_user, login_required
 
 from app.models import User, db_session
-from app.forms import ProfileForm
+from app.forms import ViewForm 
 from app import app
 from app.lib import snapins
 
-_ = gettext
-profile_page = Blueprint('profile_page', __name__, static_folder='static', template_folder='templates')
 
-@profile_page.route('/profile', methods=['GET', 'POST'])
+_ = gettext
+edit_view_page = Blueprint('edit_view_page', __name__, static_folder='static', template_folder='templates')
+
+@edit_view_page.route('/edit_view', methods=['GET', 'POST'])
 @login_required
-def profile():
-    form = ProfileForm()
-    
-    if form.validate_on_submit():
-        language = form.language.data
-        current_user.language = language 
-        db_session.commit()
-        flash(_('Profile settings saved successfully!'), 'success')
-        return redirect('/')
-    else:
-        form.language.data = current_user.language 
-        
-    return snapins.render_sidebar_template('main.html', sub_page='users/profile.html', version='0.1', form=form)
+def edit_view():
+    form = ViewForm() 
+
+    view_name = request.args.get('view_name', '')
+    acknowledged = request.args.get('acknowledged', '')
+    return snapins.render_sidebar_template('main.html', sub_page='views/edit_view.html', acknowledged=acknowledged, view_name=view_name, form=form)

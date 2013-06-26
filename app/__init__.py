@@ -19,7 +19,7 @@ babel = Babel(app)
 login_manager = LoginManager()
 login_manager.login_view = '/login'
 login_manager.init_app(app)
-
+login_manager.login_message = ""
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(user_id)
@@ -45,6 +45,8 @@ from controllers.login import login_page
 from controllers.index import index_page
 from controllers.profile import profile_page
 from controllers.frame import framed_page
+from controllers.view import view_page
+from controllers.edit_view import edit_view_page
 
 init_engine(app.config['SQLALCHEMY_DATABASE_URI'])
 clear_db()
@@ -57,3 +59,5 @@ app.register_blueprint(login_page)
 app.register_blueprint(index_page)
 app.register_blueprint(profile_page)
 app.register_blueprint(framed_page)
+app.register_blueprint(edit_view_page)
+app.register_blueprint(view_page)

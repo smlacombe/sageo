@@ -1,0 +1,67 @@
+{#
+
+   Copyright (C) 2013 Savoir-Faire Linux Inc.
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#}
+
+{% from 'lib/lib.html' import with_errors %}
+{% from 'lib/lib.html' import print_flash_messages %}
+
+<p>View edit</p>
+view_name = {{ view_name }}
+acknowledged = {{acknowledged}}
+
+
+<div class="container">
+    <form class="form-horizontal" name="edit_view" action="edit_view" method="post" enctype="multipart/form-data">
+        <h2>{{ _("Edit view") }}</h2>
+            {{ form.hidden_tag() }}
+        <div id="accordion">
+            <div>
+                <h3><a href="#">{{ _('Basic Settings') }}</a></h3>
+                <div> 
+                    {{ with_errors(form.basic_settings.title, placeholder=_('view title')) }} 
+                    {{ with_errors(form.basic_settings.link_name, placeholder=_('linkname')) }}
+                    {{ with_errors(form.basic_settings.datasource) }}
+                    {{ with_errors(form.basic_settings.buttontext, placeholder=_('buttontext')) }}
+                    {{ with_errors(form.basic_settings.reload_intervall) }}
+                </div>
+            </div>
+            <div>
+                <h3><a href="#">{{ _('Filters') }}</a></h3>
+                <div>
+                    {{ with_errors(form.filters.hostname.options) }}
+                    {{ with_errors(form.filters.hostname.hostname) }}
+                    {{ with_errors(form.filters.hostname.exact_match) }}
+
+                </div>
+            </div>
+            <div>
+                <h3><a href="#">{{ _('Sorting') }}</a></h3>
+            </div>
+            <div>
+            <h3><a href="#">{{ _('Grouping') }}</a></h3>
+            </div>
+                <div>
+                <h3><a href="#">{{ _('Columns') }}</a></h3>
+            </div>
+            <div>
+                <h3><a href="#">{{ _('Layout') }}</a></h3>
+            </div>
+        </div>
+
+        <button type=submit class="btn btn-primary">{{ _('Save') }}</button>
+    </form>
+</div>

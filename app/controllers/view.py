@@ -26,20 +26,11 @@ from app import app
 from app.lib import snapins
 
 _ = gettext
-profile_page = Blueprint('profile_page', __name__, static_folder='static', template_folder='templates')
+view_page = Blueprint('view_page', __name__, static_folder='static', template_folder='templates')
 
-@profile_page.route('/profile', methods=['GET', 'POST'])
+@view_page.route('/view')
 @login_required
-def profile():
-    form = ProfileForm()
-    
-    if form.validate_on_submit():
-        language = form.language.data
-        current_user.language = language 
-        db_session.commit()
-        flash(_('Profile settings saved successfully!'), 'success')
-        return redirect('/')
-    else:
-        form.language.data = current_user.language 
-        
-    return snapins.render_sidebar_template('main.html', sub_page='users/profile.html', version='0.1', form=form)
+def view():
+    view_name = request.args.get('view_name', '')
+    acknowledged = request.args.get('acknowledged', '')
+    return snapins.render_sidebar_template('main.html', sub_page='views/view.html', acknowledged=acknowledged, view_name=view_name)
