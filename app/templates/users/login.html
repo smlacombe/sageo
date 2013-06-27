@@ -30,8 +30,8 @@
     <form class="form-signin form-horizontal" name="login" action="login" method="post" enctype="multipart/form-data">
         <h2 class="form-signin-heading">{{ _("Sageo") }}</h2>
         {{ form.hidden_tag() }}
-        {{ with_errors(form.username, placeholder=_('username')) }}
-        {{ with_errors(form.password, placeholder=_('password')) }}
+        {{ with_errors(form.username, fieldargs={'placeholder': _('username')}) }}
+        {{ with_errors(form.password, fieldargs={'placeholder': _('password')}) }}
       <div class=control-group>
         <div class=controls>
            {{ print_flash_messages() }}

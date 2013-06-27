@@ -23,7 +23,7 @@
         <h2>{{ _("Edit profile") }}</h2>
 
         {{ form.hidden_tag() }}
-        {{ with_errors(form.language, placeholder=_('language')) }}
+        {{ with_errors(form.language, fieldargs={'placeholder': _('language')}) }}
       <div class=control-group>
         <div class=controls>
           {% with messages = get_flashed_messages() %}

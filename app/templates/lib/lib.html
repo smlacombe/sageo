@@ -6,19 +6,59 @@
     <a href="{{ target }}">{{ text }}</a>
 {%- endmacro %}
 
-{% macro with_errors(field) -%}
-  <div class="control-group{% if field.errors %} error{% endif %}">
-    {{ field.label(class_='control-label') }}
-    <div class=controls>
-      {{ field(**kwargs) }}
-      {% if field.errors %}
-      {% for error in field.errors %}
-      <span class=text-error>{{ error }}</span>
-      {% endfor %}
-      {% endif %}
+{% macro with_errors(field, label=True, fieldargs={}) -%}
+    {{ single_control_group(field) }} 
+        {% if label %} 
+            {{ field_label(field) }}
+        {% endif %}
+
+        {{ controls() }} 
+            {{ print_field(field, fieldargs) }}
+            {{ field_error(field) }}
+        </div>
     </div>
-  </div>
 {%- endmacro %}
+
+{% macro print_field(field, fieldargs={}) -%}
+    {{ field(**fieldargs) }}
+{%- endmacro %}
+
+{% macro print_radiofield(field) -%}
+    {% for subfield in field %}
+        {{ subfield }}
+        {{ subfield.label }}
+    {% endfor %}
+
+{%- endmacro %}
+
+{% macro controls(inline=False) -%}
+    <div class="controls{% if inline %} form-inline{% endif %}">
+{%- endmacro %}
+
+{% macro single_control_group(field) -%}
+    <div class="control-group{% if field.errors %} error{% endif %}">
+{%- endmacro %}
+
+{% macro control_group() -%}
+    <div class="control-group">
+{%- endmacro %}
+
+{%- macro field_label(field) -%}
+    {{ field.label(class_='control-label') }}
+{%- endmacro %}
+
+{%- macro label(field) -%}
+    {{ field.label(class_='control-label') }}
+{%- endmacro %}
+
+{%- macro field_error(field) -%}
+      {% if field.errors %}
+          {% for error in field.errors %}
+              <span class=text-error>{{ error }}</span>
+          {% endfor %}
+      {% endif %}
+{%- endmacro %}
+
 
 {%- macro flash_alert(text, category='message') -%}
     {% if category == 'message' %}

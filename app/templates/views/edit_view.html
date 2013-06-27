@@ -16,8 +16,7 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #}
 
-{% from 'lib/lib.html' import with_errors %}
-{% from 'lib/lib.html' import print_flash_messages %}
+{% import 'lib/lib.html' as lib %}
 
 <p>View edit</p>
 view_name = {{ view_name }}
@@ -32,19 +31,55 @@ acknowledged = {{acknowledged}}
             <div>
                 <h3><a href="#">{{ _('Basic Settings') }}</a></h3>
                 <div> 
-                    {{ with_errors(form.basic_settings.title, placeholder=_('view title')) }} 
-                    {{ with_errors(form.basic_settings.link_name, placeholder=_('linkname')) }}
-                    {{ with_errors(form.basic_settings.datasource) }}
-                    {{ with_errors(form.basic_settings.buttontext, placeholder=_('buttontext')) }}
-                    {{ with_errors(form.basic_settings.reload_intervall) }}
+                    {{ lib.with_errors(form.basic_settings.title) }} 
+                    {{ lib.with_errors(form.basic_settings.link_name) }}
+                    {{ lib.with_errors(form.basic_settings.datasource) }}
+                    {{ lib.with_errors(form.basic_settings.buttontext, fieldargs={'placeholder': _('buttontext')}) }}
+                    {{ lib.with_errors(form.basic_settings.reload_intervall) }}
                 </div>
             </div>
             <div>
                 <h3><a href="#">{{ _('Filters') }}</a></h3>
                 <div>
-                    {{ with_errors(form.filters.hostname.options) }}
-                    {{ with_errors(form.filters.hostname.hostname) }}
-                    {{ with_errors(form.filters.hostname.exact_match) }}
+                    {{ lib.control_group() }}
+                        <span class="control-label">{{ _('Hostname') }}</span>
+                        {{ lib.controls(inline=True) }}
+                            {{ lib.print_field(form.filters.hostname.options) }}
+                            {{ lib.print_field(form.filters.hostname.hostname, fieldargs={'placeholder': _('Hostname expression')}) }}
+
+                            <label class=checkbox>
+                                {{ lib.print_field(form.filters.hostname.exact_match) }} {{ _('Exact match') }}
+                            </label>
+                        </div>
+                    </div>
+
+                    {{ lib.control_group() }}
+                        <span class="control-label">{{ _('Host states') }}</span>
+                        {{ lib.controls(inline=True) }}
+                            {{ lib.print_field(form.filters.hoststates.options) }}
+                            <label class=checkbox>
+                                {{ lib.print_field(form.filters.hoststates.up) }} {{ _('UP') }}
+                            </label>
+                            <label class=checkbox>
+                                {{ lib.print_field(form.filters.hoststates.down) }} {{ _('DOWN') }}
+                            </label>
+                            <label class=checkbox>
+                                {{ lib.print_field(form.filters.hoststates.unreach) }} {{ _('UNREACH') }}
+                            </label>
+                            <label class=checkbox>
+                                {{ lib.print_field(form.filters.hoststates.pending) }} {{ _('PENDING') }}
+                            </label>
+                        </div>
+                    </div>
+
+
+                    {{ lib.control_group() }}
+                        <span class="control-label">{{ _('Is summary host') }}</span>
+                        {{ lib.controls(inline=True) }}
+                            {{ lib.print_field(form.filters.summaryhost.options) }}
+                            {{ lib.print_radiofield(form.filters.summaryhost.summary) }}
+                        </div>
+                    </div>
 
                 </div>
             </div>
@@ -54,11 +89,26 @@ acknowledged = {{acknowledged}}
             <div>
             <h3><a href="#">{{ _('Grouping') }}</a></h3>
             </div>
-                <div>
+            <div>
                 <h3><a href="#">{{ _('Columns') }}</a></h3>
+                <div>
+                {% set counter=0 %}
+                {% for subfield in form.columns %}
+                        {% set counter = counter + 1 %}
+                        {{ lib.control_group() }}
+                        <span class="control-label">{{ _('Column #')+ ' ' ~counter }}</span>
+                        {{ lib.controls() }}
+                            {{ lib.print_field(subfield.column) }}
+                        </div>
+                    </div>
+                {% endfor %}
+                </div>
             </div>
             <div>
                 <h3><a href="#">{{ _('Layout') }}</a></h3>
+                <div>
+                    {{ lib.with_errors(form.layout.number_columns) }}
+                </div>
             </div>
         </div>
 

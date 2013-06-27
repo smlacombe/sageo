@@ -34,6 +34,9 @@ edit_view_page = Blueprint('edit_view_page', __name__, static_folder='static', t
 def edit_view():
     form = ViewForm() 
 
+    if form.validate_on_submit():
+        pass
+
     view_name = request.args.get('view_name', '')
     acknowledged = request.args.get('acknowledged', '')
     return snapins.render_sidebar_template('main.html', sub_page='views/edit_view.html', acknowledged=acknowledged, view_name=view_name, form=form)
