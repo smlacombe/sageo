@@ -16,11 +16,9 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #}
 {% extends "main.html" %}
-{% import 'lib/lib.html' as lib %}
-{% block title %}{{ _('Sageo')+' ' +_('View') }}{% endblock %}
 
 {% block main_section %}
-    <p>View</p>
-    view_name = {{ view_name }}
-    acknowledged = {{acknowledged}}
+    <iframe frameborder="0" class="myModal" name="mainFrame" src="{{ page_url }}" style="width:100%;height:100%;overflow:auto;display:block;"></iframe>
 {% endblock %}
+
+

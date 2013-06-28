@@ -29,5 +29,5 @@ framed_page = Blueprint('framed_page', __name__, static_folder='static', templat
 @login_required
 def framed(page_url):
     snapin_objects = side.side()
-    return render_template('main.html', snapin_objects=snapin_objects, current_user=current_user, page_url=page_url)
+    return render_template('framed.html', snapin_objects=snapin_objects, current_user=current_user, page_url=page_url)
 

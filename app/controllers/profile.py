@@ -42,4 +42,4 @@ def profile():
     else:
         form.language.data = current_user.language 
         
-    return snapins.render_sidebar_template('main.html', sub_page='users/profile.html', version='0.1', form=form)
+    return snapins.render_sidebar_template('users/profile.html', version='0.1', form=form)
