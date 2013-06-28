@@ -31,6 +31,38 @@ def clear_db():
 Base = declarative_base()
 Base.query = db_session.query_property()
 
+filter_choices = Column(Enum('off', 'hard', 'show', 'hide'))
+
+class View(Base):
+    __tablename__ = 'views'
+    id = Column(Integer, primary_key = True)
+    title = Column(String(30), index = True, unique = True)
+    link_name = Column(String(30)) 
+    datasource = Column(Enum('allhost', 'allservices')) 
+    buttontext = Column(String(15))
+    reload_intervall = Column(SmallInteger)
+
+    hostname_option = filter_choices 
+    hostname_exact_match = Column(Boolean) 
+    hostname = Column(String(100))
+
+    hoststate_option = filter_choices
+    hoststate_up = Column(Boolean)
+    hoststate_down = Column(Boolean)
+    hoststate_unreach = Column(Boolean)
+    hoststate_pending = Column(Boolean)
+
+    summary_option = filter_choices
+    summary = Column(Enum('yes', 'no', 'ignore'))
+    columns = relationship("ViewColumn")
+    layout_number_columns = Column(SmallInteger)
+
+class ViewColumn(Base):
+    __tablename__ = 'view_column'
+    id = Column(Integer, primary_key=True)
+    column = Column(Enum('hostname', 'hoststate', 'lastcheck'))
+    parent_id = Column(Integer, ForeignKey('views.id')) 
+
 class User(UserMixin, Base):
     __tablename__ = 'users' 
     id = Column(Integer, primary_key = True)

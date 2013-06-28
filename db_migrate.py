@@ -1,4 +1,3 @@
-#!/usr/bin/python
 import imp
 from migrate.versioning import api
 from app.models import db_session, Base
