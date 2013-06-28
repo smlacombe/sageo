@@ -33,7 +33,9 @@ edit_view_page = Blueprint('edit_view_page', __name__, static_folder='static', t
 @login_required
 def edit_view():
     form = ViewForm() 
-    form.columns.append_entry()
+    #import ipdb;ipdb.set_trace()
+    first = form.columns.append_entry()
+    first.column.data='hoststate'
     form.columns.append_entry()
     if form.validate_on_submit():
         pass

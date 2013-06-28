@@ -31,16 +31,16 @@
 
 {%- endmacro %}
 
-{% macro controls(inline=False) -%}
-    <div class="controls{% if inline %} form-inline{% endif %}">
+{% macro controls(inline=False, otherclass='') -%}
+    <div class="controls{% if inline %} form-inline{% endif %}{% if otherclass %} {{ otherclass }}{% endif %}">
 {%- endmacro %}
 
 {% macro single_control_group(field) -%}
     <div class="control-group{% if field.errors %} error{% endif %}">
 {%- endmacro %}
 
-{% macro control_group() -%}
-    <div class="control-group">
+{% macro control_group(otherclass='') -%}
+    <div class="control-group{% if otherclass %} {{ otherclass }}{% endif %}">
 {%- endmacro %}
 
 {%- macro field_label(field) -%}

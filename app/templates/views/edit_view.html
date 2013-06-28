@@ -23,6 +23,7 @@
     {{ super() }}
     <script src="{{ url_for('.static', filename='js/tabs.js') }}"></script>
     <script src="{{ url_for('.static', filename='js/accordion.js') }}"></script>
+    <script src="{{ url_for('.static', filename='js/edit_view.js') }}"></script>
 {% endblock %}
 
 {% block main_section %}
@@ -101,14 +102,14 @@
                         {% set counter=0 %}
                         {% for subfield in form.columns %}
                                 {% set counter = counter + 1 %}
-                                {{ lib.control_group() }}
-                                <span class="control-label">{{ _('Column #')+ ' ' ~counter }}</span>
+                                {{ lib.control_group(otherclass='clonable-col') }}
+                                {{ lib.field_label(subfield.column) }} 
                                 {{ lib.controls() }}
                                     {{ lib.print_field(subfield.column) }}
                                 </div>
                             </div>
                         {% endfor %}
-                        <a id="add_column" class="btn" href="#">{{ _('Add column') }}</a>
+                        <a id="add_column" class="btn">{{ _('Add column') }}</a>
                     </div>
                 </div>
                 <div>
