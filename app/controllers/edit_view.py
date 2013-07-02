@@ -20,7 +20,7 @@ from flask.ext.babelex import gettext, ngettext
 from flask.ext.login import LoginManager, login_user, logout_user, \
     current_user, login_required
 
-from app.models import User, db_session
+from app.models import User, db_session, ViewColumn
 from app.forms.view import ViewForm 
 from app import app
 from app.lib import snapins
@@ -34,12 +34,17 @@ edit_view_page = Blueprint('edit_view_page', __name__, static_folder='static', t
 def edit_view():
     form = ViewForm() 
     #import ipdb;ipdb.set_trace()
-    first = form.columns.append_entry()
-    first.column.data='hoststate'
+    #first = form.columns.append_entry()
+    #first.column.data='hoststate'
+    #form.columns.append_entry()
+
+    col1 = ViewColumn() 
+    form.populate_obj(col1) 
     form.columns.append_entry()
     if form.validate_on_submit():
         pass
 
+#    import ipdb;ipdb.set_trace()
     view_name = request.args.get('view_name', '')
     acknowledged = request.args.get('acknowledged', '')
     return snapins.render_sidebar_template('views/edit_view.html', acknowledged=acknowledged, view_name=view_name, form=form)

@@ -1,0 +1,11 @@
+six
+SQLAlchemy>=0.8.0
+phonenumbers3k==5.6b1
+colour>=0.0.3
+
+[test]
+pytest==2.2.3
+Pygments>=1.2
+Jinja2>=2.3
+docutils>=0.10
+flexmock>=0.9.7

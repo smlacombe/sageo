@@ -1,10 +1,14 @@
+import copy
 from flask.ext.login import UserMixin
 from werkzeug.security import generate_password_hash, \
      check_password_hash
 from sqlalchemy import *
 from sqlalchemy.orm import *
 from sqlalchemy.ext.declarative import declarative_base
-
+from flask.ext.babelex import lazy_gettext, gettext, ngettext, Babel
+from app import babel, app
+from flask import Flask
+_ = lazy_gettext
 
 db_engine = None
 db_session = scoped_session(sessionmaker(autocommit=False, autoflush=False))
@@ -31,37 +35,44 @@ def clear_db():
 Base = declarative_base()
 Base.query = db_session.query_property()
 
-filter_choices = Column(Enum('off', 'hard', 'show', 'hide'))
+filter_choices = [('off',_(u'Don''t use')),('hard',_(u"Hardcode")),('show',_(u"Show to user")), ('hide',_(u"Use for linking"))]
+#filter_column = Column(Enum(dict(filter_choices).keys()), info={'choices': filter_choices})
+filter_column = Column(Enum('off','hard','show','hide'), info={'choices': filter_choices})
+datasource_choices = [('allhost',_(u'All hosts')),('allservices',_(u"All services"))]
+column_choices = [('hostname',_(u'Hostname')),('hoststate',_(u"Host state")), ('lastcheck',_(u"Last check"))]
 
 class View(Base):
     __tablename__ = 'views'
     id = Column(Integer, primary_key = True)
-    title = Column(String(30), index = True, unique = True)
-    link_name = Column(String(30)) 
-    datasource = Column(Enum('allhost', 'allservices')) 
-    buttontext = Column(String(15))
-    reload_intervall = Column(SmallInteger)
-
-    hostname_option = filter_choices 
+    title = Column(String(30), index = True, unique = True, info={'label':_(u'Title')})
+    link_name = Column(String(30), info={'label':_(u'Link name')}) 
+    datasource = Column(Enum('allhost', 'allservices'), info={'choices': datasource_choices, 'label':_(u'Datasource')}) 
+    buttontext = Column(String(15), info={'label':_(u'Button text')})
+    reload_intervall = Column(SmallInteger, info={'label':_(u'Browser reload')})
+    hostname_option = Column(Enum('off','hard','show','hide'), info={'choices': filter_choices}) 
     hostname_exact_match = Column(Boolean) 
     hostname = Column(String(100))
 
-    hoststate_option = filter_choices
+    hoststate_option = Column(Enum('off','hard','show','hide'), info={'choices': filter_choices})
     hoststate_up = Column(Boolean)
     hoststate_down = Column(Boolean)
     hoststate_unreach = Column(Boolean)
     hoststate_pending = Column(Boolean)
 
-    summary_option = filter_choices
+    summary_option = Column(Enum('off','hard','show','hide'), info={'choices': filter_choices})
     summary = Column(Enum('yes', 'no', 'ignore'))
-    columns = relationship("ViewColumn")
-    layout_number_columns = Column(SmallInteger)
+    #columns = relationship("ViewColumn")
+    layout_number_columns = Column(SmallInteger, info={'label':_(u'Number of columns')})
 
 class ViewColumn(Base):
     __tablename__ = 'view_column'
     id = Column(Integer, primary_key=True)
     column = Column(Enum('hostname', 'hoststate', 'lastcheck'))
-    parent_id = Column(Integer, ForeignKey('views.id')) 
+    parent_id = Column(Integer, ForeignKey(View.id)) 
+    view = relationship(
+        View,
+        backref = 'View'    
+    )
 
 class User(UserMixin, Base):
     __tablename__ = 'users' 

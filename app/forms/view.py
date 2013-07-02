@@ -5,10 +5,24 @@ from app import babel, app
 from flask import Flask
 _ = lazy_gettext
 from app.forms.libforms import TranslatedForm
+from wtforms_alchemy import ModelForm, ModelFieldList
+from app.models import View, ViewColumn
+
 
 filter_choices = [('off',_(u'Don''t use')),('hard',_(u"Hardcode")),('show',_(u"Show to user")), ('hide',_(u"Use for linking"))]
 datasource_choices = [('allhost',_(u'All hosts')),('allservices',_(u"All services"))]
 column_choices = [('hostname',_(u'Hostname')),('hoststate',_(u"Host state")), ('lastcheck',_(u"Last check"))]
+
+class ViewColumnForm(ModelForm, TranslatedForm):
+    class Meta:
+        model = ViewColumn
+
+class ViewForm(ModelForm, TranslatedForm):
+    class Meta:
+        model = View
+
+    columns = ModelFieldList(FormField(ViewColumnForm))
+    summary = RadioField('Summary', choices=[('yes',_(u'Yes')),('no',_(u'No')),('ignore',_(u'Ignore'))], default='no')
 
 ################# BasicSettingsForm ###################### 
 class BasicSettingsForm(TranslatedForm):
@@ -47,9 +61,10 @@ class LayoutForm(TranslatedForm):
 class Column(TranslatedForm):
     column = SelectField(_(u'Column'), choices=column_choices)
 
+'''
 class ViewForm(TranslatedForm):
     basic_settings = FormField(BasicSettingsForm)
     filters = FormField(FiltersForm)
     layout = FormField(LayoutForm)
     columns = FieldList(FormField(Column))
-
+'''
