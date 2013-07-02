@@ -21,7 +21,7 @@ from flask.ext.login import LoginManager, login_user, logout_user, \
     current_user, login_required
 
 from app.models import User, db_session
-from app.forms import ViewForm 
+from app.forms.view import ViewForm 
 from app import app
 from app.lib import snapins
 

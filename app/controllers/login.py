@@ -21,7 +21,7 @@ from flask.ext.login import LoginManager, login_user, logout_user, \
     current_user, login_required
 
 from app.models import User, db_session
-from app.forms import LoginForm
+from app.forms.login import LoginForm
 from app.lib import auth
 from app import babel, app
 
