@@ -58,7 +58,7 @@
                     <div>
                         {{ lib.control_group() }}
                             <span class="control-label">{{ _('Hostname') }}</span>
-                            {{ lib.controls(inline=True) }}
+                            {{ lib.controls(inline=True, otherclass='filter') }}
                                 {{ lib.print_field(form.hostname_option) }}
                                 <div class='filter_options'>
                                     {{ lib.print_field(form.hostname, fieldargs={'placeholder': _('Hostname expression')}) }}
@@ -72,7 +72,7 @@
 
                         {{ lib.control_group() }}
                             <span class="control-label">{{ _('Host states') }}</span>
-                            {{ lib.controls(inline=True) }}
+                            {{ lib.controls(inline=True, otherclass='filter') }}
                                 {{ lib.print_field(form.hoststate_option) }}
                                 <div class='filter_options'>
                                     <label class=checkbox>
@@ -94,7 +94,7 @@
 
                         {{ lib.control_group() }}
                             <span class="control-label">{{ _('Is summary host') }}</span>
-                            {{ lib.controls(inline=True) }}
+                            {{ lib.controls(inline=True, otherclass='filter') }}
                                 {{ lib.print_field(form.summary_option) }}
                                 <div class='filter_options'>
                                     {{ lib.print_radiofield(form.summary) }}

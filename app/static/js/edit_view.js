@@ -23,6 +23,8 @@ update: function (e, ui) {
         }
 });
 
+bind_toggle_filter_options();
+
 });
 
 function clone_field_list(selector) {
@@ -49,3 +51,26 @@ function reorder_columns() {
         }
     });
 }
+
+function bind_toggle_filter_options() {
+    $('.filter').each(function( index )  {
+        $(this).find('select').each(function() {
+            update_toggle_filter_options($(this));
+            $(this).change(function() {
+                update_toggle_filter_options($(this));
+            });
+
+        });
+    });
+}
+
+function update_toggle_filter_options(selector) {
+    var value =  selector.val();
+    var filter_options = selector.parent().find('.filter_options');
+    if (value == 'off' || value == 'hide')
+        filter_options.hide();
+    else
+        filter_options.show();
+}
+
+
