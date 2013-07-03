@@ -60,11 +60,13 @@
                             <span class="control-label">{{ _('Hostname') }}</span>
                             {{ lib.controls(inline=True) }}
                                 {{ lib.print_field(form.hostname_option) }}
-                                {{ lib.print_field(form.hostname, fieldargs={'placeholder': _('Hostname expression')}) }}
-                                {{ lib.field_error(form.hostname) }}
-                                <label class=checkbox>
-                                    {{ lib.print_field(form.hostname_exact_match) }} {{ _('Exact match') }}
-                                </label>
+                                <div class='filter_options'>
+                                    {{ lib.print_field(form.hostname, fieldargs={'placeholder': _('Hostname expression')}) }}
+                                    {{ lib.field_error(form.hostname) }}
+                                    <label class=checkbox>
+                                        {{ lib.print_field(form.hostname_exact_match) }} {{ _('Exact match') }}
+                                    </label>
+                                </div>
                             </div>
                         </div>
 
@@ -72,18 +74,20 @@
                             <span class="control-label">{{ _('Host states') }}</span>
                             {{ lib.controls(inline=True) }}
                                 {{ lib.print_field(form.hoststate_option) }}
-                                <label class=checkbox>
-                                    {{ lib.print_field(form.hoststate_up) }} {{ _('UP') }}
-                                </label>
-                                <label class=checkbox>
-                                    {{ lib.print_field(form.hoststate_down) }} {{ _('DOWN') }}
-                                </label>
-                                <label class=checkbox>
-                                    {{ lib.print_field(form.hoststate_unreach) }} {{ _('UNREACH') }}
-                                </label>
-                                <label class=checkbox>
-                                    {{ lib.print_field(form.hoststate_pending) }} {{ _('PENDING') }}
-                                </label>
+                                <div class='filter_options'>
+                                    <label class=checkbox>
+                                        {{ lib.print_field(form.hoststate_up) }} {{ _('UP') }}
+                                    </label>
+                                    <label class=checkbox>
+                                        {{ lib.print_field(form.hoststate_down) }} {{ _('DOWN') }}
+                                    </label>
+                                    <label class=checkbox>
+                                        {{ lib.print_field(form.hoststate_unreach) }} {{ _('UNREACH') }}
+                                    </label>
+                                    <label class=checkbox>
+                                        {{ lib.print_field(form.hoststate_pending) }} {{ _('PENDING') }}
+                                    </label>
+                                </div>
                             </div>
                         </div>
 
@@ -92,7 +96,9 @@
                             <span class="control-label">{{ _('Is summary host') }}</span>
                             {{ lib.controls(inline=True) }}
                                 {{ lib.print_field(form.summary_option) }}
-                                {{ lib.print_radiofield(form.summary) }}
+                                <div class='filter_options'>
+                                    {{ lib.print_radiofield(form.summary) }}
+                                </div>
                             </div>
                         </div>
 
@@ -115,7 +121,7 @@
                                         {{ lib.control_group() }}
                                             {{ lib.field_label(subfield.column) }} 
                                             {{ lib.controls() }}
-                                                {{ lib.print_field(subfield.column) }} <a class="removeCol btn {% if counter==0 %} disabled {% endif %}"><i class="icon-trash"></i></a>
+                                                {{ lib.print_field(subfield.column) }} <a class="removeCol btn disabled"><i class="icon-trash"></i></a>
                                             </div>
                                         </div>
                                     </li>
