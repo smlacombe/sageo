@@ -36,6 +36,7 @@ Base = declarative_base()
 Base.query = db_session.query_property()
 
 filter_choices = [('off',_(u'Don''t use')),('hard',_(u"Hardcode")),('show',_(u"Show to user")), ('hide',_(u"Use for linking"))]
+filter_choices_values = Enum('off','hard','show','hide')
 #filter_column = Column(Enum(dict(filter_choices).keys()), info={'choices': filter_choices})
 filter_column = Column(Enum('off','hard','show','hide'), info={'choices': filter_choices})
 datasource_choices = [('allhost',_(u'All hosts')),('allservices',_(u"All services"))]
@@ -44,30 +45,30 @@ column_choices = [('hostname',_(u'Hostname')),('hoststate',_(u"Host state")), ('
 class View(Base):
     __tablename__ = 'views'
     id = Column(Integer, primary_key = True)
-    title = Column(String(30), index = True, unique = True, info={'label':_(u'Title')})
-    link_name = Column(String(30), info={'label':_(u'Link name')}) 
-    datasource = Column(Enum('allhost', 'allservices'), info={'choices': datasource_choices, 'label':_(u'Datasource')}) 
+    title = Column(String(30), nullable=False, index = True, unique = True, info={'label':_(u'Title')})
+    link_name = Column(String(30), nullable=False, info={'label':_(u'Link name')}) 
+    datasource = Column(Enum('allhost', 'allservices'), nullable=False, info={'choices': datasource_choices, 'label':_(u'Datasource')}) 
     buttontext = Column(String(15), info={'label':_(u'Button text')})
-    reload_intervall = Column(SmallInteger, info={'label':_(u'Browser reload')})
-    hostname_option = Column(Enum('off','hard','show','hide'), info={'choices': filter_choices}) 
-    hostname_exact_match = Column(Boolean) 
+    reload_intervall = Column(SmallInteger, nullable=False, info={'label':_(u'Browser reload')}, default=30)
+    hostname_option = Column(Enum('off','hard','show','hide'), nullable=False, info={'choices': filter_choices}, default='off') 
+    hostname_exact_match = Column(Boolean, default=False) 
     hostname = Column(String(100))
 
-    hoststate_option = Column(Enum('off','hard','show','hide'), info={'choices': filter_choices})
-    hoststate_up = Column(Boolean)
-    hoststate_down = Column(Boolean)
-    hoststate_unreach = Column(Boolean)
-    hoststate_pending = Column(Boolean)
+    hoststate_option = Column(filter_choices_values, info={'choices': filter_choices}, default='off')
+    hoststate_up = Column(Boolean, default=True)
+    hoststate_down = Column(Boolean, default=True)
+    hoststate_unreach = Column(Boolean, default=True)
+    hoststate_pending = Column(Boolean, default=True)
 
-    summary_option = Column(Enum('off','hard','show','hide'), info={'choices': filter_choices})
-    summary = Column(Enum('yes', 'no', 'ignore'))
+    summary_option = Column(filter_choices_values, info={'choices': filter_choices}, default='off')
+    summary = Column(Enum('yes', 'no', 'ignore'), default='no')
     #columns = relationship("ViewColumn")
-    layout_number_columns = Column(SmallInteger, info={'label':_(u'Number of columns')})
+    layout_number_columns = Column(SmallInteger, nullable=False, info={'label':_(u'Number of columns')}, default=3)
 
 class ViewColumn(Base):
     __tablename__ = 'view_column'
     id = Column(Integer, primary_key=True)
-    column = Column(Enum('hostname', 'hoststate', 'lastcheck'))
+    column = Column(Enum('hostname', 'hoststate', 'lastcheck'), info={'choices':column_choices} )
     parent_id = Column(Integer, ForeignKey(View.id)) 
     view = relationship(
         View,

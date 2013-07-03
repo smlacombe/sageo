@@ -4,7 +4,7 @@ from flask.ext.babelex import lazy_gettext, gettext, ngettext, Babel
 from app import babel, app
 from flask import Flask
 _ = lazy_gettext
-from app.forms.libforms import TranslatedForm
+from app.forms.libforms import TranslatedForm, TranslatedFormNoCsrf
 from wtforms_alchemy import ModelForm, ModelFieldList
 from app.models import View, ViewColumn
 
@@ -13,7 +13,7 @@ filter_choices = [('off',_(u'Don''t use')),('hard',_(u"Hardcode")),('show',_(u"S
 datasource_choices = [('allhost',_(u'All hosts')),('allservices',_(u"All services"))]
 column_choices = [('hostname',_(u'Hostname')),('hoststate',_(u"Host state")), ('lastcheck',_(u"Last check"))]
 
-class ViewColumnForm(ModelForm, TranslatedForm):
+class ViewColumnForm(ModelForm, TranslatedFormNoCsrf):
     class Meta:
         model = ViewColumn
 

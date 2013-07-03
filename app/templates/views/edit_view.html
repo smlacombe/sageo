@@ -41,12 +41,12 @@
                         {{ lib.with_errors(form.title) }} 
                         {{ lib.with_errors(form.link_name) }}
                         {{ lib.with_errors(form.datasource) }}
-                        {{ lib.with_errors(form.buttontext, fieldargs={'placeholder': _('buttontext')}) }}
+                        {{ lib.with_errors(form.buttontext) }}
                         
                         {{ lib.control_group() }}
                             {{ lib.field_label(form.reload_intervall) }}
                             {{ lib.controls(inline=True) }} 
-                                 {{ lib.print_field(form.reload_intervall) }}
+                                 {{ lib.print_field(form.reload_intervall, fieldargs={'placeholder': form.reload_intervall.default }) }}
                                  <span>{{ _('seconds')}}</span>
                             </div>
                         </div>
@@ -60,7 +60,7 @@
                             {{ lib.controls(inline=True) }}
                                 {{ lib.print_field(form.hostname_option) }}
                                 {{ lib.print_field(form.hostname, fieldargs={'placeholder': _('Hostname expression')}) }}
-
+                                {{ lib.field_error(form.hostname) }}
                                 <label class=checkbox>
                                     {{ lib.print_field(form.hostname_exact_match) }} {{ _('Exact match') }}
                                 </label>
@@ -112,7 +112,7 @@
                                 {{ lib.control_group(otherclass='clonable-col') }}
                                 {{ lib.field_label(subfield.column) }} 
                                 {{ lib.controls() }}
-                                    {{ lib.print_field(subfield.column) }}
+                                    {{ lib.print_field(subfield.column) }} <a class="removeCol btn {% if counter==0 %} disabled {% endif %}"><i class="icon-trash"></i></a>
                                 </div>
                             </div>
                         {% endfor %}
@@ -122,7 +122,7 @@
                 <div>
                     <h3><a href="#">{{ _('Layout') }}</a></h3>
                     <div>
-                        {{ lib.with_errors(form.layout_number_columns) }}
+                        {{ lib.with_errors(form.layout_number_columns, fieldargs={'placeholder': form.layout_number_columns.default }) }}
                     </div>
                 </div>
             </div>

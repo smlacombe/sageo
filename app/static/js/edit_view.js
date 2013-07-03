@@ -2,6 +2,10 @@ $(document).ready(function () {
     $('#add_column').click(function () {
         clone_field_list('.clonable-col:last');
     });
+
+    $(".removeCol").click(function() {
+        $(this).parent('div').parent('div').remove();
+    });
 });
 
 function clone_field_list(selector) {
@@ -19,3 +23,5 @@ function clone_field_list(selector) {
     });
     $(selector).after(new_element);
 }
+
+
