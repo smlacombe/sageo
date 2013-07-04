@@ -20,7 +20,7 @@ from flask.ext.babelex import gettext, ngettext
 from flask.ext.login import LoginManager, login_user, logout_user, \
     current_user, login_required
 
-from app.models import User, db_session, ViewColumn
+from app.models import User, db_session, ViewColumn, View
 from app.forms.view import ViewForm 
 from app import app
 from app.lib import snapins
@@ -33,20 +33,56 @@ edit_view_page = Blueprint('edit_view_page', __name__, static_folder='static', t
 @login_required
 def edit_view():
     form = ViewForm(csrf_enabled=True) 
-    #import ipdb;ipdb.set_trace()
-    #first = form.columns.append_entry()
-    #first.column.data='hoststate'
-    #form.columns.append_entry()
-
-    col1 = ViewColumn() 
-    form.populate_obj(col1) 
-    form.columns.append_entry()
-
-#    import ipdb;ipdb.set_trace()
-    if form.validate_on_submit():
-        pass
-
-#    import ipdb;ipdb.set_trace()
     view_name = request.args.get('view_name', '')
-    acknowledged = request.args.get('acknowledged', '')
-    return snapins.render_sidebar_template('views/edit_view.html', acknowledged=acknowledged, view_name=view_name, form=form)
+#    import ipdb;ipdb.set_trace()
+    if request.method=='GET':
+        # Store the view_name parameter to use when we will be in post request
+        session['view_name'] = view_name
+        # We wan't edit an existing view or create a new one?    
+        if view_name:
+            view = View.query.filter_by(link_name=view_name).first()    
+            #import ipdb;ipdb.set_trace()                
+            if view:
+                form.set_view(view)
+                columns = ViewColumn.query.filter_by(parent_id=view.id).all()
+                form.set_columns(columns)
+            else:
+                flash(_(u'View') + ' \'' + view_name + '\' ' +  _(u'doesn\'t exist'), 'error')
+                return redirect('/')
+        else:
+            col1 = ViewColumn() 
+            form.populate_obj(col1) 
+            form.columns.append_entry()
+    elif request.method=='POST':
+        view_name = session['view_name']
+        if view_name:
+            saved_view = View.query.filter_by(link_name=view_name).first()
+            # Workaround: remove unique validator to avoid raising validation error
+            # the unique validator don't understand we are in editing mode...
+            if form.title.data == saved_view.title:
+                form.title.validators.pop()
+            if form.link_name.data == saved_view.link_name:
+                form.link_name.validators.pop()
+    
+        if form.validate_on_submit():
+           # import ipdb;ipdb.set_trace();
+            if not view_name:
+                view = form.get_view()
+                db_session.add(view)
+                db_session.commit() 
+                saved_view = View.query.filter_by(title=view.title).first()  
+                columns = form.get_columns(saved_view.id)
+     
+                for column in columns:
+                    db_session.add(column)
+
+                db_session.commit()
+                flash(_(u'View') + ' \'' + view.title + '\' ' +  _(u'saved successfully!'), 'success')
+            else:
+                view = View.query.filter_by(link_name=view_name).first()   
+                view.update_view(form.get_view())
+                db_session.commit()
+     
+            return redirect('/edit_view?view_name='+form.link_name.data)
+
+    return snapins.render_sidebar_template('views/edit_view.html', acknowledged='', view_name=view_name, form=form)

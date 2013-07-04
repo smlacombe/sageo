@@ -6,7 +6,7 @@ from flask import Flask
 _ = lazy_gettext
 from app.forms.libforms import TranslatedForm, TranslatedFormNoCsrf
 from wtforms_alchemy import ModelForm, ModelFieldList
-from app.models import View, ViewColumn
+from app.models import View, ViewColumn, db_session
 
 
 filter_choices = [('off',_(u'Don''t use')),('hard',_(u"Hardcode")),('show',_(u"Show to user")), ('hide',_(u"Use for linking"))]
@@ -17,6 +17,7 @@ class ViewColumnForm(ModelForm, TranslatedFormNoCsrf):
     class Meta:
         model = ViewColumn
 
+
 class ViewForm(ModelForm, TranslatedForm):
     class Meta:
         model = View
@@ -24,6 +25,58 @@ class ViewForm(ModelForm, TranslatedForm):
     columns = ModelFieldList(FormField(ViewColumnForm))
     summary = RadioField('Summary', choices=[('yes',_(u'Yes')),('no',_(u'No')),('ignore',_(u'Ignore'))], default='no')
 
+    def set_view(self, view):
+        self.title.data = view.title
+        self.link_name.data = view.link_name
+        self.datasource.data = view.datasource
+        self.buttontext.data = view.buttontext
+        self.reload_intervall.data = view.reload_intervall 
+        self.hostname_option.data = view.hostname_option
+        self.hostname_exact_match.data = view.hostname_exact_match
+        self.hostname.data = view.hostname
+        self.hoststate_option.data = view.hoststate_option
+        self.hoststate_up.data = view.hoststate_up
+        self.hoststate_down.data = view.hoststate_down
+        self.hoststate_unreach.data = view.hoststate_unreach 
+        self.hoststate_pending.data = view.hoststate_pending
+        self.summary_option.data = view.summary_option
+        self.summary.data = view.summary
+        self.layout_number_columns.data = view.layout_number_columns
+
+    def set_columns(self, columns):
+        for column in columns:
+            self.columns.append_entry(column) 
+
+    def get_view(self):
+        view = View()
+        view.title = self.title.data
+        view.link_name = self.link_name.data
+        view.datasource = self.datasource.data
+        view.buttontext = self.buttontext.data
+        view.reload_intervall = self.reload_intervall.data
+        view.hostname_option = self.hostname_option.data
+        view.hostname_exact_match = self.hostname_exact_match.data
+        view.hostname = self.hostname.data
+        view.hoststate_option = self.hoststate_option.data
+        view.hoststate_up = self.hoststate_up.data
+        view.hoststate_down = self.hoststate_down.data
+        view.hoststate_unreach = self.hoststate_unreach.data
+        view.hoststate_pending = self.hoststate_pending.data
+        view.summary_option = self.summary_option.data
+        view.summary = self.summary.data
+        view.layout_number_columns = self.layout_number_columns.data
+        return view
+
+    def get_columns(self, view_id):
+        columns = []
+        for column_form in self.columns:
+            column = ViewColumn()
+            column.column = column_form.column.data
+            column.parent_id = view_id
+            columns.append(column)
+        return columns
+   
+ 
 ################# BasicSettingsForm ###################### 
 class BasicSettingsForm(TranslatedForm):
     title = TextField(_(u'Title'), validators=[Required()])
@@ -54,7 +107,7 @@ class FiltersForm(TranslatedForm):
     hoststates = FormField(HostStatesFilterForm)
     summaryhost = FormField(SummaryHostForm)
 
-##################### Layout form ###############################
+##################### Layout self.###############################
 class LayoutForm(TranslatedForm):
     number_columns = IntegerField(_(u'Number of Columns'), default=3)
 

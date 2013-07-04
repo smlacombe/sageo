@@ -46,7 +46,7 @@ class View(Base):
     __tablename__ = 'views'
     id = Column(Integer, primary_key = True)
     title = Column(String(30), nullable=False, index = True, unique = True, info={'label':_(u'Title')})
-    link_name = Column(String(30), nullable=False, info={'label':_(u'Link name')}) 
+    link_name = Column(String(30), nullable=False, unique=True, info={'label':_(u'Link name')}) 
     datasource = Column(Enum('allhost', 'allservices'), nullable=False, info={'choices': datasource_choices, 'label':_(u'Datasource')}) 
     buttontext = Column(String(15), info={'label':_(u'Button text')})
     reload_intervall = Column(SmallInteger, nullable=False, info={'label':_(u'Browser reload')}, default=30)
@@ -65,15 +65,34 @@ class View(Base):
     #columns = relationship("ViewColumn")
     layout_number_columns = Column(SmallInteger, nullable=False, info={'label':_(u'Number of columns')}, default=3)
 
+    def update_view(self, view):
+        self.title = view.title
+        self.link_name = view.link_name
+        self.datasource = view.datasource
+        self.buttontext = view.buttontext
+        self.reload_intervall = view.reload_intervall
+        self.hostname_option = view.hostname_option
+        self.hostname_exact_match = view.hostname_exact_match
+        self.hostname = view.hostname
+        self.hoststate_option = view.hoststate_option
+        self.hostate_up = view.hoststate_up
+        self.hostate_down = view.hoststate_down
+        self.hostate_unreach = view.hoststate_unreach
+        self.hoststate_pending = view.hoststate_pending
+        self.summary_option = view.summary_option
+        self.summary = view.summary
+        self.layout_number_columns = view.layout_number_columns 
+ 
 class ViewColumn(Base):
     __tablename__ = 'view_column'
     id = Column(Integer, primary_key=True)
     column = Column(Enum('hostname', 'hoststate', 'lastcheck'), info={'choices':column_choices} )
-    parent_id = Column(Integer, ForeignKey(View.id)) 
+    parent_id = Column(Integer, ForeignKey(View.id), nullable=False) 
     view = relationship(
         View,
         backref = 'View'    
     )
+
 
 class User(UserMixin, Base):
     __tablename__ = 'users' 
