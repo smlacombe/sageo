@@ -48,12 +48,15 @@ def edit_view():
                 form.set_columns(columns)
             else:
                 flash(_(u'View') + ' \'' + view_name + '\' ' +  _(u'doesn\'t exist'), 'error')
-                return redirect('/')
+                return redirect('/view')
         else:
             col1 = ViewColumn() 
             form.populate_obj(col1) 
             form.columns.append_entry()
+            restore_unique_validator(form.title)
+            restore_unique_validator(form.link_name)
     elif request.method=='POST':
+  #      import ipdb;ipdb.set_trace()
         view_name = session['view_name']
         if view_name:
             saved_view = View.query.filter_by(link_name=view_name).first()
@@ -90,27 +93,27 @@ def edit_view():
                 add_form_columns(view, form) 
                 db_session.commit()
      
-            return redirect('/edit_view?view_name='+form.link_name.data)
+            return redirect('/view')
 
     return snapins.render_sidebar_template('views/edit_view.html', acknowledged='', view_name=view_name, form=form)
 
 def add_form_columns(view, form):
     columns = form.get_columns(view.id)
-
+  #  import ipdb;ipdb.set_trace()
     for column in columns:
         db_session.add(column)
 
 def delete_unique_validator(field):
+  # import ipdb;ipdb.set_trace()
    for validator in field.validators:
         if isinstance(validator, Unique): 
-            #import ipdb;ipdb.set_trace()
             unique_validators[field.name] = validator
             field.validators.remove(validator) 
 
 def restore_unique_validator(field):
     inthere = False
     #import ipdb;ipdb.set_trace()
-    if unique_validators[field.name]:    
+    if field.name in unique_validators and unique_validators[field.name]:    
         for validator in field.validators: 
             if validator == unique_validators[field.name]:
                 inthere = True

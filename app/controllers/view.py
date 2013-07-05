@@ -20,7 +20,7 @@ from flask.ext.babelex import gettext, ngettext
 from flask.ext.login import LoginManager, login_user, logout_user, \
     current_user, login_required
 
-from app.models import User, db_session
+from app.models import User, View, db_session
 from app import app
 from app.lib import snapins
 
@@ -31,5 +31,11 @@ view_page = Blueprint('view_page', __name__, static_folder='static', template_fo
 @login_required
 def view():
     view_name = request.args.get('view_name', '')
-    acknowledged = request.args.get('acknowledged', '')
-    return snapins.render_sidebar_template('views/view.html', acknowledged=acknowledged, view_name=view_name)
+    view
+    if view_name:    
+        pass
+    else:
+        views = View.query.all()
+        return snapins.render_sidebar_template('views/view.html', views=views)
+
+    return snapins.render_sidebar_template('views/view.html', view=view)

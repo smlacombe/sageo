@@ -20,7 +20,12 @@
 {% block title %}{{ _('Sageo')+' ' +_('View') }}{% endblock %}
 
 {% block main_section %}
-    <p>View</p>
-    view_name = {{ view_name }}
-    acknowledged = {{acknowledged}}
+    <a id="create_view" href="/edit_view" class="btn">{{ _('Create new view') }}</a>
+    {% if views %}
+        <h2>{{ _('Existing views') }}</h2>
+        {% include 'views/views_list.html' %}  
+    {% else %}
+        <h2>{{ _('No view to display') }}</h2>
+    {% endif %}
+
 {% endblock %}

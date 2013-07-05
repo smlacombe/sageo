@@ -1,0 +1,21 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th>{{ _('Actions') }}</th>
+            <th>{{ _('Link Name') }}</th>
+            <th>{{ _('Title') }}</th>
+            <th>{{ _('Datasource') }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for view in views %}
+            <tr>
+                <td><a href="/edit_view?view_name={{ view.link_name }}"><i class="icon-pencil"></i></a></td>
+                <td>{{ view.link_name }}</td>
+                <td>{{ view.title }}</td>
+                <td>{{ view.datasource }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
