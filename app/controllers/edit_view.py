@@ -24,11 +24,11 @@ from app.models import User, db_session, ViewColumn, View
 from app.forms.view import ViewForm 
 from app import app
 from app.lib import snapins
-
+from wtforms_components.validators import Unique
 
 _ = gettext
 edit_view_page = Blueprint('edit_view_page', __name__, static_folder='static', template_folder='templates')
-
+unique_validators= {}
 @edit_view_page.route('/edit_view', methods=['GET', 'POST'])
 @login_required
 def edit_view():
@@ -60,9 +60,13 @@ def edit_view():
             # Workaround: remove unique validator to avoid raising validation error
             # the unique validator don't understand we are in editing mode...
             if form.title.data == saved_view.title:
-                form.title.validators.pop()
+                delete_unique_validator(form.title)
+            else:
+                restore_unique_validator(form.title)
             if form.link_name.data == saved_view.link_name:
-                form.link_name.validators.pop()
+                delete_unique_validator(form.link_name)
+            else:
+                restore_unique_validator(form.link_name)
     
         if form.validate_on_submit():
            # import ipdb;ipdb.set_trace();
@@ -96,3 +100,19 @@ def add_form_columns(view, form):
     for column in columns:
         db_session.add(column)
 
+def delete_unique_validator(field):
+   for validator in field.validators:
+        if isinstance(validator, Unique): 
+            #import ipdb;ipdb.set_trace()
+            unique_validators[field.name] = validator
+            field.validators.remove(validator) 
+
+def restore_unique_validator(field):
+    inthere = False
+    #import ipdb;ipdb.set_trace()
+    if unique_validators[field.name]:    
+        for validator in field.validators: 
+            if validator == unique_validators[field.name]:
+                inthere = True
+        if not inthere:
+            field.validators.append(unique_validators[field.name]) 
