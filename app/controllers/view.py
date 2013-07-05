@@ -38,4 +38,4 @@ def view():
         views = View.query.all()
         return snapins.render_sidebar_template('views/view.html', views=views)
 
-    return snapins.render_sidebar_template('views/view.html', view=view)
+    return snapins.render_sidebar_template('views/view.html', view_name=view_name)
