@@ -70,19 +70,29 @@ def edit_view():
                 view = form.get_view()
                 db_session.add(view)
                 db_session.commit() 
-                saved_view = View.query.filter_by(title=view.title).first()  
-                columns = form.get_columns(saved_view.id)
-     
-                for column in columns:
-                    db_session.add(column)
-
+                saved_view = View.query.filter_by(title=view.title).first()
+                add_form_columns(saved_view, form) 
                 db_session.commit()
                 flash(_(u'View') + ' \'' + view.title + '\' ' +  _(u'saved successfully!'), 'success')
             else:
                 view = View.query.filter_by(link_name=view_name).first()   
                 view.update_view(form.get_view())
+                columns = ViewColumn.query.filter_by(parent_id=view.id).all()
+
+                # Delete all columns related to the view
+                for column in columns:
+                    db_session.delete(column)
+
+                add_form_columns(view, form) 
                 db_session.commit()
      
             return redirect('/edit_view?view_name='+form.link_name.data)
 
     return snapins.render_sidebar_template('views/edit_view.html', acknowledged='', view_name=view_name, form=form)
+
+def add_form_columns(view, form):
+    columns = form.get_columns(view.id)
+
+    for column in columns:
+        db_session.add(column)
+

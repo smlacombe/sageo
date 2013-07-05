@@ -24,7 +24,7 @@ update: function (e, ui) {
 });
 
 bind_toggle_filter_options();
-
+reorder_columns();
 });
 
 function clone_field_list(selector) {
