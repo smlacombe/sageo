@@ -23,7 +23,7 @@ from flask.ext.login import LoginManager, login_user, logout_user, \
 from app.models import User, View, db_session
 from app import app
 from app.lib import snapins
-
+from app.lib import livestatus_query
 _ = gettext
 view_page = Blueprint('view_page', __name__, static_folder='static', template_folder='templates')
 
@@ -31,7 +31,6 @@ view_page = Blueprint('view_page', __name__, static_folder='static', template_fo
 @login_required
 def view():
     view_name = request.args.get('view_name', '')
-    view
     if view_name:    
         pass
     else:

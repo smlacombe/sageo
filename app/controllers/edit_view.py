@@ -32,9 +32,8 @@ unique_validators= {}
 @edit_view_page.route('/edit_view', methods=['GET', 'POST'])
 @login_required
 def edit_view():
-    form = ViewForm(csrf_enabled=True) 
     view_name = request.args.get('view_name', '')
-#    import ipdb;ipdb.set_trace()
+    form = ViewForm(csrf_enabled=True)
     if request.method=='GET':
         # Store the view_name parameter to use when we will be in post request
         session['view_name'] = view_name
@@ -43,6 +42,8 @@ def edit_view():
             view = View.query.filter_by(link_name=view_name).first()    
             #import ipdb;ipdb.set_trace()                
             if view:
+                form = ViewForm(csrf_enabled=True, obj=view)
+                form.populate_obj(view)
                 form.set_view(view)
                 columns = ViewColumn.query.filter_by(parent_id=view.id).all()
                 form.set_columns(columns)
@@ -53,23 +54,12 @@ def edit_view():
             col1 = ViewColumn() 
             form.populate_obj(col1) 
             form.columns.append_entry()
-            restore_unique_validator(form.title)
-            restore_unique_validator(form.link_name)
     elif request.method=='POST':
-  #      import ipdb;ipdb.set_trace()
         view_name = session['view_name']
         if view_name:
             saved_view = View.query.filter_by(link_name=view_name).first()
-            # Workaround: remove unique validator to avoid raising validation error
-            # the unique validator don't understand we are in editing mode...
-            if form.title.data == saved_view.title:
-                delete_unique_validator(form.title)
-            else:
-                restore_unique_validator(form.title)
-            if form.link_name.data == saved_view.link_name:
-                delete_unique_validator(form.link_name)
-            else:
-                restore_unique_validator(form.link_name)
+            form = ViewForm(csrf_enabled=True, obj=saved_view)
+            form.populate_obj(saved_view)
     
         if form.validate_on_submit():
            # import ipdb;ipdb.set_trace();
@@ -80,7 +70,6 @@ def edit_view():
                 saved_view = View.query.filter_by(title=view.title).first()
                 add_form_columns(saved_view, form) 
                 db_session.commit()
-                flash(_(u'View') + ' \'' + view.title + '\' ' +  _(u'saved successfully!'), 'success')
             else:
                 view = View.query.filter_by(link_name=view_name).first()   
                 view.update_view(form.get_view())
@@ -93,6 +82,7 @@ def edit_view():
                 add_form_columns(view, form) 
                 db_session.commit()
      
+            flash(_(u'View') + ' \'' + view.title + '\' ' +  _(u'saved successfully!'), 'success')
             return redirect('/view')
 
     return snapins.render_sidebar_template('views/edit_view.html', acknowledged='', view_name=view_name, form=form)
@@ -103,19 +93,3 @@ def add_form_columns(view, form):
     for column in columns:
         db_session.add(column)
 
-def delete_unique_validator(field):
-  # import ipdb;ipdb.set_trace()
-   for validator in field.validators:
-        if isinstance(validator, Unique): 
-            unique_validators[field.name] = validator
-            field.validators.remove(validator) 
-
-def restore_unique_validator(field):
-    inthere = False
-    #import ipdb;ipdb.set_trace()
-    if field.name in unique_validators and unique_validators[field.name]:    
-        for validator in field.validators: 
-            if validator == unique_validators[field.name]:
-                inthere = True
-        if not inthere:
-            field.validators.append(unique_validators[field.name]) 
