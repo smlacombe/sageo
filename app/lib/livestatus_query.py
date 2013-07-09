@@ -1,15 +1,43 @@
 from app.lib.livestatusconnection import live
+from app.lib.datasources import multisite_datasources as datasources
+
+def get_rows(view, columns):
+    columns_names = []
+    datasource = datasources[view.datasource]
+    for column in columns: columns_names.append(column.column)
+    # Add key columns, needed for executing commands
+    import ipdb;ipdb.set_trace()
+    columns_names += datasource["keys"]
+
+    # Add idkey columns, needed for identifying the row
+    columns_names += datasource["idkeys"] 
+
+    # Make column list unique and remove (implicit) site column
+    colset = set(columns_names)
+    if "site" in colset:
+        colset.remove("site")
+    columns_names = list(colset)
+
+    rows = query_data(datasource,columns_names, '')
+    print rows
+    return rows 
 
 # Retrieve data via livestatus, convert into list of dicts,
 # prepare row-function needed for painters
-# datasource: the datasource object as defined in plugins/views/datasources.py
+# datasource: the datasource key value as defined in plugins/views/datasources.py
 # columns: the list of livestatus columns to query
 # add_columns: list of columns the datasource is known to add itself
 #  (couldn't we get rid of this parameter by looking that up ourselves?)
 # add_headers: additional livestatus headers to add
 # only_sites: list of sites the query is limited to
 # limit: maximum number of data rows to query
-def query_data(datasource, columns, add_columns, add_headers, only_sites = [], limit = None):
+def query_data(datasource, columns, add_headers, only_sites = [], limit = None):
+    import ipdb;ipdb.set_trace()
+    if "add_columns" in datasource.keys():
+        add_columns = datasource["add_columns"]
+    else:
+        add_columns = ['']
+
     tablename = datasource["table"]
     add_headers += datasource.get("add_headers", "")
     merge_column = datasource.get("merge_by")
@@ -32,7 +60,8 @@ def query_data(datasource, columns, add_columns, add_headers, only_sites = [], l
                 columns.append(c)
 
     # Remove columns which are implicitely added by the datasource
-    columns = [ c for c in columns if c not in add_columns ]
+    if add_columns:
+        columns = [ c for c in columns if c not in add_columns ]
 
     query = "GET %s\n" % tablename
     query += "Columns: %s\n" % " ".join(columns)
@@ -53,6 +82,7 @@ def query_data(datasource, columns, add_columns, add_headers, only_sites = [], l
 
     # convert lists-rows into dictionaries.
     # performance, but makes live much easier later.
+    import ipdb;ipdb.set_trace()
     columns = ["site"] + columns + add_columns
     rows = [ dict(zip(columns, row)) for row in data ]
 

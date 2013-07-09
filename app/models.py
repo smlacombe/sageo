@@ -39,15 +39,15 @@ filter_choices = [('off',_(u'Don''t use')),('hard',_(u"Hardcode")),('show',_(u"S
 filter_choices_values = Enum('off','hard','show','hide')
 #filter_column = Column(Enum(dict(filter_choices).keys()), info={'choices': filter_choices})
 filter_column = Column(Enum('off','hard','show','hide'), info={'choices': filter_choices})
-datasource_choices = [('allhosts',_(u'All hosts')),('allservices',_(u"All services"))]
-column_choices = [('hostname',_(u'Hostname')),('hoststate',_(u"Host state")), ('lastcheck',_(u"Last check"))]
+datasource_choices = [('hosts',_(u'All hosts')),('services',_(u"All services"))]
+column_choices = [('host',_(u'Hostname')),('hoststate',_(u"Host state")), ('lastcheck',_(u"Last check"))]
 
 class View(Base):
     __tablename__ = 'views'
     id = Column(Integer, primary_key = True)
     title = Column(String(30), nullable=False, index = True, unique = True, info={'label':_(u'Title')})
     link_name = Column(String(30), nullable=False, unique=True, info={'label':_(u'Link name')}) 
-    datasource = Column(Enum('allhosts', 'allservices'), nullable=False, info={'choices': datasource_choices, 'label':_(u'Datasource')}) 
+    datasource = Column(Enum('hosts', 'services'), nullable=False, info={'choices': datasource_choices, 'label':_(u'Datasource')}) 
     buttontext = Column(String(15), info={'label':_(u'Button text')})
     reload_intervall = Column(SmallInteger, nullable=False, info={'label':_(u'Browser reload')}, default=30)
     hostname_option = Column(Enum('off','hard','show','hide'), nullable=False, info={'choices': filter_choices}, default='off') 
@@ -86,7 +86,7 @@ class View(Base):
 class ViewColumn(Base):
     __tablename__ = 'view_column'
     id = Column(Integer, primary_key=True)
-    column = Column(Enum('hostname', 'hoststate', 'lastcheck'), info={'choices':column_choices} )
+    column = Column(Enum('host', 'hoststate', 'lastcheck'), info={'choices':column_choices} )
     parent_id = Column(Integer, ForeignKey(View.id), nullable=False) 
     view = relationship(
         View,

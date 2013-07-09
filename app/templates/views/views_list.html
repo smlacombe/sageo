@@ -11,7 +11,7 @@
         {% for view in views %}
             <tr>
                 <td><a href="/edit_view?view_name={{ view.link_name }}"><i class="icon-pencil"></i></a></td>
-                <td>{{ view.link_name }}</td>
+                <td><a href="/view?view_name={{ view.link_name }}">{{ view.link_name }}</a></td>
                 <td>{{ view.title }}</td>
                 <td>{{ view.datasource }}</td>
             </tr>

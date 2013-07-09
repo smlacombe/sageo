@@ -20,7 +20,7 @@ from flask.ext.babelex import gettext, ngettext
 from flask.ext.login import LoginManager, login_user, logout_user, \
     current_user, login_required
 
-from app.models import User, View, db_session
+from app.models import User, View, db_session, ViewColumn
 from app import app
 from app.lib import snapins
 from app.lib import livestatus_query
@@ -32,9 +32,18 @@ view_page = Blueprint('view_page', __name__, static_folder='static', template_fo
 def view():
     view_name = request.args.get('view_name', '')
     if view_name:    
-        pass
+        view = View.query.filter_by(link_name=view_name).first()
+        if view:
+            columns = ViewColumn.query.filter_by(parent_id=view.id).all()
+            rows = livestatus_query.get_rows(view, columns)
+        else:
+            flash(_(u'View') + ' \'' + view_name + '\' ' +  _(u'doesn\'t exist'), 'error')
+            return redirect('/view')
     else:
         views = View.query.all()
         return snapins.render_sidebar_template('views/view.html', views=views)
 
     return snapins.render_sidebar_template('views/view.html', view_name=view_name)
+
+
+ 
