@@ -1,4 +1,3 @@
-#!/usr/bin/python
 import os
 from flask import Flask
 from flask.ext.sqlalchemy import SQLAlchemy
@@ -15,7 +14,8 @@ app = Flask(__name__, static_folder="static")
 app.config.from_object('config')
 babel = Babel(app)
 
-
+from db_model.base import init_engine, clear_db, init_db, db_session
+from app.db_model.user import User
 login_manager = LoginManager()
 login_manager.login_view = '/login'
 login_manager.init_app(app)
@@ -39,8 +39,7 @@ def get_locale():
 def send_image(filename):
     return app.send_static_file("images/"+filename)
 
-from app import controllers, lib, models
-from models import User, init_engine, clear_db, init_db, db_session
+from app import controllers, lib, db_model
 from controllers.login import login_page
 from controllers.index import index_page
 from controllers.profile import profile_page

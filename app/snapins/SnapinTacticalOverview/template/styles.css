@@ -1,14 +1,19 @@
-td.problem
+#tactical td.problem
 {
 background-color: orange;
 }
 
-td.normal
+#tactical td a
+{
+display: block;
+}
+
+#tactical td.normal
 {
 background-color: white;
 }
 
-table#tactical.td
+#tactical table#tactical.td
 {
 text-align:right;
 }

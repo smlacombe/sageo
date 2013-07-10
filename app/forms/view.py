@@ -6,8 +6,9 @@ from flask import Flask
 _ = lazy_gettext
 from app.forms.libforms import TranslatedForm, TranslatedFormNoCsrf
 from wtforms_alchemy import ModelForm, ModelFieldList
-from app.models import View, ViewColumn, db_session
-
+from app.db_model.base import db_session
+from app.db_model.viewColumn import ViewColumn
+from app.db_model.view import View
 
 filter_choices = [('off',_(u'Don''t use')),('hard',_(u"Hardcode")),('show',_(u"Show to user")), ('hide',_(u"Use for linking"))]
 datasource_choices = [('allhost',_(u'All hosts')),('allservices',_(u"All services"))]

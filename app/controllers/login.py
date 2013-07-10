@@ -20,7 +20,9 @@ from flask.ext.babelex import gettext, ngettext
 from flask.ext.login import LoginManager, login_user, logout_user, \
     current_user, login_required
 
-from app.models import User, db_session
+
+from app.db_model.base import db_session
+from app.db_model.user import User
 from app.forms.login import LoginForm
 from app.lib import auth
 from app import babel, app

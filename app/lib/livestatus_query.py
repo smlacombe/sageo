@@ -6,7 +6,6 @@ def get_rows(view, columns):
     datasource = datasources[view.datasource]
     for column in columns: columns_names.append(column.column)
     # Add key columns, needed for executing commands
-    import ipdb;ipdb.set_trace()
     columns_names += datasource["keys"]
 
     # Add idkey columns, needed for identifying the row
@@ -19,7 +18,6 @@ def get_rows(view, columns):
     columns_names = list(colset)
 
     rows = query_data(datasource,columns_names, '')
-    print rows
     return rows 
 
 # Retrieve data via livestatus, convert into list of dicts,
@@ -32,7 +30,6 @@ def get_rows(view, columns):
 # only_sites: list of sites the query is limited to
 # limit: maximum number of data rows to query
 def query_data(datasource, columns, add_headers, only_sites = [], limit = None):
-    import ipdb;ipdb.set_trace()
     if "add_columns" in datasource.keys():
         add_columns = datasource["add_columns"]
     else:
@@ -82,7 +79,6 @@ def query_data(datasource, columns, add_headers, only_sites = [], limit = None):
 
     # convert lists-rows into dictionaries.
     # performance, but makes live much easier later.
-    import ipdb;ipdb.set_trace()
     columns = ["site"] + columns + add_columns
     rows = [ dict(zip(columns, row)) for row in data ]
 

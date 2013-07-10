@@ -1,6 +1,6 @@
 import imp
 from migrate.versioning import api
-from app.models import db_session, Base
+from  app.db_model.base import db_session, Base
 from config import SQLALCHEMY_DATABASE_URI
 from config import SQLALCHEMY_MIGRATE_REPO
 migration = SQLALCHEMY_MIGRATE_REPO + '/versions/%03d_migration.py' % (api.db_version(SQLALCHEMY_DATABASE_URI, SQLALCHEMY_MIGRATE_REPO) + 1)
