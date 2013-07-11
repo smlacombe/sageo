@@ -24,10 +24,7 @@
 from app.lib.livestatusconnection import live
 from app.lib.datasources import multisite_datasources as datasources
 
-def get_rows(view, columns):
-    columns_names = []
-    datasource = datasources[view.datasource]
-    for column in columns: columns_names.append(column.column)
+def get_rows(datasource, columns_names):
     # Add key columns, needed for executing commands
     columns_names += datasource["keys"]
 

@@ -13,7 +13,6 @@ filter_choices_values = Enum('off','hard','show','hide')
 filter_column = Column(Enum('off','hard','show','hide'), info={'choices': filter_choices})
 datasource_choices = [('hosts',_(u'All hosts')),('services',_(u"All services"))]
 column_choices = [('host',_(u'Hostname')),('hoststate',_(u"Host state")), ('lastcheck',_(u"Last check"))]
-
 class View(Base):
     __tablename__ = 'views'
     id = Column(Integer, primary_key = True)

@@ -20,25 +20,21 @@ from flask.ext.babelex import gettext, ngettext
 from flask.ext.login import LoginManager, login_user, logout_user, \
     current_user, login_required
 
-from app.db_model.base import db_session
-from app.db_model.user import User
-from app.db_model.view import View
-from app.db_model.viewColumn import ViewColumn
 from app import app
 from app.lib import snapins
-from app.lib import livestatus_query
+from app.managers.data_rows_manager import DataRowsManager
 _ = gettext
 view_page = Blueprint('view_page', __name__, static_folder='static', template_folder='templates')
 
 @view_page.route('/view')
 @login_required
 def view():
-    view_name = request.args.get('view_name', '')
-    if view_name:    
-        view = View.query.filter_by(link_name=view_name).first()
-        if view:
-            columns = ViewColumn.query.filter_by(parent_id=view.id).all()
+    link_name = request.args.get('link_name', '')
+    dataRowsManager = DataRowsManager() 
+    if link_name:    
+        if dataRowsManager.set_view(link_name):
             rows = livestatus_query.get_rows(view, columns)
+            print rows
         else:
             flash(_(u'View') + ' \'' + view_name + '\' ' +  _(u'doesn\'t exist'), 'error')
             return redirect('/view')
