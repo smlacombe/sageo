@@ -4,3 +4,6 @@ from app.model.filters.filter import Filter
 from app.model.filters.filter_text import FilterText 
 
 class FilterFactory():
+
+    def make_filter(filter_name):
+        

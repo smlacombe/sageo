@@ -4,7 +4,17 @@ from app.db_model.base import Base
 from flask.ext.babelex import lazy_gettext, gettext, ngettext, Babel
 from app import babel, app
 from flask import Flask
+
+from app.db_model.filters.builtin import FILTER_HOSTREGEX
+from app.db_model.filters.builtin import FILTER_EXACT_MATCH
+
+
 _ = lazy_gettext
+
+FILTER_OFF = 'off'
+FILTER_HARD = 'hard'
+FILTER_SHOW = 'show'
+FILTER_HIDE = 'hide'
 
 
 filter_choices = [('off',_(u'Don''t use')),('hard',_(u"Hardcode")),('show',_(u"Show to user")), ('hide',_(u"Use for linking"))]
@@ -54,3 +64,14 @@ class View(Base):
         self.summary = view.summary
         self.layout_number_columns = view.layout_number_columns
 
+    def get_filters(self)
+    """
+    Create a dictionnary of filters and their values
+    """
+        filters = {}  
+        if not host_name_option == FILTER_OFF and hostname 
+            if hostname_exact_match
+                filters[FILTER_EXACT_MATCH] = hostname 
+            else
+                filters[FILTER_HOSTREGEX] = hostname
+  

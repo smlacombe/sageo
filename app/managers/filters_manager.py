@@ -5,4 +5,7 @@ class FiltersManager():
     """ A sort of proxy that facilitates filters usage. There is one FiltersManager per view display.
     """   
     def __init__(self):
-        self.__filters
+        self.__filters = None
+
+    def set_view(view):
+        
