@@ -12,12 +12,12 @@ filter_choices_values = Enum('off','hard','show','hide')
 #filter_column = Column(Enum(dict(filter_choices).keys()), info={'choices': filter_choices})
 filter_column = Column(Enum('off','hard','show','hide'), info={'choices': filter_choices})
 datasource_choices = [('hosts',_(u'All hosts')),('services',_(u"All services"))]
-column_choices = [('host',_(u'Hostname')),('hoststate',_(u"Host state")), ('lastcheck',_(u"Last check"))]
+column_choices = [('host_name',_(u'Hostname')),('host_state',_(u"Host state")), ('last_check',_(u"Last check"))]
 
 class ViewColumn(Base):
     __tablename__ = 'view_column'
     id = Column(Integer, primary_key=True)
-    column = Column(Enum('host', 'hoststate', 'lastcheck'), info={'choices':column_choices} )
+    column = Column(Enum('host_name', 'host_state', 'last_check'), info={'choices':column_choices} )
     parent_id = Column(Integer, ForeignKey(View.id), nullable=False)
     view = relationship(
         View,

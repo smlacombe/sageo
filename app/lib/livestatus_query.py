@@ -24,7 +24,7 @@
 from app.lib.livestatusconnection import live
 from app.lib.datasources import multisite_datasources as datasources
 
-def get_rows(datasource, columns_names):
+def get_rows(datasource, columns_names, filters_string):
     # Add key columns, needed for executing commands
     columns_names += datasource["keys"]
 
@@ -37,7 +37,7 @@ def get_rows(datasource, columns_names):
         colset.remove("site")
     columns_names = list(colset)
 
-    rows = query_data(datasource,columns_names, '')
+    rows = query_data(datasource,columns_names, '', filters_string)
     return rows 
 
 # Retrieve data via livestatus, convert into list of dicts,
@@ -49,7 +49,7 @@ def get_rows(datasource, columns_names):
 # add_headers: additional livestatus headers to add
 # only_sites: list of sites the query is limited to
 # limit: maximum number of data rows to query
-def query_data(datasource, columns, add_headers, only_sites = [], limit = None):
+def query_data(datasource, columns, add_headers, filters_string, only_sites = [], limit = None):
     if "add_columns" in datasource.keys():
         add_columns = datasource["add_columns"]
     else:
@@ -83,6 +83,7 @@ def query_data(datasource, columns, add_headers, only_sites = [], limit = None):
     query = "GET %s\n" % tablename
     query += "Columns: %s\n" % " ".join(columns)
     query += add_headers
+    query += filters_string
     live.set_prepend_site(True)
     if limit != None:
         live.set_limit(limit + 1) # + 1: We need to know, if limit is exceeded

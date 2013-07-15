@@ -5,8 +5,10 @@ from flask.ext.babelex import lazy_gettext, gettext, ngettext, Babel
 from app import babel, app
 from flask import Flask
 
-from app.db_model.filters.builtin import FILTER_HOSTREGEX
-from app.db_model.filters.builtin import FILTER_EXACT_MATCH
+from app.model.filters.builtin import FILTER_HOSTREGEX
+from app.model.filters.builtin import FILTER_EXACT_MATCH
+from app.model.filters.builtin import FILTER_HOST_STATE
+from app.model.filters.builtin import FILTER_IS_SUMMARY_HOST
 
 
 _ = lazy_gettext
@@ -22,7 +24,7 @@ filter_choices_values = Enum('off','hard','show','hide')
 #filter_column = Column(Enum(dict(filter_choices).keys()), info={'choices': filter_choices})
 filter_column = Column(Enum('off','hard','show','hide'), info={'choices': filter_choices})
 datasource_choices = [('hosts',_(u'All hosts')),('services',_(u"All services"))]
-column_choices = [('host',_(u'Hostname')),('hoststate',_(u"Host state")), ('lastcheck',_(u"Last check"))]
+
 class View(Base):
     __tablename__ = 'views'
     id = Column(Integer, primary_key = True)
@@ -56,22 +58,27 @@ class View(Base):
         self.hostname_exact_match = view.hostname_exact_match
         self.hostname = view.hostname
         self.hoststate_option = view.hoststate_option
-        self.hostate_up = view.hoststate_up
-        self.hostate_down = view.hoststate_down
-        self.hostate_unreach = view.hoststate_unreach
+        self.hoststate_up = view.hoststate_up
+        self.hoststate_down = view.hoststate_down
+        self.hoststate_unreach = view.hoststate_unreach
         self.hoststate_pending = view.hoststate_pending
         self.summary_option = view.summary_option
         self.summary = view.summary
         self.layout_number_columns = view.layout_number_columns
 
-    def get_filters(self)
-    """
-    Create a dictionnary of filters and their values
-    """
+    def get_filters(self):
+        """
+        Create a dictionnary of filters and their values
+        """
         filters = {}  
-        if not host_name_option == FILTER_OFF and hostname 
-            if hostname_exact_match
-                filters[FILTER_EXACT_MATCH] = hostname 
-            else
-                filters[FILTER_HOSTREGEX] = hostname
-  
+        if not self.hostname_option == FILTER_OFF and self.hostname:
+            if self.hostname_exact_match:
+                filters[FILTER_EXACT_MATCH] = self.hostname 
+            else:
+                filters[FILTER_HOSTREGEX] = self.hostname
+        if not self.hoststate_option == FILTER_OFF:
+            value = {'UP':self.hoststate_up, 'DOWN':self.hoststate_down, 'UNREACH': self.hoststate_unreach, 'PENDING': self.hoststate_pending} 
+            filters[FILTER_HOST_STATE] = value 
+        if not self.summary_option == FILTER_OFF:
+            filters[FILTER_IS_SUMMARY_HOST] = self.summary
+        return filters

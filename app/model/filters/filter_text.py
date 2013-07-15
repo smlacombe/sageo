@@ -1,8 +1,8 @@
 from .filter import Filter
 
 class FilterText(Filter):
-    def __init__(self, name, title, info, descr, column_name, operation):
-        Filter.__init__(self, name, title, info, descr)
+    def __init__(self, name, title, descr, column_name, operation):
+        Filter.__init__(self, name, title, descr)
         self.operation = operation
         self.column_name = column_name
 

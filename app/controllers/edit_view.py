@@ -36,14 +36,14 @@ unique_validators= {}
 @edit_view_page.route('/edit_view', methods=['GET', 'POST'])
 @login_required
 def edit_view():
-    view_name = request.args.get('view_name', '')
+    link_name = request.args.get('link_name', '')
     form = ViewForm(csrf_enabled=True)
     if request.method=='GET':
-        # Store the view_name parameter to use when we will be in post request
-        session['view_name'] = view_name
+        # Store the link_name parameter to use when we will be in post request
+        session['link_name'] = link_name
         # We wan't edit an existing view or create a new one?    
-        if view_name:
-            view = View.query.filter_by(link_name=view_name).first()    
+        if link_name:
+            view = View.query.filter_by(link_name=link_name).first()    
             #import ipdb;ipdb.set_trace()                
             if view:
                 form = ViewForm(csrf_enabled=True, obj=view)
@@ -52,22 +52,22 @@ def edit_view():
                 columns = ViewColumn.query.filter_by(parent_id=view.id).all()
                 form.set_columns(columns)
             else:
-                flash(_(u'View') + ' \'' + view_name + '\' ' +  _(u'doesn\'t exist'), 'error')
+                flash(_(u'View') + ' \'' + link_name + '\' ' +  _(u'doesn\'t exist'), 'error')
                 return redirect('/view')
         else:
             col1 = ViewColumn() 
             form.populate_obj(col1) 
             form.columns.append_entry()
     elif request.method=='POST':
-        view_name = session['view_name']
-        if view_name:
-            saved_view = View.query.filter_by(link_name=view_name).first()
+        link_name = session['link_name']
+        if link_name:
+            saved_view = View.query.filter_by(link_name=link_name).first()
             form = ViewForm(csrf_enabled=True, obj=saved_view)
             form.populate_obj(saved_view)
     
         if form.validate_on_submit():
            # import ipdb;ipdb.set_trace();
-            if not view_name:
+            if not link_name:
                 view = form.get_view()
                 db_session.add(view)
                 db_session.commit() 
@@ -75,7 +75,7 @@ def edit_view():
                 add_form_columns(saved_view, form) 
                 db_session.commit()
             else:
-                view = View.query.filter_by(link_name=view_name).first()   
+                view = View.query.filter_by(link_name=link_name).first()   
                 view.update_view(form.get_view())
                 columns = ViewColumn.query.filter_by(parent_id=view.id).all()
 
@@ -89,7 +89,7 @@ def edit_view():
             flash(_(u'View') + ' \'' + view.title + '\' ' +  _(u'saved successfully!'), 'success')
             return redirect('/view')
 
-    return snapins.render_sidebar_template('views/edit_view.html', acknowledged='', view_name=view_name, form=form)
+    return snapins.render_sidebar_template('views/edit_view.html', acknowledged='', link_name=link_name, form=form)
 
 def add_form_columns(view, form):
     columns = form.get_columns(view.id)

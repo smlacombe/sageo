@@ -23,6 +23,7 @@ from flask.ext.login import LoginManager, login_user, logout_user, \
 from app import app
 from app.lib import snapins
 from app.managers.data_rows_manager import DataRowsManager
+from app.db_model.view import View
 _ = gettext
 view_page = Blueprint('view_page', __name__, static_folder='static', template_folder='templates')
 
@@ -33,16 +34,12 @@ def view():
     dataRowsManager = DataRowsManager() 
     if link_name:    
         if dataRowsManager.set_view(link_name):
-            rows = livestatus_query.get_rows(view, columns)
-            print rows
+            print dataRowsManager.get_rows()
         else:
-            flash(_(u'View') + ' \'' + view_name + '\' ' +  _(u'doesn\'t exist'), 'error')
+            flash(_(u'View') + ' \'' + link_name + '\' ' +  _(u'doesn\'t exist'), 'error')
             return redirect('/view')
     else:
         views = View.query.all()
         return snapins.render_sidebar_template('views/view.html', views=views)
 
-    return snapins.render_sidebar_template('views/view.html', view_name=view_name)
-
-
- 
+    return snapins.render_sidebar_template('views/view.html', link_name=link_name)
