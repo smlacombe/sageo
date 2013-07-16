@@ -19,7 +19,7 @@ class DataRowsManager():
     def set_view(self, link_name):
         self.__view = View.query.filter_by(link_name=link_name).first()
         if self.__view:
-            self.__columns = ViewColumn.query.filter_by(parent_id=self.__view.id).all()
+            self.__columns = ViewColumn.query.filter_by(parent_id=self.__view.id).order_by(ViewColumn.id).all()
             self.__filters_manager = FiltersManager()
             self.__filters_manager.set_filters(self.__view.get_filters())
             return True

@@ -12,10 +12,8 @@ Rows count {{ rows_count }}
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        {% for col_name in data_rows_manager.get_rows()[0].keys() %} 
-                            {% if col_name in data_rows_manager.get_asked_columns_names() %}
+                        {% for col_name in data_rows_manager.get_asked_columns_names() %} 
                                 <th>{{ col_name }}</th>
-                            {% endif %}
                         {% endfor %}
                     </tr>
                 </thead>
@@ -27,10 +25,8 @@ Rows count {{ rows_count }}
                         {% endif %}
                         {% for row_number in range(start, end) %} 
                             <tr>
-                                {% for key, value in rows[row_number].items() %} 
-                                    {% if key in data_rows_manager.get_asked_columns_names() %}
-                                        <td>{{ value }}</td>
-                                    {% endif %}
+                                {% for elem in data_rows_manager.get_asked_columns_names() %}
+                                    <td>{{ rows[row_number][elem] }}</td>
                                 {% endfor %}
                             </tr>
                         {% endfor %}
