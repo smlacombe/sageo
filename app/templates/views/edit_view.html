@@ -17,6 +17,7 @@
 #}
 {% extends "main.html" %}
 {% import 'lib/lib.html' as lib %}
+{% import 'lib/views.html' as lib_view %}
 {% block title %}{{ _('Sageo')+_('Edit view') }}{% endblock %}
 
 {% block head %}
@@ -29,7 +30,7 @@
 
 {% block main_section %}
     <div class="container">
-       <p><a href="/view" class="btn">{{ _('All views') }}</a></p>
+        {{ lib_view.all_views_button() }}
         <form class="form-horizontal" name="edit_view" action="edit_view" method="post" enctype="multipart/form-data">
             <h2>{{ _("Edit view") }}</h2>
                 {{ form.hidden_tag() }}

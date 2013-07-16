@@ -1,0 +1,41 @@
+{% set layout_cols = data_rows_manager.get_view().layout_number_columns %}
+{% set rows = data_rows_manager.get_rows() %}
+{% set rows_count = rows|length %}
+{% set spanCol = (12 / layout_cols)|int %}
+{% set max_rows_per_col = (rows_count / layout_cols)|round|int %} 
+Max {{ max_rows_per_col }}
+Layour cols {{ layout_cols }}
+Rows count {{ rows_count }}
+<div class="row-fluid">
+    {% for col_number in range(0, layout_cols) %}
+        <div class="span{{ spanCol }}">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        {% for col_name in data_rows_manager.get_rows()[0].keys() %} 
+                            {% if col_name in data_rows_manager.get_asked_columns_names() %}
+                                <th>{{ col_name }}</th>
+                            {% endif %}
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                        {% set start=(col_number*max_rows_per_col)|int %}
+                        {% set end=(start+max_rows_per_col)|int %}
+                        {% if end > rows_count %}  
+                            {% set end = rows_count %} 
+                        {% endif %}
+                        {% for row_number in range(start, end) %} 
+                            <tr>
+                                {% for key, value in rows[row_number].items() %} 
+                                    {% if key in data_rows_manager.get_asked_columns_names() %}
+                                        <td>{{ value }}</td>
+                                    {% endif %}
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% endfor %}
+</div>

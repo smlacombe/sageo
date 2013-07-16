@@ -1,0 +1,11 @@
+{% macro create_button() -%}
+    <p><a id="create_view" href="/edit_view" class="btn">{{ _('Create new view') }}</a></p>
+{%- endmacro %}
+
+{% macro all_views_button() -%}
+    <p><a href="/view" class="btn">{{ _('All views') }}</a></p>
+{%- endmacro %}
+
+{% macro edit_view_button(link_name) -%}
+    <p><a href="/edit_view?link_name={{ link_name }}" class="btn"><i class="icon-pencil"></i> {{ _('Edit view') }}</a></p>
+{%- endmacro %}

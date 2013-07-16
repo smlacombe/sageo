@@ -31,10 +31,11 @@ view_page = Blueprint('view_page', __name__, static_folder='static', template_fo
 @login_required
 def view():
     link_name = request.args.get('link_name', '')
-    dataRowsManager = DataRowsManager() 
+    data_rows_manager = DataRowsManager() 
     if link_name:    
-        if dataRowsManager.set_view(link_name):
-            print dataRowsManager.get_rows()
+        if data_rows_manager.set_view(link_name):
+            print data_rows_manager.get_rows()
+            return snapins.render_sidebar_template('views/view.html', data_rows_manager=data_rows_manager)
         else:
             flash(_(u'View') + ' \'' + link_name + '\' ' +  _(u'doesn\'t exist'), 'error')
             return redirect('/view')
