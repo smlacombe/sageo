@@ -4,7 +4,8 @@ from app.db_model.viewColumn import ViewColumn
 from app.lib import livestatus_query
 from app.lib.datasources import multisite_datasources as datasources
 from app.managers.filters_manager import FiltersManager
-
+from app.model.columns.builtin import painters
+import copy
 
 class DataRowsManager():
     """ A sort of proxy that facilitate gathering data from LiveStatus without knowing implementation details. """
@@ -33,7 +34,16 @@ class DataRowsManager():
         columns_name = self.get_asked_columns_names()
         filters_string = self.__filters_manager.get_filter_query() 
         print '\nfilters: ' + filters_string
-        return livestatus_query.get_rows(datasource, columns_name, filters_string)         
+        return self.__readable_rows(livestatus_query.get_rows(datasource, columns_name, filters_string))         
+
+    def __readable_rows(self, rows):
+        rows_readable = rows 
+        for row in rows_readable:
+            for name, value in row.items():
+                if name in painters.keys():
+                    row[name] = painters[name].get_readable(row)
+        return rows_readable
+                
 
     def get_asked_columns_names(self):
         columns_names = []
