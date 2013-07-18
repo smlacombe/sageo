@@ -26,24 +26,6 @@ class ViewForm(ModelForm, TranslatedForm):
     columns = ModelFieldList(FormField(ViewColumnForm))
     summary = RadioField('Summary', choices=[('yes',_(u'Yes')),('no',_(u'No')),('ignore',_(u'Ignore'))], default='no')
 
-    def set_view(self, view):
-        self.title.data = view.title
-        self.link_name.data = view.link_name
-        self.datasource.data = view.datasource
-        self.buttontext.data = view.buttontext
-        self.reload_intervall.data = view.reload_intervall 
-        self.hostname_option.data = view.hostname_option
-        self.hostname_exact_match.data = view.hostname_exact_match
-        self.hostname.data = view.hostname
-        self.hoststate_option.data = view.hoststate_option
-        self.hoststate_up.data = view.hoststate_up
-        self.hoststate_down.data = view.hoststate_down
-        self.hoststate_unreach.data = view.hoststate_unreach 
-        self.hoststate_pending.data = view.hoststate_pending
-        self.summary_option.data = view.summary_option
-        self.summary.data = view.summary
-        self.layout_number_columns.data = view.layout_number_columns
-
     def set_columns(self, columns):
         for column in columns:
             self.columns.append_entry(column) 

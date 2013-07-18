@@ -1,15 +1,9 @@
 {% import 'lib/views.html' as lib_view %}
 
 {% set layout_cols = data_rows_manager.get_view().layout_number_columns %}
-{% set rows = data_rows_manager.get_rows() %}
-{% set rows_count = rows|length %}
 {% set spanCol = (12 / layout_cols)|int %}
 {% set max_rows_per_col = (rows_count / layout_cols)|round|int %} 
 
-<h2>{{ data_rows_manager.get_view().title }}</h2>
-{{ lib_view.edit_view_button(data_rows_manager.get_view().link_name) }}
-
-<p>{{ rows_count|string + ' ' +  _('rows') }}</p>
 <div class="row-fluid">
     {% for col_number in range(0, layout_cols) %}
         <div class="span{{ spanCol }}">

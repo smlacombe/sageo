@@ -27,6 +27,9 @@
     {% if views %}
         {% include 'views/views_list.html' %}  
     {% elif data_rows_manager %}
+        {% set rows = data_rows_manager.get_rows() %}
+        {% set rows_count = rows|length %}
+        {% include 'views/view_header.html' %} 
         {% include 'views/view_rows_table.html' %}
     {% else %}
         {{ lib_view.create_button() }}

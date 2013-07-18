@@ -7,5 +7,5 @@
 {%- endmacro %}
 
 {% macro edit_view_button(link_name) -%}
-    <p><a href="/edit_view?link_name={{ link_name }}" class="btn"><i class="icon-pencil"></i> {{ _('Edit view') }}</a></p>
+    <a href="/edit_view?link_name={{ link_name }}" class="btn"><i class="icon-pencil"></i> {{ _('Edit view') }}</a>
 {%- endmacro %}

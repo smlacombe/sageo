@@ -1,0 +1,7 @@
+<h2>{{ data_rows_manager.get_view().title }}</h2>
+<p>
+    <a href="#" class="btn"><i class="icon-search"></i></a>
+    {{ lib_view.edit_view_button(data_rows_manager.get_view().link_name) }}
+</p>
+<p>{{ rows_count|string + ' ' +  _('rows') }}</p>
+

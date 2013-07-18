@@ -48,7 +48,6 @@ def edit_view():
             if view:
                 form = ViewForm(csrf_enabled=True, obj=view)
                 form.populate_obj(view)
-                form.set_view(view)
                 columns = ViewColumn.query.filter_by(parent_id=view.id).all()
                 form.set_columns(columns)
             else:

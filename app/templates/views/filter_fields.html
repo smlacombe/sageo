@@ -1,0 +1,27 @@
+
+{%- macro hostname_filter() -%}
+    {{ lib.print_field(form.hostname, fieldargs={'placeholder': _('Hostname expression')}) }}
+    {{ lib.field_error(form.hostname) }}
+    <label class=checkbox>
+        {{ lib.print_field(form.hostname_exact_match) }} {{ _('Exact match') }}
+    </label>
+{%- endmacro %}
+
+{%- macro hoststate_filter() -%}
+    <label class=checkbox>
+        {{ lib.print_field(form.hoststate_up) }} {{ _('UP') }}
+    </label>
+    <label class=checkbox>
+        {{ lib.print_field(form.hoststate_down) }} {{ _('DOWN') }}
+    </label>
+    <label class=checkbox>
+        {{ lib.print_field(form.hoststate_unreach) }} {{ _('UNREACH') }}
+    </label>
+    <label class=checkbox>
+        {{ lib.print_field(form.hoststate_pending) }} {{ _('PENDING') }}
+    </label>
+{%- endmacro %}
+
+{%- macro summary_filter() -%}
+    {{ lib.print_radiofield(form.summary) }}
+{%- endmacro %}
