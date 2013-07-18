@@ -1,9 +1,11 @@
 from .column_painter import ColumnPainter
 import time
 from flask.ext.babelex import format_timedelta
+from flask.ext.babelex import format_datetime
+from flask.ext.babelex import format_time
+from datetime import datetime
 
-
-class ColumnPainterAge(ColumnPainter):
+class ColumnPainterLastEvent(ColumnPainter):
     """
     Column painter that print age for timestamp column like last_check
     """
@@ -12,6 +14,6 @@ class ColumnPainterAge(ColumnPainter):
 
     def get_readable(self, row):
         age = time.time() - row[self.name]
-        return time.strftime(" %H:%M:%S", time.localtime(row[self.name]))
+        return format_time(datetime.fromtimestamp(row[self.name])) 
 
 
