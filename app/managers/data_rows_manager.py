@@ -31,7 +31,7 @@ class DataRowsManager():
         """ get rows corresponding to the query builded with the view and its options """
         # prepare basic parameter datasource and columns_name
         datasource = datasources[self.__view.datasource]        
-        columns_name = self.get_asked_columns_names()
+        columns_name = self.get_asked_columns_name()
         filters_string = self.__filters_manager.get_filter_query() 
         print '\nfilters: ' + filters_string
         return self.__readable_rows(livestatus_query.get_rows(datasource, columns_name, filters_string))         
@@ -45,9 +45,14 @@ class DataRowsManager():
         return rows_readable
                 
 
-    def get_asked_columns_names(self):
+    def get_asked_columns_name(self):
         columns_names = []
         for column in self.__columns: columns_names.append(column.column)
+        return columns_names
+
+    def get_asked_columns_title(self):
+        columns_names = []
+        for column in self.__columns: columns_names.append(painters[column.column].title)
         return columns_names
 
     def get_columns(self):

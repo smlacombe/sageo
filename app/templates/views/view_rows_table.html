@@ -1,18 +1,22 @@
+{% import 'lib/views.html' as lib_view %}
+
 {% set layout_cols = data_rows_manager.get_view().layout_number_columns %}
 {% set rows = data_rows_manager.get_rows() %}
 {% set rows_count = rows|length %}
 {% set spanCol = (12 / layout_cols)|int %}
 {% set max_rows_per_col = (rows_count / layout_cols)|round|int %} 
-Max {{ max_rows_per_col }}
-Layour cols {{ layout_cols }}
-Rows count {{ rows_count }}
+
+<h2>{{ data_rows_manager.get_view().title }}</h2>
+{{ lib_view.edit_view_button(data_rows_manager.get_view().link_name) }}
+
+<p>{{ rows_count|string + ' ' +  _('rows') }}</p>
 <div class="row-fluid">
     {% for col_number in range(0, layout_cols) %}
         <div class="span{{ spanCol }}">
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        {% for col_name in data_rows_manager.get_asked_columns_names() %} 
+                        {% for col_name in data_rows_manager.get_asked_columns_title() %} 
                                 <th>{{ col_name }}</th>
                         {% endfor %}
                     </tr>
@@ -25,7 +29,7 @@ Rows count {{ rows_count }}
                         {% endif %}
                         {% for row_number in range(start, end) %} 
                             <tr>
-                                {% for elem in data_rows_manager.get_asked_columns_names() %}
+                                {% for elem in data_rows_manager.get_asked_columns_name() %}
                                     <td>{{ rows[row_number][elem] }}</td>
                                 {% endfor %}
                             </tr>

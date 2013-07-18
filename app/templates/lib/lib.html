@@ -92,3 +92,16 @@
 {%- macro close_alert_button() -%}
     <button type="button" class="close" data-dismiss="alert">&times;</button>
 {%- endmacro %}
+
+{%- macro panel_heading(text) -%}
+    <div class="panel-heading">{{ text }}</div>
+{%- endmacro %}
+
+{% macro panel() -%}
+    <div class="panel panel-primary panel-edit-view">
+{%- endmacro %}
+
+{% macro edit_panel() -%}
+    <div class="panel panel-primary panel-edit-view filter_options">
+{%- endmacro %}
+

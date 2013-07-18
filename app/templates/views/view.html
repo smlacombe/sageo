@@ -19,15 +19,14 @@
 {% import 'lib/lib.html' as lib %}
 {% import 'lib/views.html' as lib_view %}
 {% block title %}{{ _('Sageo')+' ' +_('View') }}{% endblock %}
-
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('.static', filename='css/panel.css') }}">
+{% endblock %}
 {% block main_section %}
     {% if views %}
-        {{ lib_view.create_button() }}
-        <h2>{{ _('Existing views') }}</h2>
         {% include 'views/views_list.html' %}  
     {% elif data_rows_manager %}
-        {{ lib_view.edit_view_button(data_rows_manager.get_view().link_name) }}
-        <h2>{{ data_rows_manager.get_view().title }}</h2>
         {% include 'views/view_rows_table.html' %}
     {% else %}
         {{ lib_view.create_button() }}

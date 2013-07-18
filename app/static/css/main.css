@@ -5,7 +5,7 @@ html, body {
 
 .main-section {
     margin-left: 310px;
-    margin-top: 40px;
+    margin-top: 60px;
 }
 
 .sidebar-nav-fixed {
@@ -46,6 +46,10 @@ html, body {
 .row-fluid .content-area {
     margin-left:0;
 
+}
+
+.controls.form-inline.filter > select {
+    float:left;
 }
 
 .footer {

@@ -26,6 +26,7 @@
     <script src="{{ url_for('.static', filename='js/accordion.js') }}"></script>
     <script src="{{ url_for('.static', filename='js/edit_view.js') }}"></script>
     <link rel="stylesheet" type="text/css" href="{{ url_for('.static', filename='css/edit_view.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('.static', filename='css/panel.css') }}">
 {% endblock %}
 
 {% block main_section %}
@@ -59,7 +60,8 @@
                             <span class="control-label">{{ _('Hostname') }}</span>
                             {{ lib.controls(inline=True, otherclass='filter') }}
                                 {{ lib.print_field(form.hostname_option) }}
-                                <div class='filter_options'>
+                                {{ lib.edit_panel() }}
+                                    {{ lib.panel_heading( _('Hostname')) }}
                                     {{ lib.print_field(form.hostname, fieldargs={'placeholder': _('Hostname expression')}) }}
                                     {{ lib.field_error(form.hostname) }}
                                     <label class=checkbox>
@@ -73,7 +75,8 @@
                             <span class="control-label">{{ _('Host states') }}</span>
                             {{ lib.controls(inline=True, otherclass='filter') }}
                                 {{ lib.print_field(form.hoststate_option) }}
-                                <div class='filter_options'>
+                                {{ lib.edit_panel() }}
+                                    {{ lib.panel_heading( _('Host states')) }}
                                     <label class=checkbox>
                                         {{ lib.print_field(form.hoststate_up) }} {{ _('UP') }}
                                     </label>
@@ -95,7 +98,8 @@
                             <span class="control-label">{{ _('Is summary host') }}</span>
                             {{ lib.controls(inline=True, otherclass='filter') }}
                                 {{ lib.print_field(form.summary_option) }}
-                                <div class='filter_options'>
+                                {{ lib.edit_panel() }}
+                                    {{ lib.panel_heading( _('Is summary host')) }}
                                     {{ lib.print_radiofield(form.summary) }}
                                 </div>
                             </div>
