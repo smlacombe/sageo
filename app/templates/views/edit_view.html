@@ -16,7 +16,7 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #}
 {% extends "main.html" %}
-{% import 'lib/lib.html' as lib %}
+{% import 'lib/lib.html' as lib with context%}
 {% import 'lib/views.html' as lib_view %}
 {% import 'views/filter_fields.html' as lib_fields with context %}
 {% block title %}{{ _('Sageo')+_('Edit view') }}{% endblock %}
@@ -57,40 +57,9 @@
                 <div>
                     <h3><a href="#">{{ _('Filters') }}</a></h3>
                     <div>
-                        {{ lib.control_group() }}
-                            <span class="control-label">{{ _('Hostname') }}</span>
-                            {{ lib.controls(inline=True, otherclass='filter') }}
-                                {{ lib.print_field(form.hostname_option) }}
-                                {{ lib.edit_panel() }}
-                                    {{ lib.panel_heading( _('Hostname')) }}
-                                    {{ lib_fields.hostname_filter() }}
-                                </div>
-                            </div>
-                        </div>
-
-                        {{ lib.control_group() }}
-                            <span class="control-label">{{ _('Host states') }}</span>
-                            {{ lib.controls(inline=True, otherclass='filter') }}
-                                {{ lib.print_field(form.hoststate_option) }}
-                                {{ lib.edit_panel() }}
-                                    {{ lib.panel_heading( _('Host states')) }}
-                                    {{ lib_fields.hoststate_filter() }}
-                                </div>
-                            </div>
-                        </div>
-
-
-                        {{ lib.control_group() }}
-                            <span class="control-label">{{ _('Is summary host') }}</span>
-                            {{ lib.controls(inline=True, otherclass='filter') }}
-                                {{ lib.print_field(form.summary_option) }}
-                                {{ lib.edit_panel() }}
-                                    {{ lib.panel_heading( _('Is summary host')) }}
-                                    {{ lib_fields.summary_filter() }}
-                                </div>
-                            </div>
-                        </div>
-
+                        {{ lib_fields.hostname_filter(form, show_options=True, show_label=True) }}
+                        {{ lib_fields.hoststate_filter(form, show_options=True, show_label=True) }}
+                        {{ lib_fields.summary_filter(form, show_options=True, show_label=True) }}
                     </div>
                 </div>
                 <div>

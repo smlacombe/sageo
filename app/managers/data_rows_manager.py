@@ -22,10 +22,13 @@ class DataRowsManager():
         if self.__view:
             self.__columns = ViewColumn.query.filter_by(parent_id=self.__view.id).order_by(ViewColumn.id).all()
             self.__filters_manager = FiltersManager()
-            self.__filters_manager.set_filters(self.__view.get_filters())
+            self.update_filters()
             return True
         else:
             return False
+
+    def update_filters(self):
+        self.__filters_manager.set_filters(self.__view.get_filters())
 
     def get_rows(self):
         """ get rows corresponding to the query builded with the view and its options """
@@ -54,6 +57,13 @@ class DataRowsManager():
         columns_names = []
         for column in self.__columns: columns_names.append(painters[column.column].title)
         return columns_names
+    
+    def set_extra_filters(self, filters):
+        self.__view.set_filters(filters)
+        self.update_filters()
+
+    def get_filters_name(self):
+        return self.__filters_manager.get_filters_name()
 
     def get_columns(self):
         return self.__columns

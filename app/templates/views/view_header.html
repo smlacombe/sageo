@@ -1,7 +1,26 @@
+{% import 'lib/lib.html' as lib %}
+{% import 'lib/views.html' as lib_view %}
+{% import 'views/filter_fields.html' as lib_fields %}
+{% set view = data_rows_manager.get_view() %}
 <h2>{{ data_rows_manager.get_view().title }}</h2>
 <p>
     <a href="#" class="btn"><i class="icon-search"></i></a>
-    {{ lib_view.edit_view_button(data_rows_manager.get_view().link_name) }}
+    {{ lib_view.edit_view_button(view.link_name) }}
 </p>
+<form class="form-horizontal" method="post" enctype="multipart/form-data">
+    <div class="filters-panel">
+        <div class="row-fluid">
+            {% if view.hostname_option == 'show' %}
+                <div>{{ lib_fields.hostname_filter(form, False, False) }}</div>
+            {% endif %} 
+            {% if view.hoststate_option == 'show' %}
+                <div>{{ lib_fields.hoststate_filter(form, False, False) }}</div>
+            {% endif %}
+            {% if view.summary_option == 'show' %}
+                <div>{{ lib_fields.summary_filter(form, False, False) }}</div>
+            {% endif %}
+        </div>
+        <button type=submit class="btn btn-primary">{{ _('Search') }}</button>
+    </div>
+</form>
 <p>{{ rows_count|string + ' ' +  _('rows') }}</p>
-

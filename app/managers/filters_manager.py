@@ -17,3 +17,6 @@ class FiltersManager():
             filter_query = filter_query + filters[name].filter(filter_value)             
 
         return filter_query
+    
+    def get_filters_name(self):
+        return filters.keys()

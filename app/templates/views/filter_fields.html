@@ -1,27 +1,55 @@
+{% import 'lib/lib.html' as lib %}
 
-{%- macro hostname_filter() -%}
-    {{ lib.print_field(form.hostname, fieldargs={'placeholder': _('Hostname expression')}) }}
-    {{ lib.field_error(form.hostname) }}
-    <label class=checkbox>
-        {{ lib.print_field(form.hostname_exact_match) }} {{ _('Exact match') }}
-    </label>
+{%- macro hostname_filter(form, show_options, show_label) -%}
+    {{ lib.control_group() }}
+        {% if show_label %} <span class="control-label">{{ _('Hostname') }}</span> {% endif %}
+        {{ lib.controls(inline=True, otherclass='filter') }}
+            {% if show_options %} {{ lib.print_field(form.hostname_option) }} {% endif %}
+            {{ lib.edit_panel() }}
+                {{ lib.panel_heading( _('Hostname')) }}
+                {{ lib.print_field(form.hostname, fieldargs={'placeholder': _('Hostname expression')}) }}
+                {{ lib.field_error(form.hostname) }}
+                <label class=checkbox>
+                    {{ lib.print_field(form.hostname_exact_match) }} {{ _('Exact match') }}
+                </label>
+            </div>
+        </div>
+    </div>
 {%- endmacro %}
 
-{%- macro hoststate_filter() -%}
-    <label class=checkbox>
-        {{ lib.print_field(form.hoststate_up) }} {{ _('UP') }}
-    </label>
-    <label class=checkbox>
-        {{ lib.print_field(form.hoststate_down) }} {{ _('DOWN') }}
-    </label>
-    <label class=checkbox>
-        {{ lib.print_field(form.hoststate_unreach) }} {{ _('UNREACH') }}
-    </label>
-    <label class=checkbox>
-        {{ lib.print_field(form.hoststate_pending) }} {{ _('PENDING') }}
-    </label>
+{%- macro hoststate_filter(form, show_options, show_label) -%}
+    {{ lib.control_group() }}
+       {% if show_label %}<span class="control-label">{{ _('Host states') }}</span>{% endif %}
+        {{ lib.controls(inline=True, otherclass='filter') }}
+            {% if show_options %} {{ lib.print_field(form.hoststate_option) }} {% endif %}
+            {{ lib.edit_panel() }}
+                {{ lib.panel_heading( _('Host states')) }}
+                <label class=checkbox>
+                    {{ lib.print_field(form.hoststate_up) }} {{ _('UP') }}
+                </label>
+                <label class=checkbox>
+                    {{ lib.print_field(form.hoststate_down) }} {{ _('DOWN') }}
+                </label>
+                <label class=checkbox>
+                    {{ lib.print_field(form.hoststate_unreach) }} {{ _('UNREACH') }}
+                </label>
+                <label class=checkbox>
+                    {{ lib.print_field(form.hoststate_pending) }} {{ _('PENDING') }}
+                </label>
+            </div>
+        </div>
+    </div>
 {%- endmacro %}
 
-{%- macro summary_filter() -%}
-    {{ lib.print_radiofield(form.summary) }}
+{%- macro summary_filter(form, show_options, show_label) -%}
+    {{ lib.control_group() }}
+        {% if show_label %} <span class="control-label">{{ _('Is summary host') }}</span> {% endif %}
+        {{ lib.controls(inline=True, otherclass='filter') }}
+            {% if show_options %} {{ lib.print_field(form.summary_option) }} {% endif %}
+            {{ lib.edit_panel() }}
+                {{ lib.panel_heading( _('Is summary host')) }}
+                {{ lib.print_radiofield(form.summary) }}
+            </div>
+        </div>
+    </div>
 {%- endmacro %}

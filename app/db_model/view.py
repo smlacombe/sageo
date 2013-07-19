@@ -82,3 +82,42 @@ class View(Base):
         if not self.summary_option == FILTER_OFF:
             filters[FILTER_IS_SUMMARY_HOST] = self.summary
         return filters
+
+    def set_filters(self, filters):
+        """
+        Set class filter according filters dictionnary, almost of the time provening of url parameters.
+        """
+        for name, value in filters.items():
+            if name == FILTER_EXACT_MATCH:
+                if value:
+                     self.hostname = value
+                     self.hostname_exact_match = True
+                else:
+                     self.hostname_exact_match = False
+            elif name == FILTER_HOSTREGEX: 
+                self.hostname = value
+            elif name == FILTER_HOST_STATE:
+                import ipdb;ipdb.set_trace()
+                if value['UP']:
+                    if value['UP'] == 'True':
+                         self.hoststate_up = True
+                    else:
+                         self.hoststate_up = False
+                if value['DOWN']:
+                    if value['DOWN'] == 'True': 
+                        self.hoststate_down = True
+                    else: 
+                        self.hoststate_down = False
+                if value['UNREACH']:
+                    if value['UNREACH'] == 'True':
+                        self.hoststate_unreach = True
+                    else:
+                         self.hoststate_unreach = False
+                if value['PENDING']:
+                    if value['PENDING'] == 'True': 
+                        self.hoststate_pending = True
+                    else:
+                        self.hoststate_pending = False
+            elif name == FILTER_IS_SUMMARY_HOST:
+                self.summary = value
+            

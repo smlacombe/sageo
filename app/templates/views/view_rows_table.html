@@ -2,7 +2,7 @@
 
 {% set layout_cols = data_rows_manager.get_view().layout_number_columns %}
 {% set spanCol = (12 / layout_cols)|int %}
-{% set max_rows_per_col = (rows_count / layout_cols)|round|int %} 
+{% set max_rows_per_col = (rows_count / layout_cols)|round(method='ceil')|int %} 
 
 <div class="row-fluid">
     {% for col_number in range(0, layout_cols) %}
@@ -21,6 +21,7 @@
                         {% if end > rows_count %}  
                             {% set end = rows_count %} 
                         {% endif %}
+
                         {% for row_number in range(start, end) %} 
                             <tr>
                                 {% for elem in data_rows_manager.get_asked_columns_name() %}
