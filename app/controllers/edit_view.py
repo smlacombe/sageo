@@ -24,6 +24,8 @@ from app.db_model.base import db_session
 from app.db_model.user import User
 from app.db_model.viewColumn import ViewColumn
 from app.db_model.view import View
+from app.db_model.viewFilters import ViewFilters
+from app.managers.view_manager import ViewManager
 
 from app.forms.view import ViewForm 
 from app import app
@@ -38,17 +40,18 @@ unique_validators= {}
 def edit_view():
     link_name = request.args.get('link_name', '')
     form = ViewForm(csrf_enabled=True)
+    view_manager = ViewManager()
+    
     if request.method=='GET':
         # Store the link_name parameter to use when we will be in post request
         session['link_name'] = link_name
         # We wan't edit an existing view or create a new one?    
         if link_name:
-            view = View.query.filter_by(link_name=link_name).first()    
-            #import ipdb;ipdb.set_trace()                
-            if view:
+            if view_manager.set_view(link_name): 
+                view = view_manager.get_view()
                 form = ViewForm(csrf_enabled=True, obj=view)
                 form.populate_obj(view)
-                columns = ViewColumn.query.filter_by(parent_id=view.id).all()
+                columns = view_manager.get_columns() 
                 form.set_columns(columns)
             else:
                 flash(_(u'View') + ' \'' + link_name + '\' ' +  _(u'doesn\'t exist'), 'error')
@@ -60,7 +63,7 @@ def edit_view():
     elif request.method=='POST':
         link_name = session['link_name']
         if link_name:
-            saved_view = View.query.filter_by(link_name=link_name).first()
+            saved_view = view_manager.set_view(link_name) 
             form = ViewForm(csrf_enabled=True, obj=saved_view)
             form.populate_obj(saved_view)
     
@@ -68,31 +71,16 @@ def edit_view():
            # import ipdb;ipdb.set_trace();
             if not link_name:
                 view = form.get_view()
-                db_session.add(view)
-                db_session.commit() 
-                saved_view = View.query.filter_by(title=view.title).first()
-                add_form_columns(saved_view, form) 
+                view_manager.add_view(view)
+                saved_view = view_manager.set_view(view.link_name) 
+                view_manager.add_columns(form.get_columns(view.id))
                 db_session.commit()
             else:
-                view = View.query.filter_by(link_name=link_name).first()   
+                view = view_manager.set_view(view.link_name)   
                 view.update_view(form.get_view())
-                columns = ViewColumn.query.filter_by(parent_id=view.id).all()
-
-                # Delete all columns related to the view
-                for column in columns:
-                    db_session.delete(column)
-
-                add_form_columns(view, form) 
-                db_session.commit()
+                view_manager.add_form_columns(form.get_columns(view.id), delete_before=True) 
      
             flash(_(u'View') + ' \'' + view.title + '\' ' +  _(u'saved successfully!'), 'success')
             return redirect('/view')
 
     return snapins.render_sidebar_template('views/edit_view.html', acknowledged='', link_name=link_name, form=form)
-
-def add_form_columns(view, form):
-    columns = form.get_columns(view.id)
-  #  import ipdb;ipdb.set_trace()
-    for column in columns:
-        db_session.add(column)
-

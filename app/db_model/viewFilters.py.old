@@ -1,0 +1,35 @@
+from sqlalchemy import *
+from sqlalchemy.orm import *
+from app.db_model.base import Base
+from flask.ext.babelex import lazy_gettext, gettext, ngettext, Babel
+from app import babel, app
+from flask import Flask
+from app.db_model.view import View
+from app.model.filters.builtin import filters
+_ = lazy_gettext
+
+filter_choices = [('off',_(u'Don''t use')),('hard',_(u"Hardcode")),('show',_(u"Show to user")), ('hide',_(u"Use for linking"))]
+filter_choices_values = Enum('off','hard','show','hide')
+
+metadata = MetaData()
+
+view_filters = Table('view_filters', metadata, Column('id', Integer, primary_key=True), Column('parent_id', Integer, ForeignKey(View.id), nullable=False))
+
+for name, filt in filters.iteritems():
+    view_filters.append_column(Column(name + '_option', Enum('off','hard','show','hide'), nullable=False, info={'choices': filter_choices}, default='off'))  
+    for col in filt.get_col_def():
+        view_filters.append_column(col)
+
+class ViewFilters(object):
+    def __init__(self):
+        for col in view_filters.columns:
+            import ipdb;ipdb.set_trace()
+
+
+mapper(View, View.metadata.tables['views'], properties={
+    'filters' : relationship(ViewFilters, backref='View', order_by=view_filters.c.id)
+}, non_primary=True)
+
+import ipdb;ipdb.set_trace()
+mapper(ViewFilters, view_filters)
+import ipdb;ipdb.set_trace()

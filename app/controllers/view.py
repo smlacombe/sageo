@@ -64,9 +64,10 @@ def view():
 
         return snapins.render_sidebar_template('views/view.html', link_name=link_name)
     elif request.method=='POST':
-        if form.validate_on_submit():        
-            if form.hostname:
-                view = form.get_view()
-                filters = view.get_filters()
-                
+        import ipdb;ipdb.set_trace()
+        view = form.get_view()
+        filters = view.get_filters()
+        for name, value in filters:
+            import ipdb;ipdb.set_trace()
+                      
 

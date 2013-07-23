@@ -9,6 +9,8 @@ from wtforms_alchemy import ModelForm, ModelFieldList
 from app.db_model.base import db_session
 from app.db_model.viewColumn import ViewColumn
 from app.db_model.view import View
+from app.db_model.view_filters import ViewFilters
+from app.model.filters.builtin import FILTER_IS_SUMMARY_HOST
 
 filter_choices = [('off',_(u'Don''t use')),('hard',_(u"Hardcode")),('show',_(u"Show to user")), ('hide',_(u"Use for linking"))]
 datasource_choices = [('allhost',_(u'All hosts')),('allservices',_(u"All services"))]
@@ -18,13 +20,18 @@ class ViewColumnForm(ModelForm, TranslatedFormNoCsrf):
     class Meta:
         model = ViewColumn
 
+class ViewFiltersForm(ModelForm, TranslatedForm):
+    class Meta:
+        model = ViewFilters
+
+setattr(ViewFiltersForm, FILTER_IS_SUMMARY_HOST, RadioField('Summary', choices=[('yes',_(u'Yes')),('no',_(u'No')),('ignore',_(u'Ignore'))], default='no')
+
 
 class ViewForm(ModelForm, TranslatedForm):
     class Meta:
         model = View
 
     columns = ModelFieldList(FormField(ViewColumnForm))
-    summary = RadioField('Summary', choices=[('yes',_(u'Yes')),('no',_(u'No')),('ignore',_(u'Ignore'))], default='no')
 
     def set_columns(self, columns):
         for column in columns:
@@ -58,49 +65,3 @@ class ViewForm(ModelForm, TranslatedForm):
             column.parent_id = view_id
             columns.append(column)
         return columns
-   
- 
-################# BasicSettingsForm ###################### 
-class BasicSettingsForm(TranslatedForm):
-    title = TextField(_(u'Title'), validators=[Required()])
-    link_name = TextField(_(u'Link Name'), validators=[Required()])
-    datasource = SelectField(_(u'Datasource'), choices=datasource_choices)
-    buttontext = TextField(_(u'Buttontext'))
-    reload_intervall = IntegerField(_(u'Browser reload intervall'), default=30)
-
-########## Filter Form ###################
-class HostStatesFilterForm(TranslatedForm):
-    options = SelectField(_(u'Host states'), choices=filter_choices)
-    up = BooleanField(_(u'UP'), default=True)
-    down = BooleanField(_(u'DOWN'), default=True)
-    unreach = BooleanField(_(u'UNREACH'), default=True)
-    pending = BooleanField(_(u'PENDING'), default=True)
-
-class HostnameFilterForm(TranslatedForm):
-    options = SelectField(_(u'Hostname options'), choices=filter_choices)
-    exact_match = BooleanField(_(u'Exact match'), default=False)
-    hostname = TextField(_(u'Hostname'))
-
-class SummaryHostForm(TranslatedForm):
-    options = SelectField(_(u'Is summary host'), choices=filter_choices)
-    summary = RadioField('Summary', choices=[('yes',_(u'Yes')),('no',_(u'No')),('ignore',_(u'Ignore'))], default='no')
-
-class FiltersForm(TranslatedForm):
-    hostname = FormField(HostnameFilterForm)
-    hoststates = FormField(HostStatesFilterForm)
-    summaryhost = FormField(SummaryHostForm)
-
-##################### Layout self.###############################
-class LayoutForm(TranslatedForm):
-    number_columns = IntegerField(_(u'Number of Columns'), default=3)
-
-class Column(TranslatedForm):
-    column = SelectField(_(u'Column'), choices=column_choices)
-
-'''
-class ViewForm(TranslatedForm):
-    basic_settings = FormField(BasicSettingsForm)
-    filters = FormField(FiltersForm)
-    layout = FormField(LayoutForm)
-    columns = FieldList(FormField(Column))
-'''

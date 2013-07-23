@@ -12,7 +12,6 @@ class DataRowsManager():
     def __init__(self):
         self.__view = None
         self.__columns = None 
-        self.__rows = None
         self.__filters_manager = None
     '''
     Set the view with the link_name. If a view is found, return true, else return false.

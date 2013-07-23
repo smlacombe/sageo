@@ -1,18 +1,19 @@
 from flask.ext.babelex import gettext, ngettext
 from app import app
+
+_ = gettext
+OP_EQUAL = '='
+OP_TILDE = '~~'
+FILTER_HOSTREGEX = 'host_regex'
+FILTER_EXACT_MATCH = 'host'
+FILTER_HOST_STATE = 'host_state'
+FILTER_IS_SUMMARY_HOST = 'is_summary_host'
+
 from app.model.filters.filter import Filter
 from app.model.filters.filter_text import FilterText
 from app.model.filters.filter_host_state import FilterHostState
 from app.model.filters.filter_nagios_expr import FilterNagiosExpr
 
-_ = gettext
-OP_EQUAL = '='
-OP_TILDE = '~~'
-
-FILTER_HOSTREGEX = 'host_regex'
-FILTER_EXACT_MATCH = 'host'
-FILTER_HOST_STATE = 'host_state'
-FILTER_IS_SUMMARY_HOST = 'is_summary_host'
 
 filters = {}
 
