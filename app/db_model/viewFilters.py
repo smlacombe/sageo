@@ -10,6 +10,7 @@ _ = lazy_gettext
 
 filter_choices = [('off',_(u'Don''t use')),('hard',_(u"Hardcode")),('show',_(u"Show to user")), ('hide',_(u"Use for linking"))]
 filter_choices_values = Enum('off','hard','show','hide')
+cache_columns = {}
 
 class ViewFilters(Base):
     __tablename__ = 'view_filters' 
@@ -51,9 +52,14 @@ class ViewFilters(Base):
                 else:
                     setattr(self, name, value) 
             
-     
+    def update(self, filters):
+        self.__dict__.update(filters)       
+
+      
 # Dynamically add columns to view_filters table
 for name, filt in filters.iteritems():
     setattr(ViewFilters, name + '_option', Column(Enum('off','hard','show','hide'), nullable=False, info={'choices': filter_choices}, default='off'))
+    cache_columns[name + '_option'] = []
     for col in filt.get_col_def():
+        cache_columns[name + '_option'].append(col.name)
         setattr(ViewFilters, col.name, col)   

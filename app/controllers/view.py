@@ -25,6 +25,7 @@ from app.forms.view import ViewForm
 from app import app
 from app.lib import snapins
 from app.managers.data_rows_manager import DataRowsManager
+from app.managers.view_manager import ViewManager
 from app.db_model.view import View
 _ = gettext
 view_page = Blueprint('view_page', __name__, static_folder='static', template_folder='templates')
@@ -37,7 +38,10 @@ def view():
     if request.method=='GET':
         link_name = request.args.get('link_name', '')
         data_rows_manager = DataRowsManager() 
+        view_manager = ViewManager() 
         if link_name:    
+            view_manager.set_view(link_name)
+
             if data_rows_manager.set_view(link_name):
                 # Get filters parameters if any
                 filters_name = data_rows_manager.get_filters_name()
@@ -51,8 +55,9 @@ def view():
                     data_rows_manager.set_extra_filters(filters_url_values)
                 print data_rows_manager.get_rows()
                 view = data_rows_manager.get_view()
-                form = ViewForm(csrf_enabled=True, obj=view)
-                form.populate_obj(view)
+                viewFilters = view_manager.get_filters() 
+                form = ViewFiltersForm(obj=viewFilters)
+                form.populate_obj(viewFilters)
 
                 return snapins.render_sidebar_template('views/view.html', form=form, data_rows_manager=data_rows_manager)
             else:

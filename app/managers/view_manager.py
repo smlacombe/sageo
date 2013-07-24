@@ -1,10 +1,13 @@
 from app.db_model.view import View
+from app.db_model.viewFilters import ViewFilters
+from app.db_model.viewFilters import cache_columns
 from app.db_model.base import db_session
 from app.db_model.viewColumn import ViewColumn
 from app.lib import livestatus_query
 from app.lib.datasources import multisite_datasources as datasources
 from app.managers.filters_manager import FiltersManager
 from app.model.columns.builtin import painters
+from app.model.filters.filter_fields_info import FilterFieldsInfo
 import copy
 
 class ViewManager():
@@ -13,7 +16,6 @@ class ViewManager():
         self.__view = None
         self.__columns = None 
         self.__filters = None
-        self.__filters_manager = None
     '''
     Set the view with the link_name. If a view is found, return true, else return false.
     '''
@@ -22,8 +24,6 @@ class ViewManager():
         if self.__view:
             self.__columns = ViewColumn.query.filter_by(parent_id=self.__view.id).order_by(ViewColumn.id).all()
             self.__filters = ViewFilters.query.filter_by(parent_id=self.__view.id).first()
-            self.__filters_manager = FiltersManager()
-            self.update_filters()
             return self.__view 
         else:
             return None
@@ -41,15 +41,31 @@ class ViewManager():
     def add_view(self, view):
         db_session.add(view)
         db_session.commit()
+        
+    def add_filters(self, filters):
+        db_session.add(filters)
+        db_session.commit()
 
-    def update_filters(self):
-        self.__filters_manager.set_filters(self.__view.get_filters())
+    def update_filters(self, filters):
+        self.filters.update(filters)
 
     def get_filters(self):
         return self.__filters
 
     def get_columns(self):
         return self.__columns
+    
+    def get_filter_display(self, form):
+        lst_columns = cache_columns 
+        lst_info = []
+        for option, col_names in lst_columns.iteritems():
+            option_field = getattr(form, option)
+            fields = []
+            for col in col_names: 
+                fields.append(getattr(form, col))
+            lst_info.append(FilterFieldsInfo(option_field, fields))
+        return lst_info
+    
     
     def get_view(self):
         return self.__view

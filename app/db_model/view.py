@@ -31,20 +31,4 @@ class View(Base):
     layout_number_columns = Column(SmallInteger, nullable=False, info={'label':_(u'Number of columns')}, default=3)
 
     def update_view(self, view):
-        self.title = view.title
-        self.link_name = view.link_name
-        self.datasource = view.datasource
-        self.buttontext = view.buttontext
-        self.reload_intervall = view.reload_intervall
-        self.hostname_option = view.hostname_option
-        self.hostname_exact_match = view.hostname_exact_match
-        self.hostname = view.hostname
-        self.hoststate_option = view.hoststate_option
-        self.hoststate_up = view.hoststate_up
-        self.hoststate_down = view.hoststate_down
-        self.hoststate_unreach = view.hoststate_unreach
-        self.hoststate_pending = view.hoststate_pending
-        self.summary_option = view.summary_option
-        self.summary = view.summary
-        self.layout_number_columns = view.layout_number_columns
-
+        self.__dict__.update(view)

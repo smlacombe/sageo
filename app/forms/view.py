@@ -5,11 +5,11 @@ from app import babel, app
 from flask import Flask
 _ = lazy_gettext
 from app.forms.libforms import TranslatedForm, TranslatedFormNoCsrf
-from wtforms_alchemy import ModelForm, ModelFieldList
+from wtforms_alchemy import ModelForm, ModelFieldList, ModelFormField
 from app.db_model.base import db_session
 from app.db_model.viewColumn import ViewColumn
 from app.db_model.view import View
-from app.db_model.view_filters import ViewFilters
+from app.db_model.viewFilters import ViewFilters
 from app.model.filters.builtin import FILTER_IS_SUMMARY_HOST
 
 filter_choices = [('off',_(u'Don''t use')),('hard',_(u"Hardcode")),('show',_(u"Show to user")), ('hide',_(u"Use for linking"))]
@@ -24,7 +24,7 @@ class ViewFiltersForm(ModelForm, TranslatedForm):
     class Meta:
         model = ViewFilters
 
-setattr(ViewFiltersForm, FILTER_IS_SUMMARY_HOST, RadioField('Summary', choices=[('yes',_(u'Yes')),('no',_(u'No')),('ignore',_(u'Ignore'))], default='no')
+setattr(ViewFiltersForm, FILTER_IS_SUMMARY_HOST, RadioField('Summary', choices=[('yes',_(u'Yes')),('no',_(u'No')),('ignore',_(u'Ignore'))], default='no'))
 
 
 class ViewForm(ModelForm, TranslatedForm):
@@ -32,11 +32,12 @@ class ViewForm(ModelForm, TranslatedForm):
         model = View
 
     columns = ModelFieldList(FormField(ViewColumnForm))
+    filters = ModelFormField(ViewFiltersForm)    
 
     def set_columns(self, columns):
         for column in columns:
             self.columns.append_entry(column) 
-
+    
     def get_view(self):
         view = View()
         view.title = self.title.data
@@ -65,3 +66,8 @@ class ViewForm(ModelForm, TranslatedForm):
             column.parent_id = view_id
             columns.append(column)
         return columns
+
+    def get_filters(self):
+        return filters.fdsfsd  
+
+

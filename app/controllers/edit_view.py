@@ -53,12 +53,13 @@ def edit_view():
                 form.populate_obj(view)
                 columns = view_manager.get_columns() 
                 form.set_columns(columns)
+                filters = view_manager.get_filters()
             else:
                 flash(_(u'View') + ' \'' + link_name + '\' ' +  _(u'doesn\'t exist'), 'error')
                 return redirect('/view')
         else:
             col1 = ViewColumn() 
-            form.populate_obj(col1) 
+            #form.populate_obj(col1) 
             form.columns.append_entry()
     elif request.method=='POST':
         link_name = session['link_name']
@@ -74,13 +75,16 @@ def edit_view():
                 view_manager.add_view(view)
                 saved_view = view_manager.set_view(view.link_name) 
                 view_manager.add_columns(form.get_columns(view.id))
+                view_manager.add_filters(form.get_filters)
                 db_session.commit()
             else:
                 view = view_manager.set_view(view.link_name)   
                 view.update_view(form.get_view())
-                view_manager.add_form_columns(form.get_columns(view.id), delete_before=True) 
+                view_manager.update_filters(form.get_filters())
+                view_manager.add_columns(form.get_columns(view.id), delete_before=True) 
      
             flash(_(u'View') + ' \'' + view.title + '\' ' +  _(u'saved successfully!'), 'success')
             return redirect('/view')
 
-    return snapins.render_sidebar_template('views/edit_view.html', acknowledged='', link_name=link_name, form=form)
+    filter_display = view_manager.get_filter_display(form.filters) 
+    return snapins.render_sidebar_template('views/edit_view.html', link_name=link_name, form=form, filter_display=filter_display) 

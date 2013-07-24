@@ -57,9 +57,18 @@
                 <div>
                     <h3><a href="#">{{ _('Filters') }}</a></h3>
                     <div>
-                        {{ lib_fields.hostname_filter(form, show_options=True, show_label=True) }}
-                        {{ lib_fields.hoststate_filter(form, show_options=True, show_label=True) }}
-                        {{ lib_fields.summary_filter(form, show_options=True, show_label=True) }}
+                        {% for filter_info in filter_display %}
+                            {% for field in filter_info.fields %} 
+                                {{ field.type }}
+                                {% if field.type == "TextField" %}
+                                    {{ lib_fields.text_filter(field.name, field, filter_info.option_field, True) }}
+                                {% elif field.type == "RadioField" %}
+                                    {{ lib_fields.radio_filter(field.name, field, filter_info.option_field, True) }} 
+                                {% elif field.type == "BooleanField" %} 
+                                    {{ lib_fields.checkbox_filter(field.name, field, filter_info.option_field, True) }}
+                                {% endif %}
+                             {% endfor %}
+                        {% endfor %}
                     </div>
                 </div>
                 <div>

@@ -27,9 +27,9 @@ class FilterHostState(Filter):
 
     def get_col_def(self):
         return [
-                    Column(FILTER_HOST_STATE + '_up', Boolean, default=True),
-                    Column(FILTER_HOST_STATE + '_down', Boolean, default=True),
-                    Column(FILTER_HOST_STATE + '_unreach', Boolean, default=True),
-                    Column(FILTER_HOST_STATE + '_pending', Boolean, default=True)
+                    Column(FILTER_HOST_STATE + '_up', Boolean, default=True, info={'label': 'UP'}),
+                    Column(FILTER_HOST_STATE + '_down', Boolean, default=True, info={'label': 'DOWN'}),
+                    Column(FILTER_HOST_STATE + '_unreach', Boolean, default=True, info={'label': 'UNREACHABLE'}),
+                    Column(FILTER_HOST_STATE + '_pending', Boolean, default=True, info={'label': 'PENDING'})
                 ]
 

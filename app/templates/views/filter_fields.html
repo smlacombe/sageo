@@ -1,46 +1,44 @@
 {% import 'lib/lib.html' as lib %}
 
-{%- macro text_filter(field, show_options, show_label) -%}
+{%- macro text_filter(filter_title, field, option_field, show_label) -%}
     {{ lib.control_group() }}
-        {% if show_label %} <span class="control-label">{{ _('Hostname') }}</span> {% endif %}
+        {% if show_label %} <span class="control-label">{{ filter_title }}</span> {% endif %}
         {{ lib.controls(inline=True, otherclass='filter') }}
-            {% if show_options %} {{ lib.print_field(form.hostname_option) }} {% endif %}
+            {% if show_options %} {{ lib.print_field(option_field) }} {% endif %}
             {{ lib.edit_panel() }}
-                {{ lib.panel_heading( _('Hostname')) }}
-                {{ lib.print_field(form.hostname, fieldargs={'placeholder': _('Hostname expression')}) }}
-                {{ lib.field_error(form.hostname) }}
-                <label class=checkbox>
-                    {{ lib.print_field(form.hostname_exact_match) }} {{ _('Exact match') }}
-                </label>
+                {{ lib.panel_heading(filter_title) }}
+                {{ lib.print_field(field, fieldargs={'placeholder': field.placeholder}) }}
+                {{ lib.field_error(field) }}
             </div>
         </div>
     </div>
 {%- endmacro %}
 
-{%- macro checkbox_filter(fields, show_options, show_label) -%}
+{%- macro checkbox_filter(filter_title, fields, option_field, show_label) -%}
     {{ lib.control_group() }}
-       {% if show_label %}<span class="control-label">{{ _('Host states') }}</span>{% endif %}
+       {% if show_label %}<span class="control-label">{{ filter_title }}</span>{% endif %}
         {{ lib.controls(inline=True, otherclass='filter') }}
-            {% if show_options %} {{ lib.print_field(form.hoststate_option) }} {% endif %}
+            {% if option_field %} {{ lib.print_field(option_field) }} {% endif %}
             {{ lib.edit_panel() }}
-                {{ lib.panel_heading( _('Host states')) }}
-                
-                <label class=checkbox>
-                    {{ lib.print_field(form.hoststate_up) }} {{ _('UP') }}
-                </label>
+                {{ lib.panel_heading(filter_title) }}
+                {% for field in fields %} 
+                    <label class=checkbox>
+                        {{ lib.print_field(field) }} {{ field.label }}
+                    </label>
+                {% endfor %}
             </div>
         </div>
     </div>
 {%- endmacro %}
 
-{%- macro radio_filter(form, show_options, show_label) -%}
+{%- macro radio_filter(filter_title, field, option_field, show_label) -%}
     {{ lib.control_group() }}
-        {% if show_label %} <span class="control-label">{{ _('Is summary host') }}</span> {% endif %}
+        {% if show_label %} <span class="control-label">{{ filter_title }}</span> {% endif %}
         {{ lib.controls(inline=True, otherclass='filter') }}
-            {% if show_options %} {{ lib.print_field(form.summary_option) }} {% endif %}
+            {% if option_field %} {{ lib.print_field(option_field) }} {% endif %}
             {{ lib.edit_panel() }}
-                {{ lib.panel_heading( _('Is summary host')) }}
-                {{ lib.print_radiofield(form.summary) }}
+                {{ lib.panel_heading(filter_title) }}
+                {{ lib.print_radiofield(field) }}
             </div>
         </div>
     </div>
