@@ -20,7 +20,7 @@ class ViewColumnForm(ModelForm, TranslatedFormNoCsrf):
     class Meta:
         model = ViewColumn
 
-class ViewFiltersForm(ModelForm, TranslatedForm):
+class ViewFiltersForm(ModelForm, TranslatedFormNoCsrf):
     class Meta:
         model = ViewFilters
 
@@ -45,16 +45,6 @@ class ViewForm(ModelForm, TranslatedForm):
         view.datasource = self.datasource.data
         view.buttontext = self.buttontext.data
         view.reload_intervall = self.reload_intervall.data
-        view.hostname_option = self.hostname_option.data
-        view.hostname_exact_match = self.hostname_exact_match.data
-        view.hostname = self.hostname.data
-        view.hoststate_option = self.hoststate_option.data
-        view.hoststate_up = self.hoststate_up.data
-        view.hoststate_down = self.hoststate_down.data
-        view.hoststate_unreach = self.hoststate_unreach.data
-        view.hoststate_pending = self.hoststate_pending.data
-        view.summary_option = self.summary_option.data
-        view.summary = self.summary.data
         view.layout_number_columns = self.layout_number_columns.data
         return view
 
@@ -68,6 +58,8 @@ class ViewForm(ModelForm, TranslatedForm):
         return columns
 
     def get_filters(self):
-        return filters.fdsfsd  
+        filters = ViewFilters()
+        for col, value in self.filters.data.iteritems():
+            setattr(filters, col, value)
 
-
+        return filters  

@@ -53,12 +53,13 @@ class ViewFilters(Base):
                     setattr(self, name, value) 
             
     def update(self, filters):
-        self.__dict__.update(filters)       
+        del filters._sa_instance_state
+        self.__dict__.update(filters.__dict__)       
 
       
 # Dynamically add columns to view_filters table
 for name, filt in filters.iteritems():
-    setattr(ViewFilters, name + '_option', Column(Enum('off','hard','show','hide'), nullable=False, info={'choices': filter_choices}, default='off'))
+    setattr(ViewFilters, name + '_option', Column(Enum('off','hard','show','hide'), nullable=False, info={'choices': filter_choices, 'label': filt.title}, default='off'))
     cache_columns[name + '_option'] = []
     for col in filt.get_col_def():
         cache_columns[name + '_option'].append(col.name)

@@ -50,7 +50,8 @@ def edit_view():
             if view_manager.set_view(link_name): 
                 view = view_manager.get_view()
                 form = ViewForm(csrf_enabled=True, obj=view)
-                form.populate_obj(view)
+                #import ipdb;ipdb.set_trace()
+                #form.populate_obj(view)
                 columns = view_manager.get_columns() 
                 form.set_columns(columns)
                 filters = view_manager.get_filters()
@@ -66,24 +67,22 @@ def edit_view():
         if link_name:
             saved_view = view_manager.set_view(link_name) 
             form = ViewForm(csrf_enabled=True, obj=saved_view)
-            form.populate_obj(saved_view)
-    
+            #form.populate_obj(saved_view)
+
         if form.validate_on_submit():
-           # import ipdb;ipdb.set_trace();
             if not link_name:
                 view = form.get_view()
                 view_manager.add_view(view)
                 saved_view = view_manager.set_view(view.link_name) 
                 view_manager.add_columns(form.get_columns(view.id))
-                view_manager.add_filters(form.get_filters)
+                view_manager.add_filters(form.get_filters())
                 db_session.commit()
             else:
-                view = view_manager.set_view(view.link_name)   
+                view = view_manager.set_view(link_name)   
                 view.update_view(form.get_view())
                 view_manager.update_filters(form.get_filters())
                 view_manager.add_columns(form.get_columns(view.id), delete_before=True) 
-     
-            flash(_(u'View') + ' \'' + view.title + '\' ' +  _(u'saved successfully!'), 'success')
+            flash(_(u'View') + ' \'' + view_manager.get_view().title + '\' ' +  _(u'saved successfully!'), 'success')
             return redirect('/view')
 
     filter_display = view_manager.get_filter_display(form.filters) 

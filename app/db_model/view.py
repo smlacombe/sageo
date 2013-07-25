@@ -31,4 +31,5 @@ class View(Base):
     layout_number_columns = Column(SmallInteger, nullable=False, info={'label':_(u'Number of columns')}, default=3)
 
     def update_view(self, view):
-        self.__dict__.update(view)
+        del view._sa_instance_state 
+        self.__dict__.update(view.__dict__)

@@ -30,7 +30,7 @@ class ViewManager():
 
     def add_columns(self, columns, delete_before = False):
         if delete_before:
-            for column in __columns:
+            for column in self.__columns:
                     db_session.delete(column)
 
         for column in columns:
@@ -43,11 +43,12 @@ class ViewManager():
         db_session.commit()
         
     def add_filters(self, filters):
+        filters.parent_id = self.__view.id 
         db_session.add(filters)
         db_session.commit()
 
     def update_filters(self, filters):
-        self.filters.update(filters)
+        self.__filters.update(filters)
 
     def get_filters(self):
         return self.__filters
@@ -55,7 +56,7 @@ class ViewManager():
     def get_columns(self):
         return self.__columns
     
-    def get_filter_display(self, form):
+    def get_filter_display(sel,form):
         lst_columns = cache_columns 
         lst_info = []
         for option, col_names in lst_columns.iteritems():
@@ -65,7 +66,6 @@ class ViewManager():
                 fields.append(getattr(form, col))
             lst_info.append(FilterFieldsInfo(option_field, fields))
         return lst_info
-    
     
     def get_view(self):
         return self.__view

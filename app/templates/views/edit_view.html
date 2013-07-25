@@ -58,16 +58,17 @@
                     <h3><a href="#">{{ _('Filters') }}</a></h3>
                     <div>
                         {% for filter_info in filter_display %}
-                            {% for field in filter_info.fields %} 
-                                {{ field.type }}
-                                {% if field.type == "TextField" %}
-                                    {{ lib_fields.text_filter(field.name, field, filter_info.option_field, True) }}
-                                {% elif field.type == "RadioField" %}
-                                    {{ lib_fields.radio_filter(field.name, field, filter_info.option_field, True) }} 
-                                {% elif field.type == "BooleanField" %} 
-                                    {{ lib_fields.checkbox_filter(field.name, field, filter_info.option_field, True) }}
-                                {% endif %}
-                             {% endfor %}
+                            {% if filter_info.fields[0].type == "BooleanField" %}
+                                {{ lib_fields.checkbox_filter(filter_info.fields, filter_info.option_field, True) }} 
+                            {% else %} 
+                                {% for field in filter_info.fields %} 
+                                    {% if field.type == "TextField" %}
+                                        {{ lib_fields.text_filter(field, filter_info.option_field, True) }}
+                                    {% elif field.type == "RadioField" %}
+                                        {{ lib_fields.radio_filter(field, filter_info.option_field, True) }} 
+                                    {% endif %}
+                                 {% endfor %}
+                            {% endif %}
                         {% endfor %}
                     </div>
                 </div>

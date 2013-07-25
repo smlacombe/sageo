@@ -26,6 +26,6 @@ filters[FILTER_EXACT_MATCH] = FilterText(FILTER_EXACT_MATCH, _("Hostname (exact 
 filters[FILTER_HOST_STATE] = FilterHostState(FILTER_HOST_STATE, _("Host states"), _("Filter host state")) 
 
 # Nagios expression filters
-filters[FILTER_IS_SUMMARY_HOST] = FilterNagiosExpr(FILTER_IS_SUMMARY_HOST, _("Is summary host"), '', "Filter: host_custom_variable_names >= _REALNAME\n", "Filter: host_custom_variable_names < _REALNAME\n") 
+filters[FILTER_IS_SUMMARY_HOST] = FilterNagiosExpr(FILTER_IS_SUMMARY_HOST, _("Is summary host"), '', "Filter: host_custom_variable_names >= _REALNAME\n", "Filter: host_custom_variable_names < _REALNAME\n", default='no') 
 
 

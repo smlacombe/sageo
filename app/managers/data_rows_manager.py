@@ -4,22 +4,21 @@ from app.db_model.viewColumn import ViewColumn
 from app.lib import livestatus_query
 from app.lib.datasources import multisite_datasources as datasources
 from app.managers.filters_manager import FiltersManager
+from app.managers.view_manager import ViewManager
 from app.model.columns.builtin import painters
 import copy
 
 class DataRowsManager():
     """ A sort of proxy that facilitate gathering data from LiveStatus without knowing implementation details. """
     def __init__(self):
-        self.__view = None
-        self.__columns = None 
+        self.__view_manager = None
         self.__filters_manager = None
     '''
     Set the view with the link_name. If a view is found, return true, else return false.
     '''
     def set_view(self, link_name):
-        self.__view = View.query.filter_by(link_name=link_name).first()
-        if self.__view:
-            self.__columns = ViewColumn.query.filter_by(parent_id=self.__view.id).order_by(ViewColumn.id).all()
+        self.__view_manager = ViewManager()
+        if self.__view_manager.set_view(link_name):
             self.__filters_manager = FiltersManager()
             self.update_filters()
             return True
@@ -27,12 +26,12 @@ class DataRowsManager():
             return False
 
     def update_filters(self):
-        self.__filters_manager.set_filters(self.__view.get_filters())
+        self.__filters_manager.set_filters(self.__view_manager.get_filters())
 
     def get_rows(self):
         """ get rows corresponding to the query builded with the view and its options """
         # prepare basic parameter datasource and columns_name
-        datasource = datasources[self.__view.datasource]        
+        datasource = datasources[self.__view_manager.get_view().datasource]        
         columns_name = self.get_asked_columns_name()
         filters_string = self.__filters_manager.get_filter_query() 
         print '\nfilters: ' + filters_string
@@ -49,7 +48,7 @@ class DataRowsManager():
 
     def get_asked_columns_name(self):
         columns_names = []
-        for column in self.__columns: columns_names.append(column.column)
+        for column in self.__view_manager.get_columns(): columns_names.append(column.column)
         return columns_names
 
     def get_asked_columns_title(self):

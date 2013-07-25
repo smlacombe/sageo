@@ -15,4 +15,4 @@ class FilterText(Filter):
             return ""
 
     def get_col_def(self):
-        return [Column(self.name, String(100))]
+        return [Column(self.name, String(100), info={'label':self.title})]
