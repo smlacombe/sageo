@@ -53,8 +53,10 @@ class ViewFilters(Base):
                     setattr(self, name, value) 
             
     def update(self, filters):
-        del filters._sa_instance_state
-        self.__dict__.update(filters.__dict__)       
+        del filters._sa_instance_state 
+        for attribute, value in filters.__dict__.iteritems():
+            setattr(self, attribute, value)
+
 
       
 # Dynamically add columns to view_filters table

@@ -79,7 +79,7 @@ def edit_view():
                 db_session.commit()
             else:
                 view = view_manager.set_view(link_name)   
-                view.update_view(form.get_view())
+                view_manager.update_view(form.get_view())
                 view_manager.update_filters(form.get_filters())
                 view_manager.add_columns(form.get_columns(view.id), delete_before=True) 
             flash(_(u'View') + ' \'' + view_manager.get_view().title + '\' ' +  _(u'saved successfully!'), 'success')

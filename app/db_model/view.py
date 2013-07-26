@@ -32,4 +32,16 @@ class View(Base):
 
     def update_view(self, view):
         del view._sa_instance_state 
-        self.__dict__.update(view.__dict__)
+        #self.__dict__.update(view.__dict__)
+        for attribute, value in view.__dict__.iteritems():
+            setattr(self, attribute, value)
+        '''
+        self.title = view.title
+        self.link_name = view.link_name
+        self.datasource = view.datasource
+        self.buttontext = view.buttontext
+        self.reload_intervall = view.reload_intervall
+        self.layout_number_columns = view.layout_number_columns
+        '''
+
+

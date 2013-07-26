@@ -49,6 +49,7 @@ class ViewManager():
 
     def update_filters(self, filters):
         self.__filters.update(filters)
+        db_session.commit()
 
     def get_filters(self):
         return self.__filters
@@ -69,3 +70,8 @@ class ViewManager():
     
     def get_view(self):
         return self.__view
+
+    def update_view(self, view):
+        self.__view.update_view(view)
+        db_session.commit()
+        
