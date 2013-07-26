@@ -50,11 +50,11 @@ def edit_view():
             if view_manager.set_view(link_name): 
                 view = view_manager.get_view()
                 form = ViewForm(csrf_enabled=True, obj=view)
-                #import ipdb;ipdb.set_trace()
-                #form.populate_obj(view)
+                form.populate_obj(view)
                 columns = view_manager.get_columns() 
                 form.set_columns(columns)
                 filters = view_manager.get_filters()
+                #form.populate_obj(filters)
             else:
                 flash(_(u'View') + ' \'' + link_name + '\' ' +  _(u'doesn\'t exist'), 'error')
                 return redirect('/view')

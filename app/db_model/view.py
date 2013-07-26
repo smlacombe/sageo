@@ -1,6 +1,7 @@
 from sqlalchemy import *
 from sqlalchemy.orm import *
 from app.db_model.base import Base
+from app.db_model.viewFilters import ViewFilters
 from flask.ext.babelex import lazy_gettext, gettext, ngettext, Babel
 from app import babel, app
 from flask import Flask
@@ -29,6 +30,12 @@ class View(Base):
     buttontext = Column(String(15), info={'label':_(u'Button text')})
     reload_intervall = Column(SmallInteger, nullable=False, info={'label':_(u'Browser reload')}, default=30)
     layout_number_columns = Column(SmallInteger, nullable=False, info={'label':_(u'Number of columns')}, default=3)
+    filters_id = Column(Integer, ForeignKey(ViewFilters.id))
+
+    filters = relationship(
+        ViewFilters,
+        backref = 'view'
+    )
 
     def update_view(self, view):
         del view._sa_instance_state 

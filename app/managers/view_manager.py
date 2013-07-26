@@ -23,7 +23,7 @@ class ViewManager():
         self.__view = View.query.filter_by(link_name=link_name).first()
         if self.__view:
             self.__columns = ViewColumn.query.filter_by(parent_id=self.__view.id).order_by(ViewColumn.id).all()
-            self.__filters = ViewFilters.query.filter_by(parent_id=self.__view.id).first()
+            self.__filters = self.__view.filters 
             return self.__view 
         else:
             return None
@@ -43,12 +43,11 @@ class ViewManager():
         db_session.commit()
         
     def add_filters(self, filters):
-        filters.parent_id = self.__view.id 
-        db_session.add(filters)
+        self.__view.filters = filters
         db_session.commit()
 
     def update_filters(self, filters):
-        self.__filters.update(filters)
+        self.__view.filters.update(filters)
         db_session.commit()
 
     def get_filters(self):

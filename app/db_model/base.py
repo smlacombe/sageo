@@ -33,13 +33,22 @@ def create_default_users():
     db_session.commit()
 
 def create_default_views():
+    filters = ViewFilters()
+    for option, col_names in cache_columns.iteritems():
+        setattr(filters, option, 'show')
+
+    db_session.add(filters)
+    db_session.commit()
+
+    filters = ViewFilters.query.first()
     view1 = View()
     view1.title = 'All hosts'
     view1.link_name = 'allhosts'
     view1.datasource = 'hosts'
-    view1.layout_number_columns = 2     
+    view1.filters_id = filters.id
+    view1.layout_number_columns = 2
     db_session.add(view1)
-    db_session.commit() 
+    db_session.commit()
     view1 = (View.query.filter_by(link_name=view1.link_name).first())
 
     col1 = ViewColumn()
@@ -52,17 +61,10 @@ def create_default_views():
     col2.parent_id = view1.id
     db_session.add(col2)
 
-    col3 = ViewColumn() 
+    col3 = ViewColumn()
     col3.column = 'last_check'
     col3.parent_id = view1.id
     db_session.add(col3)
-
-    filters = ViewFilters()
-    filters.parent_id = view1.id
-    for option, col_names in cache_columns.iteritems():
-        setattr(filters, option, 'show')
-
-    db_session.add(filters)
     db_session.commit()
 
 def clear_db():

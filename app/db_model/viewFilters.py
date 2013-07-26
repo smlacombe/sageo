@@ -4,7 +4,6 @@ from app.db_model.base import Base
 from flask.ext.babelex import lazy_gettext, gettext, ngettext, Babel
 from app import babel, app
 from flask import Flask
-from app.db_model.view import View
 from app.model.filters.builtin import filters
 _ = lazy_gettext
 
@@ -15,11 +14,6 @@ cache_columns = {}
 class ViewFilters(Base):
     __tablename__ = 'view_filters' 
     id = Column(Integer, primary_key=True)
-    parent_id = Column(Integer, ForeignKey(View.id), nullable=False)
-    view = relationship(
-        View,
-        backref = 'view_filters'
-    )
 
     def get_filters(self):
         """
