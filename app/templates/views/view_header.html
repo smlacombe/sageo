@@ -7,20 +7,14 @@
     <a href="#" class="btn"><i class="icon-search"></i></a>
     {{ lib_view.edit_view_button(view.link_name) }}
 </p>
-<form class="form-horizontal" method="post" enctype="multipart/form-data">
+<form class="form-inline" method="post" enctype="multipart/form-data">
     <div class="filters-panel">
         <div class="row-fluid">
-            {% if view.hostname_option == 'show' %}
-                <div>{{ lib_fields.hostname_filter(form, False, False) }}</div>
-            {% endif %} 
-            {% if view.hoststate_option == 'show' %}
-                <div>{{ lib_fields.hoststate_filter(form, False, False) }}</div>
-            {% endif %}
-            {% if view.summary_option == 'show' %}
-                <div>{{ lib_fields.summary_filter(form, False, False) }}</div>
-            {% endif %}
+            {{ lib_view.print_filters_fields(filter_display, False) }}
         </div>
-        <button type=submit class="btn btn-primary">{{ _('Search') }}</button>
+        <div class="row-fluid">
+            <button type=submit class="btn btn-primary">{{ _('Search') }}</button>
+        </div>
     </div>
 </form>
 <p>{{ rows_count|string + ' ' +  _('rows') }}</p>

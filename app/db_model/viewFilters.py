@@ -7,6 +7,11 @@ from flask import Flask
 from app.model.filters.builtin import filters
 _ = lazy_gettext
 
+FILTER_OFF = 'off'
+FILTER_HARD = 'hard'
+FILTER_SHOW = 'show'
+FILTER_HIDE = 'hide'
+
 filter_choices = [('off',_(u'Don''t use')),('hard',_(u"Hardcode")),('show',_(u"Show to user")), ('hide',_(u"Use for linking"))]
 filter_choices_values = Enum('off','hard','show','hide')
 cache_columns = {}
@@ -19,7 +24,7 @@ class ViewFilters(Base):
         """
         Create a dictionnary of filters and their values
         """
-        filters = {}
+        filters_ret = {}
         for name, filt in filters.iteritems():
             if not getattr(self, name + '_option') == FILTER_OFF:
                 cols = filt.get_col_def()
@@ -28,11 +33,11 @@ class ViewFilters(Base):
                     for col in filt.get_col_def():
                         value_dict[col.name] = getattr(self, col.name) 
 
-                    filters[filt.name] = value_dict 
+                    filters_ret[filt.name] = value_dict 
                 else:
-                    filters[filt.name] = getattr(self, col.name)
+                    filters_ret[filt.name] = getattr(self, cols[0].name)
 
-        return filters
+        return filters_ret
 
     def set_filters(self, filters):
         """

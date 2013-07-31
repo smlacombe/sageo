@@ -3,7 +3,7 @@ from builtin import FILTER_HOST_STATE
 from sqlalchemy import *
 from sqlalchemy.orm import *
 
-STATE_CODES = { 'UP': 0 , "DOWN": 1 , "UNREACH": 2, "PENDING": 3 } 
+STATE_CODES = { FILTER_HOST_STATE + '_up': 0 , FILTER_HOST_STATE + '_down': 1 , FILTER_HOST_STATE + '_unreach': 2, FILTER_HOST_STATE + '_pending': 3 } 
 
 class FilterHostState(Filter): 
     def __init__(self, name, title, descr): 

@@ -22,6 +22,7 @@ from flask.ext.login import LoginManager, login_user, logout_user, \
     current_user, login_required
 
 from app.forms.view import ViewForm
+from app.forms.view import ViewFiltersForm
 from app import app
 from app.lib import snapins
 from app.managers.data_rows_manager import DataRowsManager
@@ -58,8 +59,8 @@ def view():
                 viewFilters = view_manager.get_filters() 
                 form = ViewFiltersForm(obj=viewFilters)
                 form.populate_obj(viewFilters)
-
-                return snapins.render_sidebar_template('views/view.html', form=form, data_rows_manager=data_rows_manager)
+                filter_display = view_manager.get_filter_display(form)
+                return snapins.render_sidebar_template('views/view.html', form=form, data_rows_manager=data_rows_manager, filter_display = filter_display)
             else:
                 flash(_(u'View') + ' \'' + link_name + '\' ' +  _(u'doesn\'t exist'), 'error')
                 return redirect('/view')
@@ -69,7 +70,6 @@ def view():
 
         return snapins.render_sidebar_template('views/view.html', link_name=link_name)
     elif request.method=='POST':
-        import ipdb;ipdb.set_trace()
         view = form.get_view()
         filters = view.get_filters()
         for name, value in filters:

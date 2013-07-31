@@ -14,11 +14,6 @@ from app.model.filters.builtin import FILTER_IS_SUMMARY_HOST
 
 _ = lazy_gettext
 
-FILTER_OFF = 'off'
-FILTER_HARD = 'hard'
-FILTER_SHOW = 'show'
-FILTER_HIDE = 'hide'
-
 datasource_choices = [('hosts',_(u'All hosts')),('services',_(u"All services"))]
 
 class View(Base):

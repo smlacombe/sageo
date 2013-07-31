@@ -17,7 +17,7 @@ class ViewManager():
         self.__columns = None 
         self.__filters = None
     '''
-    Set the view with the link_name. If a view is found, return true, else return false.
+    Set the view with the link_name. If a view is found, return the view found 
     '''
     def set_view(self, link_name):
         self.__view = View.query.filter_by(link_name=link_name).first()

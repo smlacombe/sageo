@@ -53,7 +53,7 @@ class DataRowsManager():
 
     def get_asked_columns_title(self):
         columns_names = []
-        for column in self.__columns: columns_names.append(painters[column.column].title)
+        for column in self.__view_manager.get_columns(): columns_names.append(painters[column.column].title)
         return columns_names
     
     def set_extra_filters(self, filters):
@@ -62,9 +62,6 @@ class DataRowsManager():
 
     def get_filters_name(self):
         return self.__filters_manager.get_filters_name()
-
-    def get_columns(self):
-        return self.__columns
     
     def get_view(self):
-        return self.__view
+        return self.__view_manager.get_view()

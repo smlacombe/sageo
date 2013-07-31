@@ -1,3 +1,5 @@
+{% import 'views/filter_fields.html' as lib_fields with context %}
+
 {% macro create_button() -%}
     <p><a id="create_view" href="/edit_view" class="btn">{{ _('Create new view') }}</a></p>
 {%- endmacro %}
@@ -8,4 +10,22 @@
 
 {% macro edit_view_button(link_name) -%}
     <a href="/edit_view?link_name={{ link_name }}" class="btn"><i class="icon-pencil"></i> {{ _('Edit view') }}</a>
+{%- endmacro %}
+
+{% macro print_filters_fields(filter_display, edit_mode) -%}
+    {% for filter_info in filter_display %}
+        {% if filter_info.option_field.data == 'show' or not edit_mode%}
+            {% if filter_info.fields[0].type == "BooleanField" %}
+                {{ lib_fields.checkbox_filter(filter_info.fields, filter_info.option_field, edit_mode, edit_mode) }}
+            {% else %}
+                {% for field in filter_info.fields %}
+                    {% if field.type == "TextField" %}
+                        {{ lib_fields.text_filter(field, filter_info.option_field, edit_mode, edit_mode) }}
+                    {% elif field.type == "RadioField" %}
+                        {{ lib_fields.radio_filter(field, filter_info.option_field, edit_mode, edit_mode) }}
+                    {% endif %}
+                 {% endfor %}
+            {% endif %}
+        {% endif %}
+    {% endfor %}
 {%- endmacro %}
