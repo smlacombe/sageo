@@ -57,7 +57,7 @@ class DataRowsManager():
         return columns_names
     
     def set_extra_filters(self, filters):
-        self.__view.set_filters(filters)
+        self.__view_manager.set_filters(filters)
         self.update_filters()
 
     def get_filters_name(self):

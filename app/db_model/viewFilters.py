@@ -45,14 +45,15 @@ class ViewFilters(Base):
         """
         for name, value in filters.iteritems():
             if not getattr(self, name + '_option') == FILTER_OFF:
-                if type(value) == type(dict):
+                if type(value) == type(dict()):
                     for sub_name, sub_value in value.iteritems():
                         setattr(self, sub_name, sub_value)
                 else:
                     setattr(self, name, value) 
             
     def update(self, filters):
-        del filters._sa_instance_state 
+        if hasattr(filters, '_sa_instance_state'):
+            del filters._sa_instance_state 
         for attribute, value in filters.__dict__.iteritems():
             setattr(self, attribute, value)
 

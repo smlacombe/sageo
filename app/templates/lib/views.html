@@ -14,7 +14,7 @@
 
 {% macro print_filters_fields(filter_display, edit_mode) -%}
     {% for filter_info in filter_display %}
-        {% if filter_info.option_field.data == 'show' or not edit_mode%}
+        {% if filter_info.option_field.data == 'show' or edit_mode%}
             {% if filter_info.fields[0].type == "BooleanField" %}
                 {{ lib_fields.checkbox_filter(filter_info.fields, filter_info.option_field, edit_mode, edit_mode) }}
             {% else %}

@@ -46,6 +46,9 @@ class ViewManager():
         self.__view.filters = filters
         db_session.commit()
 
+    def set_filters(self, filters):
+        self.__filters.set_filters(filters)
+
     def update_filters(self, filters):
         self.__view.filters.update(filters)
         db_session.commit()

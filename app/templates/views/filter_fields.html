@@ -1,10 +1,17 @@
 {% import 'lib/lib.html' as lib %}
 
+{% set fieldargs={'class': 'hide'} %}
+
 {%- macro text_filter(field, option_field, show_label, show_option) -%}
     {{ lib.control_group() }}
         {% if show_label %} <span class="control-label">{{ option_field.label }}</span> {% endif %}
         {{ lib.controls(inline=True, otherclass='filter') }}
-            {% if show_option %} {{ lib.print_field(option_field) }} {% endif %}
+            {% if show_option %}
+                {{ lib.print_field(option_field) }}
+            {% else %}
+                {{ lib.print_field(option_field, fieldargs=fieldargs) }}
+            {% endif %}
+
             {{ lib.edit_panel() }}
                 {{ lib.panel_heading(option_field.label) }}
                 {{ lib.print_field(field, fieldargs={'placeholder': field.placeholder}) }}
@@ -18,7 +25,12 @@
     {{ lib.control_group() }}
        {% if show_option %}<span class="control-label">{{ option_field.label }}</span>{% endif %}
         {{ lib.controls(inline=True, otherclass='filter') }}
-            {% if show_option %} {{ lib.print_field(option_field) }} {% endif %}
+            {% if show_option %}
+                {{ lib.print_field(option_field) }}
+            {% else %}
+                {{ lib.print_field(option_field, fieldargs=fieldargs) }}
+            {% endif %}
+
             {{ lib.edit_panel() }}
                 {{ lib.panel_heading(option_field.label) }}
                 {% for field in fields %} 
@@ -35,7 +47,12 @@
     {{ lib.control_group() }}
         {% if show_label %} <span class="control-label">{{ option_field.label }}</span> {% endif %}
         {{ lib.controls(inline=True, otherclass='filter') }}
-            {% if show_option %} {{ lib.print_field(option_field) }} {% endif %}
+            {% if show_option %}
+                {{ lib.print_field(option_field) }}
+            {% else %}
+                {{ lib.print_field(option_field, fieldargs=fieldargs) }}
+            {% endif %}
+
             {{ lib.edit_panel() }}
                 {{ lib.panel_heading(option_field.label) }}
                 {{ lib.print_radiofield(field) }}

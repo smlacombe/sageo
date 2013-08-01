@@ -23,6 +23,12 @@ class ViewColumnForm(ModelForm, TranslatedFormNoCsrf):
 class ViewFiltersForm(ModelForm, TranslatedFormNoCsrf):
     class Meta:
         model = ViewFilters
+    
+    def get_filters(self):
+        filters = ViewFilters()
+        for col, value in self.data.iteritems():
+            setattr(filters, col, value)
+        return filters
 
 setattr(ViewFiltersForm, FILTER_IS_SUMMARY_HOST, RadioField('Summary', choices=[('yes',_(u'Yes')),('no',_(u'No')),('ignore',_(u'Ignore'))], default='no'))
 
@@ -58,8 +64,4 @@ class ViewForm(ModelForm, TranslatedForm):
         return columns
 
     def get_filters(self):
-        filters = ViewFilters()
-        for col, value in self.filters.data.iteritems():
-            setattr(filters, col, value)
-
-        return filters  
+        return self.filters.get_filters()  
