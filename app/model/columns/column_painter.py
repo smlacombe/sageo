@@ -7,10 +7,11 @@ class ColumnPainter:
     human readable.
     """
     __metaclass = abc.ABCMeta
-    def __init__(self, name, title, short_title):
+    def __init__(self, name, title, short_title, datasources):
         self.name = name
         self.title = title
         self.short_title = short_title
+        self.datasources = datasources
     
     @abc.abstractmethod
     def get_readable(self, row):

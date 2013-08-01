@@ -5,14 +5,19 @@ from flask.ext.babelex import lazy_gettext, gettext, ngettext, Babel
 from app import babel, app
 from flask import Flask
 from app.db_model.view import View
+from app.model.columns.builtin import get_columns_pairs
+from app.model.columns.builtin import get_columns_name
+import ast
 _ = lazy_gettext
 
-column_choices = [('host_name',_(u'Hostname')),('host_state',_(u"Host state")), ('last_check',_(u"Last check"))]
+column_choices = get_columns_pairs() 
+column_names = get_columns_name()
+enum_col = Enum(*column_names) 
 
 class ViewColumn(Base):
     __tablename__ = 'view_column'
     id = Column(Integer, primary_key=True)
-    column = Column(Enum('host_name', 'host_state', 'last_check'), info={'choices':column_choices} )
+    column = Column(enum_col, info={'choices':column_choices} )
     parent_id = Column(Integer, ForeignKey(View.id), nullable=False)
     view = relationship(
         View,

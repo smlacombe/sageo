@@ -5,12 +5,7 @@
 <h2>{{ data_rows_manager.get_view().title }}</h2>
 <p>
     <a id='filters_button' class="btn">
-    {% if not extra_filter %}
-        <i class="icon-search">
-    {% else %}
-        <i class="icon-exclamation-sign">
-    {% endif %}
-    </i>
+        <i class="icon-search"></i>
     </a>
     {{ lib_view.edit_view_button(view.link_name) }}
 </p>

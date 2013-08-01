@@ -54,8 +54,6 @@ def view():
                 for name in filters_name:
                     arg = query_param.get(name, '')
                     if arg:
-                        # TODO: find a better way to know if the extra filter is truly coming from user.
-                        extra_filter = True
                         # TODO: find a better way to check if it is a dictionnary
                         if '{' in arg[0]:
                             filters_url_values[name] = dict(ast.literal_eval(arg[0])) 

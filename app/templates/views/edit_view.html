@@ -42,7 +42,7 @@
                     <div> 
                         {{ lib.with_errors(form.title) }} 
                         {{ lib.with_errors(form.link_name) }}
-                        {{ lib.with_errors(form.datasource) }}
+                        {{ lib.with_errors(form.datasource, fieldargs={'disabled':''}) }}
                         {{ lib.with_errors(form.buttontext) }}
                         
                         {{ lib.control_group() }}
