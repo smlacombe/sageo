@@ -10,18 +10,27 @@ from app.model.filters.builtin import FILTER_HOSTREGEX
 from app.model.filters.builtin import FILTER_EXACT_MATCH
 from app.model.filters.builtin import FILTER_HOST_STATE
 from app.model.filters.builtin import FILTER_IS_SUMMARY_HOST
+from app.lib.datasources import multisite_datasources
 
 
 _ = lazy_gettext
 
-datasource_choices = [('hosts',_(u'All hosts')),('services',_(u"All services"))]
+datasource_choices = []
+enum_list = []
+
+for name, data in multisite_datasources.iteritems():
+    datasource_choices.append((name, data['title']))
+    enum_list.append(name)
+
+datasource_choices = sorted(datasource_choices, key=lambda tup: tup[1])
+enum_col = Enum(*enum_list)
 
 class View(Base):
     __tablename__ = 'views'
     id = Column(Integer, primary_key = True)
     title = Column(String(30), nullable=False, index = True, unique = True, info={'label':_(u'Title')})
     link_name = Column(String(30), nullable=False, unique=True, info={'label':_(u'Link name')})
-    datasource = Column(Enum('hosts', 'services'), nullable=False, info={'choices': datasource_choices, 'label':_(u'Datasource')})
+    datasource = Column(enum_col, nullable=False, info={'disabled': True, 'choices': datasource_choices, 'label':_(u'Datasource')})
     buttontext = Column(String(15), info={'label':_(u'Button text')})
     reload_intervall = Column(SmallInteger, nullable=False, info={'label':_(u'Browser reload')}, default=30)
     layout_number_columns = Column(SmallInteger, nullable=False, info={'label':_(u'Number of columns')}, default=3)

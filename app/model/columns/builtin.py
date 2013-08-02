@@ -20,13 +20,13 @@ painters[COL_CHECK_COMMAND] = ColumnPainterRaw(COL_CHECK_COMMAND, _(u'Check comm
 def get_columns_pairs(datasources=None):
     column_pairs = []
     for name, col in painters.iteritems():
-        if not datasources or col.datasources in datasources:
+        if not datasources or datasources in col.datasources:
             column_pairs.append((name, col.title))
     return column_pairs
 
 def get_columns_name(datasources=None):
     column_names = []
     for name, col in painters.iteritems():
-        if not datasources or col.datasources in datasources:
+        if not datasources or datasources in col.datasources:
             column_names.append(col.name)
     return column_names

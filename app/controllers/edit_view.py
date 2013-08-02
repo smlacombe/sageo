@@ -26,11 +26,11 @@ from app.db_model.viewColumn import ViewColumn
 from app.db_model.view import View
 from app.db_model.viewFilters import ViewFilters
 from app.managers.view_manager import ViewManager
-
 from app.forms.view import ViewForm 
 from app import app
 from app.lib import snapins
 from wtforms_components.validators import Unique
+from app.model.columns.builtin import get_columns_pairs
 
 _ = gettext
 edit_view_page = Blueprint('edit_view_page', __name__, static_folder='static', template_folder='templates')
@@ -39,18 +39,20 @@ unique_validators= {}
 @login_required
 def edit_view():
     link_name = request.args.get('link_name', '')
+    datasource = request.args.get('datasource', '')
     form = ViewForm(csrf_enabled=True)
     view_manager = ViewManager()
     
     if request.method=='GET':
         # Store the link_name parameter to use when we will be in post request
         session['link_name'] = link_name
-        # We wan't edit an existing view or create a new one?    
+        # We want to edit an existing view or create a new one?    
         if link_name:
             if view_manager.set_view(link_name): 
                 view = view_manager.get_view()
                 form = ViewForm(csrf_enabled=True, obj=view)
                 form.populate_obj(view)
+                form.set_columns_choices(view_manager.get_columns_choices())
                 columns = view_manager.get_columns() 
                 form.set_columns(columns)
                 filters = view_manager.get_filters()
@@ -59,16 +61,22 @@ def edit_view():
                 flash(_(u'View') + ' \'' + link_name + '\' ' +  _(u'doesn\'t exist'), 'error')
                 return redirect('/view')
         else:
-            col1 = ViewColumn() 
-            #form.populate_obj(col1) 
+            if not datasource:
+                datasource = 'hosts'
+           
+            view_manager.set_view_dummy(datasource) 
+            view = view_manager.get_view()
+            form = ViewForm(csrf_enabled=True, obj=view) 
+            form.populate_obj(view)
             form.columns.append_entry()
+            form.set_columns_choices(view_manager.get_columns_choices(), update=True)
+                
     elif request.method=='POST':
         link_name = session['link_name']
         if link_name:
             saved_view = view_manager.set_view(link_name) 
             form = ViewForm(csrf_enabled=True, obj=saved_view)
             #form.populate_obj(saved_view)
-
         if form.validate_on_submit():
             if not link_name:
                 view = form.get_view()

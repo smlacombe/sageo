@@ -1,7 +1,7 @@
 {% import 'views/filter_fields.html' as lib_fields with context %}
 
 {% macro create_button() -%}
-    <p><a id="create_view" href="/edit_view" class="btn">{{ _('Create new view') }}</a></p>
+    <button class="btn" type="submit">{{ _('Create new view') }}</button>
 {%- endmacro %}
 
 {% macro all_views_button() -%}

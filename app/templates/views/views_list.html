@@ -1,7 +1,10 @@
 {% import 'lib/views.html' as lib_view %}
+{% import 'lib/lib.html' as lib %}
 
-{{ lib_view.create_button() }}
-<h2>{{ _('Existing views') }}</h2>
+<form class="form-inline" method="post" enctype="multipart/form-data">
+    {{ lib_view.create_button() }} {{ _('for datasource') }}: {{ lib.print_field(form.datasource) }}
+    <h2>{{ _('Existing views') }}</h2>
+</form>
 
 <table class="table table-striped">
     <thead>

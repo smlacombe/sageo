@@ -12,9 +12,6 @@ from app.db_model.view import View
 from app.db_model.viewFilters import ViewFilters
 from app.model.filters.builtin import FILTER_IS_SUMMARY_HOST
 
-filter_choices = [('off',_(u'Don''t use')),('hard',_(u"Hardcode")),('show',_(u"Show to user")), ('hide',_(u"Use for linking"))]
-datasource_choices = [('allhost',_(u'All hosts')),('allservices',_(u"All services"))]
-column_choices = [('hostname',_(u'Hostname')),('hoststate',_(u"Host state")), ('lastcheck',_(u"Last check"))]
 
 class ViewColumnForm(ModelForm, TranslatedFormNoCsrf):
     class Meta:
@@ -23,7 +20,7 @@ class ViewColumnForm(ModelForm, TranslatedFormNoCsrf):
 class ViewFiltersForm(ModelForm, TranslatedFormNoCsrf):
     class Meta:
         model = ViewFilters
-    
+
     def get_filters(self):
         filters = ViewFilters()
         for col, value in self.data.iteritems():
@@ -38,11 +35,13 @@ class ViewForm(ModelForm, TranslatedForm):
         model = View
 
     columns = ModelFieldList(FormField(ViewColumnForm))
+    columns_choices = None 
     filters = ModelFormField(ViewFiltersForm)    
 
     def set_columns(self, columns):
         for column in columns:
             self.columns.append_entry(column) 
+            self.columns[-1].column.choices = self.columns_choices
     
     def get_view(self):
         view = View()
@@ -53,6 +52,13 @@ class ViewForm(ModelForm, TranslatedForm):
         view.reload_intervall = self.reload_intervall.data
         view.layout_number_columns = self.layout_number_columns.data
         return view
+    
+    def set_columns_choices(self, choices, update=False):
+        self.columns_choices = choices
+        if update:
+            for column_form in self.columns:
+                column_form.column.choices = choices 
+
 
     def get_columns(self, view_id):
         columns = []

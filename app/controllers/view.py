@@ -35,8 +35,11 @@ view_page = Blueprint('view_page', __name__, static_folder='static', template_fo
 @view_page.route('/view', methods=['GET', 'POST'])
 @login_required
 def view():
-    form = ViewFiltersForm()
     link_name = request.args.get('link_name', '')
+    if link_name:
+        form = ViewFiltersForm()
+    else:
+        form = ViewForm()
 
     if request.method=='GET':
         data_rows_manager = DataRowsManager() 
@@ -74,10 +77,14 @@ def view():
                 return redirect('/view')
         else:
             views = View.query.all()
-            return snapins.render_sidebar_template('views/view.html', views=views)
+            return snapins.render_sidebar_template('views/view.html', views=views, form=form)
 
         return snapins.render_sidebar_template('views/view.html', link_name=link_name)
     elif request.method=='POST':
-        viewFilters = form.get_filters()
-        url = urllib.urlencode(viewFilters.get_filters())
-        return redirect('/view?link_name='+ link_name+'&'+ url)
+        if link_name:
+            viewFilters = form.get_filters()
+            url = urllib.urlencode(viewFilters.get_filters())
+            return redirect('/view?link_name='+ link_name+'&'+ url)
+        else:
+            datasource = form.datasource.data
+            return redirect('/edit_view?datasource='+ datasource)

@@ -6,7 +6,7 @@ from app.db_model.viewColumn import ViewColumn
 from app.lib import livestatus_query
 from app.lib.datasources import multisite_datasources as datasources
 from app.managers.filters_manager import FiltersManager
-from app.model.columns.builtin import painters
+from app.model.columns.builtin import painters, get_columns_pairs
 from app.model.filters.filter_fields_info import FilterFieldsInfo
 import copy
 
@@ -27,6 +27,10 @@ class ViewManager():
             return self.__view 
         else:
             return None
+    
+    def set_view_dummy(self, datasource):
+        self.__view = View()
+        self.__view.datasource = datasource
 
     def add_columns(self, columns, delete_before = False):
         if delete_before:
@@ -55,6 +59,9 @@ class ViewManager():
 
     def get_filters(self):
         return self.__filters
+
+    def get_columns_choices(self):
+        return get_columns_pairs(self.__view.datasource)
 
     def get_columns(self):
         return self.__columns
