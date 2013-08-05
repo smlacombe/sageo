@@ -1,5 +1,6 @@
 from app.db_model.view import View
 from app.db_model.viewFilters import ViewFilters
+from app.db_model.viewSorter import ViewSorter
 from app.db_model.viewFilters import cache_columns
 from app.db_model.base import db_session
 from app.db_model.viewColumn import ViewColumn
@@ -15,6 +16,7 @@ class ViewManager():
     def __init__(self):
         self.__view = None
         self.__columns = None 
+        self.__sorters = None
         self.__filters = None
     '''
     Set the view with the link_name. If a view is found, return the view found 
@@ -23,6 +25,7 @@ class ViewManager():
         self.__view = View.query.filter_by(link_name=link_name).first()
         if self.__view:
             self.__columns = ViewColumn.query.filter_by(parent_id=self.__view.id).order_by(ViewColumn.id).all()
+            self.__sorters = ViewSorter.query.filter_by(parent_id=self.__view.id).order_by(ViewSorter.id).all()
             self.__filters = self.__view.filters 
             return self.__view 
         else:
@@ -40,6 +43,16 @@ class ViewManager():
         for column in columns:
             db_session.add(column)
         
+        db_session.commit()
+
+    def add_sorters(self, sorters, delete_before = False):
+        if delete_before:
+            for sorter in self.__sorters:
+                    db_session.delete(sorter)
+
+        for sorter in sorters:
+            db_session.add(sorter)
+
         db_session.commit()
 
     def add_view(self, view):
@@ -65,6 +78,9 @@ class ViewManager():
 
     def get_columns(self):
         return self.__columns
+
+    def get_sorters(self):
+        return self.__sorters
     
     def get_filter_display(sel,form):
         lst_columns = cache_columns 

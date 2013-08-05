@@ -8,10 +8,15 @@ from app.forms.libforms import TranslatedForm, TranslatedFormNoCsrf
 from wtforms_alchemy import ModelForm, ModelFieldList, ModelFormField
 from app.db_model.base import db_session
 from app.db_model.viewColumn import ViewColumn
+from app.db_model.viewSorter import ViewSorter
 from app.db_model.view import View
 from app.db_model.viewFilters import ViewFilters
 from app.model.filters.builtin import FILTER_IS_SUMMARY_HOST
 
+
+class ViewSorterForm(ModelForm, TranslatedFormNoCsrf):
+    class Meta:
+        model = ViewSorter
 
 class ViewColumnForm(ModelForm, TranslatedFormNoCsrf):
     class Meta:
@@ -35,6 +40,7 @@ class ViewForm(ModelForm, TranslatedForm):
         model = View
 
     columns = ModelFieldList(FormField(ViewColumnForm))
+    sorters = ModelFieldList(FormField(ViewSorterForm))
     columns_choices = None 
     filters = ModelFormField(ViewFiltersForm)    
 
@@ -42,6 +48,11 @@ class ViewForm(ModelForm, TranslatedForm):
         for column in columns:
             self.columns.append_entry(column) 
             self.columns[-1].column.choices = self.columns_choices
+
+    def set_sorters(self, sorters):
+        for sorter in sorters:
+            self.sorters.append_entry(sorter)
+            self.sorters[-1].column.choices = self.columns_choices
     
     def get_view(self):
         view = View()
@@ -58,7 +69,8 @@ class ViewForm(ModelForm, TranslatedForm):
         if update:
             for column_form in self.columns:
                 column_form.column.choices = choices 
-
+            for sorter_form in self.sorters:
+                sorter_form.column.choices = choices
 
     def get_columns(self, view_id):
         columns = []
@@ -68,6 +80,17 @@ class ViewForm(ModelForm, TranslatedForm):
             column.parent_id = view_id
             columns.append(column)
         return columns
+
+    def get_sorters(self, view_id):
+        sorters = []
+        for sorter_form in self.sorters:
+            sorter = ViewSorter()
+            sorter.column = sorter_form.column.data
+            import ipdb;ipdb.set_trace()
+            sorter.sorter_option = sorter_form.sorter_option.data
+            sorter.parent_id = view_id
+            sorters.append(sorter)
+        return sorters
 
     def get_filters(self):
         return self.filters.get_filters()  

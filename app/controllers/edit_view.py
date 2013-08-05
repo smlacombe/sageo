@@ -55,6 +55,11 @@ def edit_view():
                 form.set_columns_choices(view_manager.get_columns_choices())
                 columns = view_manager.get_columns() 
                 form.set_columns(columns)
+                sorters = view_manager.get_sorters()
+                if sorters:
+                    form.set_sorters(sorters)
+                else:
+                    add_default_sorters(form)
                 filters = view_manager.get_filters()
                 #form.populate_obj(filters)
             else:
@@ -70,7 +75,7 @@ def edit_view():
             form.populate_obj(view)
             form.columns.append_entry()
             form.set_columns_choices(view_manager.get_columns_choices(), update=True)
-                
+            add_default_sorters(form)
     elif request.method=='POST':
         link_name = session['link_name']
         if link_name:
@@ -83,6 +88,7 @@ def edit_view():
                 view_manager.add_view(view)
                 saved_view = view_manager.set_view(view.link_name) 
                 view_manager.add_columns(form.get_columns(view.id))
+                view_manager.add_sorters(form.get_sorters(view.id))
                 view_manager.add_filters(form.get_filters())
                 db_session.commit()
             else:
@@ -90,8 +96,14 @@ def edit_view():
                 view_manager.update_view(form.get_view())
                 view_manager.update_filters(form.get_filters())
                 view_manager.add_columns(form.get_columns(view.id), delete_before=True) 
+                view_manager.add_sorters(form.get_sorters(view.id), delete_before=True)
             flash(_(u'View') + ' \'' + view_manager.get_view().title + '\' ' +  _(u'saved successfully!'), 'success')
             return redirect('/view')
 
     filter_display = view_manager.get_filter_display(form.filters) 
     return snapins.render_sidebar_template('views/edit_view.html', link_name=link_name, form=form, filter_display=filter_display) 
+
+def add_default_sorters(form):
+    for x in range(0, app.config['MAX_SORTING_COLUMNS']):
+        form.sorters.append_entry()
+

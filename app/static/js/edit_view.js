@@ -1,53 +1,86 @@
 $(document).ready(function () {
     $('#add_column').click(function () {
-        clone_field_list('.clonable-col:last');
+        clone_field_list('.clonable-col:last', '.clonable-col', '.removeCol');
+    });
+
+    $('#add_sorter').click(function () {
+        clone_field_list('.clonable-sort:last', '.clonable-sort', '.removeSort');
     });
 
     $(".removeCol").click(function() {
-        if ($('.clonable-col').size() > 1)
+        var clonable = '.clonable-col';
+        var remove = '.removeCol';
+        if ($(clonable).size() > 1)
         {
-            $(this).parent('div').parent('div').parent('.clonable-col').remove();
-            reorder_columns();
+            $(this).parent('div').parent('div').parent(clonable).remove();
+            reorder_columns(clonable, remove);
 
-            if ($('.clonable-col').size() == 1)
+            if ($(clonable).size() == 1)
             {
-                $('.clonable-col').find('.removeCol').addClass('disabled');
+                $(clonable).find(remove).addClass('disabled');
             }
         }
     });
 
-     $( "#sortable" ).sortable({
+    $(".removeSort").click(function() {
+        var clonable = '.clonable-sort';
+        var remove = '.removeSort';
+        if ($(clonable).size() > 1)
+        {
+            $(this).parent('div').parent('div').parent(clonable).remove();
+            reorder_columns(clonable, remove);
+
+            if ($(clonable).size() == 1)
+            {
+                $(clonable).find(remove).addClass('disabled');
+            }
+        }
+    });
+
+
+     $( "#sortable.columns" ).sortable({
 placeholder: "ui-state-highlight",
 update: function (e, ui) {
-           reorder_columns() 
+            reorder_columns('.clonable-col', '.removeCol');
         }
 });
 
-bind_toggle_filter_options();
-reorder_columns();
+     $( "#sortable.sorters" ).sortable({
+placeholder: "ui-state-highlight",
+update: function (e, ui) {
+            reorder_columns('.clonable-sort', '.removeSort');
+        }
 });
 
-function clone_field_list(selector) {
+
+bind_toggle_filter_options();
+reorder_columns('.clonable-col', '.removeCol');
+reorder_columns('.clonable-sort', '.removeSort');
+reorder_columns('.clonable-sort', '.removeSort');
+});
+
+function clone_field_list(selector, colClass, btnClass) {
     var new_element = $(selector).clone(true);
     $(selector).after(new_element);
-    reorder_columns();
+    reorder_columns(colClass, btnClass);
 }
 
-function reorder_columns() {
-    $('.clonable-col').each(function( index )  {
+function reorder_columns(colClass, btnClass) {
+    $(colClass).each(function( index )  {
         var selectCol = $(this).find('select');
         var labelCol = $(this).find('label');
-        
-        var old_id = selectCol.attr('id');
-        var old_num = parseInt(old_id.replace(/.*-(\d{1,4})-.*/m, '$1')); 
+        var index;
+        for (index = 0; index < selectCol.length; ++index) {
+            var old_id = selectCol[index].attr('id');
+            var old_num = parseInt(old_id.replace(/.*-(\d{1,4})-.*/m, '$1')); 
 
-        var new_id = old_id.replace('-' + (old_num) + '-', '-' + index + '-');
-        selectCol.attr({'name': new_id, 'id': new_id});
+            var new_id = old_id.replace('-' + (old_num) + '-', '-' + index + '-');
+            selectCol[index].attr({'name': new_id, 'id': new_id});
+        } 
         labelCol.attr('for', new_id);
-        
-        if ($('.clonable-col').size() > 1)
+        if ($(colClass).size() > 1)
         {
-            $(this).find('.removeCol').removeClass('disabled');
+            $(this).find(btnClass).removeClass('disabled');
         }
     });
 }

@@ -22,11 +22,13 @@ def get_columns_pairs(datasources=None):
     for name, col in painters.iteritems():
         if not datasources or datasources in col.datasources:
             column_pairs.append((name, col.title))
-    return column_pairs
+    column_pairs.append(('',''))
+    return sorted(column_pairs)
 
 def get_columns_name(datasources=None):
     column_names = []
     for name, col in painters.iteritems():
         if not datasources or datasources in col.datasources:
             column_names.append(col.name)
-    return column_names
+    column_names.append('')
+    return sorted(column_names)

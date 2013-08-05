@@ -62,6 +62,25 @@
                 </div>
                 <div>
                     <h3><a href="#">{{ _('Sorting') }}</a></h3>
+                    <div>
+                        <ul id="sortable" class="sorters">
+                            {% set counter=0 %}
+                            {% for subfield in form.sorters %}
+                                    <li class="ui-state-default clonable-sort">
+                                        {% set counter = counter + 1 %}
+                                        {{ lib.control_group() }}
+                                            {{ lib.field_label(subfield.column) }}
+                                            {{ lib.controls(inline=True) }}
+                                                {{ lib.print_field(subfield.column, fieldargs={'class':'sortCol'}) }} 
+                                                {{ lib.print_field(subfield.sorter_option, fieldargs={'class':'sortOption'}) }}
+                                                <a class="removeSort btn disabled"><i class="icon-trash"></i></a>
+                                            </div>
+                                        </div>
+                                    </li>
+                            {% endfor %}
+                        </ul>
+                        <a id="add_sorter" class="btn">{{ _('Add sorter') }}</a>
+                    </div>
                 </div>
                 <div>
                 <h3><a href="#">{{ _('Grouping') }}</a></h3>
@@ -69,7 +88,7 @@
                 <div>
                     <h3><a href="#">{{ _('Columns') }}</a></h3>
                     <div>
-                        <ul id="sortable">
+                        <ul id="sortable" class="columns">
                             {% set counter=0 %}
                             {% for subfield in form.columns %}
                                     <li class="ui-state-default clonable-col">
