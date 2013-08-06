@@ -13,6 +13,7 @@ from app.db_model.user import User, ROLE_ADMIN, ROLE_USER
 from app.db_model.viewColumn import ViewColumn
 from app.db_model.view import View
 from app.db_model.viewFilters import ViewFilters
+from app.db_model.viewGrouper import ViewGrouper
 from app.db_model.viewFilters import cache_columns
 
 def init_engine(db_uri):

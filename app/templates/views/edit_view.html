@@ -63,10 +63,10 @@
                 <div>
                     <h3><a href="#">{{ _('Sorting') }}</a></h3>
                     <div>
-                        <ul id="sortable" class="sorters">
+                        <ul class="sortable clonable">
                             {% set counter=0 %}
                             {% for subfield in form.sorters %}
-                                    <li class="ui-state-default clonable-sort">
+                                    <li class="ui-state-default clonable-row">
                                         {% set counter = counter + 1 %}
                                         {{ lib.control_group() }}
                                             {{ lib.field_label(subfield.column) }}
@@ -81,26 +81,43 @@
                     </div>
                 </div>
                 <div>
-                <h3><a href="#">{{ _('Grouping') }}</a></h3>
-                </div>
-                <div>
-                    <h3><a href="#">{{ _('Columns') }}</a></h3>
+                    <h3><a href="#">{{ _('Grouping') }}</a></h3>
                     <div>
-                        <ul id="sortable" class="columns">
+                        <ul class="sortable clonable">
                             {% set counter=0 %}
-                            {% for subfield in form.columns %}
-                                    <li class="ui-state-default clonable-col">
+                            {% for subfield in form.groupers %}
+                                    <li class="ui-state-default clonable-row">
                                         {% set counter = counter + 1 %}
                                         {{ lib.control_group() }}
-                                            {{ lib.field_label(subfield.column) }} 
+                                            {{ lib.field_label(subfield.column) }}
                                             {{ lib.controls() }}
-                                                {{ lib.print_field(subfield.column) }} <a class="removeCol btn disabled"><i class="icon-trash"></i></a>
+                                                {{ lib.print_field(subfield.column) }} <a class="removeRow btn disabled"><i class="icon-trash"></i></a>
                                             </div>
                                         </div>
                                     </li>
                             {% endfor %}
                         </ul>
-                        <a id="add_column" class="btn">{{ _('Add column') }}</a>
+                        <a class="btn add_row">{{ _('Add column') }}</a>
+                    </div>
+                </div>
+                <div>
+                    <h3><a href="#">{{ _('Columns') }}</a></h3>
+                    <div>
+                        <ul class="sortable clonable">
+                            {% set counter=0 %}
+                            {% for subfield in form.columns %}
+                                    <li class="ui-state-default clonable-row">
+                                        {% set counter = counter + 1 %}
+                                        {{ lib.control_group() }}
+                                            {{ lib.field_label(subfield.column) }} 
+                                            {{ lib.controls() }}
+                                                {{ lib.print_field(subfield.column) }} <a class="removeRow btn disabled"><i class="icon-trash"></i></a>
+                                            </div>
+                                        </div>
+                                    </li>
+                            {% endfor %}
+                        </ul>
+                        <a class="add_row btn">{{ _('Add column') }}</a>
                     </div>
                 </div>
                 <div>

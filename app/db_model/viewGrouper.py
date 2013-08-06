@@ -12,18 +12,14 @@ _ = lazy_gettext
 
 column_choices = get_columns_pairs() 
 column_names = get_columns_name()
-if ('','') in column_choices:
-    column_choices.remove(('',''))
-if '' in column_names:
-    column_names.remove('')
 enum_col = Enum(*column_names) 
 
-class ViewColumn(Base):
-    __tablename__ = 'view_column'
+class ViewGrouper(Base):
+    __tablename__ = 'view_grouper'
     id = Column(Integer, primary_key=True)
-    column = Column(enum_col, nullable=False, info={'choices':column_choices} )
+    column = Column(enum_col, info={'choices':column_choices} )
     parent_id = Column(Integer, ForeignKey(View.id), nullable=False)
     view = relationship(
         View,
-        backref = 'view_column'
+        backref = 'view_grouper'
     )

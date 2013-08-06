@@ -54,7 +54,11 @@ def edit_view():
                 form.populate_obj(view)
                 form.set_columns_choices(view_manager.get_columns_choices())
                 columns = view_manager.get_columns() 
+                groupers = view_manager.get_groupers()
                 form.set_columns(columns)
+                if groupers:
+                    form.set_groupers(groupers)
+                add_default_groupers(form)
                 sorters = view_manager.get_sorters()
                 if sorters:
                     form.set_sorters(sorters)
@@ -73,9 +77,10 @@ def edit_view():
             view = view_manager.get_view()
             form = ViewForm(csrf_enabled=True, obj=view) 
             form.populate_obj(view)
-            form.columns.append_entry()
             form.set_columns_choices(view_manager.get_columns_choices(), update=True)
+            form.columns.append_entry()
             add_default_sorters(form)
+            add_default_groupers(form)
     elif request.method=='POST':
         link_name = session['link_name']
         if link_name:
@@ -89,6 +94,7 @@ def edit_view():
                 saved_view = view_manager.set_view(view.link_name) 
                 view_manager.add_columns(form.get_columns(view.id))
                 view_manager.add_sorters(form.get_sorters(view.id))
+                view_manager.add_groupers(form.get_groupers(view.id))
                 view_manager.add_filters(form.get_filters())
                 db_session.commit()
             else:
@@ -96,6 +102,7 @@ def edit_view():
                 view_manager.update_view(form.get_view())
                 view_manager.update_filters(form.get_filters())
                 view_manager.add_columns(form.get_columns(view.id), delete_before=True) 
+                view_manager.add_groupers(form.get_groupers(view.id), delete_before=True) 
                 view_manager.add_sorters(form.get_sorters(view.id), delete_before=True)
             flash(_(u'View') + ' \'' + view_manager.get_view().title + '\' ' +  _(u'saved successfully!'), 'success')
             return redirect('/view')
@@ -107,3 +114,6 @@ def add_default_sorters(form):
     for x in range(0, app.config['MAX_SORTING_COLUMNS']-len(form.sorters)):
         form.sorters.append_entry()
 
+def add_default_groupers(form):
+    if len(form.groupers) == 0:
+        form.groupers.append_entry()

@@ -11,6 +11,6 @@ class ColumnPainterLastEvent(ColumnPainter):
     """
     def get_readable(self, row):
         age = time.time() - row[self.name]
-        return format_time(datetime.fromtimestamp(row[self.name])) 
+        return format_datetime(datetime.fromtimestamp(row[self.name])) 
 
 

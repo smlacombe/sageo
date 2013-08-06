@@ -11,8 +11,8 @@ from app.db_model.viewColumn import ViewColumn
 from app.db_model.viewSorter import ViewSorter
 from app.db_model.view import View
 from app.db_model.viewFilters import ViewFilters
+from app.db_model.viewGrouper import ViewGrouper
 from app.model.filters.builtin import FILTER_IS_SUMMARY_HOST
-
 
 class ViewSorterForm(ModelForm, TranslatedFormNoCsrf):
     class Meta:
@@ -21,6 +21,10 @@ class ViewSorterForm(ModelForm, TranslatedFormNoCsrf):
 class ViewColumnForm(ModelForm, TranslatedFormNoCsrf):
     class Meta:
         model = ViewColumn
+
+class ViewGrouperForm(ModelForm, TranslatedFormNoCsrf):
+    class Meta:
+        model = ViewGrouper
 
 class ViewFiltersForm(ModelForm, TranslatedFormNoCsrf):
     class Meta:
@@ -40,6 +44,7 @@ class ViewForm(ModelForm, TranslatedForm):
         model = View
 
     columns = ModelFieldList(FormField(ViewColumnForm))
+    groupers = ModelFieldList(FormField(ViewGrouperForm))
     sorters = ModelFieldList(FormField(ViewSorterForm))
     columns_choices = None 
     filters = ModelFormField(ViewFiltersForm)    
@@ -48,6 +53,13 @@ class ViewForm(ModelForm, TranslatedForm):
         for column in columns:
             self.columns.append_entry(column) 
             self.columns[-1].column.choices = self.columns_choices
+            if ('','') in self.columns[-1].column.choices:
+                self.columns[-1].column.choices.remove(('',''))
+
+    def set_groupers(self, groupers):
+        for grouper in groupers:
+            self.groupers.append_entry(grouper) 
+            self.groupers[-1].column.choices = self.columns_choices
 
     def set_sorters(self, sorters):
         for sorter in sorters:
@@ -71,6 +83,8 @@ class ViewForm(ModelForm, TranslatedForm):
                 column_form.column.choices = choices 
             for sorter_form in self.sorters:
                 sorter_form.column.choices = choices
+            for grouper_form in self.groupers:
+                grouper_form.column.choices = choices
 
     def get_columns(self, view_id):
         columns = []
@@ -80,6 +94,15 @@ class ViewForm(ModelForm, TranslatedForm):
             column.parent_id = view_id
             columns.append(column)
         return columns
+
+    def get_groupers(self, view_id):
+        groupers = []
+        for grouper_form in self.groupers:
+            grouper = ViewGrouper()
+            grouper.column = grouper_form.column.data
+            grouper.parent_id = view_id
+            groupers.append(grouper)
+        return groupers
 
     def get_sorters(self, view_id):
         sorters = []

@@ -1,6 +1,7 @@
 from app.db_model.view import View
 from app.db_model.viewFilters import ViewFilters
 from app.db_model.viewSorter import ViewSorter
+from app.db_model.viewGrouper import ViewGrouper
 from app.db_model.viewFilters import cache_columns
 from app.db_model.base import db_session
 from app.db_model.viewColumn import ViewColumn
@@ -16,6 +17,7 @@ class ViewManager():
     def __init__(self):
         self.__view = None
         self.__columns = None 
+        self.__groupers = None
         self.__sorters = None
         self.__filters = None
     '''
@@ -25,6 +27,7 @@ class ViewManager():
         self.__view = View.query.filter_by(link_name=link_name).first()
         if self.__view:
             self.__columns = ViewColumn.query.filter_by(parent_id=self.__view.id).order_by(ViewColumn.id).all()
+            self.__groupers = ViewGrouper.query.filter_by(parent_id=self.__view.id).order_by(ViewGrouper.id).all()
             self.__sorters = ViewSorter.query.filter_by(parent_id=self.__view.id).order_by(ViewSorter.id).all()
             self.__filters = self.__view.filters 
             return self.__view 
@@ -42,6 +45,17 @@ class ViewManager():
 
         for column in columns:
             db_session.add(column)
+        
+        db_session.commit()
+
+    def add_groupers(self, groupers, delete_before = False):
+        if delete_before:
+            for grouper in self.__groupers:
+                    db_session.delete(grouper)
+
+        for grouper in groupers:
+            if grouper.column:
+                db_session.add(grouper)
         
         db_session.commit()
 
@@ -82,6 +96,9 @@ class ViewManager():
 
     def get_sorters(self):
         return self.__sorters
+
+    def get_groupers(self):
+        return self.__groupers
     
     def get_filter_display(sel,form):
         lst_columns = cache_columns 

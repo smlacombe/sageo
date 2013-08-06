@@ -8,6 +8,7 @@ COL_HOST_NAME = 'host_name'
 COL_HOST_STATE = 'host_state'
 COL_LAST_CHECK = 'last_check'
 COL_CHECK_COMMAND = 'check_command'
+COL_SITE = 'site'
 
 _ = gettext
 painters = {}
@@ -16,6 +17,7 @@ painters[COL_HOST_NAME] = ColumnPainterRaw(COL_HOST_NAME, _(u'Host name'), _(u'H
 painters[COL_HOST_STATE] = ColumnPainterHostState(COL_HOST_STATE, _(u'Host state'), _(u'Host state'), ['hosts', 'services'])
 painters[COL_LAST_CHECK] = ColumnPainterLastEvent(COL_LAST_CHECK, _(u'Last check'), _(u'Last check'), ['hosts', 'services'])
 painters[COL_CHECK_COMMAND] = ColumnPainterRaw(COL_CHECK_COMMAND, _(u'Check command'), _(u'Check command'), ['hosts', 'services'])
+painters[COL_SITE] = ColumnPainterRaw(COL_SITE, _(u'Site'), _(u'Site'), ['hosts', 'services'])
 
 def get_columns_pairs(datasources=None):
     column_pairs = []
