@@ -58,8 +58,8 @@ def edit_view():
                 sorters = view_manager.get_sorters()
                 if sorters:
                     form.set_sorters(sorters)
-                else:
-                    add_default_sorters(form)
+                add_default_sorters(form)
+
                 filters = view_manager.get_filters()
                 #form.populate_obj(filters)
             else:
@@ -104,6 +104,6 @@ def edit_view():
     return snapins.render_sidebar_template('views/edit_view.html', link_name=link_name, form=form, filter_display=filter_display) 
 
 def add_default_sorters(form):
-    for x in range(0, app.config['MAX_SORTING_COLUMNS']):
+    for x in range(0, app.config['MAX_SORTING_COLUMNS']-len(form.sorters)):
         form.sorters.append_entry()
 

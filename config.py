@@ -18,8 +18,8 @@ LANGUAGES = {
 SITES = {
   "quebec": {
      "alias":          "Shinken Mac mini",
-     "socket":         "tcp:192.168.50.137:50000",
-     "url_prefix":     "http://192.168.50.137",
+     "socket":         "tcp:192.168.52.44:50000",
+     "url_prefix":     "http://192.168.52.44",
    },
 }
 

@@ -51,7 +51,8 @@ class ViewManager():
                     db_session.delete(sorter)
 
         for sorter in sorters:
-            db_session.add(sorter)
+            if sorter.column:
+                db_session.add(sorter)
 
         db_session.commit()
 

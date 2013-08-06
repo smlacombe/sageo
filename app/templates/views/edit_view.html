@@ -73,13 +73,11 @@
                                             {{ lib.controls(inline=True) }}
                                                 {{ lib.print_field(subfield.column, fieldargs={'class':'sortCol'}) }} 
                                                 {{ lib.print_field(subfield.sorter_option, fieldargs={'class':'sortOption'}) }}
-                                                <a class="removeSort btn disabled"><i class="icon-trash"></i></a>
                                             </div>
                                         </div>
                                     </li>
                             {% endfor %}
                         </ul>
-                        <a id="add_sorter" class="btn">{{ _('Add sorter') }}</a>
                     </div>
                 </div>
                 <div>

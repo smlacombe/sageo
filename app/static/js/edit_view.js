@@ -3,28 +3,9 @@ $(document).ready(function () {
         clone_field_list('.clonable-col:last', '.clonable-col', '.removeCol');
     });
 
-    $('#add_sorter').click(function () {
-        clone_field_list('.clonable-sort:last', '.clonable-sort', '.removeSort');
-    });
-
     $(".removeCol").click(function() {
         var clonable = '.clonable-col';
         var remove = '.removeCol';
-        if ($(clonable).size() > 1)
-        {
-            $(this).parent('div').parent('div').parent(clonable).remove();
-            reorder_columns(clonable, remove);
-
-            if ($(clonable).size() == 1)
-            {
-                $(clonable).find(remove).addClass('disabled');
-            }
-        }
-    });
-
-    $(".removeSort").click(function() {
-        var clonable = '.clonable-sort';
-        var remove = '.removeSort';
         if ($(clonable).size() > 1)
         {
             $(this).parent('div').parent('div').parent(clonable).remove();
@@ -55,7 +36,6 @@ update: function (e, ui) {
 
 bind_toggle_filter_options();
 reorder_columns('.clonable-col', '.removeCol');
-reorder_columns('.clonable-sort', '.removeSort');
 reorder_columns('.clonable-sort', '.removeSort');
 });
 

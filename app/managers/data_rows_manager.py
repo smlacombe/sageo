@@ -3,10 +3,12 @@ from app.db_model.base import db_session
 from app.db_model.viewColumn import ViewColumn
 from app.lib import livestatus_query
 from app.lib.datasources import multisite_datasources as datasources
+from app.lib.multi_keys_sorting import compose, multikeysort
 from app.managers.filters_manager import FiltersManager
 from app.managers.view_manager import ViewManager
 from app.model.columns.builtin import painters
 import copy
+from operator import itemgetter, methodcaller
 
 class DataRowsManager():
     """ A sort of proxy that facilitate gathering data from LiveStatus without knowing implementation details. """
@@ -35,7 +37,21 @@ class DataRowsManager():
         columns_name = self.get_asked_columns_name()
         filters_string = self.__filters_manager.get_filter_query() 
         print '\nfilters: ' + filters_string
-        return self.__readable_rows(livestatus_query.get_rows(datasource, columns_name, filters_string))         
+        rows = self.__readable_rows(livestatus_query.get_rows(datasource, columns_name, filters_string))         
+        sorters = self.__view_manager.get_sorters()
+        if sorters:
+            arguments = []
+            callers = {}
+            for sorter in sorters:
+                prefix = ''
+                if sorter.sorter_option == '1':
+                    prefix = '-'
+                arguments.append(prefix + sorter.column)
+                get_lower = compose(itemgetter(sorter.column), methodcaller('lower')) 
+                callers[sorter.column] = get_lower
+            sortedRows = multikeysort(rows, arguments, callers)
+            return sortedRows
+        return rows
 
     def __readable_rows(self, rows):
         rows_readable = rows 

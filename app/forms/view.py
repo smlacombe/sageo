@@ -86,7 +86,6 @@ class ViewForm(ModelForm, TranslatedForm):
         for sorter_form in self.sorters:
             sorter = ViewSorter()
             sorter.column = sorter_form.column.data
-            import ipdb;ipdb.set_trace()
             sorter.sorter_option = sorter_form.sorter_option.data
             sorter.parent_id = view_id
             sorters.append(sorter)
