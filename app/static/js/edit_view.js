@@ -67,17 +67,12 @@ function clone_field_list(selector, colClass, btnClass) {
 
 function reorder_columns(colClass, btnClass) {
     $(colClass).each(function( index )  {
-        var selectCol = $(this).find('select');
-        var labelCol = $(this).find('label');
-        var index;
-        for (index = 0; index < selectCol.length; ++index) {
-            var old_id = selectCol[index].attr('id');
+        $(this).find('select').each(function( indexd ) {
+            var old_id = $(this).attr('id');
             var old_num = parseInt(old_id.replace(/.*-(\d{1,4})-.*/m, '$1')); 
-
             var new_id = old_id.replace('-' + (old_num) + '-', '-' + index + '-');
-            selectCol[index].attr({'name': new_id, 'id': new_id});
-        } 
-        labelCol.attr('for', new_id);
+            $(this).attr({'name': new_id, 'id': new_id});
+        }); 
         if ($(colClass).size() > 1)
         {
             $(this).find(btnClass).removeClass('disabled');
