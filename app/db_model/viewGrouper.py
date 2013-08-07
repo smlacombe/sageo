@@ -23,3 +23,4 @@ class ViewGrouper(Base):
         View,
         backref = 'view_grouper'
     )
+        

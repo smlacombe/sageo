@@ -13,6 +13,7 @@ from app.db_model.view import View
 from app.db_model.viewFilters import ViewFilters
 from app.db_model.viewGrouper import ViewGrouper
 from app.model.filters.builtin import FILTER_IS_SUMMARY_HOST
+import copy
 
 class ViewSorterForm(ModelForm, TranslatedFormNoCsrf):
     class Meta:
@@ -52,7 +53,7 @@ class ViewForm(ModelForm, TranslatedForm):
     def set_columns(self, columns):
         for column in columns:
             self.columns.append_entry(column) 
-            self.columns[-1].column.choices = self.columns_choices
+            self.columns[-1].column.choices = copy.copy(self.columns_choices)
             if ('','') in self.columns[-1].column.choices:
                 self.columns[-1].column.choices.remove(('',''))
 

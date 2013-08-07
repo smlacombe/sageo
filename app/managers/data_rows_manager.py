@@ -30,6 +30,14 @@ class DataRowsManager():
     def update_filters(self):
         self.__filters_manager.set_filters(self.__view_manager.get_filters())
 
+    def get_group_columns_list(self):
+        groupers = self.__view_manager.get_groupers()
+        group_list = []
+        if groupers:
+            for group in groupers:
+                group_list.append(group.column)
+        return group_list
+
     def get_rows(self):
         """ get rows corresponding to the query builded with the view and its options """
         # prepare basic parameter datasource and columns_name
@@ -38,19 +46,23 @@ class DataRowsManager():
         filters_string = self.__filters_manager.get_filter_query() 
         print '\nfilters: ' + filters_string
         rows = self.__readable_rows(livestatus_query.get_rows(datasource, columns_name, filters_string))         
+
+        groupers = self.__view_manager.get_groupers()
+        if groupers:
+            sort_list = []
+            for grouper in groupers:
+                sort_list.append((grouper.column,0))
+            rows = self.group(rows, self.get_group_columns_list())  
+            rows = sorted(list((k, v) for k,v in rows.items()))
+        import ipdb;ipdb.set_trace()
+
         sorters = self.__view_manager.get_sorters()
         if sorters:
-            arguments = []
-            callers = {}
+            sort_list = []
             for sorter in sorters:
-                prefix = ''
-                if sorter.sorter_option == '1':
-                    prefix = '-'
-                arguments.append(prefix + sorter.column)
-                get_lower = compose(itemgetter(sorter.column), methodcaller('lower')) 
-                callers[sorter.column] = get_lower
-            sortedRows = multikeysort(rows, arguments, callers)
-            return sortedRows
+                sort_list.append((sorter.column,sorter.sorter_option))                
+
+            rows = self.__sorted_rows(rows, sort_list)
         return rows
 
     def __readable_rows(self, rows):
@@ -61,6 +73,21 @@ class DataRowsManager():
                     row[name] = painters[name].get_readable(row)
         return rows_readable
                 
+    def __sorted_rows(self, rows, sort_list):
+        arguments = []
+        callers = {}
+        import ipdb;ipdb.set_trace()
+        for sorter in sort_list:
+            prefix = ''
+            sort_order = sorter[1]
+            column = sorter[0]
+            if sort_order == '1':
+                prefix = '-'
+            arguments.append(prefix + column)
+            get_lower = compose(itemgetter(column), methodcaller('lower'))
+            callers[column] = get_lower
+        sortedRows = multikeysort(rows, arguments, callers)
+        return sortedRows
 
     def get_asked_columns_name(self):
         columns_names = []
@@ -81,3 +108,13 @@ class DataRowsManager():
     
     def get_view(self):
         return self.__view_manager.get_view()
+
+    def group(self, mylist, groups):
+        if not groups: return mylist
+        def foo(mydict, row):
+            key = tuple(map(lambda x: row[x], groups))
+            if not key in mydict.keys():
+                mydict[key] = []
+            mydict[key].append(row)
+            return mydict
+        return reduce(foo, mylist, {})
