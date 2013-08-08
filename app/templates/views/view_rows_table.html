@@ -2,35 +2,43 @@
 
 {% set layout_cols = data_rows_manager.get_view().layout_number_columns %}
 {% set spanCol = (12 / layout_cols)|int %}
-{% set max_rows_per_col = (rows_count / layout_cols)|round(method='ceil')|int %} 
 
-<div class="row-fluid">
-    {% for col_number in range(0, layout_cols) %}
-        <div class="span{{ spanCol }}">
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        {% for col_name in data_rows_manager.get_asked_columns_title() %} 
-                                <th>{{ col_name }}</th>
-                        {% endfor %}
-                    </tr>
-                </thead>
-                <tbody>
-                        {% set start=(col_number*max_rows_per_col)|int %}
-                        {% set end=(start+max_rows_per_col)|int %}
-                        {% if end > rows_count %}  
-                            {% set end = rows_count %} 
-                        {% endif %}
+    {% for group in rows %}
+        {% if not group[0] == () %}
+            <h2>{{ data_rows_manager.get_group_header(group[0]) }}</h2>
 
-                        {% for row_number in range(start, end) %} 
-                            <tr>
-                                {% for elem in data_rows_manager.get_asked_columns_name() %}
-                                    <td>{{ rows[row_number][elem] }}</td>
-                                {% endfor %}
-                            </tr>
-                        {% endfor %}
-                </tbody>
-            </table>
-        </div>
+        {% endif %}
+        <div class="row-fluid">
+        {% set group_rows_count = group[1]|length %}
+        {% set group_max_rows_per_col = (group_rows_count / layout_cols)|round(method='ceil')|int %}
+
+        {% for col_number in range(0, layout_cols) %}
+            <div class="span{{ spanCol }}">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            {% for col_name in data_rows_manager.get_asked_columns_title() %} 
+                                    <th>{{ col_name }}</th>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                            {% set start=(col_number*group_max_rows_per_col)|int %}
+                            {% set end=(start+group_max_rows_per_col)|int %}
+                            {% if end > group_rows_count %}  
+                                {% set end = group_rows_count %} 
+                            {% endif %}
+
+                            {% for row_number in range(start, end) %} 
+                                <tr>
+                                    {% for elem in data_rows_manager.get_asked_columns_name() %}
+                                        <td>{{ group[1][row_number][elem] }}</td>
+                                    {% endfor %}
+                                </tr>
+                            {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% endfor %}
+    </div>
     {% endfor %}
-</div>

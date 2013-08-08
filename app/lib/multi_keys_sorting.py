@@ -24,7 +24,7 @@ def multikeysort(items, columns, functions={}, getter=itemgetter):
                 return polarity * result
         else:
             return 0
-    return sorted(items, cmp=comparer)
+    return items.sort(cmp=comparer)
 
 def compose(inner_func, *outer_funcs):
      """Compose multiple unary functions together into a single unary function"""

@@ -48,13 +48,11 @@ class DataRowsManager():
         rows = self.__readable_rows(livestatus_query.get_rows(datasource, columns_name, filters_string))         
 
         groupers = self.__view_manager.get_groupers()
-        if groupers:
-            sort_list = []
-            for grouper in groupers:
-                sort_list.append((grouper.column,0))
-            rows = self.group(rows, self.get_group_columns_list())  
-            rows = sorted(list((k, v) for k,v in rows.items()))
-        import ipdb;ipdb.set_trace()
+        sort_list = []
+        for grouper in groupers:
+            sort_list.append((grouper.column,0))
+        rows = self.group(rows, self.get_group_columns_list())  
+        rows = sorted(list((k, v) for k,v in rows.items()))
 
         sorters = self.__view_manager.get_sorters()
         if sorters:
@@ -76,7 +74,6 @@ class DataRowsManager():
     def __sorted_rows(self, rows, sort_list):
         arguments = []
         callers = {}
-        import ipdb;ipdb.set_trace()
         for sorter in sort_list:
             prefix = ''
             sort_order = sorter[1]
@@ -86,19 +83,31 @@ class DataRowsManager():
             arguments.append(prefix + column)
             get_lower = compose(itemgetter(column), methodcaller('lower'))
             callers[column] = get_lower
-        sortedRows = multikeysort(rows, arguments, callers)
-        return sortedRows
+
+        for group in rows:
+            multikeysort(group[1], arguments, callers)
+
+        return rows
 
     def get_asked_columns_name(self):
         columns_names = []
         for column in self.__view_manager.get_columns(): columns_names.append(column.column)
         return columns_names
 
+    def get_rows_count(self, rows):
+        count = 0
+        for group in rows:
+            count = count + len(group[1])
+        return count
+
     def get_asked_columns_title(self):
         columns_names = []
         for column in self.__view_manager.get_columns(): columns_names.append(painters[column.column].title)
         return columns_names
     
+    def get_group_header(self, groupEnum):
+        return ', '.join(groupEnum)    
+
     def set_extra_filters(self, filters):
         self.__view_manager.set_filters(filters)
         self.update_filters()
@@ -110,7 +119,7 @@ class DataRowsManager():
         return self.__view_manager.get_view()
 
     def group(self, mylist, groups):
-        if not groups: return mylist
+        #if not groups: return mylist
         def foo(mydict, row):
             key = tuple(map(lambda x: row[x], groups))
             if not key in mydict.keys():
