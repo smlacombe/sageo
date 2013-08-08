@@ -45,7 +45,7 @@ class DataRowsManager():
         columns_name = self.get_asked_columns_name()
         filters_string = self.__filters_manager.get_filter_query() 
         print '\nfilters: ' + filters_string
-        rows = self.__readable_rows(livestatus_query.get_rows(datasource, columns_name, filters_string))         
+        rows = livestatus_query.get_rows(datasource, columns_name, filters_string)         
 
         groupers = self.__view_manager.get_groupers()
         sort_list = []
@@ -59,16 +59,19 @@ class DataRowsManager():
             sort_list = []
             for sorter in sorters:
                 sort_list.append((sorter.column,sorter.sorter_option))                
-
             rows = self.__sorted_rows(rows, sort_list)
+
+        rows = self.__readable_rows(rows)
+        
         return rows
 
     def __readable_rows(self, rows):
         rows_readable = rows 
-        for row in rows_readable:
-            for name, value in row.items():
-                if name in painters.keys():
-                    row[name] = painters[name].get_readable(row)
+        for group in rows_readable:
+            for row in group[1]:
+                for name, value in row.iteritems():
+                    if name in painters.keys():
+                        row[name] = painters[name].get_readable(row)
         return rows_readable
                 
     def __sorted_rows(self, rows, sort_list):
@@ -81,8 +84,9 @@ class DataRowsManager():
             if sort_order == '1':
                 prefix = '-'
             arguments.append(prefix + column)
-            get_lower = compose(itemgetter(column), methodcaller('lower'))
-            callers[column] = get_lower
+            if isinstance(rows[0][1][0][column], basestring): 
+                get_lower = compose(itemgetter(column), methodcaller('lower'))
+                callers[column] = get_lower
 
         for group in rows:
             multikeysort(group[1], arguments, callers)
