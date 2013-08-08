@@ -110,7 +110,16 @@ class DataRowsManager():
         return columns_names
     
     def get_group_header(self, groupEnum):
-        return ', '.join(groupEnum)    
+        header = ""
+        groups_list = self.get_group_columns_list() 
+        for elem in groupEnum:
+            curCol = groups_list[groupEnum.index(elem)]
+            if not header == "":
+                header = header + ', '
+            readable_elem = painters[curCol].get_readable({curCol: elem})
+            header = header + str(readable_elem)
+        
+        return header    
 
     def set_extra_filters(self, filters):
         self.__view_manager.set_filters(filters)
