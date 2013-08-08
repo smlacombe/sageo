@@ -91,7 +91,8 @@ def edit_view():
             if not link_name:
                 view = form.get_view()
                 view_manager.add_view(view)
-                saved_view = view_manager.set_view(view.link_name) 
+                link_name = view.link_name
+                saved_view = view_manager.set_view(link_name) 
                 view_manager.add_columns(form.get_columns(view.id))
                 view_manager.add_sorters(form.get_sorters(view.id))
                 view_manager.add_groupers(form.get_groupers(view.id))
@@ -105,7 +106,7 @@ def edit_view():
                 view_manager.add_groupers(form.get_groupers(view.id), delete_before=True) 
                 view_manager.add_sorters(form.get_sorters(view.id), delete_before=True)
             flash(_(u'View') + ' \'' + view_manager.get_view().title + '\' ' +  _(u'saved successfully!'), 'success')
-            return redirect('/view')
+            return redirect('/view?link_name='+ link_name)
 
     filter_display = view_manager.get_filter_display(form.filters) 
     return snapins.render_sidebar_template('views/edit_view.html', link_name=link_name, form=form, filter_display=filter_display) 
