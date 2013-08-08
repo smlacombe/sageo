@@ -65,6 +65,13 @@ class DataRowsManager():
             rows = self.__readable_rows(rows)
         return rows
 
+    def get_sorters_dic(self):
+        sorters = {}
+        for sorter in self.__view_manager.get_sorters():
+            sorters[sorter.column] = sorter.sorter_option 
+
+        return sorters
+
     def __readable_rows(self, rows):
         rows_readable = rows 
         for group in rows_readable:

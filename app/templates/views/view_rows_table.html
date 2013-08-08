@@ -17,8 +17,27 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            {% for col_name in data_rows_manager.get_asked_columns_title() %} 
-                                    <th>{{ col_name }}</th>
+                            {% for col_title in data_rows_manager.get_asked_columns_title() %} 
+                                    {% set colIndex = data_rows_manager.get_asked_columns_title().index(col_title) %}
+                                    {% set colName = data_rows_manager.get_asked_columns_name()[colIndex] %}
+                                    {% set sortOrderAttr = '' %}
+                                    {% set sortDic = data_rows_manager.get_sorters_dic() %} 
+                                    {% if sortDic.has_key(colName) %}
+                                        {% set sortOrderAttr = data_rows_manager.get_sorters_dic()[colName] %}
+                                    {% endif %}
+                                    
+                                    <th sortOrder='{{sortOrderAttr}}' colname='{{colName}}'>
+                                        <a class='header-link' href='#'>
+                                            {{ col_title }}
+                                            {% if sortOrderAttr == '0' %}
+                                                <i class="icon-chevron-up"></i>
+                                            {% elif sortOrderAttr == '1' %}
+                                                <i class="icon-chevron-down"></i>
+                                            {% else %}
+                                                <i class="icon-resize-vertical"></i>
+                                            {% endif %}
+                                        </a>
+                                    </th>
                             {% endfor %}
                         </tr>
                     </thead>
