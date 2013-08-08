@@ -47,22 +47,22 @@ class DataRowsManager():
         print '\nfilters: ' + filters_string
         rows = livestatus_query.get_rows(datasource, columns_name, filters_string)         
 
-        groupers = self.__view_manager.get_groupers()
-        sort_list = []
-        for grouper in groupers:
-            sort_list.append((grouper.column,0))
-        rows = self.group(rows, self.get_group_columns_list())  
-        rows = sorted(list((k, v) for k,v in rows.items()))
-
-        sorters = self.__view_manager.get_sorters()
-        if sorters:
+        if not rows == []:
+            groupers = self.__view_manager.get_groupers()
             sort_list = []
-            for sorter in sorters:
-                sort_list.append((sorter.column,sorter.sorter_option))                
-            rows = self.__sorted_rows(rows, sort_list)
+            for grouper in groupers:
+                sort_list.append((grouper.column,0))
+            rows = self.group(rows, self.get_group_columns_list())  
+            rows = sorted(list((k, v) for k,v in rows.items()))
 
-        rows = self.__readable_rows(rows)
-        
+            sorters = self.__view_manager.get_sorters()
+            if sorters:
+                sort_list = []
+                for sorter in sorters:
+                    sort_list.append((sorter.column,sorter.sorter_option))                
+                rows = self.__sorted_rows(rows, sort_list)
+
+            rows = self.__readable_rows(rows)
         return rows
 
     def __readable_rows(self, rows):

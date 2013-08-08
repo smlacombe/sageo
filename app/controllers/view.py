@@ -65,7 +65,6 @@ def view():
 
                 if filters_url_values:
                     data_rows_manager.set_extra_filters(filters_url_values)
-                print data_rows_manager.get_rows()
                 view = data_rows_manager.get_view()
                 viewFilters = view_manager.get_filters() 
                 form = ViewFiltersForm(obj=viewFilters)                   
