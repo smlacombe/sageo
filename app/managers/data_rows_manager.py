@@ -132,6 +132,9 @@ class DataRowsManager():
         self.__view_manager.set_filters(filters)
         self.update_filters()
 
+    def set_extra_sorters(self, sorters):
+        self.__view_manager.set_extra_sorters(sorters)    
+
     def get_filters_name(self):
         return self.__filters_manager.get_filters_name()
     

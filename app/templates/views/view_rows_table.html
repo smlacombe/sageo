@@ -25,9 +25,8 @@
                                     {% if sortDic.has_key(colName) %}
                                         {% set sortOrderAttr = data_rows_manager.get_sorters_dic()[colName] %}
                                     {% endif %}
-                                    
                                     <th sortOrder='{{sortOrderAttr}}' colname='{{colName}}'>
-                                        <a class='header-link' href='#'>
+                                        <a class='header-link' href='{{controller.get_sort_url(request, colName, sortOrderAttr)}}'>
                                             {{ col_title }}
                                             {% if sortOrderAttr == '0' %}
                                                 <i class="icon-chevron-up"></i>

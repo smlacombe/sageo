@@ -54,23 +54,31 @@ def view():
                 filters_url_values = {}
                 url = urlparse.urlparse(request.url)
                 query_param = urlparse.parse_qs(url.query)
+                query_param = dict([(k, v[0]) for k, v in query_param.items()])
                 for name in filters_name:
                     arg = query_param.get(name, '')
                     if arg:
                         # TODO: find a better way to check if it is a dictionnary
-                        if '{' in arg[0]:
-                            filters_url_values[name] = dict(ast.literal_eval(arg[0])) 
+                        if '{' in arg:
+                            filters_url_values[name] = dict(ast.literal_eval(arg)) 
                         else:
-                            filters_url_values[name] = arg[0]
+                            filters_url_values[name] = arg
 
                 if filters_url_values:
                     data_rows_manager.set_extra_filters(filters_url_values)
+
+                arg = query_param.get('sort_by', '')
+                if arg:
+                    sort_by = dict(ast.literal_eval(arg))
+                    data_rows_manager.set_extra_sorters(sort_by)
+                    
+
                 view = data_rows_manager.get_view()
                 viewFilters = view_manager.get_filters() 
                 form = ViewFiltersForm(obj=viewFilters)                   
                 form.populate_obj(viewFilters)
                 filter_display = view_manager.get_filter_display(form)
-                return snapins.render_sidebar_template('views/view.html', form=form, data_rows_manager=data_rows_manager, extra_filter = extra_filter, filter_display = filter_display)
+                return snapins.render_sidebar_template('views/view.html', controller=globals(), form=form, data_rows_manager=data_rows_manager, extra_filter = extra_filter, filter_display = filter_display)
             else:
                 flash(_(u'View') + ' \'' + link_name + '\' ' +  _(u'doesn\'t exist'), 'error')
                 return redirect('/view')
@@ -82,8 +90,39 @@ def view():
     elif request.method=='POST':
         if link_name:
             viewFilters = form.get_filters()
-            url = urllib.urlencode(viewFilters.get_filters())
-            return redirect('/view?link_name='+ link_name+'&'+ url)
+            return redirect(add_to_cur_url(request, viewFilters.get_filters()))
         else:
             datasource = form.datasource.data
             return redirect('/edit_view?datasource='+ datasource)
+
+def get_sort_url(request, colname, orderAttr):
+    url = urlparse.urlparse(request.url)
+    query_param = urlparse.parse_qs(url.query)
+    query_param = dict([(k, v[0]) for k, v in query_param.items()])
+    arg = query_param.get('sort_by', '')
+    if arg:
+        sortBy = dict(ast.literal_eval(arg))       
+    else:
+        sortBy = {}
+   
+    if orderAttr == '1':
+        order = '0'
+    elif orderAttr == '0':
+        order = '1'
+    else:
+        order = '0'
+
+    sortBy[colname] = order
+    dic = {'sort_by': sortBy} 
+    return add_to_cur_url(request, dic) 
+
+def add_to_cur_url(request, objs):
+    url = urlparse.urlparse(request.url)
+    query_param = urlparse.parse_qs(url.query)
+    query_param = dict([(k, v[0]) for k, v in query_param.items()])
+    for name, value in objs.items(): 
+        query_param[name] = value
+    param = urllib.urlencode(query_param)
+    return request.base_url + '?' + param
+
+

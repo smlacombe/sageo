@@ -80,6 +80,14 @@ class ViewManager():
 
     def set_filters(self, filters):
         self.__filters.set_filters(filters)
+    
+    def set_extra_sorters(self, sorters):
+        for colname, order in sorters.items():
+            sorter = ViewSorter()
+            sorter.column = colname
+            sorter.sorter_option = order
+            [self.__sorters.remove(sorter_item) for sorter_item in self.__sorters if sorter_item.column == colname]
+            self.__sorters.append(sorter)
 
     def update_filters(self, filters):
         self.__view.filters.update(filters)
