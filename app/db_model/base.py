@@ -1,10 +1,12 @@
 from sqlalchemy import *
 from sqlalchemy.orm import *
 from sqlalchemy.ext.declarative import declarative_base
+from flask.ext.sqlalchemy import SQLAlchemy
 from app import babel, app
 from flask import Flask
 
 db_engine = None
+db = SQLAlchemy(app)
 db_session = scoped_session(sessionmaker(autocommit=False, autoflush=False))
 Base = declarative_base()
 Base.query = db_session.query_property()
