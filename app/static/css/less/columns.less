@@ -6,7 +6,7 @@
     width:60px;
 }
 
-span.col.host_state.UP
+span.col.host_state.UP, span.col.service_state.OK
 {
 .badge;
 .badge-success;
@@ -14,7 +14,7 @@ span.col.host_state.UP
 background-color:#3BCF3B;
 }
 
-span.col.host_state.DOWN
+span.col.host_state.DOWN, span.col.service_state.CRITICAL
 {
 .badge;
 .badge-important;
@@ -22,3 +22,11 @@ span.col.host_state.DOWN
 background-color:#FF2200;
 }
 
+span.col.service_state.WARNING
+{
+.badge;
+.badge-important;
+.center-badge;
+color: black;
+background-color:#FFDE00;
+}

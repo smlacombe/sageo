@@ -85,6 +85,38 @@ def create_default_views():
     db_session.commit()
 
 
+    filters = ViewFilters()
+    for option, col_names in cache_columns.iteritems():
+        setattr(filters, option, 'show')
+
+    db_session.add(filters)
+    db_session.commit()
+
+    filters = ViewFilters.query.all()[1]
+    view2 = View()
+    view2.title = 'All services'
+    view2.link_name = 'allservices'
+    view2.datasource = 'services'
+    view2.layout_number_columns = 1
+    view2.filters_id = filters.id
+    db_session.add(view2)
+    db_session.commit()
+
+    col4 = ViewColumn()
+    col4.column = 'service_description'
+    col4.parent_id = view2.id
+    db_session.add(col4)
+    db_session.commit()
+
+    col5 = ViewColumn()
+    col5.column = 'service_state'
+    col5.parent_id = view2.id
+    db_session.add(col5)
+    db_session.commit()
+
+
+
+
 def clear_db():
     Base.metadata.drop_all(bind=db_engine)
 

@@ -20,8 +20,8 @@
 {% import 'lib/views.html' as lib_view %}
 {% block title %}{{ _('Sageo')+' ' +_('View') }}{% endblock %}
 {% block head %}
-    <script src="{{ url_for('.static', filename='js/view.js') }}"></script>
     {{ super() }}
+    <script src="{{ url_for('.static', filename='js/view.js') }}"></script>
 {% endblock %}
 {% block main_section %}
     {% if views %}
