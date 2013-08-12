@@ -19,7 +19,6 @@ from flask import Flask, request, session, g, redirect, url_for, \
 from app.lib import snapins
 from flask.ext.login import LoginManager, login_user, logout_user, \
     current_user, login_required
-import ipdb;ipdb.set_trace()
 import app.forms
 
 index_page = Blueprint('index_page', __name__, static_folder='static', template_folder='templates')

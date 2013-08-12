@@ -21,8 +21,6 @@ import side
 from flask.ext.login import LoginManager, login_user, logout_user, \
     current_user, login_required
 
-import app.models
-
 framed_page = Blueprint('framed_page', __name__, static_folder='static', template_folder='templates')
 
 @framed_page.route('/framed/<path:page_url>')
