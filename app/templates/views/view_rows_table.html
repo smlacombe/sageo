@@ -14,7 +14,7 @@
 
         {% for col_number in range(0, layout_cols) %}
             <div class="span{{ spanCol }}">
-                <table class="table table-striped">
+                <table class="table table-striped table-bordered table-condensed">
                     <thead>
                         <tr>
                             {% for col_title in data_rows_manager.get_asked_columns_title() %} 
@@ -50,7 +50,8 @@
                             {% for row_number in range(start, end) %} 
                                 <tr>
                                     {% for elem in data_rows_manager.get_asked_columns_name() %}
-                                        <td>{{ group[1][row_number][elem] }}</td>
+                                    {% set value = group[1][row_number][elem] %}
+                                        <td class="col {{elem}} {{value}}">{{ value }}</td>
                                     {% endfor %}
                                 </tr>
                             {% endfor %}

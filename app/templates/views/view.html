@@ -20,10 +20,11 @@
 {% import 'lib/views.html' as lib_view %}
 {% block title %}{{ _('Sageo')+' ' +_('View') }}{% endblock %}
 {% block head %}
-    {{ super() }}
     <link rel="stylesheet" type="text/css" href="{{ url_for('.static', filename='css/panel.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('.static', filename='css/view.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('.static', filename='css/columns.css') }}">
     <script src="{{ url_for('.static', filename='js/view.js') }}"></script>
+    {{ super() }}
 {% endblock %}
 {% block main_section %}
     {% if views %}
