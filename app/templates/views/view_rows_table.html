@@ -51,7 +51,7 @@
                                 <tr>
                                     {% for elem in data_rows_manager.get_asked_columns_name() %}
                                     {% set value = group[1][row_number][elem] %}
-                                        <td class="col {{elem}} {{value}}">{{ value }}</td>
+                                        <td class="col {{elem}} {{value}}"><span class="col {{elem}} {{value}}">{{ value }}</span></td>
                                     {% endfor %}
                                 </tr>
                             {% endfor %}

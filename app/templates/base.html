@@ -22,8 +22,7 @@
     {% block head %}
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Bootstrap -->
-    <link rel="stylesheet" type="text/css" href="{{ url_for('.static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('.static', filename='css/main.css') }}">
     <link rel="shortcut icon" href="{{ url_for('.static', filename='images/favicon.ico') }}" type="image/ico">
     <title>{% block title %}{% endblock %} - Sageo</title>
     <script src="http://code.jquery.com/jquery.js"></script>
@@ -31,7 +30,7 @@
     {% endblock %}
 </head>
 
-<body class="main">
+<body class="main {% block body_class %}{% endblock %}">
     <div id="content">{% block content %}{% endblock %}</div>
     <div id="footer">
         {% block footer %}

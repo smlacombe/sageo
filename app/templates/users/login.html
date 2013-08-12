@@ -21,10 +21,7 @@
 {% from 'lib/lib.html' import print_flash_messages %}
 
 {% block title %}{{ _('login') }}{% endblock %}
-{% block head %}
-    {{ super() }}
-    <link rel="stylesheet" type="text/css" href="{{ url_for('.static', filename='css/login.css') }}">
-{% endblock %}
+{% block body_class %}login{% endblock %}
 {% block content %}
 <div class="container">
     <form class="form-signin form-horizontal" name="login" action="login" method="post" enctype="multipart/form-data">
