@@ -4,4 +4,4 @@
 data/
 *~
 *.mo
-static/css/*.css
+app/static/css/*.css
