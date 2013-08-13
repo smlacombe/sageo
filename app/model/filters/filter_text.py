@@ -3,14 +3,14 @@ from sqlalchemy import *
 from sqlalchemy.orm import *
 
 class FilterText(Filter):
-    def __init__(self, name, title, descr, column_name, operation):
+    def __init__(self, name, title, descr, column_names, operation):
         Filter.__init__(self, name, title, descr)
         self.operation = operation
-        self.column_name = column_name
+        self.column_names = column_names
 
     def filter(self, column_value):
         if column_value:
-             return "Filter: %s %s %s\n" % (self.column_name, self.operation, column_value)
+             return "Filter: %s %s %s\n" % (self.column_names[0], self.operation, column_value)
         else:
             return ""
 

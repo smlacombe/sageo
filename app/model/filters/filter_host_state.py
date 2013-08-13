@@ -8,6 +8,7 @@ STATE_CODES = { FILTER_HOST_STATE + '_up': 0 , FILTER_HOST_STATE + '_down': 1 , 
 class FilterHostState(Filter): 
     def __init__(self, name, title, descr): 
         Filter.__init__(self, name, title, descr) 
+        self.column_names = ['host_has_been_checked', 'host_state']
     def filter(self, states):
         """
             Filter host states.

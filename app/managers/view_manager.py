@@ -10,6 +10,8 @@ from app.lib.datasources import multisite_datasources as datasources
 from app.managers.filters_manager import FiltersManager
 from app.model.columns.builtin import painters, get_columns_pairs
 from app.model.filters.filter_fields_info import FilterFieldsInfo
+from app.model.filters.builtin import filters
+from app.model.columns.builtin import painters
 import copy
 
 class ViewManager():
@@ -108,15 +110,22 @@ class ViewManager():
     def get_groupers(self):
         return self.__groupers
     
-    def get_filter_display(sel,form):
+    def get_filter_display(self, form):
         lst_columns = cache_columns 
         lst_info = []
-        for option, col_names in lst_columns.iteritems():
-            option_field = getattr(form, option)
-            fields = []
-            for col in col_names: 
-                fields.append(getattr(form, col))
-            lst_info.append(FilterFieldsInfo(option_field, fields))
+        for option, fil_col_names in lst_columns.iteritems():
+            filter_name = option.replace("_option","")
+            col_names = filters[filter_name].column_names
+            filter_datasources = []
+            for col_name in col_names:
+                if painters.has_key(col_name):
+                    filter_datasources = filter_datasources + painters[col_name].datasources
+                if self.__view.datasource in filter_datasources:
+                    option_field = getattr(form, option)
+                    fields = []
+                    for col in fil_col_names: 
+                        fields.append(getattr(form, col))
+                    lst_info.append(FilterFieldsInfo(option_field, fields))
         return lst_info
     
     def get_view(self):
