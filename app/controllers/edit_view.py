@@ -77,10 +77,10 @@ def edit_view():
             view = view_manager.get_view()
             form = ViewForm(csrf_enabled=True, obj=view) 
             form.populate_obj(view)
-            form.set_columns_choices(view_manager.get_columns_choices(), update=True)
             form.columns.append_entry()
             add_default_sorters(form)
             add_default_groupers(form)
+            form.set_columns_choices(view_manager.get_columns_choices(), update=True)
     elif request.method=='POST':
         link_name = session['link_name']
         if link_name:
