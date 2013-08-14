@@ -8,6 +8,9 @@ Sageo is a rewriting of [check_mk multisite](http://mathias-kettner.de/checkmk_m
 - Able to browse many sites at a time
 - Easy to maintain 
 - Using up to date technologies 
+- Lightweight
+
+Sageo reimplement the view customization feature of check_mk. 
 
 Sageo offers many advantages over by check_mk multisite:
 
@@ -61,7 +64,7 @@ Global application
 - Easily web forms creation according to the DB model
 - Content and logic separated from presentation
 
-Upcomming features
+Upcoming features
 ------------
 Views
 
