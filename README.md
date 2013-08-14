@@ -134,5 +134,5 @@ lessc less/main.less main.css
 Launch server
 <pre><code>python run.py
 </code></pre>
-
 Go to : http://127.0.0.1:5000
+The default username and the default password is 'admin' and 'jobs' respectively.
