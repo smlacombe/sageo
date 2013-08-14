@@ -76,8 +76,6 @@ Views
 Views templates
 
 - Single dataset
-- Balanced boxes
-- Tiles
 
 Snapins
 
