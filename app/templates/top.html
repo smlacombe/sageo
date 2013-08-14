@@ -1,18 +1,14 @@
 <a href="#" class="brand">{{ _('Sageo') }}</a>
 <div class="nav-collapse">
 <ul class="nav">
-<li class="active"><a href="#">Home</a></li>
-<li><a href="#about">About</a></li>
-<li><a href="#contact">Contact</a></li>
 </ul>
 
 <ul class="nav pull-right">    
 <li class="dropdown" id="fat-menu">
-<a data-toggle="dropdown" class="dropdown-toggle" role="button" id="drop3" href="#">{{ _('Hi') }} {{ current_user.username }}<b class="caret"></b></a>
+<a data-toggle="dropdown" class="dropdown-toggle" role="button" id="drop3" href="#"><i class="icon-user"></i> {{ current_user.username }}<b class="caret"></b></a>
 <ul aria-labelledby="drop3" role="menu" class="dropdown-menu">
 <li role="presentation"><a href="/logout" role="menuitem"><i class="icon-off"></i> {{ _('Logout') }}</a></li>
 <li role="presentation"><a href="/profile" role="menuitem"><i class="icon-pencil"></i> {{ _('Edit profile') }}</a></li>
-<li role="presentation"><a href="#" role="menuitem">Something else here</a></li>
 <li class="divider" role="presentation"></li>
 <li role="presentation"><a href="#" role="menuitem">Separated link</a></li>
 </ul>

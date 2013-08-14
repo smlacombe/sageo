@@ -3,6 +3,7 @@
 {% set fieldargs={'class': 'hide'} %}
 
 {%- macro text_filter(field, option_field, show_label, show_option) -%}
+    {% if show_option %} {{ lib.control_group() }} {% endif %} 
         {% if show_label %} <span class="control-label">{{ option_field.label }}</span> {% endif %}
         {{ lib.controls(inline=True, otherclass='filter') }}
             {% if show_option %}
@@ -17,9 +18,11 @@
                 {{ lib.field_error(field) }}
             </div>
         </div>
+    {% if show_option %} </div> {% endif %}
 {%- endmacro %}
 
 {%- macro checkbox_filter(fields, option_field, show_label, show_option) -%}
+    {% if show_option %} {{ lib.control_group() }} {% endif %} 
        {% if show_option %}<span class="control-label">{{ option_field.label }}</span>{% endif %}
         {{ lib.controls(inline=True, otherclass='filter') }}
             {% if show_option %}
@@ -37,9 +40,11 @@
                 {% endfor %}
             </div>
         </div>
+    {% if show_option %} </div> {% endif %}
 {%- endmacro %}
 
 {%- macro radio_filter(field, option_field, show_label, show_option) -%}
+    {% if show_option %} {{ lib.control_group() }} {% endif %} 
         {% if show_label %} <span class="control-label">{{ option_field.label }}</span> {% endif %}
         {{ lib.controls(inline=True, otherclass='filter') }}
             {% if show_option %}
@@ -53,4 +58,5 @@
                 {{ lib.print_radiofield(field) }}
             </div>
         </div>
+    {% if show_option %} </div> {% endif %}
 {%- endmacro %}

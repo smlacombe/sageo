@@ -16,12 +16,12 @@ LANGUAGES = {
 }
 
 SITES = {
-  "Mac mini": {
+  "Site 1": {
      "alias":          "Shinken mac mini",
-     "socket":         "tcp:192.168.50.137:50000",
-     "url_prefix":     "http://192.168.50.137",
+     "socket":         "tcp:192.168.50.43:50001",
+     "url_prefix":     "http://192.168.50.43",
    },
-  "Production": {
+  "Site 2": {
      "alias":          "Shinken demo",
      "socket":         "tcp:192.168.50.43:50000",
      "url_prefix":     "http://192.168.50.43",

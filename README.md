@@ -88,13 +88,6 @@ Users
 - User privileges
 - Login configuration
 
-Global application
-
-- Display easily external content with a framed mode.
-- Localizable
-- Easily web forms creation according to the DB model
-- Content and logic separated from presentation
-
 Installation
 ------------
 
