@@ -13,13 +13,10 @@ Installation
 ------------
 
 # Dependencies
-<pre><code>
-sudo aptitude install python-virtualenv
-</code></pre>
+<pre><code>sudo aptitude install python-virtualenv</code></pre>
 
 # Installation
-<pre><code>
-virtualenv env
+<pre><code>virtualenv env
 . env/bin/activate
 git clone https://github.com/smlacombe/sageo.git
 cd sageo
@@ -30,14 +27,12 @@ python db_create.py
 
 # Configuration
 Add your broker address
-<pre><code>
-vim config.py
+<pre><code>vim config.py
 </code></pre>
 
 # Run server
 Launch server
-<pre><code>
-python run.py
+<pre><code>python run.py
 </code></pre>
 
 Go to : http://127.0.0.1:5000
