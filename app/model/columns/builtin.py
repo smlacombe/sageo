@@ -50,3 +50,10 @@ def get_columns_name(datasources=None):
             column_names.append(col.name)
     column_names.append('')
     return sorted(column_names)
+
+def get_datasources_available():
+    lst_datasources = []
+    for name, col in painters.iteritems():
+        lst_datasources += col.datasources
+    return list(set(lst_datasources))
+
