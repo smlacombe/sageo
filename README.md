@@ -34,6 +34,19 @@ Add your broker address
 vim config.py
 </code></pre>
 
+# Compile LESS files (CSS)
+You need first to install LESS compiler (LESSC command)
+Debian based:
+<pre><code>
+apt-get install lessc
+</pre></code>
+
+Compile LESS files
+<pre><code>
+cd app/static/css
+lessc less/main.less main.css
+</code></pre>
+
 # Run server
 Launch server
 <pre><code>
