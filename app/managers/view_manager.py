@@ -107,6 +107,12 @@ class ViewManager():
     def get_sorters(self):
         return self.__sorters
 
+    def get_sorters_columns(self):
+        lst_columns = []
+        for sorter in self.__sorters:
+            lst_columns.append(sorter.column)
+        return lst_columns
+
     def get_groupers(self):
         return self.__groupers
     

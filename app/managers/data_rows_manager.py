@@ -45,6 +45,7 @@ class DataRowsManager():
         columns_name = self.get_asked_columns_name()
         filters_string = self.__filters_manager.get_filter_query() 
         print '\nfilters: ' + filters_string
+        columns_name += self.__view_manager.get_sorters_columns()
         rows = livestatus_query.get_rows(datasource, columns_name, filters_string)         
 
         if not rows == []:
