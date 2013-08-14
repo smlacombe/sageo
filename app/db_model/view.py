@@ -11,6 +11,7 @@ from app.model.filters.builtin import FILTER_EXACT_MATCH
 from app.model.filters.builtin import FILTER_HOST_STATE
 from app.model.filters.builtin import FILTER_IS_SUMMARY_HOST
 from app.lib.datasources import multisite_datasources
+from app.model.columns.builtin import get_datasources_available
 
 
 _ = lazy_gettext
@@ -19,8 +20,9 @@ datasource_choices = []
 enum_list = []
 
 for name, data in multisite_datasources.iteritems():
-    datasource_choices.append((name, data['title']))
-    enum_list.append(name)
+    if name in get_datasources_available():
+        datasource_choices.append((name, data['title']))
+        enum_list.append(name)
 
 datasource_choices = sorted(datasource_choices, key=lambda tup: tup[1])
 enum_col = Enum(*enum_list)
