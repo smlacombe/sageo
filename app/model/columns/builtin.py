@@ -19,7 +19,7 @@ painters = {}
 
 painters[COL_HOST_NAME] = ColumnPainterRaw(COL_HOST_NAME, _(u'Host name'), _(u'Host name'), ['hosts', 'services']) 
 
-nagios_host_states = {0 : 'UP', 1: 'DOWN', 2: 'UNREACHABLE'}
+nagios_host_states = {0 : 'UP', 1: 'DOWN', 2: 'UNREACH'}
 painters[COL_HOST_STATE] = ColumnPainterState(COL_HOST_STATE, _(u'Host state'), _(u'Host state'), ['hosts', 'services'], nagios_host_states)
 
 nagios_service_states = {0 : 'OK', 1: 'WARNING', 2: 'CRITICAL', 3: 'UNKNOWN'}

@@ -22,9 +22,9 @@ SITES = {
      "url_prefix":     "http://192.168.50.137",
    },
   "Production": {
-     "alias":          "Shinken prod",
-     "socket":         "tcp:192.168.52.44:50000",
-     "url_prefix":     "http://192.168.52.44",
+     "alias":          "Shinken demo",
+     "socket":         "tcp:192.168.50.43:50000",
+     "url_prefix":     "http://192.168.50.43",
    },
 
 }

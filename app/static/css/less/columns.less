@@ -22,6 +22,14 @@ span.col.host_state.DOWN, span.col.service_state.CRITICAL
 background-color:#FF2200;
 }
 
+span.col.host_state.UNREACH, span.col.service_state.UNKNOWN
+{
+.badge;
+.badge-important;
+.center-badge;
+background-color:#FF9E00;
+}
+
 span.col.service_state.WARNING
 {
 .badge;

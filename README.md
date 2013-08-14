@@ -14,7 +14,7 @@ Sageo reimplement the view customization feature of check_mk.
 
 Sageo offers many advantages over by check_mk multisite:
 
-- Sageo doesn't use deprecated apache modules like mod_python or any others.
+- Sageo doesn't use the deprecated apache modules mod_python.
 - Sageo is MVC oriented, that means the content and the business logic is seperated from presentation.
 
 Sageo is compatible with all monitoring plateforms providing a livestatus interropability, like Icinga, Nagios, Shinken, etc. 
