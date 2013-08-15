@@ -84,10 +84,20 @@ Utilisateurs
 - Privilèges des utilisateurs
 - Changement du login et des options personnelles
 
+Captures d'écran
+------------
+
+![](../screenshots/SageoEdit view - Sageo.png?raw=true)
+
+![](../screenshots/Sélection_001.png?raw=true)
+
+![](../screenshots/Sélection_003.png?raw=true)
+
+
 Installation
 ------------
 
-# Dependencies
+# Dépendances
 <pre><code>sudo aptitude install python-virtualenv</code></pre>
 
 # Installation
@@ -101,28 +111,27 @@ python db_create.py
 
 
 # Configuration
-Add your broker address
+Ajouter l'adresse de votre broker
 <pre><code>vim config.py
 </code></pre>
 
-# Compile LESS files (CSS)
-You need first to install LESS compiler (LESSC command)
+# Compiler les fichiers LESS (CSS)
+Vous devant avant tout installer le compilateur LESS (Commande LESSC)
 
-Debian based:
+Pour les distributions basées sur Debian:
 <pre><code>
 apt-get install lessc
 </pre></code>
 
-Compile LESS files
+Compiler les fichiers LESS
 <pre><code>
 cd app/static/css
 lessc less/main.less main.css
 </code></pre>
 
-# Run server
-Launch server
+# Démarrer le serveur
 <pre><code>python run.py
 </code></pre>
-Go to : http://127.0.0.1:5000
-The default username and the default password is 'admin' and 'jobs' respectively.
+Ouvrir le navigateur et aller à: http://127.0.0.1:5000
+Le nom d'utilisateur et le mot de passe par défaut est "admin" et "jobs" respectivement.
 
