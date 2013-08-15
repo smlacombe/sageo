@@ -96,13 +96,16 @@ Screenshots
 ![](doc/screenshots/Sélection_003.png?raw=true)
 
 
+# Installation
+
+Dependencies
+------------
+
+<pre><code>sudo aptitude install python-virtualenv</code></pre>
+
 Installation
 ------------
 
-# Dependencies
-<pre><code>sudo aptitude install python-virtualenv</code></pre>
-
-# Installation
 <pre><code>virtualenv env
 . env/bin/activate
 git clone https://github.com/smlacombe/sageo.git
@@ -112,12 +115,16 @@ python db_create.py
 </code></pre>
 
 
-# Configuration
+Configuration
+------------
+
 Add your broker address
 <pre><code>vim config.py
 </code></pre>
 
-# Compile LESS files (CSS)
+Compile LESS files (CSS)
+------------
+
 You need first to install LESS compiler (LESSC command)
 
 Debian based:
@@ -131,7 +138,9 @@ cd app/static/css
 lessc less/main.less main.css
 </code></pre>
 
-# Run server
+Run server
+------------
+
 Launch server
 <pre><code>python run.py
 </code></pre>
