@@ -13,7 +13,7 @@ class SnapinAbout(SnapinBase):
         self.mydomain = Domain(self.translations_path)
         _ = self.mydomain.lazy_gettext
         self.title = _(u'About Sageo')
-        self.description = _(u'Version information and Links to Documentation, Homepage and Download of Check_MK')
+        self.description = _(u'Version information and Links to Documentation, Homepage and Download of Sageo')
         self.version = "0.1"
         self.name = "about"
  

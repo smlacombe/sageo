@@ -1,9 +1,14 @@
+=====
 Sageo
 =====
 
 Presentation
-------------
-Sageo est une réécriture de l'interface web [check_mk multisite](http://mathias-kettner.de/checkmk_multisite.html). Le projet Sageo est né avec l'idée d'avoir une interface web de supervision qui est à la fois: 
+-------- 
+
+Sageo est une réécriture de l'interface web `check_mk_ multisite
+<http://mathias-kettner.de/checkmk_multisite.html/>`_.
+
+Le projet Sageo est né avec l'idée d'avoir une interface web de supervision qui est à la fois: 
 
 - Capable de gérer plusieurs sites à la fois
 - Facile à maintenir
@@ -30,7 +35,8 @@ Les principales technologies utilisées sont:
 - WTFORMS-ALCHEMY
 
 Fonctionnalités
-------------
+-------- 
+
 Vues
 
 - Édition de vues
@@ -63,7 +69,8 @@ Application générale
 - Facilité de créer des formulaires web à partir du modèle de la BD 
 
 Fonctionnalités à venir
-------------
+-------- 
+
 Vues
 
 - Gestion des droits
@@ -85,62 +92,87 @@ Utilisateurs
 - Changement du login et des options personnelles
 
 Captures d'écran
-------------
+-------- 
+.. image:: https://raw.github.com/smlacombe/sageo/master/doc/screenshots/allhosts.png 
+    :alt: Vue all hosts 
+    :align: center
 
-![](../screenshots/SageoEdit view - Sageo.png?raw=true)
+.. image:: https://raw.github.com/smlacombe/sageo/master/doc/screenshots/allservices.png 
+    :alt: Vue all services
+    :align: center
 
-![](../screenshots/Sélection_001.png?raw=true)
+.. image:: https://raw.github.com/smlacombe/sageo/master/doc/screenshots/edit_view.png 
+    :alt: Édition de vue
+    :align: center
 
-![](../screenshots/Sélection_003.png?raw=true)
+.. image:: https://raw.github.com/smlacombe/sageo/master/doc/screenshots/views_list.png 
+    :alt: Liste des vues disponibles
+    :align: center
 
-
-# Installation
+=====
+Mise en route
+=====
 
 Dépendances
-------------
+-------- 
 
-<pre><code>sudo aptitude install python-virtualenv</code></pre>
+.. code-block:: bash
+
+    $ sudo aptitude install python-virtualenv 
 
 Installation
-------------
+-------- 
 
-<pre><code>virtualenv env
-. env/bin/activate
-git clone https://github.com/smlacombe/sageo.git
-cd sageo
-pip install -r requirements.txt
-python db_create.py
-</code></pre>
+.. code-block:: bash
 
+    $ virtualenv env
+    $ . env/bin/activate
+    $ git clone https://github.com/smlacombe/sageo.git
+    $ cd sageo
+    $ pip install -r requirements.txt
+    $ python db_create.py
 
 Configuration
------------
+-------- 
 
 Ajouter l'adresse de votre broker
-<pre><code>vim config.py
-</code></pre>
+
+.. code-block:: bash
+
+    $ vim config.py
 
 Compiler les fichiers LESS (CSS)
-------------
+-------- 
 
 Vous devant avant tout installer le compilateur LESS (Commande LESSC)
 
 Pour les distributions basées sur Debian:
-<pre><code>
-apt-get install lessc
-</pre></code>
+
+.. code-block:: bash
+
+    $ apt-get install lessc
 
 Compiler les fichiers LESS
-<pre><code>
-cd app/static/css
-lessc less/main.less main.css
-</code></pre>
+
+.. code-block:: bash
+
+    $ cd app/static/css
+    $ lessc less/main.less main.css
 
 Démarrer le serveur
-------------
+-------- 
 
-<pre><code>python run.py
-</code></pre>
+.. code-block:: bash
+    $ python run.py
+
 Ouvrir le navigateur et aller à: http://127.0.0.1:5000
 Le nom d'utilisateur et le mot de passe par défaut est "admin" et "jobs" respectivement.
 
+=======================
+Documentation technique
+=======================
+
+Ajout de colonnes
+-----------------
+
+cd app/model/columns
