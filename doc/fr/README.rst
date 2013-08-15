@@ -223,17 +223,23 @@ Pour les colonnes qui ne nécessite pas de conversion pour être lisible par l'u
     $ vi columns/builtin.py 
 
 3. Dans l'entête du fichier, importer la classe « column painter » si ce n'est pas déjà fait.
+
 ex:
+
 .. code-block:: python
     from .column_painter_raw import ColumnPainterRaw
 
 4. Déclarez en constante, le nom de la colonne.
+
 ex:
+
 .. code-block:: python
     COL_HOST_NAME = 'host_name'
 
 5. Stockez le painter dans le dictionnaire « painters »
+
 ex:
+
 .. code-block:: python
     painters[COL_HOST_NAME] = ColumnPainterRaw(COL_HOST_NAME, _(u'Host name'), _(u'Host name'), ['hosts', 'services']) 
 
@@ -259,21 +265,28 @@ Implémenter une classe de filtre si les classes présentes ne suffisent pas.
     $ vi filter/builtin.py 
 
 3. Dans l'entête du fichier, importer la classe « column painter » si ce n'est pas déjà fait.
+
 ex:
+
 .. code-block:: python
     from app.model.filters.filter_text import FilterText
 
 4. Déclarez en constante, le nom du filtre.
+
 ex:
+
 .. code-block:: pytho
     FILTER_HOSTREGEX = 'host_regex'
 
 5. Stockez le filtre dans le dictionnaire « filters »
+
 ex:
+
 .. code-block:: python
     filters[FILTER_HOSTREGEX] = FilterText(FILTER_HOSTREGEX, _("Hostname"), _("Search field allowing regular expressions and partial matches"), ["host_name"], OP_TILDE)
 
 6. S'assurer d'avoir la fonction d'affichage nécessaire pour le type du filtre.  
+
 .. code-block:: bash
     vim app/templates/views/filter_fields.html
 
