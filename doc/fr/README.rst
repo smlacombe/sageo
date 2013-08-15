@@ -284,7 +284,7 @@ Allez dans builtin.py
 
     $ vi filter/builtin.py 
 
-Dans l'entête du fichier, importer la classe « column painter » si ce n'est pas déjà fait.
+Dans l'entête du fichier, importer la classe « filter » si ce n'est pas déjà fait.
 
 ex:
 
