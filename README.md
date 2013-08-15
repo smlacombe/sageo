@@ -86,6 +86,16 @@ Users
 - User privileges
 - Login configuration
 
+Screenshots
+------------
+
+![](doc/screenshots/SageoEdit view - Sageo.png?raw=true)
+
+![](doc/screenshots/Sélection_001.png?raw=true)
+
+![](doc/screenshots/Sélection_003.png?raw=true)
+
+
 Installation
 ------------
 
