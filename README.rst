@@ -1,4 +1,4 @@
-====
+=====
 Sageo
 =====
 
@@ -77,7 +77,7 @@ Global application
 - Content and logic separated from presentation
 
 Upcoming features
-------------
+-----------------
 Views
 
 - Views rights management
