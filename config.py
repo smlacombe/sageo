@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*- 
 import os
 basedir = os.path.abspath(os.path.dirname(__file__))
-SAGEO_VERSION = 0.2
+SAGEO_VERSION = '0.2.1'
 # Flask
 DEBUG = True
 SECRET_KEY = 'development key'

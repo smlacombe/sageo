@@ -30,12 +30,18 @@
     {% if views %}
         {% include 'views/views_list.html' %}  
     {% elif data_rows_manager %}
+        {% set view = data_rows_manager.get_view() %}
         {% set rows = data_rows_manager.get_rows() %}
         {% set groups = data_rows_manager.get_group_columns_list() %}
         {% set rows_count = data_rows_manager.get_rows_count(rows) %}
 
         {% include 'views/view_header.html' %} 
-        {% include 'views/view_rows_table.html' %}
+        {% if view.basic_layout == 'table' %}
+            {% include 'views/view_rows_table.html' %}
+        {% elif view.basic_layout == 'single' %}
+            {% include 'views/view_single_dataset.html' %}
+        {% endif %}
+
     {% else %}
         {{ lib_view.create_button() }}
         <h2>{{ _('No view to display') }}</h2>

@@ -126,6 +126,7 @@
                     <h3><a href="#">{{ _('Layout') }}</a></h3>
                     <div>
                         {{ lib.with_errors(form.layout_number_columns, fieldargs={'placeholder': form.layout_number_columns.default }) }}
+                        {{ lib.with_errors(form.basic_layout) }}
                     </div>
                 </div>
             </div>

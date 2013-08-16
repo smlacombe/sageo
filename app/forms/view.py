@@ -94,6 +94,7 @@ class ViewForm(ModelForm, TranslatedForm):
         view.buttontext = self.buttontext.data
         view.reload_intervall = self.reload_intervall.data
         view.layout_number_columns = self.layout_number_columns.data
+        view.basic_layout = self.basic_layout.data
         return view
     
     def set_columns_choices(self, choices, update=False):

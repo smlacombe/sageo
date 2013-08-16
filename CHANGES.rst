@@ -3,6 +3,10 @@ Changelog
 
 Here you can see the full list of changes between each Sageo release.
 
+0.2.1
+^^^^^
+Add a single dataset layout for views.
+
 0.2.0
 ^^^^^
 

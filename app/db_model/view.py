@@ -26,7 +26,7 @@ from app import babel, app
 from flask import Flask
 
 from app.model.filters.builtin import FILTER_HOSTREGEX
-from app.model.filters.builtin import FILTER_EXACT_MATCH
+from app.model.filters.builtin import FILTER_HOST_EXACT_MATCH
 from app.model.filters.builtin import FILTER_HOST_STATE
 from app.model.filters.builtin import FILTER_IS_SUMMARY_HOST
 from app.lib.datasources import multisite_datasources
@@ -54,7 +54,8 @@ class View(Base):
     datasource = Column(enum_col, nullable=False, info={'disabled': True, 'choices': datasource_choices, 'label':_(u'Datasource')})
     buttontext = Column(String(15), info={'label':_(u'Button text')})
     reload_intervall = Column(SmallInteger, nullable=False, info={'label':_(u'Browser reload')}, default=30)
-    layout_number_columns = Column(SmallInteger, nullable=False, info={'label':_(u'Number of columns')}, default=3)
+    layout_number_columns = Column(SmallInteger, nullable=False, info={'label': _(u'Number of columns')}, default=3)
+    basic_layout = Column(Enum('table','single'), default='table', info={'label': _(u'Basic layout'), 'choices': [('table', _('Table')), ('single',_('Single dataset'))]})
     filters_id = Column(Integer, ForeignKey(ViewFilters.id))
 
     filters = relationship(

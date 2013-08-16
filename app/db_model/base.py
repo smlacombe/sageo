@@ -31,6 +31,7 @@ Base = declarative_base()
 Base.query = db_session.query_property()
 
 from app.db_model.user import User, ROLE_ADMIN, ROLE_USER
+from app.model.columns.builtin import get_columns_name
 from app.db_model.viewColumn import ViewColumn
 from app.db_model.view import View
 from app.db_model.viewFilters import ViewFilters
@@ -56,6 +57,9 @@ def create_default_users():
     db_session.commit()
 
 def create_default_views():
+
+    #######################
+    # All hosts view
     filters = ViewFilters()
     setattr(filters, 'host_regex_option', 'show')
     setattr(filters, 'host_option', 'show')
@@ -65,46 +69,22 @@ def create_default_views():
     db_session.commit()
 
     filters = ViewFilters.query.first()
-    view1 = View()
-    view1.title = 'All hosts'
-    view1.link_name = 'allhosts'
-    view1.datasource = 'hosts'
-    view1.filters_id = filters.id
-    view1.layout_number_columns = 2
-    db_session.add(view1)
+    view = View()
+    view.title = 'All hosts'
+    view.link_name = 'allhosts'
+    view.datasource = 'hosts'
+    view.filters_id = filters.id
+    view.layout_number_columns = 2
+    db_session.add(view)
     db_session.commit()
-    view1 = (View.query.filter_by(link_name=view1.link_name).first())
+    view = (View.query.filter_by(link_name=view.link_name).first())
 
-    col1 = ViewColumn()
-    col1.column = 'host_name'
-    col1.parent_id = view1.id
-    db_session.add(col1)
+    __add_column('last_check', view)
+    __add_column('host_state', view)
+    __add_column('host_name', view)
 
-    col2 = ViewColumn()
-    col2.column = 'host_state'
-    col2.parent_id = view1.id
-    db_session.add(col2)
-
-    col3 = ViewColumn()
-    col3.column = 'last_check'
-    col3.parent_id = view1.id
-    db_session.add(col3)
-    db_session.commit()
-
-    sort1 = ViewSorter()
-    sort1.column = 'host_name'
-    sort1.sorter_option = '1'
-    sort1.parent_id = view1.id
-    db_session.add(sort1)
-    db_session.commit()
-
-    group1 = ViewGrouper()
-    group1.column = 'site'
-    group1.parent_id = view1.id
-    db_session.add(group1)
-    db_session.commit()
-
-
+    #######################
+    # All services view
     filters = ViewFilters()
     setattr(filters, 'host_regex_option', 'show')
     setattr(filters, 'host_option', 'show')
@@ -115,28 +95,75 @@ def create_default_views():
     db_session.commit()
 
     filters = ViewFilters.query.all()[1]
-    view2 = View()
-    view2.title = 'All services'
-    view2.link_name = 'allservices'
-    view2.datasource = 'services'
-    view2.layout_number_columns = 1
-    view2.filters_id = filters.id
-    db_session.add(view2)
+    view = View()
+    view.title = 'All services'
+    view.link_name = 'allservices'
+    view.datasource = 'services'
+    view.layout_number_columns = 1
+    view.filters_id = filters.id
+    db_session.add(view)
     db_session.commit()
 
-    col4 = ViewColumn()
-    col4.column = 'service_description'
-    col4.parent_id = view2.id
-    db_session.add(col4)
+    __add_column('service_description', view)
+    __add_column('service_state', view)
+
+    ##########################
+    # Host view
+    filters = ViewFilters()
+    setattr(filters, 'host_option', 'hide')
+    setattr(filters, 'host_option', 'hide')
+
+    db_session.add(filters)
     db_session.commit()
 
-    col5 = ViewColumn()
-    col5.column = 'service_state'
-    col5.parent_id = view2.id
-    db_session.add(col5)
+    filters = ViewFilters.query.all()[2]
+    view = View()
+    view.title = 'Host'
+    view.link_name = 'host'
+    view.datasource = 'hosts'
+    view.layout_number_columns = 1
+    view.basic_layout = 'single'
+    view.filters_id = filters.id
+    db_session.add(view)
     db_session.commit()
 
+    # add all columns for a host
+    for column in get_columns_name('hosts'): 
+        if column:
+            __add_column(column, view)
 
+    ##########################
+    # Service view
+    filters = ViewFilters()
+    setattr(filters, 'service_option', 'hide')
+    setattr(filters, 'host_option', 'hide')
+
+    db_session.add(filters)
+    db_session.commit()
+
+    filters = ViewFilters.query.all()[3]
+    view = View()
+    view.title = 'Service'
+    view.link_name = 'service'
+    view.datasource = 'services'
+    view.layout_number_columns = 1
+    view.basic_layout = 'single'
+    view.filters_id = filters.id
+    db_session.add(view)
+    db_session.commit()
+
+    # add all columns for a service
+    for column in get_columns_name('services'):
+        if column:
+            __add_column(column, view)
+
+
+def __add_column(name, view):
+    col = ViewColumn()
+    col.column = name 
+    col.parent_id = view.id
+    db_session.add(col)
+    db_session.commit()
 
 
 def clear_db():
