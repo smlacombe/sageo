@@ -1,6 +1,7 @@
 *.db
 *.pyc
 *.swp
+app/build
 data/
 doc/fr/*pdf
 *~
