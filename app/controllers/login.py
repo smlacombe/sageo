@@ -51,7 +51,7 @@ def login():
                 flash(_('This username is disabled!'), 'error')
         else:
             flash(_('Wrong username or password!'), 'error')
-    return render_template('users/login.html', version='0.1', form=form) 
+    return render_template('users/login.html', version=app.config['SAGEO_VERSION'], form=form) 
 
 @login_page.route('/logout')
 @login_required

@@ -14,7 +14,7 @@ class SnapinAbout(SnapinBase):
         _ = self.mydomain.lazy_gettext
         self.title = _(u'About Sageo')
         self.description = _(u'Version information and Links to Documentation, Homepage and Download of Sageo')
-        self.version = "0.1"
+        self.version = app.config["SAGEO_VERSION"]
         self.name = "about"
  
     def context(self):
