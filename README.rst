@@ -16,17 +16,17 @@ Sageo (prononced Sah-gay-oh) is a rewriting of `check_mk_ multisite
 
 The Sageo project started with the idea of having a monitoring web GUI that is:
 
-    - Able to browse many sites at a time
-    - Easy to maintain
-    - Builded with up to date technologies
-    - Lightweight
+- Able to browse many sites at a time
+- Easy to maintain
+- Builded with up to date technologies
+- Lightweight
 
 Sageo reimplements one of the most powerfull features of check_mk: the views customization feature.
 
 Sageo offers these advantages over by check_mk multisite:
 
-    - Sageo doesn't use the deprecated apache module "mod_python".
-    - Sageo is MVC oriented, that means the content and the business logic is seperated from presentation.
+- Sageo doesn't use the deprecated apache module "mod_python".
+- Sageo is MVC oriented, that means the content and the business logic is seperated from presentation.
 
 Sageo is compatible with all monitoring plateforms providing a livestatus interoperability like Icinga, Nagios, Shinken, etc.
 
