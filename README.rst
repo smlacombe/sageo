@@ -341,9 +341,16 @@ Filters are generics, so it is the filters fields types that will determinate ho
 
     $ vim app/templates/lib/views.html
 
+Migrating the database, that will add new filters field in the filters table.
+Go to the projet root directory
+
+.. code-block:: bash
+
+    $ python db_migrate.py 
+
 Restart the server and the new filters will appears in the datasource related views.
 
-Addin snapins
+Adding snapins
 -------------
 
 A snapin consists of a folder with a python file with the same name inside. This file defines a class that inherits from the base class "SnapinBase." It defines a context method to do the processing and return an object to its use in the template of the snapin.

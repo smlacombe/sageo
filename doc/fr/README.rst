@@ -189,7 +189,7 @@ Pour les distributions basées sur Debian:
 
 .. code-block:: bash
 
-    $ apt-get install lessc
+    $ apt-get install node-less
 
 Compiler les fichiers LESS
 
@@ -318,6 +318,13 @@ S'assurer que les templates puissent afficher correctement les filtres.
 .. code-block:: bash
 
     $ vim app/templates/lib/views.html
+
+Migrez la base de données, ce qui va ajouter des champs dans la table de filtres pour le ou les nouveaux filtres.
+Allez au répertoire racine du projet.
+
+.. code-block:: bash
+
+    $ python db_migrate.py 
 
 
 Redémarrer le serveur et les nouveaux filtres apparaîtront dans les vues ayant un datasource relié.
