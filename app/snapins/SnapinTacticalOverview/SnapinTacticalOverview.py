@@ -46,10 +46,7 @@ class SnapinTacticalOverview(SnapinBase):
             "Filter: host_custom_variable_names < _REALNAME\n"
         context['toggle_url'] = "sidebar_openclose.py?name=%s&state=" % 'tactical_overview' 
 
-        try:
-            context['hstdata'] = live.query_summed_stats(host_query)
-            context['svcdata'] = live.query_summed_stats(service_query)
-        except livestatus.MKLivestatusNotFoundError:
-            return "<center>No data from any site</center>"
+        context['hstdata'] = live.query_summed_stats(host_query)
+        context['svcdata'] = live.query_summed_stats(service_query)
 
         return context

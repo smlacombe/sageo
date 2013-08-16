@@ -2,6 +2,7 @@
 *.pyc
 *.swp
 data/
+doc/fr/*pdf
 *~
 *.mo
 app/static/css/*.css

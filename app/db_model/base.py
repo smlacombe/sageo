@@ -38,8 +38,9 @@ def create_default_users():
 
 def create_default_views():
     filters = ViewFilters()
-    for option, col_names in cache_columns.iteritems():
-        setattr(filters, option, 'show')
+    setattr(filters, 'host_regex_option', 'show')
+    setattr(filters, 'host_option', 'show')
+    setattr(filters, 'host_state_option', 'show')
 
     db_session.add(filters)
     db_session.commit()
@@ -86,8 +87,10 @@ def create_default_views():
 
 
     filters = ViewFilters()
-    for option, col_names in cache_columns.iteritems():
-        setattr(filters, option, 'show')
+    setattr(filters, 'host_regex_option', 'show')
+    setattr(filters, 'host_option', 'show')
+    setattr(filters, 'host_state_option', 'show')
+    setattr(filters, 'service_state_option', 'show')
 
     db_session.add(filters)
     db_session.commit()
