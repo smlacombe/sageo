@@ -205,7 +205,7 @@ For Debian based distribution:
 
 .. code-block:: bash
 
-    $ apt-get install less
+    $ apt-get install node-less
 
 
 Compiling stuff
