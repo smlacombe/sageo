@@ -301,8 +301,6 @@ Implement a filter class if these classes are not enough.
 
 Go to builtin.py
 
-Allez dans builtin.py
-
 .. code-block:: bash
 
     $ vi filter/builtin.py
