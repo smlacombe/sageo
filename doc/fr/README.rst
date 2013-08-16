@@ -13,7 +13,7 @@ Sageo
 Présentation
 ************ 
 
-Sageo est une réécriture de l'interface web `check_mk_ multisite
+Sageo (prononcé Sah-gay-oh) est une réécriture de l'interface web `check_mk_ multisite
 <http://mathias-kettner.de/checkmk_multisite.html>`_.
 
 Le projet Sageo est né avec l'idée d'avoir une interface web de supervision qui est à la fois: 
@@ -25,7 +25,7 @@ Le projet Sageo est né avec l'idée d'avoir une interface web de supervision qu
 
 Un des points forts de Sageo est sa réimplémentation du système de vues de check_mk multisite.
 
-Sageo offre de nombreux avantages par rapport à check_mk multisite:
+Sageo offre ces avantages par rapport à check_mk multisite:
 
 - Pas d'utilisation du module apache déprécié 'mod_python'.
 - Orienté MVC, ce qui permet de découpler le contenu et la logique d'affaire de la présentation.
