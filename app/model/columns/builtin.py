@@ -13,11 +13,14 @@ COL_SITE = 'site'
 COL_SERVICE_DESCRIPTION = 'service_description'
 COL_SERVICE_PLUGIN_OUTPUT = 'service_plugin_output'
 COL_STATE_TYPE = 'state_type'
+COL_OUTPUT = 'plugin_output'
 
 _ = gettext
 painters = {}
 
 painters[COL_HOST_NAME] = ColumnPainterRaw(COL_HOST_NAME, _(u'Host name'), _(u'Host name'), ['hosts', 'services']) 
+
+painters[COL_OUTPUT] = ColumnPainterRaw(COL_OUTPUT, _(u'Output'), _(u'Output'), ['hosts', 'services'])
 
 nagios_host_states = {0 : 'UP', 1: 'DOWN', 2: 'UNREACH'}
 painters[COL_HOST_STATE] = ColumnPainterState(COL_HOST_STATE, _(u'Host state'), _(u'Host state'), ['hosts', 'services'], nagios_host_states)
