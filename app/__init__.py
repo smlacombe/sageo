@@ -48,8 +48,8 @@ from controllers.view import view_page
 from controllers.edit_view import edit_view_page
 
 init_engine(app.config['SQLALCHEMY_DATABASE_URI'])
-clear_db()
-init_db()
+#clear_db()
+#init_db()
 
 
 # Module
