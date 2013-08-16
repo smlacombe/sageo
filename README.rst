@@ -57,6 +57,7 @@ Views
 Views templates
 
 - Table aspect
+- Single dataset
 
 Snapins
 
@@ -84,10 +85,6 @@ Views
 - Columns linking
 - Results pagination
 - Commands execution on objects
-
-Views templates
-
-- Single dataset
 
 Snapins
 

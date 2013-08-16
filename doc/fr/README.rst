@@ -58,6 +58,7 @@ Vues
 Apparence des vues
 
 - Apparence de table
+- Apparance d'objet simple (single dataset)
 
 Snapins
 
@@ -86,10 +87,6 @@ Vues
 - Lien des columns (pour se déplacer entre les vues)
 - Pagination des résultats des vues
 - Exécution de commandes livestatus sur les objets supervisés
-
-Apparence des vues
-
-- Objet simple (single dataset)
 
 Snapins
 
