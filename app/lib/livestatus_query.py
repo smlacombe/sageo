@@ -37,7 +37,13 @@ def get_rows(datasource, columns_names, filters_string):
         colset.remove("site")
     columns_names = list(colset)
 
-    rows = query_data(datasource,columns_names, '', filters_string)
+    filters = filters_string.split("\n")
+    only_sites = []
+    for varFilter in filters:
+        if varFilter.startswith("Sites:"):
+            only_sites = varFilter.strip().split(": ")[1:]   
+
+    rows = query_data(datasource, columns_names, '', filters_string, only_sites)
     return rows 
 
 # Retrieve data via livestatus, convert into list of dicts,

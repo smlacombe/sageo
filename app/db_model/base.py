@@ -157,6 +157,35 @@ def create_default_views():
         if column:
             __add_column(column, view)
 
+    ##########################################
+    # CRIT Services of host
+    filters = ViewFilters()
+    setattr(filters, 'service_state_option', 'hard')
+    setattr(filters, 'service_state_ok', False)
+    setattr(filters, 'service_state_warning', False)
+    setattr(filters, 'service_state_critical', True)
+    setattr(filters, 'service_state_unknown', False)
+
+    setattr(filters, 'site_option', 'hide')
+    setattr(filters, 'host_option', 'hide')
+
+    db_session.add(filters)
+    db_session.commit()
+
+    filters = ViewFilters.query.all()[4]
+    view = View()
+    view.title = 'CRIT Services of host'
+    view.link_name = 'host_crit'
+    view.datasource = 'services'
+    view.layout_number_columns = 2
+    view.filters_id = filters.id
+    db_session.add(view)
+    db_session.commit()
+
+    __add_column('service_state', view)
+    __add_column('service_description', view)
+    __add_column('service_plugin_output', view)
+    __add_column('last_check', view) 
 
 def __add_column(name, view):
     col = ViewColumn()

@@ -29,12 +29,14 @@ FILTER_SERVICE_EXACT_MATCH = 'service'
 FILTER_HOST_STATE = 'host_state'
 FILTER_SERVICE_STATE = 'service_state'
 FILTER_IS_SUMMARY_HOST = 'is_summary_host'
+FILTER_SITE = 'site'
 
 from app.model.filters.filter import Filter
 from app.model.filters.filter_text import FilterText
 from app.model.filters.filter_host_state import FilterHostState
 from app.model.filters.filter_service_state import FilterServiceState
 from app.model.filters.filter_nagios_expr import FilterNagiosExpr
+from app.model.filters.filter_site import FilterSite
 
 
 
@@ -42,9 +44,12 @@ filters = {}
 
 # Text filters
 
-filters[FILTER_HOSTREGEX] = FilterText(FILTER_HOSTREGEX, _("Hostname"), _("Search field allowing regular expressions and partial matches"), ["host_name"], OP_TILDE) 
 filters[FILTER_HOST_EXACT_MATCH] = FilterText(FILTER_HOST_EXACT_MATCH, _("Hostname (exact match)"), _("Exact match, used for linking"), ["host_name"], OP_EQUAL)
 filters[FILTER_SERVICE_EXACT_MATCH] = FilterText(FILTER_SERVICE_EXACT_MATCH, _("Service description (exact match)"), _("Exact match, used for linking"), ["service_description"], OP_EQUAL)
+
+filters[FILTER_HOSTREGEX] = FilterText(FILTER_HOSTREGEX, _("Hostname"), _("Search field allowing regular expressions and partial matches"), ["host_name"], OP_TILDE) 
+filters[FILTER_SITE] = FilterSite(FILTER_SITE, _("Site"), _("Site (exact match)")) 
+
 
 # State filters
 filters[FILTER_HOST_STATE] = FilterHostState(FILTER_HOST_STATE, _("Host states"), _("Filter host state")) 

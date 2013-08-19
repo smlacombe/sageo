@@ -42,6 +42,8 @@
                 {% for field in filter_info.fields %}
                     {% if field.type == "TextField" %}
                         {{ lib_fields.text_filter(field, filter_info.option_field, edit_mode, edit_mode) }}
+                    {% elif field.type == "SelectField" %}
+                        {{ lib_fields.select_filter(field, filter_info.option_field, edit_mode, edit_mode) }}
                     {% elif field.type == "RadioField" %}
                         {{ lib_fields.radio_filter(field, filter_info.option_field, edit_mode, edit_mode) }}
                     {% endif %}
