@@ -38,7 +38,7 @@ enum_sorter_options = Enum(*sort_option.keys())
 class ViewSorter(Base):
     __tablename__ = 'view_sorter'
     id = Column(Integer, primary_key=True)
-    column = Column(enum_col, info={'choices':column_choices} )
+    column = Column(enum_col, info={'choices':column_choices, 'label':_(u'Column')} )
     sorter_option = Column(enum_sorter_options, info={'choices':sorted(sort_option.items())})
     parent_id = Column(Integer, ForeignKey(View.id), nullable=False)
     view = relationship(

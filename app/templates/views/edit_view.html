@@ -113,7 +113,12 @@
                                         {{ lib.control_group() }}
                                             {{ lib.field_label(subfield.column) }} 
                                             {{ lib.controls() }}
-                                                {{ lib.print_field(subfield.column) }} <a class="removeRow btn disabled"><i class="icon-trash"></i></a>
+                                                {{ lib.print_field(subfield.column) }}
+                                                <a class="removeRow btn disabled"><i class="icon-trash"></i></a>
+                                            </div>
+                                            {{ lib.field_label(subfield.link) }} 
+                                            {{ lib.controls() }}
+                                                {{ lib.print_field(subfield.link) }} 
                                             </div>
                                         </div>
                                     </li>

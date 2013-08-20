@@ -120,6 +120,22 @@ class ViewManager():
     def get_columns_choices(self):
         return get_columns_pairs(self.__view.datasource)
 
+    def get_links_choices(self):
+        views = View.query.all()
+        links_choices = []
+        links_choices.append(('',''))
+        links_choices += [(x.link_name, x.title) for x in views]
+
+        # remove the current view from the choices
+        if self.__view:
+            link_name = self.__view.link_name
+            if link_name:
+                title = self.__view.title
+                current_tuple = (link_name, title)
+                links_choices.remove(current_tuple)
+        
+        return links_choices 
+
     def get_columns(self):
         return self.__columns
 

@@ -40,9 +40,11 @@ enum_col = Enum(*column_names)
 class ViewColumn(Base):
     __tablename__ = 'view_column'
     id = Column(Integer, primary_key=True)
-    column = Column(enum_col, nullable=False, info={'choices':column_choices} )
+    column = Column(enum_col, nullable=False, info={'choices':column_choices, 'label':_(u'Column')} )
+    link = Column(String(30)) 
     parent_id = Column(Integer, ForeignKey(View.id), nullable=False)
     view = relationship(
         View,
         backref = 'view_column'
     )
+

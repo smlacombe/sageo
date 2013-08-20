@@ -32,12 +32,12 @@ Base.query = db_session.query_property()
 
 from app.db_model.user import User, ROLE_ADMIN, ROLE_USER
 from app.model.columns.builtin import get_columns_name
-from app.db_model.viewColumn import ViewColumn
 from app.db_model.view import View
 from app.db_model.viewFilters import ViewFilters
 from app.db_model.viewGrouper import ViewGrouper
 from app.db_model.viewSorter import ViewSorter
 from app.db_model.viewFilters import cache_columns
+from app.db_model.viewColumn import ViewColumn
 
 def init_engine(db_uri):
     global db_engine

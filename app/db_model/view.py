@@ -76,5 +76,3 @@ class View(Base):
         self.reload_intervall = view.reload_intervall
         self.layout_number_columns = view.layout_number_columns
         '''
-
-

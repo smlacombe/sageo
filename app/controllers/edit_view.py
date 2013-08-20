@@ -55,6 +55,7 @@ def edit_view():
                 form = ViewForm(csrf_enabled=True, obj=view)
                 form.populate_obj(view)
                 form.set_columns_choices(view_manager.get_columns_choices())
+                form.set_links_choices(view_manager.get_links_choices())
                 columns = view_manager.get_columns() 
                 groupers = view_manager.get_groupers()
                 form.set_columns(columns)
@@ -74,7 +75,6 @@ def edit_view():
         else:
             if not datasource:
                 datasource = 'hosts'
-           
             view_manager.set_view_dummy(datasource) 
             view = view_manager.get_view()
             form = ViewForm(csrf_enabled=True, obj=view) 
@@ -83,12 +83,18 @@ def edit_view():
             add_default_sorters(form)
             add_default_groupers(form)
             form.set_columns_choices(view_manager.get_columns_choices(), update=True)
+            form.set_links_choices(view_manager.get_links_choices(), update=True)
     elif request.method=='POST':
         link_name = session['link_name']
         if link_name:
             saved_view = view_manager.set_view(link_name) 
             form = ViewForm(csrf_enabled=True, obj=saved_view)
             #form.populate_obj(saved_view)
+        else:
+            view_manager.set_view_dummy(datasource)
+
+        form.set_links_choices(view_manager.get_links_choices(), update=True)
+        
         if form.validate_on_submit():
             if not link_name:
                 view = form.get_view()

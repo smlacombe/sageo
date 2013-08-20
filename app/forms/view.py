@@ -42,6 +42,8 @@ class ViewColumnForm(ModelForm, TranslatedFormNoCsrf):
     class Meta:
         model = ViewColumn
 
+    link = SelectField()
+
 class ViewGrouperForm(ModelForm, TranslatedFormNoCsrf):
     class Meta:
         model = ViewGrouper
@@ -67,14 +69,21 @@ class ViewForm(ModelForm, TranslatedForm):
     groupers = ModelFieldList(FormField(ViewGrouperForm))
     sorters = ModelFieldList(FormField(ViewSorterForm))
     columns_choices = None 
+    links_choices = None
     filters = ModelFormField(ViewFiltersForm)    
 
     def set_columns(self, columns):
         for column in columns:
             self.columns.append_entry(column) 
             self.columns[-1].column.choices = copy.copy(self.columns_choices)
+            self.columns[-1].link.choices = copy.copy(self.links_choices)
+            ''' 
             if ('','') in self.columns[-1].column.choices:
                 self.columns[-1].column.choices.remove(('',''))
+
+            if ('','') in self.columns[-1].link.choices:
+                self.columns[-1].link.choices.remove(('',''))
+            '''
 
     def set_groupers(self, groupers):
         for grouper in groupers:
@@ -107,11 +116,19 @@ class ViewForm(ModelForm, TranslatedForm):
             for grouper_form in self.groupers:
                 grouper_form.column.choices = choices
 
+    def set_links_choices(self, choices, update=False):
+        self.links_choices = choices
+        if update:
+            for column_form in self.columns:
+                column_form.link.choices = choices
+
+
     def get_columns(self, view_id):
         columns = []
         for column_form in self.columns:
             column = ViewColumn()
             column.column = column_form.column.data
+            column.link = column_form.link.data
             column.parent_id = view_id
             columns.append(column)
         return columns
