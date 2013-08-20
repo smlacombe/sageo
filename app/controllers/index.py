@@ -29,4 +29,4 @@ sageo = current_app
 @index_page.route('/')
 @login_required
 def index():
-    return snapins.render_sidebar_template('main.html', current_user=current_user)
+    return redirect('/view')
