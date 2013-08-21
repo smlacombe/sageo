@@ -20,16 +20,30 @@
 
 
 {% import 'lib/views.html' as lib_view %}
+{% set link_data = data_rows_manager.get_link_data() %}
 
 <div class="row-fluid">
     <table class="table table-striped table-bordered table-condensed">
         <tbody>
             {% for object in rows[0][1] %} 
-                {% for column in data_rows_manager.get_asked_columns_name() %}
+                {% for col_title in data_rows_manager.get_asked_columns_title() %}
+                    {% set colIndex = data_rows_manager.get_asked_columns_title().index(col_title) %}
+                    {% set colName = data_rows_manager.get_asked_columns_name()[colIndex] %}
+
                 <tr>
-                    {% set value = object[column] %}
-                    <td><span>{{ column }}</span></td>
-                    <td><span class="col {{column}} {{value}}">{{ value }}</span></td>
+                    {% set value = object[colName] %}
+                    {% if link_data.has_key(colName) %}
+                        {% set link = controller.get_view_link(link_data[colName], object) %}
+                    {% else %}
+                        {% set link = "" %}
+                    {% endif %}
+
+                    <td><span>{{ col_title }}</span></td>
+                    <td>
+                        {% if link %}<a href="{{link}}">{% endif %}
+                            <span class="col {{column}} {{value}}">{{ value }}</span>
+                        {% if link %}</a>{% endif %}
+                    </td>
                 </tr>
                 {% endfor %}
                 <tr>

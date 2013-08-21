@@ -23,6 +23,7 @@
 
 {% set layout_cols = data_rows_manager.get_view().layout_number_columns %}
 {% set spanCol = (12 / layout_cols)|int %}
+{% set link_data = data_rows_manager.get_link_data() %}
 
     {% for group in rows %}
         {% if not group[0] == () %}
@@ -72,7 +73,16 @@
                                 <tr>
                                     {% for elem in data_rows_manager.get_asked_columns_name() %}
                                     {% set value = group[1][row_number][elem] %}
-                                        <td class="col {{elem}} {{value}}"><span class="col {{elem}} {{value}}">{{ value }}</span></td>
+                                        {% if link_data.has_key(elem) %}
+                                            {% set link = controller.get_view_link(link_data[elem], group[1][row_number]) %}
+                                        {% else %}
+                                            {% set link = "" %}
+                                        {% endif %}
+                                        <td class="col {{elem}} {{value}}">
+                                            {% if link %}<a href="{{link}}">{% endif %}
+                                                <span class="col {{elem}} {{value}}">{{ value }}</span>
+                                            {% if link %}</a>{% endif %}
+                                        </td>
                                     {% endfor %}
                                 </tr>
                             {% endfor %}

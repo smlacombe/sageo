@@ -128,4 +128,8 @@ def add_to_cur_url(request, objs):
     param = urllib.urlencode(query_param)
     return request.base_url + '?' + param
 
+def get_view_link(link_details, row):
+    query_param = dict([(k[0], row[k[1]]) for k in link_details['filters']])
+    query_param['link_name'] = link_details['link_name']
+    return request.base_url + '?'+urllib.urlencode(query_param)
 

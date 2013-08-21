@@ -21,7 +21,6 @@ from flask import Flask, request, session, g, redirect, url_for, \
 from flask.ext.babelex import gettext, ngettext
 from flask.ext.login import LoginManager, login_user, logout_user, \
     current_user, login_required
-
 from app.db_model.base import db_session
 from app.db_model.user import User
 from app.db_model.viewColumn import ViewColumn
@@ -126,3 +125,5 @@ def add_default_sorters(form):
 def add_default_groupers(form):
     if len(form.groupers) == 0:
         form.groupers.append_entry()
+
+

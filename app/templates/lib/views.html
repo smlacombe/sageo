@@ -52,3 +52,11 @@
         {% endif %}
     {% endfor %}
 {%- endmacro %}
+
+{% macro get_view_link(link_data, col, row, controller) -%}
+    {% if link_data.has_key(col) %}
+        {{controller.get_view_link(link_data[col], row)}}
+    {% else %}
+        ""
+    {% endif %}
+{%- endmacro %} 

@@ -57,6 +57,22 @@ class DataRowsManager():
                 group_list.append(group.column)
         return group_list
 
+    def get_link_data(self):
+        link_data = {}
+        columns = self.__view_manager.get_columns()
+        for col in columns:
+            if col.link:
+                linked_view_manager = ViewManager()
+                linked_view_manager.set_view(col.link)
+                link_details = {}
+                hidden_filters = linked_view_manager.get_hidden_filters()
+                link_details['link_name'] = col.link
+                link_details['filters'] = hidden_filters 
+                link_data[col.column] = link_details 
+
+        return link_data
+        
+
     def get_rows(self):
         """ get rows corresponding to the query builded with the view and its options """
         # prepare basic parameter datasource and columns_name

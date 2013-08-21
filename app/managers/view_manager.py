@@ -117,6 +117,17 @@ class ViewManager():
     def get_filters(self):
         return self.__filters
 
+    def get_hidden_filters(self):
+        filters_tuples = []
+        filters_obj = self.__filters
+        for option, fil_col_names in cache_columns.iteritems():
+            if getattr(filters_obj, option) == 'hide':
+                filter_name = option.replace("_option","")
+                column_name = filters[filter_name].column_names  
+                filters_tuples.append((filter_name, column_name[0])) 
+        return filters_tuples 
+
+
     def get_columns_choices(self):
         return get_columns_pairs(self.__view.datasource)
 
