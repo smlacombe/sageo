@@ -3,6 +3,13 @@ Changelog
 
 Here you can see the full list of changes between each Sageo release.
 
+0.3.0
+^^^^^
+Add the view linking feature.
+Add a description and a link_title field for views.
+In the single dataset layout, the columns names are now columns titles instead columns raw names.
+
+
 0.2.1
 ^^^^^
 Add a single dataset layout for views.
