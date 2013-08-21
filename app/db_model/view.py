@@ -51,6 +51,8 @@ class View(Base):
     id = Column(Integer, primary_key = True)
     title = Column(String(30), nullable=False, index = True, unique = True, info={'label':_(u'Title')})
     link_name = Column(String(30), nullable=False, unique=True, info={'label':_(u'Link name')})
+    link_title = Column(String(30), info={'label':_(u'Link title (linking)')})
+    description = Column(Text(200), info={'label':_(u'Description')})
     datasource = Column(enum_col, nullable=False, info={'disabled': True, 'choices': datasource_choices, 'label':_(u'Datasource')})
     buttontext = Column(String(15), info={'label':_(u'Button text')})
     reload_intervall = Column(SmallInteger, nullable=False, info={'label':_(u'Browser reload')}, default=30)

@@ -21,6 +21,7 @@ from sqlalchemy import *
 from sqlalchemy.orm import *
 from sqlalchemy.ext.declarative import declarative_base
 from flask.ext.sqlalchemy import SQLAlchemy
+from flask.ext.babelex import gettext, ngettext
 from app import babel, app
 from flask import Flask
 
@@ -38,6 +39,8 @@ from app.db_model.viewGrouper import ViewGrouper
 from app.db_model.viewSorter import ViewSorter
 from app.db_model.viewFilters import cache_columns
 from app.db_model.viewColumn import ViewColumn
+
+_ = gettext
 
 def init_engine(db_uri):
     global db_engine
@@ -72,6 +75,7 @@ def create_default_views():
     view = View()
     view.title = 'All hosts'
     view.link_name = 'allhosts'
+    view.description = 'Overall state of allhosts, with counts of services in the various states.'
     view.datasource = 'hosts'
     view.filters_id = filters.id
     view.layout_number_columns = 2
@@ -79,9 +83,9 @@ def create_default_views():
     db_session.commit()
     view = (View.query.filter_by(link_name=view.link_name).first())
 
-    __add_column('last_check', view)
+    __add_column('host_name', view, 'host')
     __add_column('host_state', view)
-    __add_column('host_name', view)
+    __add_column('last_check', view)
 
     #######################
     # All services view
@@ -98,45 +102,51 @@ def create_default_views():
     view = View()
     view.title = 'All services'
     view.link_name = 'allservices'
+    view.description = _('All services grouped\r\nby hosts.')
     view.datasource = 'services'
     view.layout_number_columns = 1
     view.filters_id = filters.id
     db_session.add(view)
     db_session.commit()
 
-    __add_column('service_description', view)
+    __add_column('service_description', view, 'service')
     __add_column('service_state', view)
+    __add_group_by('site', view)
+    __add_group_by('host_name', view)
 
     ##########################
     # Host view
     filters = ViewFilters()
     setattr(filters, 'host_option', 'hide')
-    setattr(filters, 'host_option', 'hide')
+    setattr(filters, 'site_option', 'hide')
 
     db_session.add(filters)
     db_session.commit()
 
     filters = ViewFilters.query.all()[2]
     view = View()
-    view.title = 'Host'
+    view.title = 'Services of Host'
     view.link_name = 'host'
-    view.datasource = 'hosts'
+    view.datasource = 'services'
+    view.description = _('All services of a given host.')
+    view.link_title = _('Services')
     view.layout_number_columns = 1
-    view.basic_layout = 'single'
+    view.basic_layout = 'table'
     view.filters_id = filters.id
     db_session.add(view)
     db_session.commit()
 
-    # add all columns for a host
-    for column in get_columns_name('hosts'): 
-        if column:
-            __add_column(column, view)
+    __add_column('service_state', view)
+    __add_column('service_description', view)
+    __add_column('service_plugin_output', view)
+    __add_column('check_command', view)
 
     ##########################
     # Service view
     filters = ViewFilters()
     setattr(filters, 'service_option', 'hide')
     setattr(filters, 'host_option', 'hide')
+    setattr(filters, 'site_option', 'hide')
 
     db_session.add(filters)
     db_session.commit()
@@ -145,7 +155,9 @@ def create_default_views():
     view = View()
     view.title = 'Service'
     view.link_name = 'service'
+    view.link_title = 'Service details'
     view.datasource = 'services'
+    view.description = 'Status of a single service, to be used for linking'
     view.layout_number_columns = 1
     view.basic_layout = 'single'
     view.filters_id = filters.id
@@ -176,7 +188,9 @@ def create_default_views():
     view = View()
     view.title = 'CRIT Services of host'
     view.link_name = 'host_crit'
+    view.link_title = 'Services: CRIT'
     view.datasource = 'services'
+    view.description = 'All services of a given host that are in state CRIT'
     view.layout_number_columns = 2
     view.filters_id = filters.id
     db_session.add(view)
@@ -187,9 +201,25 @@ def create_default_views():
     __add_column('service_plugin_output', view)
     __add_column('last_check', view) 
 
-def __add_column(name, view):
+def __add_column(name, view, link=""):
     col = ViewColumn()
     col.column = name 
+    col.link = link
+    col.parent_id = view.id
+    db_session.add(col)
+    db_session.commit()
+
+def __add_sort_by(name, view, order=""):
+    col = ViewSorter()
+    col.column = name
+    col.sorter_option = order
+    col.parent_id = view.id
+    db_session.add(col)
+    db_session.commit()
+
+def __add_group_by(name, view):
+    col = ViewGrouper()
+    col.column = name
     col.parent_id = view.id
     db_session.add(col)
     db_session.commit()

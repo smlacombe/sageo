@@ -135,7 +135,11 @@ class ViewManager():
         views = View.query.all()
         links_choices = []
         links_choices.append(('',''))
-        links_choices += [(x.link_name, x.title) for x in views]
+        for x in views:
+            if x.link_title:
+                links_choices.append((x.link_name, x.link_title))
+            else:
+                links_choices.append((x.link_name, x.title))
 
         # remove the current view from the choices
         if self.__view:

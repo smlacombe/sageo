@@ -100,6 +100,8 @@ class ViewForm(ModelForm, TranslatedForm):
         view.title = self.title.data
         view.link_name = self.link_name.data
         view.datasource = self.datasource.data
+        view.description = self.description.data
+        view.link_title = self.link_title.data
         view.buttontext = self.buttontext.data
         view.reload_intervall = self.reload_intervall.data
         view.layout_number_columns = self.layout_number_columns.data

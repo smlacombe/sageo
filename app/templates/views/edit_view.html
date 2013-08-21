@@ -43,7 +43,9 @@
                     <div> 
                         {{ lib.with_errors(form.title) }} 
                         {{ lib.with_errors(form.link_name) }}
+                        {{ lib.with_errors(form.link_title) }}
                         {{ lib.with_errors(form.datasource, fieldargs={'disabled':"disabled"}) }}
+                        {{ lib.with_errors(form.description) }}
                         <input type="hidden" name="{{form.datasource.name}}" value="{{form.datasource.data}}" />
                         {{ lib.with_errors(form.buttontext) }}
                         
