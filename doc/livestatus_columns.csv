@@ -1,0 +1,1566 @@
+﻿A description of the column;description;columns;string
+The name of the column within the table;name;columns;string
+The name of the table;table;columns;string
+The data type of the column (int, float, string, list);type;columns;string
+Whether passive host checks are accepted (0/1);accept_passive_checks;hosts;int
+Whether the current host problem has been acknowledged (0/1);acknowledged;hosts;int
+Type of acknowledgement (0: none, 1: normal, 2: stick);acknowledgement_type;hosts;int
+An optional URL to custom actions or information about this host;action_url;hosts;string
+The same as action_url, but with the most important macros expanded;action_url_expanded;hosts;string
+Whether active checks are enabled for the host (0/1);active_checks_enabled;hosts;int
+IP address;address;hosts;string
+An alias name for the host;alias;hosts;string
+The importance we gave to this host between the minimum 0 and the maximum 5;business_impact;hosts;int
+Nagios command for active host check of this host;check_command;hosts;string
+Whether to check to send a recovery notification when flapping stops (0/1);check_flapping_recovery_notification;hosts;int
+Whether freshness checks are activated (0/1);check_freshness;hosts;int
+Number of basic interval lengths between two scheduled checks of the host;check_interval;hosts;float
+The current check option, forced, normal, freshness... (0-2);check_options;hosts;int
+Time period in which this host will be checked. If empty then the host will always be checked.;check_period;hosts;string
+Type of check (0: active, 1: passive);check_type;hosts;int
+Whether checks of the host are enabled (0/1);checks_enabled;hosts;int
+List of the host/service that depend on this host (logical, network or business one).;child_dependencies;hosts;list
+A list of all direct childs of the host;childs;hosts;list
+A list of the ids of all comments of this host;comments;hosts;list
+A list of the ids of all comments of this host with id, author and comment;comments_with_info;hosts;list
+A list of all contact groups this host is in;contact_groups;hosts;list
+A list of all contacts of this host, either direct or via a contact group;contacts;hosts;list
+The importance we gave to this host between the minimum 0 and the maximum 5;criticity;hosts;int
+Number of the current check attempts;current_attempt;hosts;int
+Number of the current notification;current_notification_number;hosts;int
+A list of the names of all custom variables;custom_variable_names;hosts;list
+A list of the values of the custom variables;custom_variable_values;hosts;list
+A dictionary of the custom variables;custom_variables;hosts;list
+Optional display name of the host - not used by Nagios' web interface;display_name;hosts;string
+A list of the ids of all scheduled downtimes of this host;downtimes;hosts;list
+A list of the all scheduled downtimes of the host with id, author and comment;downtimes_with_info;hosts;list
+Nagios command used as event handler;event_handler;hosts;string
+Whether event handling is enabled (0/1);event_handler_enabled;hosts;int
+Time the host check needed for execution;execution_time;hosts;float
+The value of the custom variable FILENAME;filename;hosts;string
+Delay before the first notification;first_notification_delay;hosts;float
+Whether flap detection is enabled (0/1);flap_detection_enabled;hosts;int
+Whether the host state is an business rule based host or not (0/1);got_business_rule;hosts;int
+A list of all host groups this host is in;groups;hosts;list
+The effective hard state of the host (eliminates a problem in hard_state);hard_state;hosts;int
+Whether the host has already been checked (0/1);has_been_checked;hosts;int
+High threshold of flap detection;high_flap_threshold;hosts;float
+The name of an image file to be used in the web pages;icon_image;hosts;string
+Alternative text for the icon_image;icon_image_alt;hosts;string
+The same as icon_image, but with the most important macros expanded;icon_image_expanded;hosts;string
+List of what the source impact (list of hosts and services);impacts;hosts;list
+Whether this host is currently in its check period (0/1);in_check_period;hosts;int
+Whether this host is currently in its notification period (0/1);in_notification_period;hosts;int
+Initial host state;initial_state;hosts;int
+is there a host check currently running... (0/1);is_executing;hosts;int
+Whether the host state is flapping (0/1);is_flapping;hosts;int
+Whether the host state is an impact or not (0/1);is_impact;hosts;int
+Whether the host state is a problem or not (0/1);is_problem;hosts;int
+Time of the last check (Unix timestamp);last_check;hosts;int
+Last hard state;last_hard_state;hosts;int
+Time of the last hard state change (Unix timestamp);last_hard_state_change;hosts;int
+Time of the last notification (Unix timestamp);last_notification;hosts;int
+State before last state change;last_state;hosts;int
+Time of the last state change - soft or hard (Unix timestamp);last_state_change;hosts;int
+The last time the host was DOWN (Unix timestamp);last_time_down;hosts;int
+The last time the host was UNREACHABLE (Unix timestamp);last_time_unreachable;hosts;int
+The last time the host was UP (Unix timestamp);last_time_up;hosts;int
+Time difference between scheduled check time and actual check time;latency;hosts;float
+Complete output from check plugin;long_plugin_output;hosts;string
+Low threshold of flap detection;low_flap_threshold;hosts;float
+Max check attempts for active host checks;max_check_attempts;hosts;int
+A bitmask specifying which attributes have been modified;modified_attributes;hosts;int
+A list of all modified attributes;modified_attributes_list;hosts;list
+Host name;name;hosts;string
+Scheduled time for the next check (Unix timestamp);next_check;hosts;int
+Time of the next notification (Unix timestamp);next_notification;hosts;int
+Whether to stop sending notifications (0/1);no_more_notifications;hosts;int
+Optional notes for this host;notes;hosts;string
+The same as notes, but with the most important macros expanded;notes_expanded;hosts;string
+An optional URL with further information about the host;notes_url;hosts;string
+Same es notes_url, but with the most important macros expanded;notes_url_expanded;hosts;string
+Interval of periodic notification or 0 if its off;notification_interval;hosts;float
+Time period in which problems of this host will be notified. If empty then notification will be always;notification_period;hosts;string
+Whether notifications of the host are enabled (0/1);notifications_enabled;hosts;int
+The total number of services of the host;num_services;hosts;int
+The number of the host's services with the soft state CRIT;num_services_crit;hosts;int
+The number of the host's services with the hard state CRIT;num_services_hard_crit;hosts;int
+The number of the host's services with the hard state OK;num_services_hard_ok;hosts;int
+The number of the host's services with the hard state UNKNOWN;num_services_hard_unknown;hosts;int
+The number of the host's services with the hard state WARN;num_services_hard_warn;hosts;int
+The number of the host's services with the soft state OK;num_services_ok;hosts;int
+The number of the host's services which have not been checked yet (pending);num_services_pending;hosts;int
+The number of the host's services with the soft state UNKNOWN;num_services_unknown;hosts;int
+The number of the host's services with the soft state WARN;num_services_warn;hosts;int
+The current obsess_over_host setting... (0/1);obsess_over_host;hosts;int
+List of the dependencies (logical, network or business one) of this host.;parent_dependencies;hosts;list
+A list of all direct parents of the host;parents;hosts;list
+Whether a flex downtime is pending (0/1);pending_flex_downtime;hosts;int
+Percent state change;percent_state_change;hosts;float
+Optional performance data of the last host check;perf_data;hosts;string
+Output of the last host check;plugin_output;hosts;string
+Whether there is a PNP4Nagios graph present for this host (0/1);pnpgraph_present;hosts;int
+Poller Tag;poller_tag;hosts;string
+Whether processing of performance data is enabled (0/1);process_performance_data;hosts;int
+Realm;realm;hosts;string
+Number of basic interval lengths between checks when retrying after a soft error;retry_interval;hosts;float
+The number of downtimes this host is currently in;scheduled_downtime_depth;hosts;int
+A list of all services of the host;services;hosts;list
+A list of all services including detailed information about each service;services_with_info;hosts;list
+A list of all services of the host together with state and has_been_checked;services_with_state;hosts;list
+The name of the source problems (host or service);source_problems;hosts;list
+The current state of the host (0: up, 1: down, 2: unreachable);state;hosts;int
+Type of the current state (0: soft, 1: hard);state_type;hosts;int
+The name of in image file for the status map;statusmap_image;hosts;string
+The total number of services of the host;total_services;hosts;int
+The worst hard state of all of the host's services (OK <= WARN <= UNKNOWN <= CRIT);worst_service_hard_state;hosts;int
+The worst soft state of all of the host's services (OK <= WARN <= UNKNOWN <= CRIT);worst_service_state;hosts;int
+3D-Coordinates: X;x_3d;hosts;float
+3D-Coordinates: Y;y_3d;hosts;float
+3D-Coordinates: Z;z_3d;hosts;float
+Whether the service accepts passive checks (0/1);accept_passive_checks;services;int
+Whether the current service problem has been acknowledged (0/1);acknowledged;services;int
+The type of the acknownledgement (0: none, 1: normal, 2: sticky);acknowledgement_type;services;int
+An optional URL for actions or custom information about the service;action_url;services;string
+The action_url with (the most important) macros expanded;action_url_expanded;services;string
+Whether active checks are enabled for the service (0/1);active_checks_enabled;services;int
+The importance we gave to this service between the minimum 0 and the maximum 5;business_impact;services;int
+Nagios command used for active checks;check_command;services;string
+Number of basic interval lengths between two scheduled checks of the service;check_interval;services;float
+The current check option, forced, normal, freshness... (0/1);check_options;services;int
+The name of the check period of the service. It this is empty, the service is always checked.;check_period;services;string
+The type of the last check (0: active, 1: passive);check_type;services;int
+Whether active checks are enabled for the service (0/1);checks_enabled;services;int
+List of the host/service that depend on this service (logical, network or business one).;child_dependencies;services;list
+A list of all comment ids of the service;comments;services;list
+A list of the ids of all comments of this service with id, author and comment;comments_with_info;services;list
+A list of all contact groups this service is in;contact_groups;services;list
+A list of all contacts of the service, either direct or via a contact group;contacts;services;list
+The importance we gave to this service between the minimum 0 and the maximum 5;criticity;services;int
+The number of the current check attempt;current_attempt;services;int
+The number of the current notification;current_notification_number;services;int
+A list of the names of all custom variables of the service;custom_variable_names;services;list
+A list of the values of all custom variable of the service;custom_variable_values;services;list
+A dictionary of the custom variables;custom_variables;services;list
+Description of the service (also used as key);description;services;string
+An optional display name (not used by Nagios standard web pages);display_name;services;string
+A list of all downtime ids of the service;downtimes;services;list
+A list of all downtimes of the service with id, author and comment;downtimes_with_info;services;list
+Nagios command used as event handler;event_handler;services;string
+Whether and event handler is activated for the service (0/1);event_handler_enabled;services;int
+Time the host check needed for execution;execution_time;services;float
+Delay before the first notification;first_notification_delay;services;float
+Whether flap detection is enabled for the service (0/1);flap_detection_enabled;services;int
+Whether the service state is an business rule based host or not (0/1);got_business_rule;services;int
+A list of all service groups the service is in;groups;services;list
+Whether the service already has been checked (0/1);has_been_checked;services;int
+High threshold of flap detection;high_flap_threshold;services;float
+Whether passive host checks are accepted (0/1);host_accept_passive_checks;services;int
+Whether the current host problem has been acknowledged (0/1);host_acknowledged;services;int
+Type of acknowledgement (0: none, 1: normal, 2: stick);host_acknowledgement_type;services;int
+An optional URL to custom actions or information about this host;host_action_url;services;string
+The same as action_url, but with the most important macros expanded;host_action_url_expanded;services;string
+Whether active checks are enabled for the host (0/1);host_active_checks_enabled;services;int
+IP address;host_address;services;string
+An alias name for the host;host_alias;services;string
+Nagios command for active host check of this host;host_check_command;services;string
+Whether to check to send a recovery notification when flapping stops (0/1);host_check_flapping_recovery_notification;services;int
+Whether freshness checks are activated (0/1);host_check_freshness;services;int
+Number of basic interval lengths between two scheduled checks of the host;host_check_interval;services;float
+The current check option, forced, normal, freshness... (0-2);host_check_options;services;int
+Time period in which this host will be checked. If empty then the host will always be checked.;host_check_period;services;string
+Type of check (0: active, 1: passive);host_check_type;services;int
+Whether checks of the host are enabled (0/1);host_checks_enabled;services;int
+A list of all direct childs of the host;host_childs;services;list
+A list of the ids of all comments of this host;host_comments;services;list
+A list of the ids of all comments of this host;host_comments_with_info;services;list
+A list of all contact groups this host is in;host_contact_groups;services;list
+A list of all contacts of this host, either direct or via a contact group;host_contacts;services;list
+Number of the current check attempts;host_current_attempt;services;int
+Number of the current notification;host_current_notification_number;services;int
+A list of the names of all custom variables;host_custom_variable_names;services;list
+A list of the values of the custom variables;host_custom_variable_values;services;list
+A dictionary of the custom variables;host_custom_variables;services;list
+Optional display name of the host - not used by Nagios' web interface;host_display_name;services;string
+A list of the ids of all scheduled downtimes of this host;host_downtimes;services;list
+A list of the all scheduled downtimes of the host with id, author and comment;host_downtimes_with_info;services;list
+Whether event handling is enabled (0/1);host_event_handler_enabled;services;int
+Time the host check needed for execution;host_execution_time;services;float
+The value of the custom variable FILENAME;host_filename;services;string
+Delay before the first notification;host_first_notification_delay;services;float
+Whether flap detection is enabled (0/1);host_flap_detection_enabled;services;int
+A list of all host groups this host is in;host_groups;services;list
+The effective hard state of the host (eliminates a problem in hard_state);host_hard_state;services;int
+Whether the host has already been checked (0/1);host_has_been_checked;services;int
+High threshold of flap detection;host_high_flap_threshold;services;float
+The name of an image file to be used in the web pages;host_icon_image;services;string
+Alternative text for the icon_image;host_icon_image_alt;services;string
+The same as icon_image, but with the most important macros expanded;host_icon_image_expanded;services;string
+Whether this host is currently in its check period (0/1);host_in_check_period;services;int
+Whether this host is currently in its notification period (0/1);host_in_notification_period;services;int
+Initial host state;host_initial_state;services;int
+is there a host check currently running... (0/1);host_is_executing;services;int
+Whether the host state is flapping (0/1);host_is_flapping;services;int
+Time of the last check (Unix timestamp);host_last_check;services;int
+Last hard state;host_last_hard_state;services;int
+Time of the last hard state change (Unix timestamp);host_last_hard_state_change;services;int
+Time of the last notification (Unix timestamp);host_last_notification;services;int
+State before last state change;host_last_state;services;int
+Time of the last state change - soft or hard (Unix timestamp);host_last_state_change;services;int
+The last time the host was DOWN (Unix timestamp);host_last_time_down;services;int
+The last time the host was UNREACHABLE (Unix timestamp);host_last_time_unreachable;services;int
+The last time the host was UP (Unix timestamp);host_last_time_up;services;int
+Time difference between scheduled check time and actual check time;host_latency;services;float
+Complete output from check plugin;host_long_plugin_output;services;string
+Low threshold of flap detection;host_low_flap_threshold;services;float
+Max check attempts for active host checks;host_max_check_attempts;services;int
+A bitmask specifying which attributes have been modified;host_modified_attributes;services;int
+A list of all modified attributes;host_modified_attributes_list;services;list
+Host name;host_name;services;string
+Scheduled time for the next check (Unix timestamp);host_next_check;services;int
+Time of the next notification (Unix timestamp);host_next_notification;services;int
+Whether to stop sending notifications (0/1);host_no_more_notifications;services;int
+Optional notes for this host;host_notes;services;string
+The same as notes, but with the most important macros expanded;host_notes_expanded;services;string
+An optional URL with further information about the host;host_notes_url;services;string
+Same es notes_url, but with the most important macros expanded;host_notes_url_expanded;services;string
+Interval of periodic notification or 0 if its off;host_notification_interval;services;float
+Time period in which problems of this host will be notified. If empty then notification will be always;host_notification_period;services;string
+Whether notifications of the host are enabled (0/1);host_notifications_enabled;services;int
+The total number of services of the host;host_num_services;services;int
+The number of the host's services with the soft state CRIT;host_num_services_crit;services;int
+The number of the host's services with the hard state CRIT;host_num_services_hard_crit;services;int
+The number of the host's services with the hard state OK;host_num_services_hard_ok;services;int
+The number of the host's services with the hard state UNKNOWN;host_num_services_hard_unknown;services;int
+The number of the host's services with the hard state WARN;host_num_services_hard_warn;services;int
+The number of the host's services with the soft state OK;host_num_services_ok;services;int
+The number of the host's services which have not been checked yet (pending);host_num_services_pending;services;int
+The number of the host's services with the soft state UNKNOWN;host_num_services_unknown;services;int
+The number of the host's services with the soft state WARN;host_num_services_warn;services;int
+The current obsess_over_host setting... (0/1);host_obsess_over_host;services;int
+A list of all direct parents of the host;host_parents;services;list
+Whether a flex downtime is pending (0/1);host_pending_flex_downtime;services;int
+Percent state change;host_percent_state_change;services;float
+Optional performance data of the last host check;host_perf_data;services;string
+Output of the last host check;host_plugin_output;services;string
+Whether there is a PNP4Nagios graph present for this host (0/1);host_pnpgraph_present;services;int
+Whether processing of performance data is enabled (0/1);host_process_performance_data;services;int
+Number of basic interval lengths between checks when retrying after a soft error;host_retry_interval;services;float
+The number of downtimes this host is currently in;host_scheduled_downtime_depth;services;int
+A list of all services of the host;host_services;services;list
+A list of all services including detailed information about each service;host_services_with_info;services;list
+A list of all services of the host together with state and has_been_checked;host_services_with_state;services;list
+The current state of the host (0: up, 1: down, 2: unreachable);host_state;services;int
+Type of the current state (0: soft, 1: hard);host_state_type;services;int
+The name of in image file for the status map;host_statusmap_image;services;string
+The total number of services of the host;host_total_services;services;int
+The worst hard state of all of the host's services (OK <= WARN <= UNKNOWN <= CRIT);host_worst_service_hard_state;services;int
+The worst soft state of all of the host's services (OK <= WARN <= UNKNOWN <= CRIT);host_worst_service_state;services;int
+3D-Coordinates: X;host_x_3d;services;float
+3D-Coordinates: Y;host_y_3d;services;float
+3D-Coordinates: Z;host_z_3d;services;float
+The name of an image to be used as icon in the web interface;icon_image;services;string
+An alternative text for the icon_image for browsers not displaying icons;icon_image_alt;services;string
+The icon_image with (the most important) macros expanded;icon_image_expanded;services;string
+List of what the source impact (list of hosts and services);impacts;services;list
+Whether the service is currently in its check period (0/1);in_check_period;services;int
+Whether the service is currently in its notification period (0/1);in_notification_period;services;int
+The initial state of the service;initial_state;services;int
+is there a service check currently running... (0/1);is_executing;services;int
+Whether the service is flapping (0/1);is_flapping;services;int
+Whether the host state is an impact or not (0/1);is_impact;services;int
+Whether the host state is a problem or not (0/1);is_problem;services;int
+The time of the last check (Unix timestamp);last_check;services;int
+The last hard state of the service;last_hard_state;services;int
+The time of the last hard state change (Unix timestamp);last_hard_state_change;services;int
+The time of the last notification (Unix timestamp);last_notification;services;int
+The last state of the service;last_state;services;int
+The time of the last state change (Unix timestamp);last_state_change;services;int
+The last time the service was CRITICAL (Unix timestamp);last_time_critical;services;int
+The last time the service was OK (Unix timestamp);last_time_ok;services;int
+The last time the service was UNKNOWN (Unix timestamp);last_time_unknown;services;int
+The last time the service was in WARNING state (Unix timestamp);last_time_warning;services;int
+Time difference between scheduled check time and actual check time;latency;services;int
+Unabbreviated output of the last check plugin;long_plugin_output;services;string
+Low threshold of flap detection;low_flap_threshold;services;float
+The maximum number of check attempts;max_check_attempts;services;int
+A bitmask specifying which attributes have been modified;modified_attributes;services;int
+A list of all modified attributes;modified_attributes_list;services;list
+The scheduled time of the next check (Unix timestamp);next_check;services;int
+The time of the next notification (Unix timestamp);next_notification;services;int
+Whether to stop sending notifications (0/1);no_more_notifications;services;int
+Optional notes about the service;notes;services;string
+The notes with (the most important) macros expanded;notes_expanded;services;string
+An optional URL for additional notes about the service;notes_url;services;string
+The notes_url with (the most important) macros expanded;notes_url_expanded;services;string
+Interval of periodic notification or 0 if its off;notification_interval;services;float
+The name of the notification period of the service. It this is empty, service problems are always notified.;notification_period;services;string
+Whether notifications are enabled for the service (0/1);notifications_enabled;services;int
+Whether 'obsess_over_service' is enabled for the service (0/1);obsess_over_service;services;int
+List of the dependencies (logical, network or business one) of this service.;parent_dependencies;services;list
+Percent state change;percent_state_change;services;float
+Performance data of the last check plugin;perf_data;services;string
+Output of the last check plugin;plugin_output;services;string
+Whether there is a PNP4Nagios graph present for this service (0/1);pnpgraph_present;services;int
+Poller Tag;poller_tag;services;string
+Whether processing of performance data is enabled for the service (0/1);process_performance_data;services;int
+Number of basic interval lengths between checks when retrying after a soft error;retry_interval;services;float
+The number of scheduled downtimes the service is currently in;scheduled_downtime_depth;services;int
+The name of the source problems (host or service);source_problems;services;list
+The current state of the service (0: OK, 1: WARN, 2: CRITICAL, 3: UNKNOWN);state;services;int
+The type of the current state (0: soft, 1: hard);state_type;services;int
+An optional URL to custom actions or information about the hostgroup;action_url;hostgroups;string
+An alias of the hostgroup;alias;hostgroups;string
+A list of all host names that are members of the hostgroup;members;hostgroups;list
+A list of all host names that are members of the hostgroup together with state and has_been_checked;members_with_state;hostgroups;list
+Name of the hostgroup;name;hostgroups;string
+Optional notes to the hostgroup;notes;hostgroups;string
+An optional URL with further information about the hostgroup;notes_url;hostgroups;string
+The total number of hosts in the group;num_hosts;hostgroups;int
+The number of hosts in the group that are down;num_hosts_down;hostgroups;int
+The number of hosts in the group that are pending;num_hosts_pending;hostgroups;int
+The number of hosts in the group that are unreachable;num_hosts_unreach;hostgroups;int
+The number of hosts in the group that are up;num_hosts_up;hostgroups;int
+The total number of services of hosts in this group;num_services;hostgroups;int
+The total number of services with the state CRIT of hosts in this group;num_services_crit;hostgroups;int
+The total number of services with the state CRIT of hosts in this group;num_services_hard_crit;hostgroups;int
+The total number of services with the state OK of hosts in this group;num_services_hard_ok;hostgroups;int
+The total number of services with the state UNKNOWN of hosts in this group;num_services_hard_unknown;hostgroups;int
+The total number of services with the state WARN of hosts in this group;num_services_hard_warn;hostgroups;int
+The total number of services with the state OK of hosts in this group;num_services_ok;hostgroups;int
+The total number of services with the state Pending of hosts in this group;num_services_pending;hostgroups;int
+The total number of services with the state UNKNOWN of hosts in this group;num_services_unknown;hostgroups;int
+The total number of services with the state WARN of hosts in this group;num_services_warn;hostgroups;int
+The worst state of all of the groups' hosts (UP <= UNREACHABLE <= DOWN);worst_host_state;hostgroups;int
+The worst state of all services that belong to a host of this group (OK <= WARN <= UNKNOWN <= CRIT);worst_service_hard_state;hostgroups;int
+The worst state of all services that belong to a host of this group (OK <= WARN <= UNKNOWN <= CRIT);worst_service_state;hostgroups;int
+An optional URL to custom notes or actions on the service group;action_url;servicegroups;string
+An alias of the service group;alias;servicegroups;string
+A list of all members of the service group as host/service pairs;members;servicegroups;list
+A list of all members of the service group with state and has_been_checked;members_with_state;servicegroups;list
+The name of the service group;name;servicegroups;string
+Optional additional notes about the service group;notes;servicegroups;string
+An optional URL to further notes on the service group;notes_url;servicegroups;string
+The total number of services in the group;num_services;servicegroups;int
+The number of services in the group that are CRIT;num_services_crit;servicegroups;int
+The number of services in the group that are CRIT;num_services_hard_crit;servicegroups;int
+The number of services in the group that are OK;num_services_hard_ok;servicegroups;int
+The number of services in the group that are UNKNOWN;num_services_hard_unknown;servicegroups;int
+The number of services in the group that are WARN;num_services_hard_warn;servicegroups;int
+The number of services in the group that are OK;num_services_ok;servicegroups;int
+The number of services in the group that are PENDING;num_services_pending;servicegroups;int
+The number of services in the group that are UNKNOWN;num_services_unknown;servicegroups;int
+The number of services in the group that are WARN;num_services_warn;servicegroups;int
+The worst soft state of all of the groups services (OK <= WARN <= UNKNOWN <= CRIT);worst_service_state;servicegroups;int
+The additional field address1;address1;contacts;string
+The additional field address2;address2;contacts;string
+The additional field address3;address3;contacts;string
+The additional field address4;address4;contacts;string
+The additional field address5;address5;contacts;string
+The additional field address6;address6;contacts;string
+The full name of the contact;alias;contacts;string
+Whether the contact is allowed to submit commands (0/1);can_submit_commands;contacts;int
+A list of all custom variables of the contact;custom_variable_names;contacts;list
+A list of the values of all custom variables of the contact;custom_variable_values;contacts;list
+A dictionary of the custom variables;custom_variables;contacts;list
+The email address of the contact;email;contacts;string
+The time period in which the contact will be notified about host problems;host_notification_period;contacts;string
+Whether the contact will be notified about host problems in general (0/1);host_notifications_enabled;contacts;int
+Whether the contact is currently in his/her host notification period (0/1);in_host_notification_period;contacts;int
+Whether the contact is currently in his/her service notification period (0/1);in_service_notification_period;contacts;int
+A bitmask specifying which attributes have been modified;modified_attributes;contacts;int
+A list of all modified attributes;modified_attributes_list;contacts;list
+The login name of the contact person;name;contacts;string
+The pager address of the contact;pager;contacts;string
+The time period in which the contact will be notified about service problems;service_notification_period;contacts;string
+Whether the contact will be notified about service problems in general (0/1);service_notifications_enabled;contacts;int
+The alias of the contactgroup;alias;contactgroups;string
+A list of all members of this contactgroup;members;contactgroups;list
+The name of the contactgroup;name;contactgroups;string
+The shell command line;line;commands;string
+The name of the command;name;commands;string
+The contact that scheduled the downtime;author;downtimes;string
+A comment text;comment;downtimes;string
+The duration of the downtime in seconds;duration;downtimes;int
+The end time of the downtime as UNIX timestamp;end_time;downtimes;int
+The time the entry was made as UNIX timestamp;entry_time;downtimes;int
+A 1 if the downtime is fixed, a 0 if it is flexible;fixed;downtimes;int
+Whether passive host checks are accepted (0/1);host_accept_passive_checks;downtimes;int
+Whether the current host problem has been acknowledged (0/1);host_acknowledged;downtimes;int
+Type of acknowledgement (0: none, 1: normal, 2: stick);host_acknowledgement_type;downtimes;int
+An optional URL to custom actions or information about this host;host_action_url;downtimes;string
+The same as action_url, but with the most important macros expanded;host_action_url_expanded;downtimes;string
+Whether active checks are enabled for the host (0/1);host_active_checks_enabled;downtimes;int
+IP address;host_address;downtimes;string
+An alias name for the host;host_alias;downtimes;string
+Nagios command for active host check of this host;host_check_command;downtimes;string
+Whether to check to send a recovery notification when flapping stops (0/1);host_check_flapping_recovery_notification;downtimes;int
+Whether freshness checks are activated (0/1);host_check_freshness;downtimes;int
+Number of basic interval lengths between two scheduled checks of the host;host_check_interval;downtimes;float
+The current check option, forced, normal, freshness... (0-2);host_check_options;downtimes;int
+Time period in which this host will be checked. If empty then the host will always be checked.;host_check_period;downtimes;string
+Type of check (0: active, 1: passive);host_check_type;downtimes;int
+Whether checks of the host are enabled (0/1);host_checks_enabled;downtimes;int
+A list of all direct childs of the host;host_childs;downtimes;list
+A list of the ids of all comments of this host;host_comments;downtimes;list
+A list of all comments of the host with id, author and comment;host_comments_with_info;downtimes;list
+A list of all contact groups this host is in;host_contact_groups;downtimes;list
+A list of all contacts of this host, either direct or via a contact group;host_contacts;downtimes;list
+Number of the current check attempts;host_current_attempt;downtimes;int
+Number of the current notification;host_current_notification_number;downtimes;int
+A list of the names of all custom variables;host_custom_variable_names;downtimes;list
+A list of the values of the custom variables;host_custom_variable_values;downtimes;list
+A dictionary of the custom variables;host_custom_variables;downtimes;list
+Optional display name of the host - not used by Nagios' web interface;host_display_name;downtimes;string
+A list of the ids of all scheduled downtimes of this host;host_downtimes;downtimes;list
+A list of the all scheduled downtimes of the host with id, author and comment;host_downtimes_with_info;downtimes;list
+Whether event handling is enabled (0/1);host_event_handler_enabled;downtimes;int
+Time the host check needed for execution;host_execution_time;downtimes;float
+The value of the custom variable FILENAME;host_filename;downtimes;string
+Delay before the first notification;host_first_notification_delay;downtimes;float
+Whether flap detection is enabled (0/1);host_flap_detection_enabled;downtimes;int
+A list of all host groups this host is in;host_groups;downtimes;list
+The effective hard state of the host (eliminates a problem in hard_state);host_hard_state;downtimes;int
+Whether the host has already been checked (0/1);host_has_been_checked;downtimes;int
+High threshold of flap detection;host_high_flap_threshold;downtimes;float
+The name of an image file to be used in the web pages;host_icon_image;downtimes;string
+Alternative text for the icon_image;host_icon_image_alt;downtimes;string
+The same as icon_image, but with the most important macros expanded;host_icon_image_expanded;downtimes;string
+Whether this host is currently in its check period (0/1);host_in_check_period;downtimes;int
+Whether this host is currently in its notification period (0/1);host_in_notification_period;downtimes;int
+Initial host state;host_initial_state;downtimes;int
+is there a host check currently running... (0/1);host_is_executing;downtimes;int
+Whether the host state is flapping (0/1);host_is_flapping;downtimes;int
+Time of the last check (Unix timestamp);host_last_check;downtimes;int
+Last hard state;host_last_hard_state;downtimes;int
+Time of the last hard state change (Unix timestamp);host_last_hard_state_change;downtimes;int
+Time of the last notification (Unix timestamp);host_last_notification;downtimes;int
+State before last state change;host_last_state;downtimes;int
+Time of the last state change - soft or hard (Unix timestamp);host_last_state_change;downtimes;int
+The last time the host was DOWN (Unix timestamp);host_last_time_down;downtimes;int
+The last time the host was UNREACHABLE (Unix timestamp);host_last_time_unreachable;downtimes;int
+The last time the host was UP (Unix timestamp);host_last_time_up;downtimes;int
+Time difference between scheduled check time and actual check time;host_latency;downtimes;float
+Complete output from check plugin;host_long_plugin_output;downtimes;string
+Low threshold of flap detection;host_low_flap_threshold;downtimes;float
+Max check attempts for active host checks;host_max_check_attempts;downtimes;int
+A bitmask specifying which attributes have been modified;host_modified_attributes;downtimes;int
+A list of all modified attributes;host_modified_attributes_list;downtimes;list
+Host name;host_name;downtimes;string
+Scheduled time for the next check (Unix timestamp);host_next_check;downtimes;int
+Time of the next notification (Unix timestamp);host_next_notification;downtimes;int
+Whether to stop sending notifications (0/1);host_no_more_notifications;downtimes;int
+Optional notes for this host;host_notes;downtimes;string
+The same as notes, but with the most important macros expanded;host_notes_expanded;downtimes;string
+An optional URL with further information about the host;host_notes_url;downtimes;string
+Same es notes_url, but with the most important macros expanded;host_notes_url_expanded;downtimes;string
+Interval of periodic notification or 0 if its off;host_notification_interval;downtimes;float
+Time period in which problems of this host will be notified. If empty then notification will be always;host_notification_period;downtimes;string
+Whether notifications of the host are enabled (0/1);host_notifications_enabled;downtimes;int
+The total number of services of the host;host_num_services;downtimes;int
+The number of the host's services with the soft state CRIT;host_num_services_crit;downtimes;int
+The number of the host's services with the hard state CRIT;host_num_services_hard_crit;downtimes;int
+The number of the host's services with the hard state OK;host_num_services_hard_ok;downtimes;int
+The number of the host's services with the hard state UNKNOWN;host_num_services_hard_unknown;downtimes;int
+The number of the host's services with the hard state WARN;host_num_services_hard_warn;downtimes;int
+The number of the host's services with the soft state OK;host_num_services_ok;downtimes;int
+The number of the host's services which have not been checked yet (pending);host_num_services_pending;downtimes;int
+The number of the host's services with the soft state UNKNOWN;host_num_services_unknown;downtimes;int
+The number of the host's services with the soft state WARN;host_num_services_warn;downtimes;int
+The current obsess_over_host setting... (0/1);host_obsess_over_host;downtimes;int
+A list of all direct parents of the host;host_parents;downtimes;list
+Whether a flex downtime is pending (0/1);host_pending_flex_downtime;downtimes;int
+Percent state change;host_percent_state_change;downtimes;float
+Optional performance data of the last host check;host_perf_data;downtimes;string
+Output of the last host check;host_plugin_output;downtimes;string
+Whether there is a PNP4Nagios graph present for this host (0/1);host_pnpgraph_present;downtimes;int
+Whether processing of performance data is enabled (0/1);host_process_performance_data;downtimes;int
+Number of basic interval lengths between checks when retrying after a soft error;host_retry_interval;downtimes;float
+The number of downtimes this host is currently in;host_scheduled_downtime_depth;downtimes;int
+A list of all services of the host;host_services;downtimes;list
+A list of all services including detailed information about each service;host_services_with_info;downtimes;list
+A list of all services of the host together with state and has_been_checked;host_services_with_state;downtimes;list
+The current state of the host (0: up, 1: down, 2: unreachable);host_state;downtimes;int
+Type of the current state (0: soft, 1: hard);host_state_type;downtimes;int
+The name of in image file for the status map;host_statusmap_image;downtimes;string
+The total number of services of the host;host_total_services;downtimes;int
+The worst hard state of all of the host's services (OK <= WARN <= UNKNOWN <= CRIT);host_worst_service_hard_state;downtimes;int
+The worst soft state of all of the host's services (OK <= WARN <= UNKNOWN <= CRIT);host_worst_service_state;downtimes;int
+3D-Coordinates: X;host_x_3d;downtimes;float
+3D-Coordinates: Y;host_y_3d;downtimes;float
+3D-Coordinates: Z;host_z_3d;downtimes;float
+The id of the downtime;id;downtimes;int
+0, if this entry is for a host, 1 if it is for a service;is_service;downtimes;int
+Whether the service accepts passive checks (0/1);service_accept_passive_checks;downtimes;int
+Whether the current service problem has been acknowledged (0/1);service_acknowledged;downtimes;int
+The type of the acknownledgement (0: none, 1: normal, 2: sticky);service_acknowledgement_type;downtimes;int
+An optional URL for actions or custom information about the service;service_action_url;downtimes;string
+The action_url with (the most important) macros expanded;service_action_url_expanded;downtimes;string
+Whether active checks are enabled for the service (0/1);service_active_checks_enabled;downtimes;int
+Nagios command used for active checks;service_check_command;downtimes;string
+Number of basic interval lengths between two scheduled checks of the service;service_check_interval;downtimes;float
+The current check option, forced, normal, freshness... (0/1);service_check_options;downtimes;int
+The name of the check period of the service. It this is empty, the service is always checked.;service_check_period;downtimes;string
+The type of the last check (0: active, 1: passive);service_check_type;downtimes;int
+Whether active checks are enabled for the service (0/1);service_checks_enabled;downtimes;int
+A list of all comment ids of the service;service_comments;downtimes;list
+A list of all comments of the service with id, author and comment;service_comments_with_info;downtimes;list
+A list of all contact groups this service is in;service_contact_groups;downtimes;list
+A list of all contacts of the service, either direct or via a contact group;service_contacts;downtimes;list
+The number of the current check attempt;service_current_attempt;downtimes;int
+The number of the current notification;service_current_notification_number;downtimes;int
+A list of the names of all custom variables of the service;service_custom_variable_names;downtimes;list
+A list of the values of all custom variable of the service;service_custom_variable_values;downtimes;list
+A dictionary of the custom variables;service_custom_variables;downtimes;list
+Description of the service (also used as key);service_description;downtimes;string
+An optional display name (not used by Nagios standard web pages);service_display_name;downtimes;string
+A list of all downtime ids of the service;service_downtimes;downtimes;list
+A list of all downtimes of the service with id, author and comment;service_downtimes_with_info;downtimes;list
+Nagios command used as event handler;service_event_handler;downtimes;string
+Whether and event handler is activated for the service (0/1);service_event_handler_enabled;downtimes;int
+Time the host check needed for execution;service_execution_time;downtimes;float
+Delay before the first notification;service_first_notification_delay;downtimes;float
+Whether flap detection is enabled for the service (0/1);service_flap_detection_enabled;downtimes;int
+A list of all service groups the service is in;service_groups;downtimes;list
+Whether the service already has been checked (0/1);service_has_been_checked;downtimes;int
+High threshold of flap detection;service_high_flap_threshold;downtimes;float
+The name of an image to be used as icon in the web interface;service_icon_image;downtimes;string
+An alternative text for the icon_image for browsers not displaying icons;service_icon_image_alt;downtimes;string
+The icon_image with (the most important) macros expanded;service_icon_image_expanded;downtimes;string
+Whether the service is currently in its check period (0/1);service_in_check_period;downtimes;int
+Whether the service is currently in its notification period (0/1);service_in_notification_period;downtimes;int
+The initial state of the service;service_initial_state;downtimes;int
+is there a service check currently running... (0/1);service_is_executing;downtimes;int
+Whether the service is flapping (0/1);service_is_flapping;downtimes;int
+The time of the last check (Unix timestamp);service_last_check;downtimes;int
+The last hard state of the service;service_last_hard_state;downtimes;int
+The time of the last hard state change (Unix timestamp);service_last_hard_state_change;downtimes;int
+The time of the last notification (Unix timestamp);service_last_notification;downtimes;int
+The last state of the service;service_last_state;downtimes;int
+The time of the last state change (Unix timestamp);service_last_state_change;downtimes;int
+The last time the service was CRITICAL (Unix timestamp);service_last_time_critical;downtimes;int
+The last time the service was OK (Unix timestamp);service_last_time_ok;downtimes;int
+The last time the service was UNKNOWN (Unix timestamp);service_last_time_unknown;downtimes;int
+The last time the service was in WARNING state (Unix timestamp);service_last_time_warning;downtimes;int
+Time difference between scheduled check time and actual check time;service_latency;downtimes;int
+Unabbreviated output of the last check plugin;service_long_plugin_output;downtimes;string
+Low threshold of flap detection;service_low_flap_threshold;downtimes;float
+The maximum number of check attempts;service_max_check_attempts;downtimes;int
+A bitmask specifying which attributes have been modified;service_modified_attributes;downtimes;int
+A list of all modified attributes;service_modified_attributes_list;downtimes;list
+The scheduled time of the next check (Unix timestamp);service_next_check;downtimes;int
+The time of the next notification (Unix timestamp);service_next_notification;downtimes;int
+Whether to stop sending notifications (0/1);service_no_more_notifications;downtimes;int
+Optional notes about the service;service_notes;downtimes;string
+The notes with (the most important) macros expanded;service_notes_expanded;downtimes;string
+An optional URL for additional notes about the service;service_notes_url;downtimes;string
+The notes_url with (the most important) macros expanded;service_notes_url_expanded;downtimes;string
+Interval of periodic notification or 0 if its off;service_notification_interval;downtimes;float
+The name of the notification period of the service. It this is empty, service problems are always notified.;service_notification_period;downtimes;string
+Whether notifications are enabled for the service (0/1);service_notifications_enabled;downtimes;int
+Whether 'obsess_over_service' is enabled for the service (0/1);service_obsess_over_service;downtimes;int
+Percent state change;service_percent_state_change;downtimes;float
+Performance data of the last check plugin;service_perf_data;downtimes;string
+Output of the last check plugin;service_plugin_output;downtimes;string
+Whether there is a PNP4Nagios graph present for this service (0/1);service_pnpgraph_present;downtimes;int
+Whether processing of performance data is enabled for the service (0/1);service_process_performance_data;downtimes;int
+Number of basic interval lengths between checks when retrying after a soft error;service_retry_interval;downtimes;float
+The number of scheduled downtimes the service is currently in;service_scheduled_downtime_depth;downtimes;int
+The current state of the service (0: OK, 1: WARN, 2: CRITICAL, 3: UNKNOWN);service_state;downtimes;int
+The type of the current state (0: soft, 1: hard);service_state_type;downtimes;int
+The start time of the downtime as UNIX timestamp;start_time;downtimes;int
+The id of the downtime this downtime was triggered by or 0 if it was not triggered by another downtime;triggered_by;downtimes;int
+The type of the downtime: 0 if it is active, 1 if it is pending;type;downtimes;int
+The contact that entered the comment;author;comments;string
+A comment text;comment;comments;string
+The time the entry was made as UNIX timestamp;entry_time;comments;int
+The type of the comment: 1 is user, 2 is downtime, 3 is flap and 4 is acknowledgement;entry_type;comments;int
+The time of expiry of this comment as a UNIX timestamp;expire_time;comments;int
+Whether this comment expires;expires;comments;int
+Whether passive host checks are accepted (0/1);host_accept_passive_checks;comments;int
+Whether the current host problem has been acknowledged (0/1);host_acknowledged;comments;int
+Type of acknowledgement (0: none, 1: normal, 2: stick);host_acknowledgement_type;comments;int
+An optional URL to custom actions or information about this host;host_action_url;comments;string
+The same as action_url, but with the most important macros expanded;host_action_url_expanded;comments;string
+Whether active checks are enabled for the host (0/1);host_active_checks_enabled;comments;int
+IP address;host_address;comments;string
+An alias name for the host;host_alias;comments;string
+Nagios command for active host check of this host;host_check_command;comments;string
+Whether to check to send a recovery notification when flapping stops (0/1);host_check_flapping_recovery_notification;comments;int
+Whether freshness checks are activated (0/1);host_check_freshness;comments;int
+Number of basic interval lengths between two scheduled checks of the host;host_check_interval;comments;float
+The current check option, forced, normal, freshness... (0-2);host_check_options;comments;int
+Time period in which this host will be checked. If empty then the host will always be checked.;host_check_period;comments;string
+Type of check (0: active, 1: passive);host_check_type;comments;int
+Whether checks of the host are enabled (0/1);host_checks_enabled;comments;int
+A list of all direct childs of the host;host_childs;comments;list
+A list of the ids of all comments of this host;host_comments;comments;list
+A list of all comments of the host with id, author and comment;host_comments_with_info;comments;list
+A list of all contact groups this host is in;host_contact_groups;comments;list
+A list of all contacts of this host, either direct or via a contact group;host_contacts;comments;list
+Number of the current check attempts;host_current_attempt;comments;int
+Number of the current notification;host_current_notification_number;comments;int
+A list of the names of all custom variables;host_custom_variable_names;comments;list
+A list of the values of the custom variables;host_custom_variable_values;comments;list
+A dictionary of the custom variables;host_custom_variables;comments;list
+Optional display name of the host - not used by Nagios' web interface;host_display_name;comments;string
+A list of the ids of all scheduled downtimes of this host;host_downtimes;comments;list
+A list of the all scheduled downtimes of the host with id, author and comment;host_downtimes_with_info;comments;list
+Whether event handling is enabled (0/1);host_event_handler_enabled;comments;int
+Time the host check needed for execution;host_execution_time;comments;float
+The value of the custom variable FILENAME;host_filename;comments;string
+Delay before the first notification;host_first_notification_delay;comments;float
+Whether flap detection is enabled (0/1);host_flap_detection_enabled;comments;int
+A list of all host groups this host is in;host_groups;comments;list
+The effective hard state of the host (eliminates a problem in hard_state);host_hard_state;comments;int
+Whether the host has already been checked (0/1);host_has_been_checked;comments;int
+High threshold of flap detection;host_high_flap_threshold;comments;float
+The name of an image file to be used in the web pages;host_icon_image;comments;string
+Alternative text for the icon_image;host_icon_image_alt;comments;string
+The same as icon_image, but with the most important macros expanded;host_icon_image_expanded;comments;string
+Whether this host is currently in its check period (0/1);host_in_check_period;comments;int
+Whether this host is currently in its notification period (0/1);host_in_notification_period;comments;int
+Initial host state;host_initial_state;comments;int
+is there a host check currently running... (0/1);host_is_executing;comments;int
+Whether the host state is flapping (0/1);host_is_flapping;comments;int
+Time of the last check (Unix timestamp);host_last_check;comments;int
+Last hard state;host_last_hard_state;comments;int
+Time of the last hard state change (Unix timestamp);host_last_hard_state_change;comments;int
+Time of the last notification (Unix timestamp);host_last_notification;comments;int
+State before last state change;host_last_state;comments;int
+Time of the last state change - soft or hard (Unix timestamp);host_last_state_change;comments;int
+The last time the host was DOWN (Unix timestamp);host_last_time_down;comments;int
+The last time the host was UNREACHABLE (Unix timestamp);host_last_time_unreachable;comments;int
+The last time the host was UP (Unix timestamp);host_last_time_up;comments;int
+Time difference between scheduled check time and actual check time;host_latency;comments;float
+Complete output from check plugin;host_long_plugin_output;comments;string
+Low threshold of flap detection;host_low_flap_threshold;comments;float
+Max check attempts for active host checks;host_max_check_attempts;comments;int
+A bitmask specifying which attributes have been modified;host_modified_attributes;comments;int
+A list of all modified attributes;host_modified_attributes_list;comments;list
+Host name;host_name;comments;string
+Scheduled time for the next check (Unix timestamp);host_next_check;comments;int
+Time of the next notification (Unix timestamp);host_next_notification;comments;int
+Whether to stop sending notifications (0/1);host_no_more_notifications;comments;int
+Optional notes for this host;host_notes;comments;string
+The same as notes, but with the most important macros expanded;host_notes_expanded;comments;string
+An optional URL with further information about the host;host_notes_url;comments;string
+Same es notes_url, but with the most important macros expanded;host_notes_url_expanded;comments;string
+Interval of periodic notification or 0 if its off;host_notification_interval;comments;float
+Time period in which problems of this host will be notified. If empty then notification will be always;host_notification_period;comments;string
+Whether notifications of the host are enabled (0/1);host_notifications_enabled;comments;int
+The total number of services of the host;host_num_services;comments;int
+The number of the host's services with the soft state CRIT;host_num_services_crit;comments;int
+The number of the host's services with the hard state CRIT;host_num_services_hard_crit;comments;int
+The number of the host's services with the hard state OK;host_num_services_hard_ok;comments;int
+The number of the host's services with the hard state UNKNOWN;host_num_services_hard_unknown;comments;int
+The number of the host's services with the hard state WARN;host_num_services_hard_warn;comments;int
+The number of the host's services with the soft state OK;host_num_services_ok;comments;int
+The number of the host's services which have not been checked yet (pending);host_num_services_pending;comments;int
+The number of the host's services with the soft state UNKNOWN;host_num_services_unknown;comments;int
+The number of the host's services with the soft state WARN;host_num_services_warn;comments;int
+The current obsess_over_host setting... (0/1);host_obsess_over_host;comments;int
+A list of all direct parents of the host;host_parents;comments;list
+Whether a flex downtime is pending (0/1);host_pending_flex_downtime;comments;int
+Percent state change;host_percent_state_change;comments;float
+Optional performance data of the last host check;host_perf_data;comments;string
+Output of the last host check;host_plugin_output;comments;string
+Whether there is a PNP4Nagios graph present for this host (0/1);host_pnpgraph_present;comments;int
+Whether processing of performance data is enabled (0/1);host_process_performance_data;comments;int
+Number of basic interval lengths between checks when retrying after a soft error;host_retry_interval;comments;float
+The number of downtimes this host is currently in;host_scheduled_downtime_depth;comments;int
+A list of all services of the host;host_services;comments;list
+A list of all services including detailed information about each service;host_services_with_info;comments;list
+A list of all services of the host together with state and has_been_checked;host_services_with_state;comments;list
+The current state of the host (0: up, 1: down, 2: unreachable);host_state;comments;int
+Type of the current state (0: soft, 1: hard);host_state_type;comments;int
+The name of in image file for the status map;host_statusmap_image;comments;string
+The total number of services of the host;host_total_services;comments;int
+The worst hard state of all of the host's services (OK <= WARN <= UNKNOWN <= CRIT);host_worst_service_hard_state;comments;int
+The worst soft state of all of the host's services (OK <= WARN <= UNKNOWN <= CRIT);host_worst_service_state;comments;int
+3D-Coordinates: X;host_x_3d;comments;float
+3D-Coordinates: Y;host_y_3d;comments;float
+3D-Coordinates: Z;host_z_3d;comments;float
+The id of the comment;id;comments;int
+0, if this entry is for a host, 1 if it is for a service;is_service;comments;int
+Whether this comment is persistent (0/1);persistent;comments;int
+Whether the service accepts passive checks (0/1);service_accept_passive_checks;comments;int
+Whether the current service problem has been acknowledged (0/1);service_acknowledged;comments;int
+The type of the acknownledgement (0: none, 1: normal, 2: sticky);service_acknowledgement_type;comments;int
+An optional URL for actions or custom information about the service;service_action_url;comments;string
+The action_url with (the most important) macros expanded;service_action_url_expanded;comments;string
+Whether active checks are enabled for the service (0/1);service_active_checks_enabled;comments;int
+Nagios command used for active checks;service_check_command;comments;string
+Number of basic interval lengths between two scheduled checks of the service;service_check_interval;comments;float
+The current check option, forced, normal, freshness... (0/1);service_check_options;comments;int
+The name of the check period of the service. It this is empty, the service is always checked.;service_check_period;comments;string
+The type of the last check (0: active, 1: passive);service_check_type;comments;int
+Whether active checks are enabled for the service (0/1);service_checks_enabled;comments;int
+A list of all comment ids of the service;service_comments;comments;list
+A list of all comments of the service with id, author and comment;service_comments_with_info;comments;list
+A list of all contact groups this service is in;service_contact_groups;comments;list
+A list of all contacts of the service, either direct or via a contact group;service_contacts;comments;list
+The number of the current check attempt;service_current_attempt;comments;int
+The number of the current notification;service_current_notification_number;comments;int
+A list of the names of all custom variables of the service;service_custom_variable_names;comments;list
+A list of the values of all custom variable of the service;service_custom_variable_values;comments;list
+A dictionary of the custom variables;service_custom_variables;comments;list
+Description of the service (also used as key);service_description;comments;string
+An optional display name (not used by Nagios standard web pages);service_display_name;comments;string
+A list of all downtime ids of the service;service_downtimes;comments;list
+A list of all downtimes of the service with id, author and comment;service_downtimes_with_info;comments;list
+Nagios command used as event handler;service_event_handler;comments;string
+Whether and event handler is activated for the service (0/1);service_event_handler_enabled;comments;int
+Time the host check needed for execution;service_execution_time;comments;float
+Delay before the first notification;service_first_notification_delay;comments;float
+Whether flap detection is enabled for the service (0/1);service_flap_detection_enabled;comments;int
+A list of all service groups the service is in;service_groups;comments;list
+Whether the service already has been checked (0/1);service_has_been_checked;comments;int
+High threshold of flap detection;service_high_flap_threshold;comments;float
+The name of an image to be used as icon in the web interface;service_icon_image;comments;string
+An alternative text for the icon_image for browsers not displaying icons;service_icon_image_alt;comments;string
+The icon_image with (the most important) macros expanded;service_icon_image_expanded;comments;string
+Whether the service is currently in its check period (0/1);service_in_check_period;comments;int
+Whether the service is currently in its notification period (0/1);service_in_notification_period;comments;int
+The initial state of the service;service_initial_state;comments;int
+is there a service check currently running... (0/1);service_is_executing;comments;int
+Whether the service is flapping (0/1);service_is_flapping;comments;int
+The time of the last check (Unix timestamp);service_last_check;comments;int
+The last hard state of the service;service_last_hard_state;comments;int
+The time of the last hard state change (Unix timestamp);service_last_hard_state_change;comments;int
+The time of the last notification (Unix timestamp);service_last_notification;comments;int
+The last state of the service;service_last_state;comments;int
+The time of the last state change (Unix timestamp);service_last_state_change;comments;int
+The last time the service was CRITICAL (Unix timestamp);service_last_time_critical;comments;int
+The last time the service was OK (Unix timestamp);service_last_time_ok;comments;int
+The last time the service was UNKNOWN (Unix timestamp);service_last_time_unknown;comments;int
+The last time the service was in WARNING state (Unix timestamp);service_last_time_warning;comments;int
+Time difference between scheduled check time and actual check time;service_latency;comments;int
+Unabbreviated output of the last check plugin;service_long_plugin_output;comments;string
+Low threshold of flap detection;service_low_flap_threshold;comments;float
+The maximum number of check attempts;service_max_check_attempts;comments;int
+A bitmask specifying which attributes have been modified;service_modified_attributes;comments;int
+A list of all modified attributes;service_modified_attributes_list;comments;list
+The scheduled time of the next check (Unix timestamp);service_next_check;comments;int
+The time of the next notification (Unix timestamp);service_next_notification;comments;int
+Whether to stop sending notifications (0/1);service_no_more_notifications;comments;int
+Optional notes about the service;service_notes;comments;string
+The notes with (the most important) macros expanded;service_notes_expanded;comments;string
+An optional URL for additional notes about the service;service_notes_url;comments;string
+The notes_url with (the most important) macros expanded;service_notes_url_expanded;comments;string
+Interval of periodic notification or 0 if its off;service_notification_interval;comments;float
+The name of the notification period of the service. It this is empty, service problems are always notified.;service_notification_period;comments;string
+Whether notifications are enabled for the service (0/1);service_notifications_enabled;comments;int
+Whether 'obsess_over_service' is enabled for the service (0/1);service_obsess_over_service;comments;int
+Percent state change;service_percent_state_change;comments;float
+Performance data of the last check plugin;service_perf_data;comments;string
+Output of the last check plugin;service_plugin_output;comments;string
+Whether there is a PNP4Nagios graph present for this service (0/1);service_pnpgraph_present;comments;int
+Whether processing of performance data is enabled for the service (0/1);service_process_performance_data;comments;int
+Number of basic interval lengths between checks when retrying after a soft error;service_retry_interval;comments;float
+The number of scheduled downtimes the service is currently in;service_scheduled_downtime_depth;comments;int
+The current state of the service (0: OK, 1: WARN, 2: CRITICAL, 3: UNKNOWN);service_state;comments;int
+The type of the current state (0: soft, 1: hard);service_state_type;comments;int
+The source of the comment (0 is internal and 1 is external);source;comments;int
+The type of the comment: 1 is host, 2 is service;type;comments;int
+The alias of the timeperiod;alias;timeperiods;string
+Whether we are currently in this period (0/1);in;timeperiods;int
+The name of the timeperiod;name;timeperiods;string
+Whether passive host checks are accepted in general (0/1);accept_passive_host_checks;status;int
+Whether passive service checks are activated in general (0/1);accept_passive_service_checks;status;int
+The current number of log messages MK Livestatus keeps in memory;cached_log_messages;status;int
+The current number of log messages MK Livestatus keeps in memory;cached_log_messages_rate;status;float
+Whether Nagios checks for external commands at its command pipe (0/1);check_external_commands;status;int
+Whether host freshness checking is activated in general (0/1);check_host_freshness;status;int
+Whether service freshness checking is activated in general (0/1);check_service_freshness;status;int
+The number of client connections to Livestatus since program start;connections;status;int
+The averaged number of new client connections to Livestatus per second;connections_rate;status;float
+Whether event handlers are activated in general (0/1);enable_event_handlers;status;int
+Whether flap detection is activated in general (0/1);enable_flap_detection;status;int
+Whether notifications are enabled in general (0/1);enable_notifications;status;int
+Whether host checks are executed in general (0/1);execute_host_checks;status;int
+Whether active service checks are activated in general (0/1);execute_service_checks;status;int
+The maximum number of slots used in the external command buffer;external_command_buffer_max;status;int
+The size of the buffer for the external commands;external_command_buffer_slots;status;int
+The number of slots in use of the external command buffer;external_command_buffer_usage;status;int
+The averaged number of external commands per second;external_commands_rate;status;float
+The number of process creations since program start;forks;status;float
+The averaged number of forks per second;forks_rate;status;float
+The number of host checks since program start;host_checks;status;int
+the averaged number of host checks per second;host_checks_rate;status;float
+The default interval length from nagios.cfg;interval_length;status;int
+The time of the last check for a command as UNIX timestamp;last_command_check;status;int
+Time time of the last log file rotation;last_log_rotation;status;int
+The version of the MK Livestatus module;livestatus_version;status;string
+The number of new log messages since program start;log_messages;status;float
+The averaged number of log messages per second;log_messages_rate;status;float
+The process ID of the Nagios main process;nagios_pid;status;int
+The number of NEB call backs since program start;neb_callbacks;status;int
+The averaged number of NEB call backs per second;neb_callbacks_rate;status;float
+Whether Nagios will obsess over host checks (0/1);obsess_over_hosts;status;int
+Whether Nagios will obsess over service checks and run the ocsp_command (0/1);obsess_over_services;status;int
+Whether processing of performance data is activated in general (0/1);process_performance_data;status;int
+The time of the last program start as UNIX timestamp;program_start;status;int
+The version of the monitoring daemon;program_version;status;string
+The number of requests to Livestatus since program start;requests;status;int
+The averaged number of request to Livestatus per second;requests_rate;status;float
+The number of completed service checks since program start;service_checks;status;int
+The averaged number of service checks per second;service_checks_rate;status;float
+The number of the check attempt;attempt;log;int
+The class of the message as integer (0:info, 1:state, 2:program, 3:notification, 4:passive, 5:command);class;log;int
+The name of the command of the log entry (e.g. for notifications);command_name;log;string
+A comment field used in various message types;comment;log;string
+The name of the contact the log entry is about (might be empty);contact_name;log;string
+The shell command line;current_command_line;log;string
+The name of the command;current_command_name;log;string
+The additional field address1;current_contact_address1;log;string
+The additional field address2;current_contact_address2;log;string
+The additional field address3;current_contact_address3;log;string
+The additional field address4;current_contact_address4;log;string
+The additional field address5;current_contact_address5;log;string
+The additional field address6;current_contact_address6;log;string
+The full name of the contact;current_contact_alias;log;string
+Whether the contact is allowed to submit commands (0/1);current_contact_can_submit_commands;log;int
+A list of all custom variables of the contact;current_contact_custom_variable_names;log;list
+A list of the values of all custom variables of the contact;current_contact_custom_variable_values;log;list
+A dictionary of the custom variables;current_contact_custom_variables;log;list
+The email address of the contact;current_contact_email;log;string
+The time period in which the contact will be notified about host problems;current_contact_host_notification_period;log;string
+Whether the contact will be notified about host problems in general (0/1);current_contact_host_notifications_enabled;log;int
+Whether the contact is currently in his/her host notification period (0/1);current_contact_in_host_notification_period;log;int
+Whether the contact is currently in his/her service notification period (0/1);current_contact_in_service_notification_period;log;int
+A bitmask specifying which attributes have been modified;current_contact_modified_attributes;log;int
+A list of all modified attributes;current_contact_modified_attributes_list;log;list
+The login name of the contact person;current_contact_name;log;string
+The pager address of the contact;current_contact_pager;log;string
+The time period in which the contact will be notified about service problems;current_contact_service_notification_period;log;string
+Whether the contact will be notified about service problems in general (0/1);current_contact_service_notifications_enabled;log;int
+Whether passive host checks are accepted (0/1);current_host_accept_passive_checks;log;int
+Whether the current host problem has been acknowledged (0/1);current_host_acknowledged;log;int
+Type of acknowledgement (0: none, 1: normal, 2: stick);current_host_acknowledgement_type;log;int
+An optional URL to custom actions or information about this host;current_host_action_url;log;string
+The same as action_url, but with the most important macros expanded;current_host_action_url_expanded;log;string
+Whether active checks are enabled for the host (0/1);current_host_active_checks_enabled;log;int
+IP address;current_host_address;log;string
+An alias name for the host;current_host_alias;log;string
+Nagios command for active host check of this host;current_host_check_command;log;string
+Whether to check to send a recovery notification when flapping stops (0/1);current_host_check_flapping_recovery_notification;log;int
+Whether freshness checks are activated (0/1);current_host_check_freshness;log;int
+Number of basic interval lengths between two scheduled checks of the host;current_host_check_interval;log;float
+The current check option, forced, normal, freshness... (0-2);current_host_check_options;log;int
+Time period in which this host will be checked. If empty then the host will always be checked.;current_host_check_period;log;string
+Type of check (0: active, 1: passive);current_host_check_type;log;int
+Whether checks of the host are enabled (0/1);current_host_checks_enabled;log;int
+A list of all direct childs of the host;current_host_childs;log;list
+A list of the ids of all comments of this host;current_host_comments;log;list
+A list of all comments of the host with id, author and comment;current_host_comments_with_info;log;list
+A list of all contact groups this host is in;current_host_contact_groups;log;list
+A list of all contacts of this host, either direct or via a contact group;current_host_contacts;log;list
+Number of the current check attempts;current_host_current_attempt;log;int
+Number of the current notification;current_host_current_notification_number;log;int
+A list of the names of all custom variables;current_host_custom_variable_names;log;list
+A list of the values of the custom variables;current_host_custom_variable_values;log;list
+A dictionary of the custom variables;current_host_custom_variables;log;list
+Optional display name of the host - not used by Nagios' web interface;current_host_display_name;log;string
+A list of the ids of all scheduled downtimes of this host;current_host_downtimes;log;list
+A list of the all scheduled downtimes of the host with id, author and comment;current_host_downtimes_with_info;log;list
+Whether event handling is enabled (0/1);current_host_event_handler_enabled;log;int
+Time the host check needed for execution;current_host_execution_time;log;float
+The value of the custom variable FILENAME;current_host_filename;log;string
+Delay before the first notification;current_host_first_notification_delay;log;float
+Whether flap detection is enabled (0/1);current_host_flap_detection_enabled;log;int
+A list of all host groups this host is in;current_host_groups;log;list
+The effective hard state of the host (eliminates a problem in hard_state);current_host_hard_state;log;int
+Whether the host has already been checked (0/1);current_host_has_been_checked;log;int
+High threshold of flap detection;current_host_high_flap_threshold;log;float
+The name of an image file to be used in the web pages;current_host_icon_image;log;string
+Alternative text for the icon_image;current_host_icon_image_alt;log;string
+The same as icon_image, but with the most important macros expanded;current_host_icon_image_expanded;log;string
+Whether this host is currently in its check period (0/1);current_host_in_check_period;log;int
+Whether this host is currently in its notification period (0/1);current_host_in_notification_period;log;int
+Initial host state;current_host_initial_state;log;int
+is there a host check currently running... (0/1);current_host_is_executing;log;int
+Whether the host state is flapping (0/1);current_host_is_flapping;log;int
+Time of the last check (Unix timestamp);current_host_last_check;log;int
+Last hard state;current_host_last_hard_state;log;int
+Time of the last hard state change (Unix timestamp);current_host_last_hard_state_change;log;int
+Time of the last notification (Unix timestamp);current_host_last_notification;log;int
+State before last state change;current_host_last_state;log;int
+Time of the last state change - soft or hard (Unix timestamp);current_host_last_state_change;log;int
+The last time the host was DOWN (Unix timestamp);current_host_last_time_down;log;int
+The last time the host was UNREACHABLE (Unix timestamp);current_host_last_time_unreachable;log;int
+The last time the host was UP (Unix timestamp);current_host_last_time_up;log;int
+Time difference between scheduled check time and actual check time;current_host_latency;log;float
+Complete output from check plugin;current_host_long_plugin_output;log;string
+Low threshold of flap detection;current_host_low_flap_threshold;log;float
+Max check attempts for active host checks;current_host_max_check_attempts;log;int
+A bitmask specifying which attributes have been modified;current_host_modified_attributes;log;int
+A list of all modified attributes;current_host_modified_attributes_list;log;list
+Host name;current_host_name;log;string
+Scheduled time for the next check (Unix timestamp);current_host_next_check;log;int
+Time of the next notification (Unix timestamp);current_host_next_notification;log;int
+Whether to stop sending notifications (0/1);current_host_no_more_notifications;log;int
+Optional notes for this host;current_host_notes;log;string
+The same as notes, but with the most important macros expanded;current_host_notes_expanded;log;string
+An optional URL with further information about the host;current_host_notes_url;log;string
+Same es notes_url, but with the most important macros expanded;current_host_notes_url_expanded;log;string
+Interval of periodic notification or 0 if its off;current_host_notification_interval;log;float
+Time period in which problems of this host will be notified. If empty then notification will be always;current_host_notification_period;log;string
+Whether notifications of the host are enabled (0/1);current_host_notifications_enabled;log;int
+The total number of services of the host;current_host_num_services;log;int
+The number of the host's services with the soft state CRIT;current_host_num_services_crit;log;int
+The number of the host's services with the hard state CRIT;current_host_num_services_hard_crit;log;int
+The number of the host's services with the hard state OK;current_host_num_services_hard_ok;log;int
+The number of the host's services with the hard state UNKNOWN;current_host_num_services_hard_unknown;log;int
+The number of the host's services with the hard state WARN;current_host_num_services_hard_warn;log;int
+The number of the host's services with the soft state OK;current_host_num_services_ok;log;int
+The number of the host's services which have not been checked yet (pending);current_host_num_services_pending;log;int
+The number of the host's services with the soft state UNKNOWN;current_host_num_services_unknown;log;int
+The number of the host's services with the soft state WARN;current_host_num_services_warn;log;int
+The current obsess_over_host setting... (0/1);current_host_obsess_over_host;log;int
+A list of all direct parents of the host;current_host_parents;log;list
+Whether a flex downtime is pending (0/1);current_host_pending_flex_downtime;log;int
+Percent state change;current_host_percent_state_change;log;float
+Optional performance data of the last host check;current_host_perf_data;log;string
+Output of the last host check;current_host_plugin_output;log;string
+Whether there is a PNP4Nagios graph present for this host (0/1);current_host_pnpgraph_present;log;int
+Whether processing of performance data is enabled (0/1);current_host_process_performance_data;log;int
+Number of basic interval lengths between checks when retrying after a soft error;current_host_retry_interval;log;float
+The number of downtimes this host is currently in;current_host_scheduled_downtime_depth;log;int
+A list of all services of the host;current_host_services;log;list
+A list of all services including detailed information about each service;current_host_services_with_info;log;list
+A list of all services of the host together with state and has_been_checked;current_host_services_with_state;log;list
+The current state of the host (0: up, 1: down, 2: unreachable);current_host_state;log;int
+Type of the current state (0: soft, 1: hard);current_host_state_type;log;int
+The name of in image file for the status map;current_host_statusmap_image;log;string
+The total number of services of the host;current_host_total_services;log;int
+The worst hard state of all of the host's services (OK <= WARN <= UNKNOWN <= CRIT);current_host_worst_service_hard_state;log;int
+The worst soft state of all of the host's services (OK <= WARN <= UNKNOWN <= CRIT);current_host_worst_service_state;log;int
+3D-Coordinates: X;current_host_x_3d;log;float
+3D-Coordinates: Y;current_host_y_3d;log;float
+3D-Coordinates: Z;current_host_z_3d;log;float
+Whether the service accepts passive checks (0/1);current_service_accept_passive_checks;log;int
+Whether the current service problem has been acknowledged (0/1);current_service_acknowledged;log;int
+The type of the acknownledgement (0: none, 1: normal, 2: sticky);current_service_acknowledgement_type;log;int
+An optional URL for actions or custom information about the service;current_service_action_url;log;string
+The action_url with (the most important) macros expanded;current_service_action_url_expanded;log;string
+Whether active checks are enabled for the service (0/1);current_service_active_checks_enabled;log;int
+Nagios command used for active checks;current_service_check_command;log;string
+Number of basic interval lengths between two scheduled checks of the service;current_service_check_interval;log;float
+The current check option, forced, normal, freshness... (0/1);current_service_check_options;log;int
+The name of the check period of the service. It this is empty, the service is always checked.;current_service_check_period;log;string
+The type of the last check (0: active, 1: passive);current_service_check_type;log;int
+Whether active checks are enabled for the service (0/1);current_service_checks_enabled;log;int
+A list of all comment ids of the service;current_service_comments;log;list
+A list of all comments of the service with id, author and comment;current_service_comments_with_info;log;list
+A list of all contact groups this service is in;current_service_contact_groups;log;list
+A list of all contacts of the service, either direct or via a contact group;current_service_contacts;log;list
+The number of the current check attempt;current_service_current_attempt;log;int
+The number of the current notification;current_service_current_notification_number;log;int
+A list of the names of all custom variables of the service;current_service_custom_variable_names;log;list
+A list of the values of all custom variable of the service;current_service_custom_variable_values;log;list
+A dictionary of the custom variables;current_service_custom_variables;log;list
+Description of the service (also used as key);current_service_description;log;string
+An optional display name (not used by Nagios standard web pages);current_service_display_name;log;string
+A list of all downtime ids of the service;current_service_downtimes;log;list
+A list of all downtimes of the service with id, author and comment;current_service_downtimes_with_info;log;list
+Nagios command used as event handler;current_service_event_handler;log;string
+Whether and event handler is activated for the service (0/1);current_service_event_handler_enabled;log;int
+Time the host check needed for execution;current_service_execution_time;log;float
+Delay before the first notification;current_service_first_notification_delay;log;float
+Whether flap detection is enabled for the service (0/1);current_service_flap_detection_enabled;log;int
+A list of all service groups the service is in;current_service_groups;log;list
+Whether the service already has been checked (0/1);current_service_has_been_checked;log;int
+High threshold of flap detection;current_service_high_flap_threshold;log;float
+The name of an image to be used as icon in the web interface;current_service_icon_image;log;string
+An alternative text for the icon_image for browsers not displaying icons;current_service_icon_image_alt;log;string
+The icon_image with (the most important) macros expanded;current_service_icon_image_expanded;log;string
+Whether the service is currently in its check period (0/1);current_service_in_check_period;log;int
+Whether the service is currently in its notification period (0/1);current_service_in_notification_period;log;int
+The initial state of the service;current_service_initial_state;log;int
+is there a service check currently running... (0/1);current_service_is_executing;log;int
+Whether the service is flapping (0/1);current_service_is_flapping;log;int
+The time of the last check (Unix timestamp);current_service_last_check;log;int
+The last hard state of the service;current_service_last_hard_state;log;int
+The time of the last hard state change (Unix timestamp);current_service_last_hard_state_change;log;int
+The time of the last notification (Unix timestamp);current_service_last_notification;log;int
+The last state of the service;current_service_last_state;log;int
+The time of the last state change (Unix timestamp);current_service_last_state_change;log;int
+The last time the service was CRITICAL (Unix timestamp);current_service_last_time_critical;log;int
+The last time the service was OK (Unix timestamp);current_service_last_time_ok;log;int
+The last time the service was UNKNOWN (Unix timestamp);current_service_last_time_unknown;log;int
+The last time the service was in WARNING state (Unix timestamp);current_service_last_time_warning;log;int
+Time difference between scheduled check time and actual check time;current_service_latency;log;int
+Unabbreviated output of the last check plugin;current_service_long_plugin_output;log;string
+Low threshold of flap detection;current_service_low_flap_threshold;log;float
+The maximum number of check attempts;current_service_max_check_attempts;log;int
+A bitmask specifying which attributes have been modified;current_service_modified_attributes;log;int
+A list of all modified attributes;current_service_modified_attributes_list;log;list
+The scheduled time of the next check (Unix timestamp);current_service_next_check;log;int
+The time of the next notification (Unix timestamp);current_service_next_notification;log;int
+Whether to stop sending notifications (0/1);current_service_no_more_notifications;log;int
+Optional notes about the service;current_service_notes;log;string
+The notes with (the most important) macros expanded;current_service_notes_expanded;log;string
+An optional URL for additional notes about the service;current_service_notes_url;log;string
+The notes_url with (the most important) macros expanded;current_service_notes_url_expanded;log;string
+Interval of periodic notification or 0 if its off;current_service_notification_interval;log;float
+The name of the notification period of the service. It this is empty, service problems are always notified.;current_service_notification_period;log;string
+Whether notifications are enabled for the service (0/1);current_service_notifications_enabled;log;int
+Whether 'obsess_over_service' is enabled for the service (0/1);current_service_obsess_over_service;log;int
+Percent state change;current_service_percent_state_change;log;float
+Performance data of the last check plugin;current_service_perf_data;log;string
+Output of the last check plugin;current_service_plugin_output;log;string
+Whether there is a PNP4Nagios graph present for this service (0/1);current_service_pnpgraph_present;log;int
+Whether processing of performance data is enabled for the service (0/1);current_service_process_performance_data;log;int
+Number of basic interval lengths between checks when retrying after a soft error;current_service_retry_interval;log;float
+The number of scheduled downtimes the service is currently in;current_service_scheduled_downtime_depth;log;int
+The current state of the service (0: OK, 1: WARN, 2: CRITICAL, 3: UNKNOWN);current_service_state;log;int
+The type of the current state (0: soft, 1: hard);current_service_state_type;log;int
+The name of the host the log entry is about (might be empty);host_name;log;string
+The number of the line in the log file;lineno;log;int
+The complete message line including the timestamp;message;log;string
+The part of the message after the ':';options;log;string
+The output of the check, if any is associated with the message;plugin_output;log;string
+The description of the service log entry is about (might be empty);service_description;log;string
+The state of the host or service in question;state;log;int
+The type of the state (varies on different log classes);state_type;log;string
+Time of the log event (UNIX timestamp);time;log;int
+The type of the message (text before the colon), the message itself for info messages;type;log;string
+Whether passive host checks are accepted (0/1);accept_passive_checks;hostsbygroup;int
+Whether the current host problem has been acknowledged (0/1);acknowledged;hostsbygroup;int
+Type of acknowledgement (0: none, 1: normal, 2: stick);acknowledgement_type;hostsbygroup;int
+An optional URL to custom actions or information about this host;action_url;hostsbygroup;string
+The same as action_url, but with the most important macros expanded;action_url_expanded;hostsbygroup;string
+Whether active checks are enabled for the host (0/1);active_checks_enabled;hostsbygroup;int
+IP address;address;hostsbygroup;string
+An alias name for the host;alias;hostsbygroup;string
+The importance we gave to this host between the minimum 0 and the maximum 5;business_impact;hostsbygroup;int
+Nagios command for active host check of this host;check_command;hostsbygroup;string
+Whether to check to send a recovery notification when flapping stops (0/1);check_flapping_recovery_notification;hostsbygroup;int
+Whether freshness checks are activated (0/1);check_freshness;hostsbygroup;int
+Number of basic interval lengths between two scheduled checks of the host;check_interval;hostsbygroup;float
+The current check option, forced, normal, freshness... (0-2);check_options;hostsbygroup;int
+Time period in which this host will be checked. If empty then the host will always be checked.;check_period;hostsbygroup;string
+Type of check (0: active, 1: passive);check_type;hostsbygroup;int
+Whether checks of the host are enabled (0/1);checks_enabled;hostsbygroup;int
+List of the host/service that depend on this host (logical, network or business one).;child_dependencies;hostsbygroup;list
+A list of all direct childs of the host;childs;hostsbygroup;list
+A list of the ids of all comments of this host;comments;hostsbygroup;list
+A list of the ids of all comments of this host with id, author and comment;comments_with_info;hostsbygroup;list
+A list of all contact groups this host is in;contact_groups;hostsbygroup;list
+A list of all contacts of this host, either direct or via a contact group;contacts;hostsbygroup;list
+The importance we gave to this host between the minimum 0 and the maximum 5;criticity;hostsbygroup;int
+Number of the current check attempts;current_attempt;hostsbygroup;int
+Number of the current notification;current_notification_number;hostsbygroup;int
+A list of the names of all custom variables;custom_variable_names;hostsbygroup;list
+A list of the values of the custom variables;custom_variable_values;hostsbygroup;list
+A dictionary of the custom variables;custom_variables;hostsbygroup;list
+Optional display name of the host - not used by Nagios' web interface;display_name;hostsbygroup;string
+A list of the ids of all scheduled downtimes of this host;downtimes;hostsbygroup;list
+A list of the all scheduled downtimes of the host with id, author and comment;downtimes_with_info;hostsbygroup;list
+Nagios command used as event handler;event_handler;hostsbygroup;string
+Whether event handling is enabled (0/1);event_handler_enabled;hostsbygroup;int
+Time the host check needed for execution;execution_time;hostsbygroup;float
+The value of the custom variable FILENAME;filename;hostsbygroup;string
+Delay before the first notification;first_notification_delay;hostsbygroup;float
+Whether flap detection is enabled (0/1);flap_detection_enabled;hostsbygroup;int
+Whether the host state is an business rule based host or not (0/1);got_business_rule;hostsbygroup;int
+A list of all host groups this host is in;groups;hostsbygroup;list
+The effective hard state of the host (eliminates a problem in hard_state);hard_state;hostsbygroup;int
+Whether the host has already been checked (0/1);has_been_checked;hostsbygroup;int
+High threshold of flap detection;high_flap_threshold;hostsbygroup;float
+The name of an image file to be used in the web pages;icon_image;hostsbygroup;string
+Alternative text for the icon_image;icon_image_alt;hostsbygroup;string
+The same as icon_image, but with the most important macros expanded;icon_image_expanded;hostsbygroup;string
+List of what the source impact (list of hosts and services);impacts;hostsbygroup;list
+Whether this host is currently in its check period (0/1);in_check_period;hostsbygroup;int
+Whether this host is currently in its notification period (0/1);in_notification_period;hostsbygroup;int
+Initial host state;initial_state;hostsbygroup;int
+is there a host check currently running... (0/1);is_executing;hostsbygroup;int
+Whether the host state is flapping (0/1);is_flapping;hostsbygroup;int
+Whether the host state is an impact or not (0/1);is_impact;hostsbygroup;int
+Whether the host state is a problem or not (0/1);is_problem;hostsbygroup;int
+Time of the last check (Unix timestamp);last_check;hostsbygroup;int
+Last hard state;last_hard_state;hostsbygroup;int
+Time of the last hard state change (Unix timestamp);last_hard_state_change;hostsbygroup;int
+Time of the last notification (Unix timestamp);last_notification;hostsbygroup;int
+State before last state change;last_state;hostsbygroup;int
+Time of the last state change - soft or hard (Unix timestamp);last_state_change;hostsbygroup;int
+The last time the host was DOWN (Unix timestamp);last_time_down;hostsbygroup;int
+The last time the host was UNREACHABLE (Unix timestamp);last_time_unreachable;hostsbygroup;int
+The last time the host was UP (Unix timestamp);last_time_up;hostsbygroup;int
+Time difference between scheduled check time and actual check time;latency;hostsbygroup;float
+Complete output from check plugin;long_plugin_output;hostsbygroup;string
+Low threshold of flap detection;low_flap_threshold;hostsbygroup;float
+Max check attempts for active host checks;max_check_attempts;hostsbygroup;int
+A bitmask specifying which attributes have been modified;modified_attributes;hostsbygroup;int
+A list of all modified attributes;modified_attributes_list;hostsbygroup;list
+Host name;name;hostsbygroup;string
+Scheduled time for the next check (Unix timestamp);next_check;hostsbygroup;int
+Time of the next notification (Unix timestamp);next_notification;hostsbygroup;int
+Whether to stop sending notifications (0/1);no_more_notifications;hostsbygroup;int
+Optional notes for this host;notes;hostsbygroup;string
+The same as notes, but with the most important macros expanded;notes_expanded;hostsbygroup;string
+An optional URL with further information about the host;notes_url;hostsbygroup;string
+Same es notes_url, but with the most important macros expanded;notes_url_expanded;hostsbygroup;string
+Interval of periodic notification or 0 if its off;notification_interval;hostsbygroup;float
+Time period in which problems of this host will be notified. If empty then notification will be always;notification_period;hostsbygroup;string
+Whether notifications of the host are enabled (0/1);notifications_enabled;hostsbygroup;int
+The total number of services of the host;num_services;hostsbygroup;int
+The number of the host's services with the soft state CRIT;num_services_crit;hostsbygroup;int
+The number of the host's services with the hard state CRIT;num_services_hard_crit;hostsbygroup;int
+The number of the host's services with the hard state OK;num_services_hard_ok;hostsbygroup;int
+The number of the host's services with the hard state UNKNOWN;num_services_hard_unknown;hostsbygroup;int
+The number of the host's services with the hard state WARN;num_services_hard_warn;hostsbygroup;int
+The number of the host's services with the soft state OK;num_services_ok;hostsbygroup;int
+The number of the host's services which have not been checked yet (pending);num_services_pending;hostsbygroup;int
+The number of the host's services with the soft state UNKNOWN;num_services_unknown;hostsbygroup;int
+The number of the host's services with the soft state WARN;num_services_warn;hostsbygroup;int
+The current obsess_over_host setting... (0/1);obsess_over_host;hostsbygroup;int
+List of the dependencies (logical, network or business one) of this host.;parent_dependencies;hostsbygroup;list
+A list of all direct parents of the host;parents;hostsbygroup;list
+Whether a flex downtime is pending (0/1);pending_flex_downtime;hostsbygroup;int
+Percent state change;percent_state_change;hostsbygroup;float
+Optional performance data of the last host check;perf_data;hostsbygroup;string
+Output of the last host check;plugin_output;hostsbygroup;string
+Whether there is a PNP4Nagios graph present for this host (0/1);pnpgraph_present;hostsbygroup;int
+Poller Tag;poller_tag;hostsbygroup;string
+Whether processing of performance data is enabled (0/1);process_performance_data;hostsbygroup;int
+Realm;realm;hostsbygroup;string
+Number of basic interval lengths between checks when retrying after a soft error;retry_interval;hostsbygroup;float
+The number of downtimes this host is currently in;scheduled_downtime_depth;hostsbygroup;int
+A list of all services of the host;services;hostsbygroup;list
+A list of all services including detailed information about each service;services_with_info;hostsbygroup;list
+A list of all services of the host together with state and has_been_checked;services_with_state;hostsbygroup;list
+The name of the source problems (host or service);source_problems;hostsbygroup;list
+The current state of the host (0: up, 1: down, 2: unreachable);state;hostsbygroup;int
+Type of the current state (0: soft, 1: hard);state_type;hostsbygroup;int
+The name of in image file for the status map;statusmap_image;hostsbygroup;string
+The total number of services of the host;total_services;hostsbygroup;int
+The worst hard state of all of the host's services (OK <= WARN <= UNKNOWN <= CRIT);worst_service_hard_state;hostsbygroup;int
+The worst soft state of all of the host's services (OK <= WARN <= UNKNOWN <= CRIT);worst_service_state;hostsbygroup;int
+3D-Coordinates: X;x_3d;hostsbygroup;float
+3D-Coordinates: Y;y_3d;hostsbygroup;float
+3D-Coordinates: Z;z_3d;hostsbygroup;float
+Whether the service accepts passive checks (0/1);accept_passive_checks;servicesbygroup;int
+Whether the current service problem has been acknowledged (0/1);acknowledged;servicesbygroup;int
+The type of the acknownledgement (0: none, 1: normal, 2: sticky);acknowledgement_type;servicesbygroup;int
+An optional URL for actions or custom information about the service;action_url;servicesbygroup;string
+The action_url with (the most important) macros expanded;action_url_expanded;servicesbygroup;string
+Whether active checks are enabled for the service (0/1);active_checks_enabled;servicesbygroup;int
+The importance we gave to this service between the minimum 0 and the maximum 5;business_impact;servicesbygroup;int
+Nagios command used for active checks;check_command;servicesbygroup;string
+Number of basic interval lengths between two scheduled checks of the service;check_interval;servicesbygroup;float
+The current check option, forced, normal, freshness... (0/1);check_options;servicesbygroup;int
+The name of the check period of the service. It this is empty, the service is always checked.;check_period;servicesbygroup;string
+The type of the last check (0: active, 1: passive);check_type;servicesbygroup;int
+Whether active checks are enabled for the service (0/1);checks_enabled;servicesbygroup;int
+List of the host/service that depend on this service (logical, network or business one).;child_dependencies;servicesbygroup;list
+A list of all comment ids of the service;comments;servicesbygroup;list
+A list of the ids of all comments of this service with id, author and comment;comments_with_info;servicesbygroup;list
+A list of all contact groups this service is in;contact_groups;servicesbygroup;list
+A list of all contacts of the service, either direct or via a contact group;contacts;servicesbygroup;list
+The importance we gave to this service between the minimum 0 and the maximum 5;criticity;servicesbygroup;int
+The number of the current check attempt;current_attempt;servicesbygroup;int
+The number of the current notification;current_notification_number;servicesbygroup;int
+A list of the names of all custom variables of the service;custom_variable_names;servicesbygroup;list
+A list of the values of all custom variable of the service;custom_variable_values;servicesbygroup;list
+A dictionary of the custom variables;custom_variables;servicesbygroup;list
+Description of the service (also used as key);description;servicesbygroup;string
+An optional display name (not used by Nagios standard web pages);display_name;servicesbygroup;string
+A list of all downtime ids of the service;downtimes;servicesbygroup;list
+A list of all downtimes of the service with id, author and comment;downtimes_with_info;servicesbygroup;list
+Nagios command used as event handler;event_handler;servicesbygroup;string
+Whether and event handler is activated for the service (0/1);event_handler_enabled;servicesbygroup;int
+Time the host check needed for execution;execution_time;servicesbygroup;float
+Delay before the first notification;first_notification_delay;servicesbygroup;float
+Whether flap detection is enabled for the service (0/1);flap_detection_enabled;servicesbygroup;int
+Whether the service state is an business rule based host or not (0/1);got_business_rule;servicesbygroup;int
+A list of all service groups the service is in;groups;servicesbygroup;list
+Whether the service already has been checked (0/1);has_been_checked;servicesbygroup;int
+High threshold of flap detection;high_flap_threshold;servicesbygroup;float
+Whether passive host checks are accepted (0/1);host_accept_passive_checks;servicesbygroup;int
+Whether the current host problem has been acknowledged (0/1);host_acknowledged;servicesbygroup;int
+Type of acknowledgement (0: none, 1: normal, 2: stick);host_acknowledgement_type;servicesbygroup;int
+An optional URL to custom actions or information about this host;host_action_url;servicesbygroup;string
+The same as action_url, but with the most important macros expanded;host_action_url_expanded;servicesbygroup;string
+Whether active checks are enabled for the host (0/1);host_active_checks_enabled;servicesbygroup;int
+IP address;host_address;servicesbygroup;string
+An alias name for the host;host_alias;servicesbygroup;string
+Nagios command for active host check of this host;host_check_command;servicesbygroup;string
+Whether to check to send a recovery notification when flapping stops (0/1);host_check_flapping_recovery_notification;servicesbygroup;int
+Whether freshness checks are activated (0/1);host_check_freshness;servicesbygroup;int
+Number of basic interval lengths between two scheduled checks of the host;host_check_interval;servicesbygroup;float
+The current check option, forced, normal, freshness... (0-2);host_check_options;servicesbygroup;int
+Time period in which this host will be checked. If empty then the host will always be checked.;host_check_period;servicesbygroup;string
+Type of check (0: active, 1: passive);host_check_type;servicesbygroup;int
+Whether checks of the host are enabled (0/1);host_checks_enabled;servicesbygroup;int
+A list of all direct childs of the host;host_childs;servicesbygroup;list
+A list of the ids of all comments of this host;host_comments;servicesbygroup;list
+A list of the ids of all comments of this host;host_comments_with_info;servicesbygroup;list
+A list of all contact groups this host is in;host_contact_groups;servicesbygroup;list
+A list of all contacts of this host, either direct or via a contact group;host_contacts;servicesbygroup;list
+Number of the current check attempts;host_current_attempt;servicesbygroup;int
+Number of the current notification;host_current_notification_number;servicesbygroup;int
+A list of the names of all custom variables;host_custom_variable_names;servicesbygroup;list
+A list of the values of the custom variables;host_custom_variable_values;servicesbygroup;list
+A dictionary of the custom variables;host_custom_variables;servicesbygroup;list
+Optional display name of the host - not used by Nagios' web interface;host_display_name;servicesbygroup;string
+A list of the ids of all scheduled downtimes of this host;host_downtimes;servicesbygroup;list
+A list of the all scheduled downtimes of the host with id, author and comment;host_downtimes_with_info;servicesbygroup;list
+Whether event handling is enabled (0/1);host_event_handler_enabled;servicesbygroup;int
+Time the host check needed for execution;host_execution_time;servicesbygroup;float
+The value of the custom variable FILENAME;host_filename;servicesbygroup;string
+Delay before the first notification;host_first_notification_delay;servicesbygroup;float
+Whether flap detection is enabled (0/1);host_flap_detection_enabled;servicesbygroup;int
+A list of all host groups this host is in;host_groups;servicesbygroup;list
+The effective hard state of the host (eliminates a problem in hard_state);host_hard_state;servicesbygroup;int
+Whether the host has already been checked (0/1);host_has_been_checked;servicesbygroup;int
+High threshold of flap detection;host_high_flap_threshold;servicesbygroup;float
+The name of an image file to be used in the web pages;host_icon_image;servicesbygroup;string
+Alternative text for the icon_image;host_icon_image_alt;servicesbygroup;string
+The same as icon_image, but with the most important macros expanded;host_icon_image_expanded;servicesbygroup;string
+Whether this host is currently in its check period (0/1);host_in_check_period;servicesbygroup;int
+Whether this host is currently in its notification period (0/1);host_in_notification_period;servicesbygroup;int
+Initial host state;host_initial_state;servicesbygroup;int
+is there a host check currently running... (0/1);host_is_executing;servicesbygroup;int
+Whether the host state is flapping (0/1);host_is_flapping;servicesbygroup;int
+Time of the last check (Unix timestamp);host_last_check;servicesbygroup;int
+Last hard state;host_last_hard_state;servicesbygroup;int
+Time of the last hard state change (Unix timestamp);host_last_hard_state_change;servicesbygroup;int
+Time of the last notification (Unix timestamp);host_last_notification;servicesbygroup;int
+State before last state change;host_last_state;servicesbygroup;int
+Time of the last state change - soft or hard (Unix timestamp);host_last_state_change;servicesbygroup;int
+The last time the host was DOWN (Unix timestamp);host_last_time_down;servicesbygroup;int
+The last time the host was UNREACHABLE (Unix timestamp);host_last_time_unreachable;servicesbygroup;int
+The last time the host was UP (Unix timestamp);host_last_time_up;servicesbygroup;int
+Time difference between scheduled check time and actual check time;host_latency;servicesbygroup;float
+Complete output from check plugin;host_long_plugin_output;servicesbygroup;string
+Low threshold of flap detection;host_low_flap_threshold;servicesbygroup;float
+Max check attempts for active host checks;host_max_check_attempts;servicesbygroup;int
+A bitmask specifying which attributes have been modified;host_modified_attributes;servicesbygroup;int
+A list of all modified attributes;host_modified_attributes_list;servicesbygroup;list
+Host name;host_name;servicesbygroup;string
+Scheduled time for the next check (Unix timestamp);host_next_check;servicesbygroup;int
+Time of the next notification (Unix timestamp);host_next_notification;servicesbygroup;int
+Whether to stop sending notifications (0/1);host_no_more_notifications;servicesbygroup;int
+Optional notes for this host;host_notes;servicesbygroup;string
+The same as notes, but with the most important macros expanded;host_notes_expanded;servicesbygroup;string
+An optional URL with further information about the host;host_notes_url;servicesbygroup;string
+Same es notes_url, but with the most important macros expanded;host_notes_url_expanded;servicesbygroup;string
+Interval of periodic notification or 0 if its off;host_notification_interval;servicesbygroup;float
+Time period in which problems of this host will be notified. If empty then notification will be always;host_notification_period;servicesbygroup;string
+Whether notifications of the host are enabled (0/1);host_notifications_enabled;servicesbygroup;int
+The total number of services of the host;host_num_services;servicesbygroup;int
+The number of the host's services with the soft state CRIT;host_num_services_crit;servicesbygroup;int
+The number of the host's services with the hard state CRIT;host_num_services_hard_crit;servicesbygroup;int
+The number of the host's services with the hard state OK;host_num_services_hard_ok;servicesbygroup;int
+The number of the host's services with the hard state UNKNOWN;host_num_services_hard_unknown;servicesbygroup;int
+The number of the host's services with the hard state WARN;host_num_services_hard_warn;servicesbygroup;int
+The number of the host's services with the soft state OK;host_num_services_ok;servicesbygroup;int
+The number of the host's services which have not been checked yet (pending);host_num_services_pending;servicesbygroup;int
+The number of the host's services with the soft state UNKNOWN;host_num_services_unknown;servicesbygroup;int
+The number of the host's services with the soft state WARN;host_num_services_warn;servicesbygroup;int
+The current obsess_over_host setting... (0/1);host_obsess_over_host;servicesbygroup;int
+A list of all direct parents of the host;host_parents;servicesbygroup;list
+Whether a flex downtime is pending (0/1);host_pending_flex_downtime;servicesbygroup;int
+Percent state change;host_percent_state_change;servicesbygroup;float
+Optional performance data of the last host check;host_perf_data;servicesbygroup;string
+Output of the last host check;host_plugin_output;servicesbygroup;string
+Whether there is a PNP4Nagios graph present for this host (0/1);host_pnpgraph_present;servicesbygroup;int
+Whether processing of performance data is enabled (0/1);host_process_performance_data;servicesbygroup;int
+Number of basic interval lengths between checks when retrying after a soft error;host_retry_interval;servicesbygroup;float
+The number of downtimes this host is currently in;host_scheduled_downtime_depth;servicesbygroup;int
+A list of all services of the host;host_services;servicesbygroup;list
+A list of all services including detailed information about each service;host_services_with_info;servicesbygroup;list
+A list of all services of the host together with state and has_been_checked;host_services_with_state;servicesbygroup;list
+The current state of the host (0: up, 1: down, 2: unreachable);host_state;servicesbygroup;int
+Type of the current state (0: soft, 1: hard);host_state_type;servicesbygroup;int
+The name of in image file for the status map;host_statusmap_image;servicesbygroup;string
+The total number of services of the host;host_total_services;servicesbygroup;int
+The worst hard state of all of the host's services (OK <= WARN <= UNKNOWN <= CRIT);host_worst_service_hard_state;servicesbygroup;int
+The worst soft state of all of the host's services (OK <= WARN <= UNKNOWN <= CRIT);host_worst_service_state;servicesbygroup;int
+3D-Coordinates: X;host_x_3d;servicesbygroup;float
+3D-Coordinates: Y;host_y_3d;servicesbygroup;float
+3D-Coordinates: Z;host_z_3d;servicesbygroup;float
+The name of an image to be used as icon in the web interface;icon_image;servicesbygroup;string
+An alternative text for the icon_image for browsers not displaying icons;icon_image_alt;servicesbygroup;string
+The icon_image with (the most important) macros expanded;icon_image_expanded;servicesbygroup;string
+List of what the source impact (list of hosts and services);impacts;servicesbygroup;list
+Whether the service is currently in its check period (0/1);in_check_period;servicesbygroup;int
+Whether the service is currently in its notification period (0/1);in_notification_period;servicesbygroup;int
+The initial state of the service;initial_state;servicesbygroup;int
+is there a service check currently running... (0/1);is_executing;servicesbygroup;int
+Whether the service is flapping (0/1);is_flapping;servicesbygroup;int
+Whether the host state is an impact or not (0/1);is_impact;servicesbygroup;int
+Whether the host state is a problem or not (0/1);is_problem;servicesbygroup;int
+The time of the last check (Unix timestamp);last_check;servicesbygroup;int
+The last hard state of the service;last_hard_state;servicesbygroup;int
+The time of the last hard state change (Unix timestamp);last_hard_state_change;servicesbygroup;int
+The time of the last notification (Unix timestamp);last_notification;servicesbygroup;int
+The last state of the service;last_state;servicesbygroup;int
+The time of the last state change (Unix timestamp);last_state_change;servicesbygroup;int
+The last time the service was CRITICAL (Unix timestamp);last_time_critical;servicesbygroup;int
+The last time the service was OK (Unix timestamp);last_time_ok;servicesbygroup;int
+The last time the service was UNKNOWN (Unix timestamp);last_time_unknown;servicesbygroup;int
+The last time the service was in WARNING state (Unix timestamp);last_time_warning;servicesbygroup;int
+Time difference between scheduled check time and actual check time;latency;servicesbygroup;int
+Unabbreviated output of the last check plugin;long_plugin_output;servicesbygroup;string
+Low threshold of flap detection;low_flap_threshold;servicesbygroup;float
+The maximum number of check attempts;max_check_attempts;servicesbygroup;int
+A bitmask specifying which attributes have been modified;modified_attributes;servicesbygroup;int
+A list of all modified attributes;modified_attributes_list;servicesbygroup;list
+The scheduled time of the next check (Unix timestamp);next_check;servicesbygroup;int
+The time of the next notification (Unix timestamp);next_notification;servicesbygroup;int
+Whether to stop sending notifications (0/1);no_more_notifications;servicesbygroup;int
+Optional notes about the service;notes;servicesbygroup;string
+The notes with (the most important) macros expanded;notes_expanded;servicesbygroup;string
+An optional URL for additional notes about the service;notes_url;servicesbygroup;string
+The notes_url with (the most important) macros expanded;notes_url_expanded;servicesbygroup;string
+Interval of periodic notification or 0 if its off;notification_interval;servicesbygroup;float
+The name of the notification period of the service. It this is empty, service problems are always notified.;notification_period;servicesbygroup;string
+Whether notifications are enabled for the service (0/1);notifications_enabled;servicesbygroup;int
+Whether 'obsess_over_service' is enabled for the service (0/1);obsess_over_service;servicesbygroup;int
+List of the dependencies (logical, network or business one) of this service.;parent_dependencies;servicesbygroup;list
+Percent state change;percent_state_change;servicesbygroup;float
+Performance data of the last check plugin;perf_data;servicesbygroup;string
+Output of the last check plugin;plugin_output;servicesbygroup;string
+Whether there is a PNP4Nagios graph present for this service (0/1);pnpgraph_present;servicesbygroup;int
+Poller Tag;poller_tag;servicesbygroup;string
+Whether processing of performance data is enabled for the service (0/1);process_performance_data;servicesbygroup;int
+Number of basic interval lengths between checks when retrying after a soft error;retry_interval;servicesbygroup;float
+The number of scheduled downtimes the service is currently in;scheduled_downtime_depth;servicesbygroup;int
+The name of the source problems (host or service);source_problems;servicesbygroup;list
+The current state of the service (0: OK, 1: WARN, 2: CRITICAL, 3: UNKNOWN);state;servicesbygroup;int
+The type of the current state (0: soft, 1: hard);state_type;servicesbygroup;int
+Whether the service accepts passive checks (0/1);accept_passive_checks;servicesbyhostgroup;int
+Whether the current service problem has been acknowledged (0/1);acknowledged;servicesbyhostgroup;int
+The type of the acknownledgement (0: none, 1: normal, 2: sticky);acknowledgement_type;servicesbyhostgroup;int
+An optional URL for actions or custom information about the service;action_url;servicesbyhostgroup;string
+The action_url with (the most important) macros expanded;action_url_expanded;servicesbyhostgroup;string
+Whether active checks are enabled for the service (0/1);active_checks_enabled;servicesbyhostgroup;int
+The importance we gave to this service between the minimum 0 and the maximum 5;business_impact;servicesbyhostgroup;int
+Nagios command used for active checks;check_command;servicesbyhostgroup;string
+Number of basic interval lengths between two scheduled checks of the service;check_interval;servicesbyhostgroup;float
+The current check option, forced, normal, freshness... (0/1);check_options;servicesbyhostgroup;int
+The name of the check period of the service. It this is empty, the service is always checked.;check_period;servicesbyhostgroup;string
+The type of the last check (0: active, 1: passive);check_type;servicesbyhostgroup;int
+Whether active checks are enabled for the service (0/1);checks_enabled;servicesbyhostgroup;int
+List of the host/service that depend on this service (logical, network or business one).;child_dependencies;servicesbyhostgroup;list
+A list of all comment ids of the service;comments;servicesbyhostgroup;list
+A list of the ids of all comments of this service with id, author and comment;comments_with_info;servicesbyhostgroup;list
+A list of all contact groups this service is in;contact_groups;servicesbyhostgroup;list
+A list of all contacts of the service, either direct or via a contact group;contacts;servicesbyhostgroup;list
+The importance we gave to this service between the minimum 0 and the maximum 5;criticity;servicesbyhostgroup;int
+The number of the current check attempt;current_attempt;servicesbyhostgroup;int
+The number of the current notification;current_notification_number;servicesbyhostgroup;int
+A list of the names of all custom variables of the service;custom_variable_names;servicesbyhostgroup;list
+A list of the values of all custom variable of the service;custom_variable_values;servicesbyhostgroup;list
+A dictionary of the custom variables;custom_variables;servicesbyhostgroup;list
+Description of the service (also used as key);description;servicesbyhostgroup;string
+An optional display name (not used by Nagios standard web pages);display_name;servicesbyhostgroup;string
+A list of all downtime ids of the service;downtimes;servicesbyhostgroup;list
+A list of all downtimes of the service with id, author and comment;downtimes_with_info;servicesbyhostgroup;list
+Nagios command used as event handler;event_handler;servicesbyhostgroup;string
+Whether and event handler is activated for the service (0/1);event_handler_enabled;servicesbyhostgroup;int
+Time the host check needed for execution;execution_time;servicesbyhostgroup;float
+Delay before the first notification;first_notification_delay;servicesbyhostgroup;float
+Whether flap detection is enabled for the service (0/1);flap_detection_enabled;servicesbyhostgroup;int
+Whether the service state is an business rule based host or not (0/1);got_business_rule;servicesbyhostgroup;int
+A list of all service groups the service is in;groups;servicesbyhostgroup;list
+Whether the service already has been checked (0/1);has_been_checked;servicesbyhostgroup;int
+High threshold of flap detection;high_flap_threshold;servicesbyhostgroup;float
+Whether passive host checks are accepted (0/1);host_accept_passive_checks;servicesbyhostgroup;int
+Whether the current host problem has been acknowledged (0/1);host_acknowledged;servicesbyhostgroup;int
+Type of acknowledgement (0: none, 1: normal, 2: stick);host_acknowledgement_type;servicesbyhostgroup;int
+An optional URL to custom actions or information about this host;host_action_url;servicesbyhostgroup;string
+The same as action_url, but with the most important macros expanded;host_action_url_expanded;servicesbyhostgroup;string
+Whether active checks are enabled for the host (0/1);host_active_checks_enabled;servicesbyhostgroup;int
+IP address;host_address;servicesbyhostgroup;string
+An alias name for the host;host_alias;servicesbyhostgroup;string
+Nagios command for active host check of this host;host_check_command;servicesbyhostgroup;string
+Whether to check to send a recovery notification when flapping stops (0/1);host_check_flapping_recovery_notification;servicesbyhostgroup;int
+Whether freshness checks are activated (0/1);host_check_freshness;servicesbyhostgroup;int
+Number of basic interval lengths between two scheduled checks of the host;host_check_interval;servicesbyhostgroup;float
+The current check option, forced, normal, freshness... (0-2);host_check_options;servicesbyhostgroup;int
+Time period in which this host will be checked. If empty then the host will always be checked.;host_check_period;servicesbyhostgroup;string
+Type of check (0: active, 1: passive);host_check_type;servicesbyhostgroup;int
+Whether checks of the host are enabled (0/1);host_checks_enabled;servicesbyhostgroup;int
+A list of all direct childs of the host;host_childs;servicesbyhostgroup;list
+A list of the ids of all comments of this host;host_comments;servicesbyhostgroup;list
+A list of the ids of all comments of this host;host_comments_with_info;servicesbyhostgroup;list
+A list of all contact groups this host is in;host_contact_groups;servicesbyhostgroup;list
+A list of all contacts of this host, either direct or via a contact group;host_contacts;servicesbyhostgroup;list
+Number of the current check attempts;host_current_attempt;servicesbyhostgroup;int
+Number of the current notification;host_current_notification_number;servicesbyhostgroup;int
+A list of the names of all custom variables;host_custom_variable_names;servicesbyhostgroup;list
+A list of the values of the custom variables;host_custom_variable_values;servicesbyhostgroup;list
+A dictionary of the custom variables;host_custom_variables;servicesbyhostgroup;list
+Optional display name of the host - not used by Nagios' web interface;host_display_name;servicesbyhostgroup;string
+A list of the ids of all scheduled downtimes of this host;host_downtimes;servicesbyhostgroup;list
+A list of the all scheduled downtimes of the host with id, author and comment;host_downtimes_with_info;servicesbyhostgroup;list
+Whether event handling is enabled (0/1);host_event_handler_enabled;servicesbyhostgroup;int
+Time the host check needed for execution;host_execution_time;servicesbyhostgroup;float
+The value of the custom variable FILENAME;host_filename;servicesbyhostgroup;string
+Delay before the first notification;host_first_notification_delay;servicesbyhostgroup;float
+Whether flap detection is enabled (0/1);host_flap_detection_enabled;servicesbyhostgroup;int
+A list of all host groups this host is in;host_groups;servicesbyhostgroup;list
+The effective hard state of the host (eliminates a problem in hard_state);host_hard_state;servicesbyhostgroup;int
+Whether the host has already been checked (0/1);host_has_been_checked;servicesbyhostgroup;int
+High threshold of flap detection;host_high_flap_threshold;servicesbyhostgroup;float
+The name of an image file to be used in the web pages;host_icon_image;servicesbyhostgroup;string
+Alternative text for the icon_image;host_icon_image_alt;servicesbyhostgroup;string
+The same as icon_image, but with the most important macros expanded;host_icon_image_expanded;servicesbyhostgroup;string
+Whether this host is currently in its check period (0/1);host_in_check_period;servicesbyhostgroup;int
+Whether this host is currently in its notification period (0/1);host_in_notification_period;servicesbyhostgroup;int
+Initial host state;host_initial_state;servicesbyhostgroup;int
+is there a host check currently running... (0/1);host_is_executing;servicesbyhostgroup;int
+Whether the host state is flapping (0/1);host_is_flapping;servicesbyhostgroup;int
+Time of the last check (Unix timestamp);host_last_check;servicesbyhostgroup;int
+Last hard state;host_last_hard_state;servicesbyhostgroup;int
+Time of the last hard state change (Unix timestamp);host_last_hard_state_change;servicesbyhostgroup;int
+Time of the last notification (Unix timestamp);host_last_notification;servicesbyhostgroup;int
+State before last state change;host_last_state;servicesbyhostgroup;int
+Time of the last state change - soft or hard (Unix timestamp);host_last_state_change;servicesbyhostgroup;int
+The last time the host was DOWN (Unix timestamp);host_last_time_down;servicesbyhostgroup;int
+The last time the host was UNREACHABLE (Unix timestamp);host_last_time_unreachable;servicesbyhostgroup;int
+The last time the host was UP (Unix timestamp);host_last_time_up;servicesbyhostgroup;int
+Time difference between scheduled check time and actual check time;host_latency;servicesbyhostgroup;float
+Complete output from check plugin;host_long_plugin_output;servicesbyhostgroup;string
+Low threshold of flap detection;host_low_flap_threshold;servicesbyhostgroup;float
+Max check attempts for active host checks;host_max_check_attempts;servicesbyhostgroup;int
+A bitmask specifying which attributes have been modified;host_modified_attributes;servicesbyhostgroup;int
+A list of all modified attributes;host_modified_attributes_list;servicesbyhostgroup;list
+Host name;host_name;servicesbyhostgroup;string
+Scheduled time for the next check (Unix timestamp);host_next_check;servicesbyhostgroup;int
+Time of the next notification (Unix timestamp);host_next_notification;servicesbyhostgroup;int
+Whether to stop sending notifications (0/1);host_no_more_notifications;servicesbyhostgroup;int
+Optional notes for this host;host_notes;servicesbyhostgroup;string
+The same as notes, but with the most important macros expanded;host_notes_expanded;servicesbyhostgroup;string
+An optional URL with further information about the host;host_notes_url;servicesbyhostgroup;string
+Same es notes_url, but with the most important macros expanded;host_notes_url_expanded;servicesbyhostgroup;string
+Interval of periodic notification or 0 if its off;host_notification_interval;servicesbyhostgroup;float
+Time period in which problems of this host will be notified. If empty then notification will be always;host_notification_period;servicesbyhostgroup;string
+Whether notifications of the host are enabled (0/1);host_notifications_enabled;servicesbyhostgroup;int
+The total number of services of the host;host_num_services;servicesbyhostgroup;int
+The number of the host's services with the soft state CRIT;host_num_services_crit;servicesbyhostgroup;int
+The number of the host's services with the hard state CRIT;host_num_services_hard_crit;servicesbyhostgroup;int
+The number of the host's services with the hard state OK;host_num_services_hard_ok;servicesbyhostgroup;int
+The number of the host's services with the hard state UNKNOWN;host_num_services_hard_unknown;servicesbyhostgroup;int
+The number of the host's services with the hard state WARN;host_num_services_hard_warn;servicesbyhostgroup;int
+The number of the host's services with the soft state OK;host_num_services_ok;servicesbyhostgroup;int
+The number of the host's services which have not been checked yet (pending);host_num_services_pending;servicesbyhostgroup;int
+The number of the host's services with the soft state UNKNOWN;host_num_services_unknown;servicesbyhostgroup;int
+The number of the host's services with the soft state WARN;host_num_services_warn;servicesbyhostgroup;int
+The current obsess_over_host setting... (0/1);host_obsess_over_host;servicesbyhostgroup;int
+A list of all direct parents of the host;host_parents;servicesbyhostgroup;list
+Whether a flex downtime is pending (0/1);host_pending_flex_downtime;servicesbyhostgroup;int
+Percent state change;host_percent_state_change;servicesbyhostgroup;float
+Optional performance data of the last host check;host_perf_data;servicesbyhostgroup;string
+Output of the last host check;host_plugin_output;servicesbyhostgroup;string
+Whether there is a PNP4Nagios graph present for this host (0/1);host_pnpgraph_present;servicesbyhostgroup;int
+Whether processing of performance data is enabled (0/1);host_process_performance_data;servicesbyhostgroup;int
+Number of basic interval lengths between checks when retrying after a soft error;host_retry_interval;servicesbyhostgroup;float
+The number of downtimes this host is currently in;host_scheduled_downtime_depth;servicesbyhostgroup;int
+A list of all services of the host;host_services;servicesbyhostgroup;list
+A list of all services including detailed information about each service;host_services_with_info;servicesbyhostgroup;list
+A list of all services of the host together with state and has_been_checked;host_services_with_state;servicesbyhostgroup;list
+The current state of the host (0: up, 1: down, 2: unreachable);host_state;servicesbyhostgroup;int
+Type of the current state (0: soft, 1: hard);host_state_type;servicesbyhostgroup;int
+The name of in image file for the status map;host_statusmap_image;servicesbyhostgroup;string
+The total number of services of the host;host_total_services;servicesbyhostgroup;int
+The worst hard state of all of the host's services (OK <= WARN <= UNKNOWN <= CRIT);host_worst_service_hard_state;servicesbyhostgroup;int
+The worst soft state of all of the host's services (OK <= WARN <= UNKNOWN <= CRIT);host_worst_service_state;servicesbyhostgroup;int
+3D-Coordinates: X;host_x_3d;servicesbyhostgroup;float
+3D-Coordinates: Y;host_y_3d;servicesbyhostgroup;float
+3D-Coordinates: Z;host_z_3d;servicesbyhostgroup;float
+The name of an image to be used as icon in the web interface;icon_image;servicesbyhostgroup;string
+An alternative text for the icon_image for browsers not displaying icons;icon_image_alt;servicesbyhostgroup;string
+The icon_image with (the most important) macros expanded;icon_image_expanded;servicesbyhostgroup;string
+List of what the source impact (list of hosts and services);impacts;servicesbyhostgroup;list
+Whether the service is currently in its check period (0/1);in_check_period;servicesbyhostgroup;int
+Whether the service is currently in its notification period (0/1);in_notification_period;servicesbyhostgroup;int
+The initial state of the service;initial_state;servicesbyhostgroup;int
+is there a service check currently running... (0/1);is_executing;servicesbyhostgroup;int
+Whether the service is flapping (0/1);is_flapping;servicesbyhostgroup;int
+Whether the host state is an impact or not (0/1);is_impact;servicesbyhostgroup;int
+Whether the host state is a problem or not (0/1);is_problem;servicesbyhostgroup;int
+The time of the last check (Unix timestamp);last_check;servicesbyhostgroup;int
+The last hard state of the service;last_hard_state;servicesbyhostgroup;int
+The time of the last hard state change (Unix timestamp);last_hard_state_change;servicesbyhostgroup;int
+The time of the last notification (Unix timestamp);last_notification;servicesbyhostgroup;int
+The last state of the service;last_state;servicesbyhostgroup;int
+The time of the last state change (Unix timestamp);last_state_change;servicesbyhostgroup;int
+The last time the service was CRITICAL (Unix timestamp);last_time_critical;servicesbyhostgroup;int
+The last time the service was OK (Unix timestamp);last_time_ok;servicesbyhostgroup;int
+The last time the service was UNKNOWN (Unix timestamp);last_time_unknown;servicesbyhostgroup;int
+The last time the service was in WARNING state (Unix timestamp);last_time_warning;servicesbyhostgroup;int
+Time difference between scheduled check time and actual check time;latency;servicesbyhostgroup;int
+Unabbreviated output of the last check plugin;long_plugin_output;servicesbyhostgroup;string
+Low threshold of flap detection;low_flap_threshold;servicesbyhostgroup;float
+The maximum number of check attempts;max_check_attempts;servicesbyhostgroup;int
+A bitmask specifying which attributes have been modified;modified_attributes;servicesbyhostgroup;int
+A list of all modified attributes;modified_attributes_list;servicesbyhostgroup;list
+The scheduled time of the next check (Unix timestamp);next_check;servicesbyhostgroup;int
+The time of the next notification (Unix timestamp);next_notification;servicesbyhostgroup;int
+Whether to stop sending notifications (0/1);no_more_notifications;servicesbyhostgroup;int
+Optional notes about the service;notes;servicesbyhostgroup;string
+The notes with (the most important) macros expanded;notes_expanded;servicesbyhostgroup;string
+An optional URL for additional notes about the service;notes_url;servicesbyhostgroup;string
+The notes_url with (the most important) macros expanded;notes_url_expanded;servicesbyhostgroup;string
+Interval of periodic notification or 0 if its off;notification_interval;servicesbyhostgroup;float
+The name of the notification period of the service. It this is empty, service problems are always notified.;notification_period;servicesbyhostgroup;string
+Whether notifications are enabled for the service (0/1);notifications_enabled;servicesbyhostgroup;int
+Whether 'obsess_over_service' is enabled for the service (0/1);obsess_over_service;servicesbyhostgroup;int
+List of the dependencies (logical, network or business one) of this service.;parent_dependencies;servicesbyhostgroup;list
+Percent state change;percent_state_change;servicesbyhostgroup;float
+Performance data of the last check plugin;perf_data;servicesbyhostgroup;string
+Output of the last check plugin;plugin_output;servicesbyhostgroup;string
+Whether there is a PNP4Nagios graph present for this service (0/1);pnpgraph_present;servicesbyhostgroup;int
+Poller Tag;poller_tag;servicesbyhostgroup;string
+Whether processing of performance data is enabled for the service (0/1);process_performance_data;servicesbyhostgroup;int
+Number of basic interval lengths between checks when retrying after a soft error;retry_interval;servicesbyhostgroup;float
+The number of scheduled downtimes the service is currently in;scheduled_downtime_depth;servicesbyhostgroup;int
+The name of the source problems (host or service);source_problems;servicesbyhostgroup;list
+The current state of the service (0: OK, 1: WARN, 2: CRITICAL, 3: UNKNOWN);state;servicesbyhostgroup;int
+The type of the current state (0: soft, 1: hard);state_type;servicesbyhostgroup;int
+Whether passive host checks are accepted in general (0/1);accept_passive_host_checks;status;int
+Whether passive service checks are activated in general (0/1);accept_passive_service_checks;status;int
+The current number of log messages MK Livestatus keeps in memory;cached_log_messages;status;int
+The current number of log messages MK Livestatus keeps in memory;cached_log_messages_rate;status;float
+Whether Nagios checks for external commands at its command pipe (0/1);check_external_commands;status;int
+Whether host freshness checking is activated in general (0/1);check_host_freshness;status;int
+Whether service freshness checking is activated in general (0/1);check_service_freshness;status;int
+The number of client connections to Livestatus since program start;connections;status;int
+The averaged number of new client connections to Livestatus per second;connections_rate;status;float
+Whether event handlers are activated in general (0/1);enable_event_handlers;status;int
+Whether flap detection is activated in general (0/1);enable_flap_detection;status;int
+Whether notifications are enabled in general (0/1);enable_notifications;status;int
+Whether host checks are executed in general (0/1);execute_host_checks;status;int
+Whether active service checks are activated in general (0/1);execute_service_checks;status;int
+The maximum number of slots used in the external command buffer;external_command_buffer_max;status;int
+The size of the buffer for the external commands;external_command_buffer_slots;status;int
+The number of slots in use of the external command buffer;external_command_buffer_usage;status;int
+The averaged number of external commands per second;external_commands_rate;status;float
+The number of process creations since program start;forks;status;float
+The averaged number of forks per second;forks_rate;status;float
+The number of host checks since program start;host_checks;status;int
+the averaged number of host checks per second;host_checks_rate;status;float
+The default interval length from nagios.cfg;interval_length;status;int
+The time of the last check for a command as UNIX timestamp;last_command_check;status;int
+Time time of the last log file rotation;last_log_rotation;status;int
+The version of the MK Livestatus module;livestatus_version;status;string
+The number of new log messages since program start;log_messages;status;float
+The averaged number of log messages per second;log_messages_rate;status;float
+The process ID of the Nagios main process;nagios_pid;status;int
+The number of NEB call backs since program start;neb_callbacks;status;int
+The averaged number of NEB call backs per second;neb_callbacks_rate;status;float
+Whether Nagios will obsess over host checks (0/1);obsess_over_hosts;status;int
+Whether Nagios will obsess over service checks and run the ocsp_command (0/1);obsess_over_services;status;int
+Whether processing of performance data is activated in general (0/1);process_performance_data;status;int
+The time of the last program start as UNIX timestamp;program_start;status;int
+The version of the monitoring daemon;program_version;status;string
+The number of requests to Livestatus since program start;requests;status;int
+The averaged number of request to Livestatus per second;requests_rate;status;float
+The number of completed service checks since program start;service_checks;status;int
+The averaged number of service checks per second;service_checks_rate;status;float
