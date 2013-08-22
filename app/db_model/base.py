@@ -246,6 +246,55 @@ def create_default_views():
     __add_column('num_services_unknown', view)
     __add_column('num_services_pending', view)
 
+     ##########################################
+    # Services problems
+
+    filters = ViewFilters()
+    setattr(filters, 'host_regex_option', 'show')
+
+    setattr(filters, 'host_state_option', 'show')
+    setattr(filters, 'host_state_up', True)
+    setattr(filters, 'host_state_down', False)
+    setattr(filters, 'host_state_unreach', False)
+    setattr(filters, 'host_state_pending', True)
+
+    setattr(filters, 'service_state_option', 'hard')
+    setattr(filters, 'service_state_ok', False)
+    setattr(filters, 'service_state_warning', True)
+    setattr(filters, 'service_state_critical', True)
+    setattr(filters, 'service_state_unknown', True)
+    setattr(filters, 'service_state_pending', False)
+
+    setattr(filters, 'is_host_scheduled_downtime_depth_option', 'hard')
+    setattr(filters, 'is_host_scheduled_downtime_depth', '0')
+
+    setattr(filters, 'is_service_acknowledged_option', 'show')
+    setattr(filters, 'is_service_acknowledged', '-1')
+
+    setattr(filters, 'is_summary_host_option', 'show')
+    setattr(filters, 'is_summary_host', '0')
+
+    setattr(filters, 'is_service_in_notification_period_option', 'show')
+
+    db_session.add(filters)
+    db_session.commit()
+
+    filters = ViewFilters.query.all()[6]
+    view = View()
+    view.title = _('Service problems')
+    view.link_name = 'svcproblems'
+    view.datasource = 'services'
+    view.description = 'All problems of services not currently in a downtime.'
+    view.layout_number_columns = 1
+    view.filters_id = filters.id
+    db_session.add(view)
+    db_session.commit()
+
+    __add_column('host_name', view, 'host')
+    __add_column('service_description', view, 'service')
+    __add_column('service_plugin_output', view)
+    __add_column('last_check', view)
+
 
 def __add_column(name, view, link=""):
     col = ViewColumn()

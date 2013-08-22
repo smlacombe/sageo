@@ -31,8 +31,11 @@ FILTER_SERVICE_STATE = 'service_state'
 FILTER_IS_SUMMARY_HOST = 'is_summary_host'
 FILTER_SITE = 'site'
 FILTER_IS_HOST_ACKNOWLEDGED = 'is_host_acknowledged'
+FILTER_IS_SERVICE_ACKNOWLEDGED = 'is_service_acknowledged'
 FILTER_IS_HOST_IN_NOTIFICATION_PERIOD = 'is_host_in_notification_period'
+FILTER_IS_SERVICE_IN_NOTIFICATION_PERIOD = 'is_service_in_notification_period'
 FILTER_IS_HOST_SCHEDULED_DOWNTIME_DEPTH = 'is_host_scheduled_downtime_depth'
+FILTER_IS_SERVICE_SCHEDULED_DOWNTIME_DEPTH = 'is_service_scheduled_downtime_depth'
 
 from app.model.filters.filter import Filter
 from app.model.filters.filter_text import FilterText
@@ -66,5 +69,8 @@ filters[FILTER_IS_SUMMARY_HOST] = FilterNagiosExpr(FILTER_IS_SUMMARY_HOST, _("Is
 #Nagios flag filters
 
 filters[FILTER_IS_HOST_ACKNOWLEDGED] = FilterNagiosFlag(FILTER_IS_HOST_ACKNOWLEDGED,  _("Host problem has been acknowledged"), '', default='-1', column=['host_acknowledged'])
+filters[FILTER_IS_SERVICE_ACKNOWLEDGED] = FilterNagiosFlag(FILTER_IS_SERVICE_ACKNOWLEDGED,  _("Service problem has been acknowledged"), '', default='-1', column=['service_acknowledged'])
 filters[FILTER_IS_HOST_IN_NOTIFICATION_PERIOD] = FilterNagiosFlag(FILTER_IS_HOST_IN_NOTIFICATION_PERIOD,  _("Host in notif. period"), '', default='-1', column=['host_in_notification_period']) 
+filters[FILTER_IS_SERVICE_IN_NOTIFICATION_PERIOD] = FilterNagiosFlag(FILTER_IS_SERVICE_IN_NOTIFICATION_PERIOD,  _("Service in notif. period"), '', default='-1', column=['service_in_notification_period']) 
 filters[FILTER_IS_HOST_SCHEDULED_DOWNTIME_DEPTH] = FilterNagiosFlag(FILTER_IS_HOST_SCHEDULED_DOWNTIME_DEPTH,  _("Host in downtime"), '', default='-1', column=['host_scheduled_downtime_depth']) 
+filters[FILTER_IS_SERVICE_SCHEDULED_DOWNTIME_DEPTH] = FilterNagiosFlag(FILTER_IS_SERVICE_SCHEDULED_DOWNTIME_DEPTH,  _("Service in downtime"), '', default='-1', column=['service_scheduled_downtime_depth']) 

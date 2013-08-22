@@ -38,9 +38,12 @@ COL_NUM_SERVICES_CRIT = 'num_services_crit'
 COL_NUM_SERVICES_UNKNOWN = 'num_services_unknown'
 COL_NUM_SERVICES_PENDING = 'num_services_pending'
 COL_HOST_IN_NOTIFICATION_PERIOD = 'host_in_notification_period'
+COL_SERVICE_IN_NOTIFICATION_PERIOD = 'service_in_notification_period'
 COL_HOST_ACKNOWLEDGED = 'host_acknowledged'
 COL_HOST_SCHEDULED_DOWNTIME_DEPTH = 'host_scheduled_downtime_depth'
+COL_SERVICE_SCHEDULED_DOWNTIME_DEPTH = 'service_scheduled_downtime_depth'
 COL_HOST_CUSTOM_VARIABLE_NAMES = 'host_custom_variable_names'
+COL_SERVICE_ACKNOWLEDGED = 'service_acknowledged'
 
 _ = gettext
 painters = {}
@@ -74,9 +77,13 @@ painters[COL_SERVICE_PLUGIN_OUTPUT] = ColumnPainterRaw(COL_SERVICE_PLUGIN_OUTPUT
 
 yes_no_states = {0: 'no', 1: _('yes')}
 
-painters[COL_HOST_IN_NOTIFICATION_PERIOD] = ColumnPainterState(COL_HOST_IN_NOTIFICATION_PERIOD, _(u'In notifications period'), _(u'In notif p.'), ['services', 'hostsbygroup', 'servicesbygroup','servicesbyhostgroup', 'log', 'hosts'], yes_no_states)
+
+painters[COL_HOST_IN_NOTIFICATION_PERIOD] = ColumnPainterState(COL_HOST_IN_NOTIFICATION_PERIOD, _(u'Host in notifications period'), _(u'In notif p.'), ['services', 'hostsbygroup', 'servicesbygroup','servicesbyhostgroup', 'log', 'hosts'], yes_no_states)
+painters[COL_SERVICE_IN_NOTIFICATION_PERIOD] = ColumnPainterState(COL_SERVICE_IN_NOTIFICATION_PERIOD, _(u'Service in notifications period'), _(u'In notif p.'), ['services', 'hostsbygroup', 'servicesbygroup','servicesbyhostgroup', 'log', 'hosts'], yes_no_states)
 painters[COL_HOST_ACKNOWLEDGED] = ColumnPainterState(COL_HOST_ACKNOWLEDGED, _(u"Host problem acknowledged"), _(u'Ack'), ['services', 'hostsbygroup', 'servicesbygroup','servicesbyhostgroup', 'log', 'hosts'], yes_no_states)
+painters[COL_SERVICE_ACKNOWLEDGED] = ColumnPainterState(COL_SERVICE_ACKNOWLEDGED, _(u"Service problem acknowledged"), _(u'Ack'), ['services', 'hostsbygroup', 'servicesbygroup','servicesbyhostgroup', 'log', 'hosts'], yes_no_states)
 painters[COL_HOST_SCHEDULED_DOWNTIME_DEPTH] = ColumnPainterRaw(COL_HOST_SCHEDULED_DOWNTIME_DEPTH, _(u'Host in dowtime'), _(u'Downtime'), ['hosts', 'services'])
+painters[COL_SERVICE_SCHEDULED_DOWNTIME_DEPTH] = ColumnPainterRaw(COL_SERVICE_SCHEDULED_DOWNTIME_DEPTH, _(u'Service in dowtime'), _(u'Downtime'), ['hosts', 'services'])
 painters[COL_HOST_CUSTOM_VARIABLE_NAMES] = ColumnPainterRaw(COL_HOST_CUSTOM_VARIABLE_NAMES, _(u'Custom variables names'), _(u'Custom vars'), ['hosts', 'services'])
 
 def get_columns_pairs(datasources=None):

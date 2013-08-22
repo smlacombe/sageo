@@ -3,6 +3,11 @@ Changelog
 
 Here you can see the full list of changes between each Sageo release.
 
+0.3.2
+^^^^^
+Add the builtin view "svcproblems".
+Add the filters and the columns required for "svcproblems" view. (excluding perfometer and icons columns)
+
 0.3.1
 ^^^^^
 Add the builtin view "hostproblems".
