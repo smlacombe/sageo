@@ -137,18 +137,12 @@ class ViewManager():
         links_choices.append(('',''))
         for x in views:
             if x.link_title:
-                links_choices.append((x.link_name, x.link_title))
+                if not self.__view or not self.__view.link_title == x.link_title:
+                    links_choices.append((x.link_name, x.link_title))
             else:
-                links_choices.append((x.link_name, x.title))
+                if not self.__view or not self.__view.link_name == x.link_name:
+                    links_choices.append((x.link_name, x.title))
 
-        # remove the current view from the choices
-        if self.__view:
-            link_name = self.__view.link_name
-            if link_name:
-                title = self.__view.title
-                current_tuple = (link_name, title)
-                links_choices.remove(current_tuple)
-        
         return links_choices 
 
     def get_columns(self):

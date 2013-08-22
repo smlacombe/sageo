@@ -33,7 +33,8 @@ class FiltersManager():
     def get_filter_query(self):
         filter_query = ''
         for name, filter_value in self.__filters.get_filters().iteritems():
-            filter_query = filter_query + filters[name].filter(filter_value)             
+            if filter_value:
+                filter_query = filter_query + filters[name].filter(filter_value)             
 
         return filter_query
     

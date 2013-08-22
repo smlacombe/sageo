@@ -48,7 +48,7 @@ class FilterServiceState(Filter):
     def get_col_def(self):
         return [
                     Column(FILTER_SERVICE_STATE + '_ok', Boolean, default=True, info={'label': 'OK'}),
-                    Column(FILTER_SERVICE_STATE + '_warning', Boolean, default=True, info={'label': 'WARNIN'}),
+                    Column(FILTER_SERVICE_STATE + '_warning', Boolean, default=True, info={'label': 'WARNING'}),
                     Column(FILTER_SERVICE_STATE + '_critical', Boolean, default=True, info={'label': 'CRITICAL'}),
                     Column(FILTER_SERVICE_STATE + '_unknown', Boolean, default=True, info={'label': 'UNKNOWN'})
                 ]

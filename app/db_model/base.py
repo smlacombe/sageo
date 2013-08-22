@@ -201,6 +201,52 @@ def create_default_views():
     __add_column('service_plugin_output', view)
     __add_column('last_check', view) 
 
+    ##########################################
+    # Host problems
+    
+    filters = ViewFilters()
+    setattr(filters, 'host_regex_option', 'show')
+ 
+    setattr(filters, 'host_state_option', 'hard')
+    setattr(filters, 'host_state_up', False)
+    setattr(filters, 'host_state_down', True)
+    setattr(filters, 'host_state_unreach', True)
+    setattr(filters, 'host_state_pending', False)
+
+    setattr(filters, 'is_host_scheduled_downtime_depth_option', 'hard')
+    setattr(filters, 'is_host_scheduled_downtime_depth', '0')
+    
+    setattr(filters, 'is_host_acknowledged_option', 'show')
+
+    setattr(filters, 'is_summary_host_option', 'show')
+    setattr(filters, 'is_summary_host', '0')
+
+    setattr(filters, 'is_host_in_notification_period_option', 'show')   
+
+    db_session.add(filters)
+    db_session.commit()
+
+    filters = ViewFilters.query.all()[5]
+    view = View()
+    view.title = 'Host problems'
+    view.link_name = 'hostproblems'
+    view.datasource = 'hosts'
+    view.description = 'A complete list of all host problems with a search form for selecting handled and unhandled' 
+    view.layout_number_columns = 3
+    view.filters_id = filters.id
+    db_session.add(view)
+    db_session.commit()
+
+    __add_column('host_name', view, 'host')
+    __add_column('host_state', view)
+    __add_column('plugin_output', view)
+    __add_column('num_services_ok', view)
+    __add_column('num_services_warn', view)
+    __add_column('num_services_crit', view)
+    __add_column('num_services_unknown', view)
+    __add_column('num_services_pending', view)
+
+
 def __add_column(name, view, link=""):
     col = ViewColumn()
     col.column = name 

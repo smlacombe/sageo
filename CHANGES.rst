@@ -3,6 +3,13 @@ Changelog
 
 Here you can see the full list of changes between each Sageo release.
 
+0.3.1
+^^^^^
+Add the builtin view "hostproblems".
+Add the filters and the columns required for "hostproblems" view.
+Fix the hidden filters gathering problem.
+Use the short title for columns instead the long title in the view display page.
+
 0.3.0
 ^^^^^
 Add the view linking feature.

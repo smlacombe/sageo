@@ -32,6 +32,7 @@ from app.db_model.view import View
 from app.db_model.viewFilters import ViewFilters
 from app.db_model.viewGrouper import ViewGrouper
 from app.model.filters.builtin import FILTER_IS_SUMMARY_HOST
+from app.model.filters.builtin import filters
 import copy
 
 class ViewSorterForm(ModelForm, TranslatedFormNoCsrf):
@@ -58,8 +59,12 @@ class ViewFiltersForm(ModelForm, TranslatedFormNoCsrf):
             setattr(filters, col, value)
         return filters
 
-setattr(ViewFiltersForm, FILTER_IS_SUMMARY_HOST, RadioField('Summary', choices=[('yes',_(u'Yes')),('no',_(u'No')),('ignore',_(u'Ignore'))], default='no'))
-
+# Override filters form fields if the filter have a custom form field definition
+for filt_name, filt_obj in filters.iteritems():
+    if hasattr(filt_obj, 'form_def') and filt_obj.form_def:
+        cols = filt_obj.get_col_def()
+        for col_id in range(0, len(cols)): 
+            setattr(ViewFiltersForm, cols[col_id].name, filt_obj.form_def[col_id]) 
 
 class ViewForm(ModelForm, TranslatedForm):
     class Meta:

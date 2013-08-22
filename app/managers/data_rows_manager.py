@@ -147,9 +147,9 @@ class DataRowsManager():
             count = count + len(group[1])
         return count
 
-    def get_asked_columns_title(self):
+    def get_asked_columns_short_title(self):
         columns_names = []
-        for column in self.__view_manager.get_columns(): columns_names.append(painters[column.column].title)
+        for column in self.__view_manager.get_columns(): columns_names.append(painters[column.column].short_title)
         return columns_names
     
     def get_group_header(self, groupEnum):

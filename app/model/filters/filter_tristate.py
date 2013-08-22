@@ -18,25 +18,19 @@
 
 
 from .filter import Filter
-from builtin import FILTER_SITE 
 from sqlalchemy import *
 from sqlalchemy.orm import *
-from app import app
+from flask.ext.wtf import RadioField
+from flask.ext.babelex import gettext, ngettext
 
-class FilterSite(Filter): 
-    def __init__(self, name, title, descr): 
-        Filter.__init__(self, name, title, descr) 
-        self.column_names = ['site']
-    def filter(self, site):
-        '''
-        Leave livestatus filter with the site with it internal function.
-        '''
-        return 'Sites: %s\n'% site
+_ = gettext
+
+class FilterTristate(Filter):
+    def __init__(self, name, title, descr, default, column):
+        Filter.__init__(self, name, title, descr)
+        self.default = default 
+        self.column_names = column
+        self.form_def = [RadioField(choices=[('1',_(u'Yes')),('0',_(u'No')),('-1',_(u'Ignore'))], default=default)] 
 
     def get_col_def(self):
-        sites = []
-
-        for site in app.config['SITES'].keys():
-            sites.append(site)
-        return [Column('site', Enum(*sites))]
-
+        return [Column(self.name, Enum('1', '0', '-1'), default=self.default)]

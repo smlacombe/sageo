@@ -30,12 +30,16 @@ FILTER_HOST_STATE = 'host_state'
 FILTER_SERVICE_STATE = 'service_state'
 FILTER_IS_SUMMARY_HOST = 'is_summary_host'
 FILTER_SITE = 'site'
+FILTER_IS_HOST_ACKNOWLEDGED = 'is_host_acknowledged'
+FILTER_IS_HOST_IN_NOTIFICATION_PERIOD = 'is_host_in_notification_period'
+FILTER_IS_HOST_SCHEDULED_DOWNTIME_DEPTH = 'is_host_scheduled_downtime_depth'
 
 from app.model.filters.filter import Filter
 from app.model.filters.filter_text import FilterText
 from app.model.filters.filter_host_state import FilterHostState
 from app.model.filters.filter_service_state import FilterServiceState
 from app.model.filters.filter_nagios_expr import FilterNagiosExpr
+from app.model.filters.filter_nagios_flag import FilterNagiosFlag
 from app.model.filters.filter_site import FilterSite
 
 
@@ -56,6 +60,11 @@ filters[FILTER_HOST_STATE] = FilterHostState(FILTER_HOST_STATE, _("Host states")
 filters[FILTER_SERVICE_STATE] = FilterServiceState(FILTER_SERVICE_STATE, _("Service states"), _("Filter service state"))
 
 # Nagios expression filters
-filters[FILTER_IS_SUMMARY_HOST] = FilterNagiosExpr(FILTER_IS_SUMMARY_HOST, _("Is summary host"), '', "Filter: host_custom_variable_names >= _REALNAME\n", "Filter: host_custom_variable_names < _REALNAME\n", default='no', column_names=['host_custom_variable_names']) 
+filters[FILTER_IS_SUMMARY_HOST] = FilterNagiosExpr(FILTER_IS_SUMMARY_HOST, _("Is summary host"), '', '0', ['host_custom_variable_names'], "Filter: host_custom_variable_names >= _REALNAME\n", "Filter: host_custom_variable_names < _REALNAME\n") 
 
 
+#Nagios flag filters
+
+filters[FILTER_IS_HOST_ACKNOWLEDGED] = FilterNagiosFlag(FILTER_IS_HOST_ACKNOWLEDGED,  _("Host problem has been acknowledged"), '', default='-1', column=['host_acknowledged'])
+filters[FILTER_IS_HOST_IN_NOTIFICATION_PERIOD] = FilterNagiosFlag(FILTER_IS_HOST_IN_NOTIFICATION_PERIOD,  _("Host in notif. period"), '', default='-1', column=['host_in_notification_period']) 
+filters[FILTER_IS_HOST_SCHEDULED_DOWNTIME_DEPTH] = FilterNagiosFlag(FILTER_IS_HOST_SCHEDULED_DOWNTIME_DEPTH,  _("Host in downtime"), '', default='-1', column=['host_scheduled_downtime_depth']) 

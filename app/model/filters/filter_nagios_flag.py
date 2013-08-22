@@ -17,26 +17,15 @@
 #   along with Sageo.  If not, see <http://www.gnu.org/licenses/>
 
 
-from .filter import Filter
-from builtin import FILTER_SITE 
+from .filter_tristate import FilterTristate
 from sqlalchemy import *
 from sqlalchemy.orm import *
-from app import app
 
-class FilterSite(Filter): 
-    def __init__(self, name, title, descr): 
-        Filter.__init__(self, name, title, descr) 
-        self.column_names = ['site']
-    def filter(self, site):
-        '''
-        Leave livestatus filter with the site with it internal function.
-        '''
-        return 'Sites: %s\n'% site
-
-    def get_col_def(self):
-        sites = []
-
-        for site in app.config['SITES'].keys():
-            sites.append(site)
-        return [Column('site', Enum(*sites))]
-
+class FilterNagiosFlag(FilterTristate):
+    def filter(self, value):
+        if value == '1':
+            return "Filter: %s != 0\n" % self.column_names[0]
+        elif value == '0':
+            return "Filter: %s = 0\n" % self.column_names[0]
+        else:
+            return ''

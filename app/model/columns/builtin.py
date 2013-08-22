@@ -32,13 +32,29 @@ COL_SERVICE_DESCRIPTION = 'service_description'
 COL_SERVICE_PLUGIN_OUTPUT = 'service_plugin_output'
 COL_STATE_TYPE = 'state_type'
 COL_OUTPUT = 'plugin_output'
+COL_NUM_SERVICES_OK = 'num_services_ok'
+COL_NUM_SERVICES_WARN = 'num_services_warn'
+COL_NUM_SERVICES_CRIT = 'num_services_crit'
+COL_NUM_SERVICES_UNKNOWN = 'num_services_unknown'
+COL_NUM_SERVICES_PENDING = 'num_services_pending'
+COL_HOST_IN_NOTIFICATION_PERIOD = 'host_in_notification_period'
+COL_HOST_ACKNOWLEDGED = 'host_acknowledged'
+COL_HOST_SCHEDULED_DOWNTIME_DEPTH = 'host_scheduled_downtime_depth'
+COL_HOST_CUSTOM_VARIABLE_NAMES = 'host_custom_variable_names'
 
 _ = gettext
 painters = {}
 
-painters[COL_HOST_NAME] = ColumnPainterRaw(COL_HOST_NAME, _(u'Host name'), _(u'Host name'), ['hosts', 'services']) 
+painters[COL_HOST_NAME] = ColumnPainterRaw(COL_HOST_NAME, _(u'Host name'), _(u'Host'), ['hosts', 'services']) 
 
 painters[COL_OUTPUT] = ColumnPainterRaw(COL_OUTPUT, _(u'Output'), _(u'Output'), ['hosts', 'services'])
+
+
+painters[COL_NUM_SERVICES_OK] = ColumnPainterRaw(COL_NUM_SERVICES_OK, _(u"Number of services in state OK"), _(u'OK'), ['hosts', 'hostgroups', 'servicegroups', 'hostsbygroup'])
+painters[COL_NUM_SERVICES_WARN] = ColumnPainterRaw(COL_NUM_SERVICES_WARN, _(u"Number of services in state WARNING"), _(u'Warning'), ['hosts', 'hostgroups', 'servicegroups', 'hostsbygroup'])
+painters[COL_NUM_SERVICES_CRIT] = ColumnPainterRaw(COL_NUM_SERVICES_CRIT, _(u"Number of services in state CRITICAL"), _(u'Critical'), ['hosts', 'hostgroups', 'servicegroups', 'hostsbygroup'])
+painters[COL_NUM_SERVICES_UNKNOWN] = ColumnPainterRaw(COL_NUM_SERVICES_UNKNOWN, _(u"Number of services in state UNKNOWN"), _(u'UNKNOWN'), ['hosts', 'hostgroups', 'servicegroups', 'hostsbygroup'])
+painters[COL_NUM_SERVICES_PENDING] = ColumnPainterRaw(COL_NUM_SERVICES_PENDING, _(u"Number of services in state PENDING"), _(u'PENDING'), ['hosts', 'hostgroups', 'servicegroups', 'hostsbygroup'])
 
 nagios_host_states = {0 : 'UP', 1: 'DOWN', 2: 'UNREACH'}
 painters[COL_HOST_STATE] = ColumnPainterState(COL_HOST_STATE, _(u'Host state'), _(u'Host state'), ['hosts', 'services'], nagios_host_states)
@@ -55,6 +71,13 @@ painters[COL_CHECK_COMMAND] = ColumnPainterRaw(COL_CHECK_COMMAND, _(u'Check comm
 painters[COL_SITE] = ColumnPainterRaw(COL_SITE, _(u'Site'), _(u'Site'), ['hosts', 'services'])
 painters[COL_SERVICE_DESCRIPTION] = ColumnPainterRaw(COL_SERVICE_DESCRIPTION, _(u'Service'), _(u'Service'), ['services'])
 painters[COL_SERVICE_PLUGIN_OUTPUT] = ColumnPainterRaw(COL_SERVICE_PLUGIN_OUTPUT, _(u'Service output'), _(u'Service output'), ['services'])
+
+yes_no_states = {0: 'no', 1: _('yes')}
+
+painters[COL_HOST_IN_NOTIFICATION_PERIOD] = ColumnPainterState(COL_HOST_IN_NOTIFICATION_PERIOD, _(u'In notifications period'), _(u'In notif p.'), ['services', 'hostsbygroup', 'servicesbygroup','servicesbyhostgroup', 'log', 'hosts'], yes_no_states)
+painters[COL_HOST_ACKNOWLEDGED] = ColumnPainterState(COL_HOST_ACKNOWLEDGED, _(u"Host problem acknowledged"), _(u'Ack'), ['services', 'hostsbygroup', 'servicesbygroup','servicesbyhostgroup', 'log', 'hosts'], yes_no_states)
+painters[COL_HOST_SCHEDULED_DOWNTIME_DEPTH] = ColumnPainterRaw(COL_HOST_SCHEDULED_DOWNTIME_DEPTH, _(u'Host in dowtime'), _(u'Downtime'), ['hosts', 'services'])
+painters[COL_HOST_CUSTOM_VARIABLE_NAMES] = ColumnPainterRaw(COL_HOST_CUSTOM_VARIABLE_NAMES, _(u'Custom variables names'), _(u'Custom vars'), ['hosts', 'services'])
 
 def get_columns_pairs(datasources=None):
     column_pairs = []

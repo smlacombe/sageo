@@ -38,6 +38,7 @@ cache_columns = {}
 class ViewFilters(Base):
     __tablename__ = 'view_filters' 
     id = Column(Integer, primary_key=True)
+    extra_filters = []
 
     def get_filters(self):
         """
@@ -45,25 +46,29 @@ class ViewFilters(Base):
         """
         filters_ret = {}
         for name, filt in filters.iteritems():
-            if not getattr(self, name + '_option') == FILTER_OFF:
-                cols = filt.get_col_def()
-                if len(cols) > 1:
-                    value_dict = {}
-                    for col in filt.get_col_def():
-                        value_dict[col.name] = getattr(self, col.name) 
+            option =  getattr(self, name + '_option')
+            if option in [FILTER_SHOW, FILTER_HARD, FILTER_SHOW, FILTER_HIDE]:
+                # If it is a hidden filters (linking), we consider it only if it come from an url
+                if not option == FILTER_HIDE or name in self.extra_filters:
+                    cols = filt.get_col_def()
+                    if len(cols) > 1:
+                        value_dict = {}
+                        for col in filt.get_col_def():
+                            value_dict[col.name] = getattr(self, col.name) 
 
-                    filters_ret[filt.name] = value_dict 
-                else:
-                    filters_ret[filt.name] = getattr(self, cols[0].name)
-
+                        filters_ret[filt.name] = value_dict 
+                    else:
+                        filters_ret[filt.name] = getattr(self, cols[0].name)
         return filters_ret
 
     def set_filters(self, filters):
         """
         Set class filter according to filters dictionnary, almost of the time coming from url parameters.
         """
+        self.extra_filters = []
         for name, value in filters.iteritems():
             if not getattr(self, name + '_option') == FILTER_OFF:
+                self.extra_filters.append(name)
                 if type(value) == type(dict()):
                     for sub_name, sub_value in value.iteritems():
                         setattr(self, sub_name, sub_value)
