@@ -232,7 +232,7 @@ def create_default_views():
     view.link_name = 'hostproblems'
     view.datasource = 'hosts'
     view.description = 'A complete list of all host problems with a search form for selecting handled and unhandled' 
-    view.layout_number_columns = 3
+    view.layout_number_columns = 1
     view.filters_id = filters.id
     db_session.add(view)
     db_session.commit()
