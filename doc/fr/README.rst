@@ -278,7 +278,24 @@ Aller dans le dossier 'filters'
 
 Vous allez voir plusieurs classes « filter » et un un module « builtin.py ». Un filtre définit une fonction « filter » permettant de retourner le filtre texte pour livestatus correspondant à la requête de filtrage. Un filtre définit aussi la fonction « get_col_def » retournant la définition des colonnes pour la base de données.
 
-Implémentez une classe de filtre si les classes présentes ne suffisent pas.
+Example of columns definition:
+
+.. code-block:: python
+
+    def get_col_def(self):
+        return [Column(self.name, Enum('1', '0', '-1'), default=self.default)]
+
+Implémentez une classe de filtre si les classes présentes ne suffisent pas. Vous pouvez spécifier une définition de champ de formulaire pour redéfinir la définition par défaut de WTFORMS-ALCHEMYY. Ceci est utile par exemple si vous voulez forcer l'usage de bouton radio pour un champ Enum au lieu d'une liste de sélection. Vous pouvez voir les conversions des types de bases `ici:
+<https://wtforms-alchemy.readthedocs.org/en/latest/#basic-type-conversion>`_
+
+Pour redéfinir une définition de formulaire, vous devez définir l'attribut "form_def" dans la fonction init(). L'ordre des éléments dans la liste doit être la même que celle de la liste de colonnes.
+
+Voici un exemple de redéfinition (nous voulons ici forcer l'usage de boutons radio):
+
+.. code-block:: python
+
+    self.form_def = [RadioField(choices=[('1',_(u'Yes')),('0',_(u'No')),('-1',_(u'Ignore'))], default=default)]
+
 
 Allez dans builtin.py
 
