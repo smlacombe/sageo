@@ -53,6 +53,7 @@ Views
 - Frontend filters
 - Columns order customizing by drag & drop
 - Layout column number customization
+- Columns linking
 
 Views templates
 
@@ -82,7 +83,6 @@ Upcoming features
 Views
 
 - Views rights management
-- Columns linking
 - Results pagination
 - Commands execution on objects
 
@@ -175,23 +175,13 @@ Add your broker adress
 
     $ vim config.py
 
-Example:
+Look at the configuration example in the file config.py.sample.
 
-.. code-block:: python
+Each time you change the sites, you must migrate the database because the site filter is an enum database field and will accept only the values it is aware of.
 
-    SITES = {
-      "Site 1": {
-         "alias":          "Shinken demo 2",
-         "socket":         "tcp:192.168.40.43:50001",
-         "url_prefix":     "http://192.168.40.43",
-       },
-      "Site 2": {
-         "alias":          "Shinken demo",
-         "socket":         "tcp:192.168.57.43:50000",
-         "url_prefix":     "http://192.168.57.43",
-       },
+.. code-block:: bash
 
-    }
+    $ python db_migrate.py
 
 Compile the LESS files
 -------------------------------- 
@@ -294,16 +284,31 @@ Go to the folder "filters".
 
 You will see several "filter" and a "builtin.py" module classes. A filter defines a "filter" function to return the text filter for livestatus matching the query filter. A filter also defines "get_col_def" function returning the column definition for the database.
 
-Implement a filter class if these classes are not enough.
+Example of columns definition:
 
-Go to builtin.py
+.. code-block:: python
+
+    def get_col_def(self):
+        return [Column(self.name, Enum('1', '0', '-1'), default=self.default)]
+
+Implement a filter class if these classes are not enough. You can specify a specific form field definition to override the default field definition from WTFORMS-ALCHEMY. It is usefull especially when you some want radio fields for an Enum DB field instead a SelectField. You can see the basic type conversion `here:
+<https://wtforms-alchemy.readthedocs.org/en/latest/#basic-type-conversion>`_
+
+To override a form field definition, you must set the attribute "form_def" in the init() function. The order of the elements in the list must be the same as the column definition list.
+
+Example of a form field field definition override (we want here to force the usage of radio fields):
+
+.. code-block:: python
+
+    self.form_def = [RadioField(choices=[('1',_(u'Yes')),('0',_(u'No')),('-1',_(u'Ignore'))], default=default)]
+
+When you get the filter class you want. Go to builtin.py.
 
 .. code-block:: bash
 
     $ vi filter/builtin.py
 
 In the file head, import the filter class if it is not already done.
-
 
 ex:
 
@@ -348,7 +353,7 @@ Go to the projet root directory
 Restart the server and the new filters will appears in the datasource related views.
 
 Adding snapins
--------------
+--------------
 
 A snapin consists of a folder with a python file with the same name inside. This file defines a class that inherits from the base class "SnapinBase." It defines a context method to do the processing and return an object to its use in the template of the snapin.
 

@@ -54,6 +54,7 @@ Vues
 - Filtres dans l'interface et dans l'édition de la vue
 - Changement de l'ordre des colonnes par un glisser & déposer
 - Paramétrisation de l'affichage des vues avec un nombre de colonnes modulable.
+- Lien des columns (pour se déplacer entre les vues)
 
 Apparence des vues
 
@@ -84,7 +85,6 @@ Fonctionnalités à venir
 Vues
 
 - Gestion des droits
-- Lien des columns (pour se déplacer entre les vues)
 - Pagination des résultats des vues
 - Exécution de commandes livestatus sur les objets supervisés
 
@@ -176,6 +176,11 @@ Ajouter l'adresse de votre broker
 .. code-block:: bash
 
     $ vim config.py
+
+Regardez l'exemple de configuration dans le fichier config.py.sample.
+
+À chaque fois que vous changez les adresses de broker (site), vous devez migrer la base de données puisque le filtre de site est un champ de base de données Enum et n'accepte seulement les valeurs dont il a été mis au courant dans la définition du champ.
+
 
 Compiler les fichiers LESS (CSS)
 -------------------------------- 
