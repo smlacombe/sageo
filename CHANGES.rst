@@ -3,6 +3,10 @@ Changelog
 
 Here you can see the full list of changes between each Sageo release.
 
+0.3.3
+^^^^^
+The last_painter column is now displayed with the short datetime format if the last_check was done one day or more earlier, or in a time (hour) format if the last_check was done in the current day.
+
 0.3.2
 ^^^^^
 Add the builtin view "svcproblems".

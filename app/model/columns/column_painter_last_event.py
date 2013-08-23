@@ -29,5 +29,15 @@ class ColumnPainterLastEvent(ColumnPainter):
     Column painter that print age for timestamp column like last_check
     """
     def get_readable(self, row):
-        age = time.time() - row[self.name]
-        return format_datetime(datetime.fromtimestamp(row[self.name])) 
+        row_timestamp = row[self.name]
+
+        yday_now = time.localtime().tm_yday
+        tm_year_now = time.localtime().tm_year
+        yday_row = time.localtime(row_timestamp).tm_yday
+        tm_year_row = time.localtime(row_timestamp).tm_year
+        
+        if yday_now == yday_row and tm_year_now == tm_year_row: 
+            return format_time(datetime.fromtimestamp(row_timestamp)) 
+        else:    
+            return format_datetime(datetime.fromtimestamp(row_timestamp), 'short') 
+        

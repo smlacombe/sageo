@@ -7,3 +7,4 @@ doc/fr/*pdf
 *~
 *.mo
 app/static/css/*.css
+config.py
