@@ -164,7 +164,7 @@ Create the database
 
 .. code-block:: bash
 
-    $ python db_create.py
+    $ python db_init.py
 
 Configuration
 -------------
