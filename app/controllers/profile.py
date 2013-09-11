@@ -38,7 +38,11 @@ def profile():
     
     if form.validate_on_submit():
         language = form.language.data
+        password = form.password.data
         current_user.language = language 
+        # Save password only if it's the same
+        if password:
+            current_user.set_password(password)
         db_session.commit()
         flash(_('Profile settings saved successfully!'), 'success')
         return redirect('/')

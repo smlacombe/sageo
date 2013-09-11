@@ -212,7 +212,7 @@ Start the server
 
 Open a browser et go to: http://127.0.0.1:5000
 
-The default username and the default password is 'admin' and 'jobs' respectively.
+The default username and the default password is 'admin' and 'admin' respectively.
 
 
 Technical documentation

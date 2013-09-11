@@ -53,8 +53,8 @@ def init_db():
     create_default_views()
 
 def create_default_users():
-    u1 = User(username='admin', language='en', email='admin@email.com', password='jobs', role=ROLE_ADMIN)
-    u2 = User(username='susan', language='fr', email='john@email.com', password='jojo', role=ROLE_USER)
+    u1 = User(username='admin', language='en', email='admin@email.com', password='admin', role=ROLE_ADMIN)
+    u2 = User(username='guest', language='fr', email='guest@email.com', password='guest', role=ROLE_USER)
     db_session.add(u1)
     db_session.add(u2)
     db_session.commit()

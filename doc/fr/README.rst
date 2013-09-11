@@ -209,7 +209,7 @@ Démarrer le serveur
 
 Ouvrir le navigateur et allez à: http://127.0.0.1:5000
 
-Le nom d'utilisateur et le mot de passe par défaut est "admin" et "jobs" respectivement.
+Le nom d'utilisateur et le mot de passe par défaut est "admin" et admin" respectivement.
 
 Documentation technique
 ***********************
