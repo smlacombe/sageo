@@ -26,7 +26,7 @@
 {% block main_section %}
     <div class="container">
 
-        <form class="form-horizontal" name="profile" action="profile" method="post" enctype="multipart/form-data">
+        <form class="form-horizontal" name="user_edit" action="{{ url_for('acl_page.user_edit', user_id=form.id.data) }}" method="post" enctype="multipart/form-data">
             {% if form.username.data %}
             <h2>{{ _("Edit user") }}</h2>
             {% else %}

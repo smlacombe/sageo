@@ -35,7 +35,7 @@ class User(UserMixin, Base):
     username = Column(String(120), index = True, unique = True)
     _password = Column('password', String(120),  unique = False)
 
-    def __init__(self, username, password, language, email, role):
+    def __init__(self, username='', password='', language='en', email='', role=ROLE_USER):
         self.username = username
         self.set_password(password)
         self.language = language

@@ -115,8 +115,8 @@ def edit_view():
             flash(_(u'View') + ' \'' + view_manager.get_view().title + '\' ' +  _(u'saved successfully!'), 'success')
             return redirect('/view?link_name='+ view_manager.get_view().link_name)
 
-    filter_display = view_manager.get_filter_display(form.filters) 
-    return snapins.render_sidebar_template('views/edit_view.html', link_name=link_name, form=form, filter_display=filter_display) 
+    filter_display = view_manager.get_filter_display(form.filters)
+    return snapins.render_sidebar_template('views/edit_view.html', link_name=link_name, form=form, filter_display=filter_display)
 
 def add_default_sorters(form):
     for x in range(0, app.config['MAX_SORTING_COLUMNS']-len(form.sorters)):

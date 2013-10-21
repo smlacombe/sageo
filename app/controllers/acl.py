@@ -48,27 +48,34 @@ def user_edit(user_id=None):
     form = UserEditForm()
     if user_id is None:
         # Create new user
-        return snapins.render_sidebar_template('acl/user_edit.html', version='0.1', form=form)
+        user = User()
     else:
+        # Edit User
         user = User.query.get(user_id)
-        form.username.data = user.username
-        form.language.data = user.language
-        form.email.data = user.email
-        form.role.data = user.role
-    
-
-    if form.validate_on_submit():
-        language = form.language.data
-        password = form.password.data
-        current_user.language = language
-        # Save password only if it's the same
-        if password:
-            current_user.set_password(password)
-        db_session.commit()
-        flash(_('Profile settings saved successfully!'), 'success')
-        return redirect('/')
-    else:
-        form.language.data = current_user.language
+        if request.method=='GET':
+            form.id.data = user.id
+            form.username.data = user.username
+            form.language.data = user.language
+            form.email.data = user.email
+            form.role.data = user.role
+    # Post
+    if request.method=='POST':
+        if form.validate_on_submit():
+            user.username = form.username.data
+            user.language = form.language.data
+            user.email = form.email.data
+            user.role = form.role.data
+            # Save password only if it's the same
+            if form.password.data and user.id is not None:
+                user.set_password(form.password.data)
+            if user.id is None:
+                # New user
+                flash(_('User added successfully!'), 'success')
+                db_session.add(user)
+            else:
+                flash(_('User edited successfully!'), 'success')
+            db_session.commit()
+            return redirect('/acl/users')
 
     return snapins.render_sidebar_template('acl/user_edit.html', version='0.1', form=form)
 

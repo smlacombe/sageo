@@ -18,17 +18,17 @@
 
 
 from flask.ext.wtf import FieldList, Form, FormField, TextField, IntegerField, SelectField, RadioField, PasswordField, BooleanField, \
-    Required, validators
+    Required, validators, HiddenField
 from app.forms.libforms import TranslatedForm
 from flask.ext.babelex import lazy_gettext, gettext, ngettext, Babel
 _ = lazy_gettext
 from app import babel, app
 
 class UserEditForm(TranslatedForm):
+    # TODO ADD validators
+    id = HiddenField()
     username = TextField(_('Username'))
-    password = PasswordField(_('Password'), [
-                             validators.EqualTo('confirm',
-                             message=_('Passwords must match'))])
+    password = PasswordField(_('Password'))
     email = TextField(_('Email'))
     language = SelectField(_(u'Language'),
                            choices=[(lang_code, lang_name) for lang_code,
