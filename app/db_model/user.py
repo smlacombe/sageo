@@ -24,8 +24,7 @@ from flask.ext.login import UserMixin
 from werkzeug.security import generate_password_hash, \
      check_password_hash
 
-ROLE_USER = 0
-ROLE_ADMIN = 1
+from app.lib.auth import ROLE_USER, ROLE_ADMIN
 
 class User(UserMixin, Base):
     __tablename__ = 'users'
@@ -42,7 +41,6 @@ class User(UserMixin, Base):
         self.language = language
         self.email = email
         self.role = role
-
 
     def _get_password(self):
         return self._password

@@ -1,0 +1,55 @@
+{#
+#
+#   Copyright (C) 2013 Savoir-Faire Linux Inc.
+#
+#   This file is part of Sageo
+#
+#   Sageo is free software: you can redistribute it and/or modify
+#   it under the terms of the GNU General Public License as published by
+#   the Free Software Foundation, either version 3 of the License, or
+#   (at your option) any later version.
+#
+#   Sageo is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#   GNU General Public License for more details.
+#
+#   You should have received a copy of the GNU General Public License
+#   along with Sageo.  If not, see <http://www.gnu.org/licenses/>
+#}
+
+{% extends "main.html" %}
+{% import 'lib/lib.html' as lib %}
+{% block title %}{{ _('Sageo')+_('User profile') }}{% endblock %}
+{% from 'lib/lib.html' import with_errors %}
+
+{% block main_section %}
+    <div class="container">
+        <h2>
+            {{ _("User list") }}
+        </h2>
+        <a class="btn btn-primary" href="{{ url_for('acl_page.user_edit') }}">{{_("Create user")}}</a>
+        <br/> <br/>
+        <table class="table table-striped table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>{{_("Username")}}</th>
+                    <th>{{_("Email")}}</th>
+                    <th>{{_("Admin")}}</th>
+                    <th>{{_("Action")}}</th>
+                </tr>
+            </thead>
+            {% for user in users %}
+                <tr>
+                    <td><input type="checkbox"/></td>
+                    <td>{{user.username}}</td>
+                    <td>{{user.email}}</td>
+                    <td>{{ _("Yes") if user.role else _("No") }}</td>
+                    <td><a class="btn btn-primary" href="{{ url_for('acl_page.user_edit', user_id=user.id) }}">{{_("Edit")}}</a> - {{_("Delete")}}</td>
+                </tr>
+            {% endfor %}
+        </table>
+        <a class="btn btn-primary" href="{{ url_for('acl_page.user_edit') }}">{{_("Create user")}}</a>
+    </div>
+{% endblock %}

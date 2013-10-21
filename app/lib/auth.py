@@ -17,8 +17,19 @@
 #   along with Sageo.  If not, see <http://www.gnu.org/licenses/>
 
 from functools import update_wrapper
+
 from flask import current_app, abort
-from flask.ext.login import current_user, session, request, redirect, url_for
+from flask.ext.login import current_user
+
+ROLE_USER = 0
+ROLE_ADMIN = 1
+
+#from itsdangerous import URLSafeTimedSerializer
+
+#from .config import SECRET_KEY
+
+#login_serializer = URLSafeTimedSerializer(SECRET_KEY)
+
 
 def authorized(checker):
     """Check if current user is authenticated and authorized.
@@ -50,6 +61,16 @@ def require(checker):
     return decorator
 
 
+class IsAdmin(object):
+    """Check if current user has provided username."""
+
+    def __init__(self):
+        pass
+
+    def __call__(self):
+        return current_user.role == ROLE_ADMIN
+
+
 class IsUser(object):
     """Check if current user has provided username."""
 
@@ -58,3 +79,45 @@ class IsUser(object):
 
     def __call__(self):
         return current_user.username == self.username
+
+
+class InGroups(object):
+    """Check if current user belongs to provided groups."""
+
+    def __init__(self, *args):
+        self.groups = set(args)
+
+    def __call__(self):
+        # TODO check if the acl group can come here...
+        return False
+        return self.groups <= current_user.in_groups()
+
+
+class HasPermissions(object):
+    """Check if current user has provided permissions."""
+
+    def __init__(self, *args):
+        self.permissions = set(args)
+
+    def __call__(self):
+        return self.permissions <= current_user.has_permissions()
+
+
+class All(object):
+    """Compound checker to check if all provided checkers are true."""
+
+    def __init__(self, *args):
+        self.checkers = args
+
+    def __call__(self):
+        return all(c() for c in self.checkers)
+
+
+class Any(object):
+    """Compound checker to check if any of provided checkers is true."""
+
+    def __init__(self, *args):
+        self.checkers = args
+
+    def __call__(self):
+        return any(c() for c in self.checkers)

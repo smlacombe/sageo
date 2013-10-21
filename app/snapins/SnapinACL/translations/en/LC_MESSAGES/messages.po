@@ -1,0 +1,13 @@
+# Translations template for PROJECT.
+# Copyright (C) 2013 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
+#
+msgid "Sageo GitHub project"
+msgstr "Sageo GitHub project"
+
+msgid "Savoir-Faire Linux"
+msgstr "Savoir-Faire Linux"
+
+msgid "About Sageo"
+msgstr "About Sageo"
