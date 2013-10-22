@@ -52,8 +52,12 @@
                         {{ lib.control_group() }}
                             {{ lib.field_label(form.reload_intervall) }}
                             {{ lib.controls(inline=True) }} 
+                            <div class="col-md-7">
                                  {{ lib.print_field(form.reload_intervall, fieldargs={'placeholder': form.reload_intervall.default }) }}
+                            </div>
+                            <div class="col-md-1">
                                  <span>{{ _('seconds')}}</span>
+                            </div>
                             </div>
                         </div>
                     </div>
@@ -75,8 +79,11 @@
                                         {{ lib.control_group() }}
                                             {{ lib.field_label(subfield.column) }}
                                             {{ lib.controls(inline=True) }}
-                                                {{ lib.print_field(subfield.column, fieldargs={'class':'sortCol'}) }} 
-                                                {{ lib.print_field(subfield.sorter_option, fieldargs={'class':'sortOption'}) }}
+                                            <div class="col-lg-9 ">
+                                                {{ lib.print_field(subfield.column, fieldargs={'class':'sortCol form-control col-lg-9'}) }} 
+                                            </div>
+                                            <div class="col-lg-3 ">
+                                                {{ lib.print_field(subfield.sorter_option, fieldargs={'class':'sortOption form-control col-lg-3'}) }}
                                             </div>
                                         </div>
                                     </li>
@@ -94,14 +101,19 @@
                                         {% set counter = counter + 1 %}
                                         {{ lib.control_group() }}
                                             {{ lib.field_label(subfield.column) }}
-                                            {{ lib.controls() }}
-                                                {{ lib.print_field(subfield.column) }} <a class="removeRow btn disabled"><i class="icon-trash"></i></a>
+                                               {{ lib.controls() }}
+                                            <div class="col-md-7">
+                                                {{ lib.print_field(subfield.column) }}
+                                            </div>
+                                            <div class="col-md-3">
+                                                <a class="removeRow btn btn-default disabled"><i class="glyphicon glyphicon-trash"></i></a>
+                                            </div>
                                             </div>
                                         </div>
                                     </li>
                             {% endfor %}
                         </ul>
-                        <a class="btn add_row">{{ _('Add column') }}</a>
+                        <a class="btn btn-default add_row">{{ _('Add column') }}</a>
                     </div>
                 </div>
                 <div>
@@ -115,18 +127,24 @@
                                         {{ lib.control_group() }}
                                             {{ lib.field_label(subfield.column) }} 
                                             {{ lib.controls() }}
-                                                {{ lib.print_field(subfield.column) }}
-                                                <a class="removeRow btn disabled"><i class="icon-trash"></i></a>
+                                                <div class="col-md-7">
+                                                    {{ lib.print_field(subfield.column) }}
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <a class="removeRow btn btn-default disabled"><i class="glyphicon glyphicon-trash"></i></a>
+                                                </div>
                                             </div>
                                             {{ lib.field_label(subfield.link) }} 
                                             {{ lib.controls() }}
+                                                <div class="col-md-4">
                                                 {{ lib.print_field(subfield.link) }} 
+                                                </div>
                                             </div>
                                         </div>
                                     </li>
                             {% endfor %}
                         </ul>
-                        <a class="add_row btn">{{ _('Add column') }}</a>
+                        <a class="add_row btn btn-default">{{ _('Add column') }}</a>
                     </div>
                 </div>
                 <div>

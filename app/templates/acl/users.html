@@ -46,7 +46,7 @@
                     <td>{{user.username}}</td>
                     <td>{{user.email}}</td>
                     <td>{{ _("Yes") if user.role else _("No") }}</td>
-                    <td><a class="btn btn-primary" href="{{ url_for('acl_page.user_edit', user_id=user.id) }}">{{_("Edit")}}</a> - {{_("Delete")}}</td>
+                    <td><a class="btn btn-default" href="{{ url_for('acl_page.user_edit', user_id=user.id) }}">{{_("Edit")}}</a> <a class="btn btn-danger" href="{{ url_for('acl_page.user_delete', user_id=user.id) }}">{{_("Delete")}}</a></td>
                 </tr>
             {% endfor %}
         </table>

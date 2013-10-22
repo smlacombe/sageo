@@ -31,13 +31,13 @@
         {{ form.hidden_tag() }}
         {{ with_errors(form.username, fieldargs={'placeholder': _('username')}) }}
         {{ with_errors(form.password, fieldargs={'placeholder': _('password')}) }}
-      <div class=control-group>
-        <div class=controls>
+      <div class="form-group">
+        <div class="controls">
            {{ print_flash_messages() }}
-            <label class=checkbox>
-            <input type=checkbox name=remember> {{ _('Remember me') }}
+            <label class="checkbox">
+            <input type="checkbox" name="remember"> {{ _('Remember me') }}
           </label>
-          <button type=submit class="btn btn-primary">{{ _('login') }}</button>
+          <button type="submit" class="btn btn-primary">{{ _('login') }}</button>
         </div>
       </div> 
     </form>

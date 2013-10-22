@@ -18,17 +18,17 @@
 #   along with Sageo.  If not, see <http://www.gnu.org/licenses/>
 #}
 
-<a href="#" class="brand">{{ _('Sageo') }}</a>
-<div class="nav-collapse">
-<ul class="nav">
+<a href="#" class="navbar-brand">{{ _('Sageo') }}</a>
+<div class="collapse navbar-collapse navbar-ex1-collapse">
+<ul class="nav navbar-nav">
 </ul>
 
-<ul class="nav pull-right">    
+<ul class="nav navbar-nav navbar-right">    
 <li class="dropdown" id="fat-menu">
-<a data-toggle="dropdown" class="dropdown-toggle" role="button" id="drop3" href="#"><i class="icon-user"></i> {{ current_user.username }}<b class="caret"></b></a>
+<a data-toggle="dropdown" class="dropdown-toggle" role="button" id="drop3" href="#"><i class="glyphicon glyphicon-user"></i> {{ current_user.username }}<b class="caret"></b></a>
 <ul aria-labelledby="drop3" role="menu" class="dropdown-menu">
-<li role="presentation"><a href="/logout" role="menuitem"><i class="icon-off"></i> {{ _('Logout') }}</a></li>
-<li role="presentation"><a href="/profile" role="menuitem"><i class="icon-pencil"></i> {{ _('Edit profile') }}</a></li>
+<li role="presentation"><a href="/logout" role="menuitem"><i class="glyphicon glyphicon-off"></i> {{ _('Logout') }}</a></li>
+<li role="presentation"><a href="/profile" role="menuitem"><i class="glyphicon glyphicon-pencil"></i> {{ _('Edit profile') }}</a></li>
 <li class="divider" role="presentation"></li>
 <li role="presentation"><a href="#" role="menuitem">Separated link</a></li>
 </ul>

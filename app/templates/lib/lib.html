@@ -40,7 +40,7 @@
 {%- endmacro %}
 
 {% macro print_field(field, fieldargs={}) -%}
-    {{ field(**fieldargs) }}
+    {{ field(class='form-control', **fieldargs) }}
 {%- endmacro %}
 
 {% macro print_radiofield(field) -%}
@@ -52,23 +52,27 @@
 {%- endmacro %}
 
 {% macro controls(inline=False, otherclass='') -%}
-    <div class="controls{% if inline %} form-inline{% endif %}{% if otherclass %} {{ otherclass }}{% endif %}">
+    <div class="col-lg-10{% if inline %} form-group {% endif %}{% if otherclass %} {{ otherclass }}{% endif %}">
 {%- endmacro %}
 
 {% macro single_control_group(field) -%}
-    <div class="control-group{% if field.errors %} error{% endif %}">
+    <div class="form-group{% if field.errors %} error{% endif %}">
 {%- endmacro %}
 
 {% macro control_group(otherclass='') -%}
-    <div class="control-group{% if otherclass %} {{ otherclass }}{% endif %}">
+    <div class="form-group{% if otherclass %} {{ otherclass }}{% endif %}">
+{%- endmacro %}
+
+{% macro control_inline(otherclass='') -%}
+    <div class="form-inline{% if otherclass %} {{ otherclass }}{% endif %}">
 {%- endmacro %}
 
 {%- macro field_label(field) -%}
-    {{ field.label(class_='control-label') }}
+    {{ field.label(class_='control-label col-lg-2') }}
 {%- endmacro %}
 
 {%- macro label(field) -%}
-    {{ field.label(class_='control-label') }}
+    {{ field.label(class_='control-label col-lg-2') }}
 {%- endmacro %}
 
 {%- macro field_error(field) -%}

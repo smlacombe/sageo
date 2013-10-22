@@ -32,18 +32,18 @@
             {{ with_errors(form.language, fieldargs={'placeholder': _('language')}) }}
             {{ with_errors(form.password, fieldargs={'placeholder': _('password')}) }}
             {{ with_errors(form.confirm, fieldargs={'placeholder': _('confirm')}) }}
-          <div class=control-group>
-            <div class=controls>
+          <div class="form-group">
+            <div class="controls">
               {% with messages = get_flashed_messages() %}
         {% if messages %}
         <ul>
         {% for message in messages %}
-            <li><span class=text-error>{{ message }}</span></li>
+            <li><span class="text-error">{{ message }}</span></li>
         {% endfor %}
         </ul>
         {% endif %}
         {% endwith %}
-              <button type=submit class="btn btn-primary">{{ _('Save') }}</button>
+              <button type="submit" class="btn btn-primary">{{ _('Save') }}</button>
             </div>
           </div>
         </form>

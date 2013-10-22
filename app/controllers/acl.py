@@ -79,3 +79,13 @@ def user_edit(user_id=None):
 
     return snapins.render_sidebar_template('acl/user_edit.html', version='0.1', form=form)
 
+
+@acl_page.route('/acl/user_delete', methods=['GET', 'POST'])
+@login_required
+@require(Any(IsAdmin(),InGroups()))
+def user_delete():
+    users = User.query.all()
+
+    return snapins.render_sidebar_template('acl/users.html', version='0.1', users=users)
+
+

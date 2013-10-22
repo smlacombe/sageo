@@ -22,15 +22,15 @@
 {% import 'views/filter_fields.html' as lib_fields with context %}
 
 {% macro create_button() -%}
-    <button class="btn" type="submit">{{ _('Create new view') }}</button>
+    <button class="btn btn-default" type="submit">{{ _('Create new view') }}</button>
 {%- endmacro %}
 
 {% macro all_views_button() -%}
-    <p><a href="/view" class="btn">{{ _('All views') }}</a></p>
+    <p><a href="/view" class="btn btn-default">{{ _('All views') }}</a></p>
 {%- endmacro %}
 
 {% macro edit_view_button(link_name) -%}
-    <a href="/edit_view?link_name={{ link_name }}" class="btn"><i class="icon-pencil"></i> {{ _('Edit view') }}</a>
+    <a href="/edit_view?link_name={{ link_name }}" class="btn btn-default"><i class="glyphicon glyphicon-pencil"></i> {{ _('Edit view') }}</a>
 {%- endmacro %}
 
 {% macro print_filters_fields(filter_display, edit_mode) -%}

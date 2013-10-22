@@ -29,11 +29,9 @@
     <script src="{{ url_for('.static', filename='js/iframeSizing.js') }}"></script>
 {% endblock %}
 {% block content %}
-    <div class="navbar navbar-fixed-top" id="top-bar">
-        <div class="navbar-inner">
-            <div class="container-fluid">
-                {% include "top.html" %}
-            </div>
+    <div class="navbar navbar-default" id="top-bar">
+        <div class="container">
+            {% include "top.html" %}
         </div>
     </div>
     <div class="well sidebar-nav-fixed"> 
